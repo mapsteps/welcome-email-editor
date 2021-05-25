@@ -1,0 +1,91 @@
+/* Code Mirror */
+.CodeMirror-wrap {
+	border: 1px solid #ddd;
+}
+
+/* Override heatbox */
+.heatbox-header .logo-container img {
+	width: 180px;
+}
+
+/* Featured */
+.weed-featured-products > h2 {
+	text-align: center;
+	margin-bottom: 50px;
+	font-size: 24px;
+}
+
+.weed-featured-products .products {
+	display: flex;
+	justify-content: space-between;
+}
+
+.weed-featured-products .products li {
+	width: 32%;
+}
+
+.weed-featured-products .products .subheadline {
+	font-weight: 600;
+	margin-top: -6px;
+}
+
+.weed-featured-products .products img {
+	max-width: 100%;
+}
+
+.weed-featured-products .credit {
+	margin-top: 20px;
+	text-align: center;
+	opacity: .5;
+}
+
+/* Fields */
+.weed-fields {
+	position: relative;
+}
+
+.weed-field {
+	margin-bottom: 15px;
+}
+
+.weed-inline-fields .weed-field:last-child {
+	margin-bottom: 0;
+}
+
+.weed-inline-fields {
+	display: flex;
+	position: relative;
+}
+
+.weed-inline-fields .weed-field {
+	margin-right: 10px;
+}
+
+.weed-inline-fields .weed-field:last-child {
+	margin-right: 0;
+}
+
+.weed-field .wp-picker-input-wrap .color-picker {
+	width: 160px !important;
+}
+
+.weed-field .wp-picker-input-wrap {
+	display: inline-flex;
+	max-width: 220px;
+	overflow: hidden;
+	transition: max-width .2s;
+}
+
+.weed-field .wp-picker-input-wrap.hidden {
+	display: inline-flex;
+	max-width: 0;
+}
+
+.weed-label {
+	display: block;
+	margin-bottom: 3px;
+}
+
+.is-hidden {
+	display: none;
+}
