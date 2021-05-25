@@ -168,6 +168,11 @@ class Settings_Module extends Base_Module {
 		add_settings_field( 'user-welcome-email-attachment', __( 'Email Attachment URL', 'welcome-email-editor' ), array( $this, 'user_welcome_email_attachment_field' ), 'weed-user-welcome-email-settings', 'weed-user-welcome-email-section' );
 		add_settings_field( 'user-welcome-email-additional-headers', __( 'Additional Email Headers', 'welcome-email-editor' ), array( $this, 'user_welcome_email_additional_headers_field' ), 'weed-user-welcome-email-settings', 'weed-user-welcome-email-section' );
 		add_settings_field( 'user-welcome-email-reply-to', __( '"Reply-To" Email Address', 'welcome-email-editor' ), array( $this, 'user_welcome_email_reply_to_field' ), 'weed-user-welcome-email-settings', 'weed-user-welcome-email-section' );
+
+		// Admin welcome email fields.
+		add_settings_field( 'admin-welcome-email-subject', __( 'Email Subject', 'welcome-email-editor' ), array( $this, 'admin_welcome_email_subject_field' ), 'weed-admin-welcome-email-settings', 'weed-admin-welcome-email-section' );
+		add_settings_field( 'admin-welcome-email-body', __( 'Email Body', 'welcome-email-editor' ), array( $this, 'admin_welcome_email_body_field' ), 'weed-admin-welcome-email-settings', 'weed-admin-welcome-email-section' );
+		add_settings_field( 'admin-welcome-email-custom-recipients', __( 'Custom Recipients', 'welcome-email-editor' ), array( $this, 'admin_welcome_email_custom_recipients_field' ), 'weed-admin-welcome-email-settings', 'weed-admin-welcome-email-section' );
 	}
 
 	/**
@@ -256,6 +261,36 @@ class Settings_Module extends Base_Module {
 	public function user_welcome_email_reply_to_field() {
 
 		$field = require __DIR__ . '/templates/fields/user-welcome-email/reply-to.php';
+		$field( $this );
+
+	}
+
+	/**
+	 * Admin welcome email's subject field.
+	 */
+	public function admin_welcome_email_subject_field() {
+
+		$field = require __DIR__ . '/templates/fields/admin-welcome-email/subject.php';
+		$field( $this );
+
+	}
+
+	/**
+	 * Admin welcome email's body field.
+	 */
+	public function admin_welcome_email_body_field() {
+
+		$field = require __DIR__ . '/templates/fields/admin-welcome-email/body.php';
+		$field( $this );
+
+	}
+
+	/**
+	 * Admin welcome email's body field.
+	 */
+	public function admin_welcome_email_custom_recipients_field() {
+
+		$field = require __DIR__ . '/templates/fields/admin-welcome-email/custom-recipients.php';
 		$field( $this );
 
 	}

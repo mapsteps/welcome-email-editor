@@ -69,14 +69,22 @@ class Setup {
 	public function set_data() {
 
 		$defaults = array(
+			// General settings.
 			'from_email'                            => '[admin_email]',
 			'from_name'                             => '',
 			'content_type'                          => 'text',
+
+			// Welcome email settings - for user.
 			'user_welcome_email_subject'            => '[[blog_name]] Your username and password',
-			'user_welcome_email_body'               => 'Username: [user_login]<br />Password: [user_password]<br />[login_url]',
+			'user_welcome_email_body'               => 'Username: [user_login]<br>Password: [user_password]<br>[login_url]',
 			'user_welcome_email_attachment_url'     => '',
 			'user_welcome_email_additional_headers' => '',
 			'user_welcome_email_reply_to'           => '',
+
+			// Welcome email settings - for admin.
+			'admin_welcome_email_subject'           => '[[blog_name]] New User Registration',
+			'admin_welcome_email_body'              => 'New user registration on your blog [blog_name]<br><br>Username: [user_login]<br>Email: [user_email]',
+			'admin_welcome_email_custom_recipients' => '',
 		);
 
 		$settings = get_option( 'weed_settings', array() );
