@@ -51,6 +51,14 @@ return function () {
 					<?php do_settings_sections( 'weed-admin-welcome-email-settings' ); ?>
 				</div>
 
+				<div class="heatbox">
+					<?php do_settings_sections( 'weed-forgot-password-email-settings' ); ?>
+				</div>
+
+				<div class="heatbox">
+					<?php do_settings_sections( 'weed-misc-settings' ); ?>
+				</div>
+
 				<?php submit_button( '', 'button button-primary button-larger' ); ?>
 
 			</form>

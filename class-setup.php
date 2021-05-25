@@ -85,6 +85,10 @@ class Setup {
 			'admin_welcome_email_subject'           => '[[blog_name]] New User Registration',
 			'admin_welcome_email_body'              => 'New user registration on your blog [blog_name]<br><br>Username: [user_login]<br>Email: [user_email]',
 			'admin_welcome_email_custom_recipients' => '',
+
+			// Forgot password email settings.
+			'forgot_password_email_subject'         => '[[blog_name]] Forgot Password',
+			'forgot_password_email_body'            => 'Someone requested that the password be reset for the following account.<br><br>[site_url]<br><br>Username: [user_login]<br><br>If this was a mistake, just ignore this email and nothing will happen.<br><br>To reset your password, visit the following address: [reset_url]',
 		);
 
 		$settings = get_option( 'weed_settings', array() );

@@ -155,6 +155,8 @@ class Settings_Module extends Base_Module {
 		add_settings_section( 'weed-general-section', __( 'General Settings', 'welcome-email-editor' ), '', 'weed-general-settings' );
 		add_settings_section( 'weed-user-welcome-email-section', __( 'Welcome Email Settings &mdash; For User', 'welcome-email-editor' ), '', 'weed-user-welcome-email-settings' );
 		add_settings_section( 'weed-admin-welcome-email-section', __( 'Welcome Email Settings &mdash; For Admin', 'welcome-email-editor' ), '', 'weed-admin-welcome-email-settings' );
+		add_settings_section( 'weed-forgot-password-email-section', __( 'Forgot Password Email Settings', 'welcome-email-editor' ), '', 'weed-forgot-password-email-settings' );
+		add_settings_section( 'weed-misc-section', __( 'Misc. Settings', 'welcome-email-editor' ), '', 'weed-misc-settings' );
 
 		// General fields.
 		add_settings_field( 'from-email', __( 'From Email Address', 'welcome-email-editor' ), array( $this, 'from_email_field' ), 'weed-general-settings', 'weed-general-section' );
@@ -172,7 +174,11 @@ class Settings_Module extends Base_Module {
 		// Admin welcome email fields.
 		add_settings_field( 'admin-welcome-email-subject', __( 'Email Subject', 'welcome-email-editor' ), array( $this, 'admin_welcome_email_subject_field' ), 'weed-admin-welcome-email-settings', 'weed-admin-welcome-email-section' );
 		add_settings_field( 'admin-welcome-email-body', __( 'Email Body', 'welcome-email-editor' ), array( $this, 'admin_welcome_email_body_field' ), 'weed-admin-welcome-email-settings', 'weed-admin-welcome-email-section' );
-		add_settings_field( 'admin-welcome-email-custom-recipients', __( 'Custom Recipients', 'welcome-email-editor' ), array( $this, 'admin_welcome_email_custom_recipients_field' ), 'weed-admin-welcome-email-settings', 'weed-admin-welcome-email-section' );
+
+		// Forgot password email fields.
+		add_settings_field( 'forgot-password-email-subject', __( 'Email Subject', 'welcome-email-editor' ), array( $this, 'forgot_password_email_subject_field' ), 'weed-forgot-password-email-settings', 'weed-forgot-password-email-section' );
+		add_settings_field( 'forgot-password-email-body', __( 'Email Body', 'welcome-email-editor' ), array( $this, 'forgot_password_email_body_field' ), 'weed-forgot-password-email-settings', 'weed-forgot-password-email-section' );
+
 	}
 
 	/**
@@ -180,7 +186,7 @@ class Settings_Module extends Base_Module {
 	 */
 	public function from_email_field() {
 
-		$field = require __DIR__ . '/templates/fields/from-email.php';
+		$field = require __DIR__ . '/templates/fields/general/from-email.php';
 		$field( $this );
 
 	}
@@ -190,7 +196,7 @@ class Settings_Module extends Base_Module {
 	 */
 	public function from_name_field() {
 
-		$field = require __DIR__ . '/templates/fields/from-name.php';
+		$field = require __DIR__ . '/templates/fields/general/from-name.php';
 		$field( $this );
 
 	}
@@ -200,7 +206,7 @@ class Settings_Module extends Base_Module {
 	 */
 	public function content_type_field() {
 
-		$field = require __DIR__ . '/templates/fields/content-type.php';
+		$field = require __DIR__ . '/templates/fields/general/content-type.php';
 		$field( $this );
 
 	}
@@ -210,7 +216,7 @@ class Settings_Module extends Base_Module {
 	 */
 	public function disable_global_headers_field() {
 
-		$field = require __DIR__ . '/templates/fields/disable-global-headers.php';
+		$field = require __DIR__ . '/templates/fields/general/disable-global-headers.php';
 		$field( $this );
 
 	}
@@ -291,6 +297,26 @@ class Settings_Module extends Base_Module {
 	public function admin_welcome_email_custom_recipients_field() {
 
 		$field = require __DIR__ . '/templates/fields/admin-welcome-email/custom-recipients.php';
+		$field( $this );
+
+	}
+
+	/**
+	 * Forgot password email's subject field.
+	 */
+	public function forgot_password_email_subject_field() {
+
+		$field = require __DIR__ . '/templates/fields/forgot-password-email/subject.php';
+		$field( $this );
+
+	}
+
+	/**
+	 * Forgot password email's body field.
+	 */
+	public function forgot_password_email_body_field() {
+
+		$field = require __DIR__ . '/templates/fields/forgot-password-email/body.php';
 		$field( $this );
 
 	}
