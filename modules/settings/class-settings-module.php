@@ -153,22 +153,21 @@ class Settings_Module extends Base_Module {
 
 		// Register sections.
 		add_settings_section( 'weed-general-section', __( 'General Settings', 'welcome-email-editor' ), '', 'weed-general-settings' );
-		// add_settings_section( 'weed-button-section', __( 'Quick View Button Settings', 'welcome-email-editor' ), '', 'weed-button-settings' );
-		// add_settings_section( 'weed-popup-section', __( 'Popup Settings', 'welcome-email-editor' ), '', 'weed-popup-settings' );
-		// add_settings_section( 'weed-custom-section', __( 'Custom Settings', 'welcome-email-editor' ), '', 'weed-custom-settings' );
+		add_settings_section( 'weed-user-welcome-email-section', __( 'Welcome Email Settings &mdash; For User', 'welcome-email-editor' ), '', 'weed-user-welcome-email-settings' );
+		add_settings_section( 'weed-admin-welcome-email-section', __( 'Welcome Email Settings &mdash; For Admin', 'welcome-email-editor' ), '', 'weed-admin-welcome-email-settings' );
 
 		// General fields.
 		add_settings_field( 'from-email', __( 'From Email Address', 'welcome-email-editor' ), array( $this, 'from_email_field' ), 'weed-general-settings', 'weed-general-section' );
 		add_settings_field( 'from-name', __( 'From Name', 'welcome-email-editor' ), array( $this, 'from_name_field' ), 'weed-general-settings', 'weed-general-section' );
 		add_settings_field( 'content-type', __( 'Mail Content Type', 'welcome-email-editor' ), array( $this, 'content_type_field' ), 'weed-general-settings', 'weed-general-section' );
 		add_settings_field( 'disable-global-headers', __( 'Disable Global Headers', 'welcome-email-editor' ), array( $this, 'disable_global_headers_field' ), 'weed-general-settings', 'weed-general-section' );
-		// add_settings_field( 'disable-on-mobile', __( 'Disable Only on Mobile', 'welcome-email-editor' ), array( $this, 'disable_on_mobile_field' ), 'weed-general-settings', 'weed-general-section' );
-		// add_settings_field( 'remove-all-settings', __( 'Remove Data on Uninstall', 'welcome-email-editor' ), array( $this, 'remove_on_uninstall_field' ), 'weed-general-settings', 'weed-general-section' );
 
-		// Button fields.
-		// add_settings_field( 'button-position', __( 'Button Position', 'welcome-email-editor' ), array( $this, 'button_position_field' ), 'weed-button-settings', 'weed-button-section' );
-		// add_settings_field( 'button-text', __( 'Button Text', 'welcome-email-editor' ), array( $this, 'button_text_field' ), 'weed-button-settings', 'weed-button-section' );
-		// add_settings_field( 'button-colors', __( 'Button Colors', 'welcome-email-editor' ), array( $this, 'button_colors_field' ), 'weed-button-settings', 'weed-button-section' );
+		// User welcome email fields.
+		add_settings_field( 'user-welcome-email-subject', __( 'Email Subject', 'welcome-email-editor' ), array( $this, 'user_welcome_email_subject_field' ), 'weed-user-welcome-email-settings', 'weed-user-welcome-email-section' );
+		add_settings_field( 'user-welcome-email-body', __( 'Email Body', 'welcome-email-editor' ), array( $this, 'user_welcome_email_body_field' ), 'weed-user-welcome-email-settings', 'weed-user-welcome-email-section' );
+		add_settings_field( 'user-welcome-email-attachment', __( 'Email Attachment URL', 'welcome-email-editor' ), array( $this, 'user_welcome_email_attachment_field' ), 'weed-user-welcome-email-settings', 'weed-user-welcome-email-section' );
+		add_settings_field( 'user-welcome-email-additional-headers', __( 'Additional Email Headers', 'welcome-email-editor' ), array( $this, 'user_welcome_email_additional_headers_field' ), 'weed-user-welcome-email-settings', 'weed-user-welcome-email-section' );
+		add_settings_field( 'user-welcome-email-reply-to', __( '"Reply-To" Email Address', 'welcome-email-editor' ), array( $this, 'user_welcome_email_reply_to_field' ), 'weed-user-welcome-email-settings', 'weed-user-welcome-email-section' );
 	}
 
 	/**
@@ -212,32 +211,62 @@ class Settings_Module extends Base_Module {
 	}
 
 	/**
+	 * User welcome email's subject field.
+	 */
+	public function user_welcome_email_subject_field() {
+
+		$field = require __DIR__ . '/templates/fields/user-welcome-email/subject.php';
+		$field( $this );
+
+	}
+
+	/**
+	 * User welcome email's body field.
+	 */
+	public function user_welcome_email_body_field() {
+
+		$field = require __DIR__ . '/templates/fields/user-welcome-email/body.php';
+		$field( $this );
+
+	}
+
+	/**
+	 * User welcome email's attachment field.
+	 */
+	public function user_welcome_email_attachment_field() {
+
+		$field = require __DIR__ . '/templates/fields/user-welcome-email/attachment.php';
+		$field( $this );
+
+	}
+
+	/**
+	 * User welcome email's additional headers field.
+	 */
+	public function user_welcome_email_additional_headers_field() {
+
+		$field = require __DIR__ . '/templates/fields/user-welcome-email/additional-headers.php';
+		$field( $this );
+
+	}
+
+	/**
+	 * User welcome email's reply to field.
+	 */
+	public function user_welcome_email_reply_to_field() {
+
+		$field = require __DIR__ . '/templates/fields/user-welcome-email/reply-to.php';
+		$field( $this );
+
+	}
+
+	/**
 	 * Remove data on uninstall field.
 	 */
 	public function remove_on_uninstall_field() {
 
 		$field = require __DIR__ . '/templates/fields/remove-on-uninstall.php';
 		$field();
-
-	}
-
-	/**
-	 * Button position field.
-	 */
-	public function button_position_field() {
-
-		$field = require __DIR__ . '/templates/fields/button-position.php';
-		$field();
-
-	}
-
-	/**
-	 * Button text field.
-	 */
-	public function button_text_field() {
-
-		$field = require __DIR__ . '/templates/fields/button-text.php';
-		$field( $this );
 
 	}
 

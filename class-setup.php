@@ -69,12 +69,19 @@ class Setup {
 	public function set_data() {
 
 		$defaults = array(
-			'from_email'   => '[admin_email]',
-			'from_name'    => '',
-			'content_type' => 'text',
+			'from_email'                            => '[admin_email]',
+			'from_name'                             => '',
+			'content_type'                          => 'text',
+			'user_welcome_email_subject'            => '[[blog_name]] Your username and password',
+			'user_welcome_email_body'               => 'Username: [user_login]<br />Password: [user_password]<br />[login_url]',
+			'user_welcome_email_attachment_url'     => '',
+			'user_welcome_email_additional_headers' => '',
+			'user_welcome_email_reply_to'           => '',
 		);
+
 		$settings = get_option( 'weed_settings', array() );
-		$values   = wp_parse_args( $settings, $defaults );
+
+		$values = wp_parse_args( $settings, $defaults );
 
 		Vars::set( 'default_settings', $defaults );
 		Vars::set( 'settings', $settings );
