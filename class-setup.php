@@ -68,7 +68,11 @@ class Setup {
 	 */
 	public function set_data() {
 
-		$defaults = array();
+		$defaults = array(
+			'from_email'   => '[admin_email]',
+			'from_name'    => '',
+			'content_type' => 'text',
+		);
 		$settings = get_option( 'weed_settings', array() );
 		$values   = wp_parse_args( $settings, $defaults );
 
