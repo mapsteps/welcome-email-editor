@@ -4,8 +4,19 @@
 }
 
 /* Override heatbox */
-.heatbox-header .logo-container img {
-	width: 180px;
+.heatbox-header .logo-container {
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+
+.heatbox-header .logo-container .title,
+.heatbox-header .logo-container .subtitle {
+	width: 45%;
+}
+
+.heatbox-wrap .version {
+	position: relative;
+	top: -5px;
 }
 
 /* Featured */
@@ -88,4 +99,11 @@
 
 .is-hidden {
 	display: none;
+}
+
+@media screen and (max-width: 780px) {
+	.heatbox-header .logo-container .title,
+	.heatbox-header .logo-container .subtitle {
+		width: 100%;
+	}
 }
