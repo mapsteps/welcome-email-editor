@@ -179,6 +179,9 @@ class Settings_Module extends Base_Module {
 		add_settings_field( 'forgot-password-email-subject', __( 'Email Subject', 'welcome-email-editor' ), array( $this, 'forgot_password_email_subject_field' ), 'weed-forgot-password-email-settings', 'weed-forgot-password-email-section' );
 		add_settings_field( 'forgot-password-email-body', __( 'Email Body', 'welcome-email-editor' ), array( $this, 'forgot_password_email_body_field' ), 'weed-forgot-password-email-settings', 'weed-forgot-password-email-section' );
 
+		// Misc. settings.
+		add_settings_field( 'remove-on-uninstall', __( 'Remove on Uninstall', 'welcome-email-editor' ), array( $this, 'remove_on_uninstall_field' ), 'weed-misc-settings', 'weed-misc-section' );
+
 	}
 
 	/**
@@ -326,8 +329,8 @@ class Settings_Module extends Base_Module {
 	 */
 	public function remove_on_uninstall_field() {
 
-		$field = require __DIR__ . '/templates/fields/remove-on-uninstall.php';
-		$field();
+		$field = require __DIR__ . '/templates/fields/misc/remove-on-uninstall.php';
+		$field( $this );
 
 	}
 
