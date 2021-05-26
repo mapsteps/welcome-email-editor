@@ -19,6 +19,32 @@
 	top: -5px;
 }
 
+/* Custom notice */
+.weed-placeholder-notice {
+	color: #fff;
+	background-color: #197CFF;
+	border-left-width: 0;
+}
+
+.weed-placeholder-notice h4 {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 1.2;
+}
+
+.weed-placeholder-notice p {
+	margin-top: 0;
+	margin-bottom: 10px;
+	padding: 0;
+	line-height: 1.8;
+}
+
+.weed-placeholder-notice code {
+	background-color: #0C55AF;
+}
+
 /* Featured */
 .weed-featured-products > h2 {
 	text-align: center;
