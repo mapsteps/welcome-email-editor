@@ -157,8 +157,6 @@ class Settings_Module extends Base_Module {
 		add_settings_section( 'weed-forgot-password-email-section', __( 'Forgot Password Email Settings', 'welcome-email-editor' ), '', 'weed-forgot-password-email-settings' );
 		add_settings_section( 'weed-misc-section', __( 'Misc. Settings', 'welcome-email-editor' ), '', 'weed-misc-settings' );
 
-		$enable_field_hint = '<p class="description">' . __( "Your customizations below wouldn't be implemented unless you enable this.", 'welcome-email-editor' ) . '</p>';
-
 		// General fields.
 		add_settings_field( 'enable', __( 'Enable Features', 'welcome-email-editor' ), array( $this, 'enable_field' ), 'weed-general-settings', 'weed-general-section' );
 		add_settings_field( 'from-email', __( 'From Email Address', 'welcome-email-editor' ), array( $this, 'from_email_field' ), 'weed-general-settings', 'weed-general-section' );
@@ -171,14 +169,17 @@ class Settings_Module extends Base_Module {
 		add_settings_field( 'user-welcome-email-attachment', __( 'Email Attachment URL', 'welcome-email-editor' ), array( $this, 'user_welcome_email_attachment_field' ), 'weed-user-welcome-email-settings', 'weed-user-welcome-email-section' );
 		add_settings_field( 'user-welcome-email-additional-headers', __( 'Additional Email Headers', 'welcome-email-editor' ), array( $this, 'user_welcome_email_additional_headers_field' ), 'weed-user-welcome-email-settings', 'weed-user-welcome-email-section' );
 		add_settings_field( 'user-welcome-email-reply-to', __( '"Reply-To" Email Address', 'welcome-email-editor' ), array( $this, 'user_welcome_email_reply_to_field' ), 'weed-user-welcome-email-settings', 'weed-user-welcome-email-section' );
+		add_settings_field( 'user-welcome-email-test', '', array( $this, 'user_welcome_email_test_field' ), 'weed-user-welcome-email-settings', 'weed-user-welcome-email-section' );
 
 		// Admin welcome email fields.
 		add_settings_field( 'admin-welcome-email-subject', __( 'Email Subject', 'welcome-email-editor' ), array( $this, 'admin_welcome_email_subject_field' ), 'weed-admin-welcome-email-settings', 'weed-admin-welcome-email-section' );
 		add_settings_field( 'admin-welcome-email-body', __( 'Email Body', 'welcome-email-editor' ), array( $this, 'admin_welcome_email_body_field' ), 'weed-admin-welcome-email-settings', 'weed-admin-welcome-email-section' );
+		add_settings_field( 'admin-welcome-email-test', '', array( $this, 'admin_welcome_email_test_field' ), 'weed-admin-welcome-email-settings', 'weed-admin-welcome-email-section' );
 
 		// Forgot password email fields.
 		add_settings_field( 'forgot-password-email-subject', __( 'Email Subject', 'welcome-email-editor' ), array( $this, 'forgot_password_email_subject_field' ), 'weed-forgot-password-email-settings', 'weed-forgot-password-email-section' );
 		add_settings_field( 'forgot-password-email-body', __( 'Email Body', 'welcome-email-editor' ), array( $this, 'forgot_password_email_body_field' ), 'weed-forgot-password-email-settings', 'weed-forgot-password-email-section' );
+		add_settings_field( 'forgot-password-email-test', '', array( $this, 'forgot_password_email_test_field' ), 'weed-forgot-password-email-settings', 'weed-forgot-password-email-section' );
 
 		// Misc. settings.
 		add_settings_field( 'remove-on-uninstall', __( 'Remove on Uninstall', 'welcome-email-editor' ), array( $this, 'remove_on_uninstall_field' ), 'weed-misc-settings', 'weed-misc-section' );
@@ -276,6 +277,16 @@ class Settings_Module extends Base_Module {
 	}
 
 	/**
+	 * User welcome email's test field.
+	 */
+	public function user_welcome_email_test_field() {
+
+		$field = require __DIR__ . '/templates/fields/user-welcome-email/test-button.php';
+		$field( $this );
+
+	}
+
+	/**
 	 * Admin welcome email's subject field.
 	 */
 	public function admin_welcome_email_subject_field() {
@@ -306,6 +317,16 @@ class Settings_Module extends Base_Module {
 	}
 
 	/**
+	 * Admin welcome email's test field.
+	 */
+	public function admin_welcome_email_test_field() {
+
+		$field = require __DIR__ . '/templates/fields/admin-welcome-email/test-button.php';
+		$field( $this );
+
+	}
+
+	/**
 	 * Forgot password email's subject field.
 	 */
 	public function forgot_password_email_subject_field() {
@@ -321,6 +342,16 @@ class Settings_Module extends Base_Module {
 	public function forgot_password_email_body_field() {
 
 		$field = require __DIR__ . '/templates/fields/forgot-password-email/body.php';
+		$field( $this );
+
+	}
+
+	/**
+	 * Forgot password email's test field.
+	 */
+	public function forgot_password_email_test_field() {
+
+		$field = require __DIR__ . '/templates/fields/forgot-password-email/test-button.php';
 		$field( $this );
 
 	}
