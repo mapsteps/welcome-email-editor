@@ -20,6 +20,14 @@ return function ( $module ) {
 
 	<textarea name="weed_settings[user_welcome_email_additional_headers]" id="weed_settings--user_welcome_email_additional_headers" class="regular-text" rows="5" value="<?php echo esc_attr( $values['user_welcome_email_additional_headers'] ); ?>" placeholder="<?php echo esc_attr( $defaults['user_welcome_email_additional_headers'] ); ?>"><?php echo esc_html( $defaults['user_welcome_email_additional_headers'] ); ?></textarea>
 
+	<p class="description">
+		<?php _e( 'Add custom http header string for your email sending. E.g:', 'welcome-email-editor' ); ?>
+		<br>
+		<code>Content-Type: text/plain</code>
+		<br>
+		<?php _e( 'If you would like to add multiple headers, then add them in multi lines format.', 'welcome-email-editor' ); ?>
+	</p>
+
 	<?php
 
 };

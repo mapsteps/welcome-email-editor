@@ -83,7 +83,7 @@ class Settings_Module extends Base_Module {
 		}
 
 		$description  = '<h4>' . __( 'Available template placeholders:', 'welome-email-editor' ) . '</h4>';
-		$description .= '<p><code>[site_url]</code>, <code>[login_url]</code>, <code>[reset_pass_url]</code>, <code>[user_email]</code>, <code>[user_login]</code>, <code>[user_id]</code>, <code>[first_name]</code>, <code>[last_name]</code>, <code>[blog_name]</code>, <code>[admin_email]</code>, <code>[custom_fields]</code>, <code>[date]</code>, <code>[time]</code>, <code>[bp_custom_fields]</code> (buddypress custom fields &mdash; admin only), <code>[post_data]</code> (admin only &mdash; sends $_REQUEST)</p>';
+		$description .= '<p><code>[site_url]</code>, <code>[login_url]</code>, <code>[reset_pass_url]</code>, <code>[user_email]</code>, <code>[user_login]</code>, <code>[user_id]</code>, <code>[first_name]</code>, <code>[last_name]</code>, <code>[blog_name]</code>, <code>[admin_email]</code>, <code>[custom_fields]</code>, <code>[date]</code>, <code>[time]</code>, <code>[bp_custom_fields]</code> (buddypress custom fields &mdash; admin only), <code>[post_data]</code> (admin only &mdash; contains $_POST)</p>';
 
 		printf( '<div class="notice notice-info weed-placeholder-notice">%1s</div>', $description );
 
@@ -157,11 +157,13 @@ class Settings_Module extends Base_Module {
 		add_settings_section( 'weed-forgot-password-email-section', __( 'Forgot Password Email Settings', 'welcome-email-editor' ), '', 'weed-forgot-password-email-settings' );
 		add_settings_section( 'weed-misc-section', __( 'Misc. Settings', 'welcome-email-editor' ), '', 'weed-misc-settings' );
 
+		$enable_field_hint = '<p class="description">' . __( "Your customizations below wouldn't be implemented unless you enable this.", 'welcome-email-editor' ) . '</p>';
+
 		// General fields.
+		add_settings_field( 'enable', __( 'Enable Features', 'welcome-email-editor' ), array( $this, 'enable_field' ), 'weed-general-settings', 'weed-general-section' );
 		add_settings_field( 'from-email', __( 'From Email Address', 'welcome-email-editor' ), array( $this, 'from_email_field' ), 'weed-general-settings', 'weed-general-section' );
 		add_settings_field( 'from-name', __( 'From Name', 'welcome-email-editor' ), array( $this, 'from_name_field' ), 'weed-general-settings', 'weed-general-section' );
 		add_settings_field( 'content-type', __( 'Mail Content Type', 'welcome-email-editor' ), array( $this, 'content_type_field' ), 'weed-general-settings', 'weed-general-section' );
-		add_settings_field( 'disable-global-headers', __( 'Disable Global Headers', 'welcome-email-editor' ), array( $this, 'disable_global_headers_field' ), 'weed-general-settings', 'weed-general-section' );
 
 		// User welcome email fields.
 		add_settings_field( 'user-welcome-email-subject', __( 'Email Subject', 'welcome-email-editor' ), array( $this, 'user_welcome_email_subject_field' ), 'weed-user-welcome-email-settings', 'weed-user-welcome-email-section' );
@@ -180,6 +182,16 @@ class Settings_Module extends Base_Module {
 
 		// Misc. settings.
 		add_settings_field( 'remove-on-uninstall', __( 'Remove on Uninstall', 'welcome-email-editor' ), array( $this, 'remove_on_uninstall_field' ), 'weed-misc-settings', 'weed-misc-section' );
+
+	}
+
+	/**
+	 * Enable field.
+	 */
+	public function enable_field() {
+
+		$field = require __DIR__ . '/templates/fields/general/enable.php';
+		$field( $this );
 
 	}
 
@@ -209,16 +221,6 @@ class Settings_Module extends Base_Module {
 	public function content_type_field() {
 
 		$field = require __DIR__ . '/templates/fields/general/content-type.php';
-		$field( $this );
-
-	}
-
-	/**
-	 * Set global headers field.
-	 */
-	public function disable_global_headers_field() {
-
-		$field = require __DIR__ . '/templates/fields/general/disable-global-headers.php';
 		$field( $this );
 
 	}

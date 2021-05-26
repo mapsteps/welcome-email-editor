@@ -72,7 +72,7 @@ class Setup {
 			// General settings.
 			'from_email'                            => '[admin_email]',
 			'from_name'                             => '',
-			'content_type'                          => 'text',
+			'content_type'                          => 'html',
 
 			// Welcome email settings - for user.
 			'user_welcome_email_subject'            => '[[blog_name]] Your username and password',
