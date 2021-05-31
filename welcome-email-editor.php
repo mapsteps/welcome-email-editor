@@ -8,7 +8,7 @@
  * Author URI: https://ultimatedashboard.com
  * Text Domain: welcome-email-editor
  * Domain Path: /languages
- * 
+ *
  * @package Welcome_Email_Editor
  */
 
@@ -19,10 +19,11 @@ define( 'WEED_PLUGIN_DIR', rtrim( plugin_dir_path( __FILE__ ), '/' ) );
 define( 'WEED_PLUGIN_URL', rtrim( plugin_dir_url( __FILE__ ), '/' ) );
 define( 'WEED_PLUGIN_VERSION', '5.0.0' );
 define( 'WEED_PLUGIN_NAME', 'Welome Email Editor' );
-define( 'WEED_PLUGIN_FILE', rtrim( WEED_PLUGIN_DIR . '/welcome-email-editor.php' ) );
+define( 'WEED_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 
 // Helper classes.
 require __DIR__ . '/helpers/class-screen-helper.php';
+require __DIR__ . '/helpers/class-content-helper.php';
 
 // Base module.
 require __DIR__ . '/modules/base/class-base-module.php';

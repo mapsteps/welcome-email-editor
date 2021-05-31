@@ -15,6 +15,7 @@ defined( 'ABSPATH' ) || die( "Can't access directly" );
 return function ( $module ) {
 
 	$defaults = $module->defaults;
+	$settings = $module->settings;
 	$values   = $module->values;
 	?>
 

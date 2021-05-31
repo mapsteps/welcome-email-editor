@@ -18,9 +18,9 @@ return function ( $module ) {
 	$is_checked = isset( $settings['enable'] ) ? 1 : 0;
 	?>
 
-	<label for="weed_settings--disable_global_headers--no" class="label checkbox-label">
+	<label for="weed_settings--enable" class="label checkbox-label">
 		<?php _e( 'Yes', 'welcome-email-editor' ); ?>
-		<input type="checkbox" name="weed_settings[disable_global_headers]" id="weed_settings--disable_global_headers--no" value="1" <?php checked( $is_checked, 1 ); ?>>
+		<input type="checkbox" name="weed_settings[enable]" id="weed_settings--enable" value="1" <?php checked( $is_checked, 1 ); ?>>
 		<div class="indicator"></div>
 	</label>
 

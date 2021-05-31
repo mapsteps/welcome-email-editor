@@ -60,6 +60,8 @@ class Settings_Module extends Base_Module {
 	 */
 	public function setup() {
 
+		add_action( 'init', array( $this, 'set_plugin_priority' ) );
+
 		add_action( 'admin_notices', array( $this, 'placeholders_notice' ) );
 		add_action( 'admin_menu', array( $this, 'submenu_page' ), 20 );
 		add_action( 'admin_init', array( $this, 'add_settings' ) );
@@ -67,9 +69,31 @@ class Settings_Module extends Base_Module {
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_styles' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_scripts' ) );
 
+		// Necessary functions.
+		require_once __DIR__ . '/inc/wp-new-user-notification.php';
+
 		// The module output.
 		require_once __DIR__ . '/class-settings-output.php';
 		Settings_Output::init();
+
+	}
+
+	/**
+	 * Set our plugin as the first plugin priority.
+	 */
+	public function set_plugin_priority() {
+
+		$active_plugins = get_option( 'active_plugins' );
+		$current_index  = array_search( WEED_PLUGIN_BASENAME, $active_plugins, true );
+
+		// Stop if our plugin is already the first priority (index 0).
+		if ( ! $current_index ) {
+			return;
+		}
+
+		array_splice( $active_plugins, $current_index, 1 );
+		array_unshift( $active_plugins, WEED_PLUGIN_BASENAME );
+		update_option( 'active_plugins', $active_plugins );
 
 	}
 
@@ -83,7 +107,7 @@ class Settings_Module extends Base_Module {
 		}
 
 		$description  = '<h4>' . __( 'Available template placeholders:', 'welome-email-editor' ) . '</h4>';
-		$description .= '<p><code>[site_url]</code>, <code>[login_url]</code>, <code>[reset_pass_url]</code>, <code>[user_email]</code>, <code>[user_login]</code>, <code>[user_id]</code>, <code>[first_name]</code>, <code>[last_name]</code>, <code>[blog_name]</code>, <code>[admin_email]</code>, <code>[custom_fields]</code>, <code>[date]</code>, <code>[time]</code>, <code>[bp_custom_fields]</code> (buddypress custom fields &mdash; admin only), <code>[post_data]</code> (admin only &mdash; contains $_POST)</p>';
+		$description .= '<p><code>[site_url]</code>, <code>[login_url]</code>, <code>[reset_pass_url]</code>, <code>[user_email]</code>, <code>[user_login]</code>, <code>[user_id]</code>, <code>[first_name]</code>, <code>[last_name]</code>, <code>[blog_name]</code>, <code>[admin_email]</code>, <code>[custom_fields]</code>, <code>[date]</code>, <code>[time]</code>, <code>[bp_custom_fields]</code> (admin only &mdash; will print buddypress custom fields), <code>[post_data]</code> (admin only &mdash; will print $_REQUEST)</p>';
 
 		printf( '<div class="notice notice-info weed-placeholder-notice">%1s</div>', $description );
 

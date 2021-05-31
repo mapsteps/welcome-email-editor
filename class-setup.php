@@ -53,13 +53,21 @@ class Setup {
 
 		$this->set_data();
 
-		add_filter( 'plugin_action_links_' . plugin_basename( WEED_PLUGIN_FILE ), array( $this, 'plugin_action_links' ) );
+		add_action( 'init', array( $this, 'setup_text_domain' ) );
+		add_filter( 'plugin_action_links_' . WEED_PLUGIN_BASENAME, array( $this, 'plugin_action_links' ) );
 		add_filter( 'admin_body_class', array( $this, 'admin_body_class' ) );
 
 		$this->load_modules();
 
-		register_deactivation_hook( plugin_basename( WEED_PLUGIN_FILE ), array( $this, 'deactivation' ), 20 );
+		register_deactivation_hook( WEED_PLUGIN_BASENAME, array( $this, 'deactivation' ), 20 );
 
+	}
+
+	/**
+	 * Setup textdomain.
+	 */
+	public function setup_text_domain() {
+		load_plugin_textdomain( 'welcome-email-editor', false, WEED_PLUGIN_BASENAME . '/languages' );
 	}
 
 	/**
