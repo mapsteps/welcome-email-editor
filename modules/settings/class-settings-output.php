@@ -106,6 +106,8 @@ class Settings_Output extends Base_Output {
 			return $title;
 		}
 
+		$this->set_email_headers();
+
 		return $saved_title;
 
 	}

@@ -39,12 +39,13 @@ if ( ! function_exists( 'wp_new_user_notification' ) ) {
 			return;
 		}
 
-		global $wpdb;
-
 		$user = get_userdata( $user_id );
 
 		$settings       = Vars::get( 'settings' );
 		$content_helper = new Content_Helper();
+		$module_output  = new Settings_Output();
+
+		$module_output->set_email_headers();
 
 		// The blogname option is escaped with esc_html() on the way into the database in sanitize_option().
 		// We want to reverse this for the plain text arena of emails.
@@ -315,5 +316,7 @@ if ( ! function_exists( 'wp_new_user_notification' ) ) {
 		if ( $switched_locale ) {
 			restore_previous_locale();
 		}
+
+		$module_output->reset_email_headers();
 	}
 }
