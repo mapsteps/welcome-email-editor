@@ -224,12 +224,49 @@ if ( ! function_exists( 'wp_new_user_notification' ) ) {
 			 */
 			$wp_new_user_notification_email_admin = apply_filters( 'wp_new_user_notification_email_admin', $wp_new_user_notification_email_admin, $user, $blogname );
 
+			$custom_recipient_emails = array();
+
+			$custom_recipients = $settings['admin_welcome_email_custom_recipients'];
+			$custom_recipients = trim( $custom_recipients );
+			$custom_recipients = rtrim( $custom_recipients, ',' ); // Make sure there's no trailing comma to prevent double commas.
+
+			if ( ! empty( $custom_recipients ) ) {
+				$custom_recipients = $custom_recipients . ','; // Let's add a trailing comma for the explode.
+				$custom_recipients = explode( ',', $custom_recipients );
+
+				foreach ( $custom_recipients as $custom_recipient ) {
+					$custom_recipient = trim( $custom_recipient );
+
+					if ( ! empty( $custom_recipient ) ) {
+						// Let's keep this checking separately, think about future possibility if would add custom recipient(s) as email string.
+						if ( is_numeric( $custom_recipient ) ) {
+							$custom_recipient = absint( $custom_recipient );
+
+							$user = get_userdata( $custom_recipient );
+
+							if ( $user ) {
+								array_push( $custom_recipient_emails, $user->user_email );
+							}
+						}
+					}
+				}
+			}
+
 			wp_mail(
 				$wp_new_user_notification_email_admin['to'],
 				wp_specialchars_decode( sprintf( $wp_new_user_notification_email_admin['subject'], $blogname ) ),
 				$wp_new_user_notification_email_admin['message'],
 				$wp_new_user_notification_email_admin['headers']
 			);
+
+			foreach ( $custom_recipient_emails as $custom_recipient_email ) {
+				wp_mail(
+					$custom_recipient_email,
+					wp_specialchars_decode( sprintf( $wp_new_user_notification_email_admin['subject'], $blogname ) ),
+					$wp_new_user_notification_email_admin['message'],
+					$wp_new_user_notification_email_admin['headers']
+				);
+			}
 
 			if ( $switched_locale ) {
 				restore_previous_locale();
