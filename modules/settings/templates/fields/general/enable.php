@@ -25,7 +25,7 @@ return function ( $module ) {
 	</label>
 
 	<p class="description">
-		<?php _e( "Your customizations below wouldn't be implemented unless you enable this.", 'welcome-email-editor' ); ?>
+		<?php _e( "Your customizations below won't be implemented unless you enable this.", 'welcome-email-editor' ); ?>
 	</p>
 
 	<?php
