@@ -346,11 +346,16 @@ if ( ! function_exists( 'wp_new_user_notification' ) ) {
 		 */
 		$wp_new_user_notification_email = apply_filters( 'wp_new_user_notification_email', $wp_new_user_notification_email, $user, $blogname );
 
+		$attachment = $settings['user_welcome_email_attachment_url'];
+		$attachment = trim( $attachment );
+		$attachment = empty( $attachment ) ? '' : $attachment;
+
 		wp_mail(
 			$wp_new_user_notification_email['to'],
 			wp_specialchars_decode( sprintf( $wp_new_user_notification_email['subject'], $blogname ) ),
 			$wp_new_user_notification_email['message'],
-			$wp_new_user_notification_email['headers']
+			$wp_new_user_notification_email['headers'],
+			$attachment
 		);
 
 		if ( $switched_locale ) {
