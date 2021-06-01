@@ -1,13 +1,11 @@
 <?php
 /**
  * Plugin Name: Welcome Email Editor
- * Plugin URI: http://wordpress.org/plugins/welcome-email-editor/
- * Description: Welcome Email Editor allows you to change the content, layout, and even add an attachment for many of the built-in WordPress emails.
+ * Description: Welcome Email Editor allows you to change the content, layout and even add an attachment for many of the built-in WordPress emails.
  * Version: 5.0
  * Author: David Vongries
  * Author URI: https://ultimatedashboard.com
  * Text Domain: welcome-email-editor
- * Domain Path: /languages
  *
  * @package Welcome_Email_Editor
  */
