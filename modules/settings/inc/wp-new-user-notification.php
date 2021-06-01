@@ -83,10 +83,23 @@ if ( ! function_exists( 'wp_new_user_notification' ) ) {
 		$custom_headers = str_ireplace( "\r\n", "\n", $custom_headers );
 		$custom_headers = explode( "\n", $custom_headers );
 
+		$custom_header_placeholders = array(
+			'[admin_email]',
+			'[blog_name]',
+			'[site_url]',
+		);
+
+		$custom_header_replacements = array(
+			$admin_email,
+			$blogname,
+			network_site_url(),
+		);
+
 		foreach ( $custom_headers as $custom_header ) {
 			$custom_header = trim( $custom_header );
 
 			if ( ! empty( $custom_header ) ) {
+				$custom_header = str_ireplace( $custom_header_placeholders, $custom_header_replacements, $custom_header );
 				array_push( $headers, $custom_header );
 			}
 		}
