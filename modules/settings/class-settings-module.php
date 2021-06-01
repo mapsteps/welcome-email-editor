@@ -217,6 +217,7 @@ class Settings_Module extends Base_Module {
 		// Admin welcome email fields.
 		add_settings_field( 'admin-welcome-email-subject', __( 'Email Subject', 'welcome-email-editor' ), array( $this, 'admin_welcome_email_subject_field' ), 'weed-admin-welcome-email-settings', 'weed-admin-welcome-email-section' );
 		add_settings_field( 'admin-welcome-email-body', __( 'Email Body', 'welcome-email-editor' ), array( $this, 'admin_welcome_email_body_field' ), 'weed-admin-welcome-email-settings', 'weed-admin-welcome-email-section' );
+		add_settings_field( 'admin-welcome-email-recipients', __( 'Custom Recipients', 'welcome-email-editor' ), array( $this, 'admin_welcome_email_custom_recipients_field' ), 'weed-admin-welcome-email-settings', 'weed-admin-welcome-email-section' );
 		add_settings_field( 'admin-welcome-email-test', '', array( $this, 'admin_welcome_email_test_field' ), 'weed-admin-welcome-email-settings', 'weed-admin-welcome-email-section' );
 
 		// Forgot password email fields.
