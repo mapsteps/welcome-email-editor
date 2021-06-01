@@ -77,6 +77,18 @@ class Settings_Module extends Base_Module {
 		require_once __DIR__ . '/class-settings-output.php';
 		Settings_Output::init();
 
+		$this->setup_ajax();
+
+	}
+
+	/**
+	 * Setup ajax.
+	 */
+	public function setup_ajax() {
+
+		require_once __DIR__ . '/ajax/class-test-emails.php';
+		add_action( 'wp_ajax_weed_test_emails', array( Ajax\Test_Emails::get_instance(), 'ajax_handler' ) );
+
 	}
 
 	/**
@@ -163,7 +175,19 @@ class Settings_Module extends Base_Module {
 			return;
 		}
 
-		wp_enqueue_script( 'weed-settings', $this->url . '/assets/js/settings.js', array( 'jquery', 'wp-polyfill' ), WEED_PLUGIN_VERSION, true );
+		wp_enqueue_script( 'weed-test-emails', $this->url . '/assets/js/test-emails.js', array( 'jquery', 'wp-polyfill' ), WEED_PLUGIN_VERSION, true );
+
+		wp_localize_script(
+			'weed-test-emails',
+			'weedTestEmails',
+			array(
+				'nonces' => array(
+					'adminWelcomeEmail'   => wp_create_nonce( WEED_PLUGIN_DIR . '_Admin_Welcome_Email' ),
+					'userWelcomeEmail'    => wp_create_nonce( WEED_PLUGIN_DIR . '_User_Welcome_Email' ),
+					'forgotPasswordEmail' => wp_create_nonce( WEED_PLUGIN_DIR . '_Forgot_Password_Email' ),
+				),
+			)
+		);
 
 	}
 

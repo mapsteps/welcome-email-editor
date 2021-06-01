@@ -54,10 +54,11 @@ if ( ! function_exists( 'wp_new_user_notification' ) ) {
 		// We want to reverse this for the plain text arena of emails.
 		$blogname = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
 
-		$current_date  = date_i18n( get_option( 'date_format' ) );
-		$current_time  = date_i18n( get_option( 'time_format' ) );
-		$admin_email   = get_option( 'admin_email' );
-		$custom_fields = $content_helper->get_user_custom_fields( $user_id );
+		$current_date      = date_i18n( get_option( 'date_format' ) );
+		$current_time      = date_i18n( get_option( 'time_format' ) );
+		$admin_email       = get_option( 'admin_email' );
+		$custom_fields     = $content_helper->get_user_custom_fields( $user_id );
+		$testing_recipient = apply_filters( 'weed_test_email_recipient', '' );
 
 		$headers = $email_helper->get_extra_headers();
 
@@ -208,19 +209,21 @@ if ( ! function_exists( 'wp_new_user_notification' ) ) {
 			}
 
 			wp_mail(
-				$wp_new_user_notification_email_admin['to'],
+				( ! empty( $testing_recipient ) ? $testing_recipient : $wp_new_user_notification_email_admin['to'] ),
 				wp_specialchars_decode( sprintf( $wp_new_user_notification_email_admin['subject'], $blogname ) ),
 				$wp_new_user_notification_email_admin['message'],
 				$wp_new_user_notification_email_admin['headers']
 			);
 
-			foreach ( $custom_recipient_emails as $custom_recipient_email ) {
-				wp_mail(
-					$custom_recipient_email,
-					wp_specialchars_decode( sprintf( $wp_new_user_notification_email_admin['subject'], $blogname ) ),
-					$wp_new_user_notification_email_admin['message'],
-					$wp_new_user_notification_email_admin['headers']
-				);
+			if ( empty( $testing_recipient ) ) {
+				foreach ( $custom_recipient_emails as $custom_recipient_email ) {
+					wp_mail(
+						$custom_recipient_email,
+						wp_specialchars_decode( sprintf( $wp_new_user_notification_email_admin['subject'], $blogname ) ),
+						$wp_new_user_notification_email_admin['message'],
+						$wp_new_user_notification_email_admin['headers']
+					);
+				}
 			}
 
 			if ( $switched_locale ) {
