@@ -59,7 +59,28 @@ return function () {
 					<?php do_settings_sections( 'weed-misc-settings' ); ?>
 				</div>
 
-				<?php submit_button( '', 'button button-primary button-larger' ); ?>
+				<div class="udb-buttons">
+					<?php
+					submit_button( '', 'button button-primary button-larger', 'submit', false );
+
+					$current_url = site_url() . $_SERVER['REQUEST_URI'];
+
+					$reset_settings_url = add_query_arg(
+						array(
+							'action'       => 'weed_reset_settings',
+							'nonce'        => wp_create_nonce( WEED_PLUGIN_DIR ),
+							'http_referer' => $current_url,
+						),
+						$current_url
+					);
+					?>
+
+					<a href="<?php echo esc_url( $reset_settings_url ); ?>" class="button button-larger udb-reset-button">
+						<?php _e( 'Reset Settings', 'welcome-email-editor' ); ?>
+					</a>
+				</div>
+
+
 
 			</form>
 

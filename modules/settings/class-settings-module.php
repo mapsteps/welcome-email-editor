@@ -64,6 +64,7 @@ class Settings_Module extends Base_Module {
 
 		add_action( 'admin_notices', array( $this, 'placeholders_notice' ) );
 		add_action( 'admin_menu', array( $this, 'submenu_page' ), 20 );
+		add_action( 'current_screen', array( $this, 'reset_settings' ) );
 		add_action( 'admin_init', array( $this, 'add_settings' ) );
 
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_styles' ) );
@@ -163,6 +164,24 @@ class Settings_Module extends Base_Module {
 		}
 
 		wp_enqueue_script( 'weed-settings', $this->url . '/assets/js/settings.js', array( 'jquery', 'wp-polyfill' ), WEED_PLUGIN_VERSION, true );
+
+	}
+
+	/**
+	 * Reset all settings.
+	 */
+	public function reset_settings() {
+
+		if ( ! $this->screen()->is_settings() || ! isset( $_GET['action'] ) || ! isset( $_GET['nonce'] ) || ! isset( $_GET['http_referer'] ) ) {
+			return;
+		}
+
+		if ( 'weed_reset_settings' !== $_GET['action'] || ! wp_verify_nonce( $_GET['nonce'], WEED_PLUGIN_DIR ) ) {
+			return;
+		}
+
+		delete_option( 'weed_settings' );
+		wp_safe_redirect( $_GET['http_referer'] );
 
 	}
 
