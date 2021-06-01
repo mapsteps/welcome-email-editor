@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Welcome Email Editor
- * Description: Welcome Email Editor allows you to change the content, layout and even add an attachment for many of the built-in WordPress emails.
+ * Description: Welcome Email Editor allows you to change the default WordPress welcome & reset password emails.
  * Version: 5.0
  * Author: David Vongries
  * Author URI: https://ultimatedashboard.com

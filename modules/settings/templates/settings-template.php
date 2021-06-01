@@ -23,7 +23,7 @@ return function () {
 						<span class="version"><?php echo esc_html( WEED_PLUGIN_VERSION ); ?></span>
 					</span>
 
-					<p class="subtitle"><?php _e( 'Change the content, layout, for many of the built-in WordPress emails.', 'welcome-email-editor' ); ?></p>
+					<p class="subtitle"><?php _e( 'Change WordPress\' Welcome & Reset Password Emails', 'welcome-email-editor' ); ?></p>
 
 				</div>
 
