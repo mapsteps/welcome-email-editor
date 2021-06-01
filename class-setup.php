@@ -86,9 +86,9 @@ class Setup {
 			'user_welcome_email_subject'            => '[[blog_name]] Your username and password',
 			'user_welcome_email_body'               => 'Username: [user_login]<br>Password: [user_password]<br>[login_url]',
 			'user_welcome_email_attachment_url'     => '',
-			'user_welcome_email_additional_headers' => '',
 			'user_welcome_email_reply_to_email'     => '',
 			'user_welcome_email_reply_to_name'      => '',
+			'user_welcome_email_additional_headers' => '',
 
 			// Welcome email settings - for admin.
 			'admin_welcome_email_subject'           => '[[blog_name]] New User Registration',

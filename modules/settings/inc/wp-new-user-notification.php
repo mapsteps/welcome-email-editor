@@ -7,6 +7,7 @@
 
 use Weed\Vars;
 use Weed\Helpers\Content_Helper;
+use Weed\Helpers\Email_Helper;
 use Weed\Settings\Settings_Output;
 
 if ( ! function_exists( 'wp_new_user_notification' ) ) {
@@ -42,9 +43,9 @@ if ( ! function_exists( 'wp_new_user_notification' ) ) {
 		$user = get_userdata( $user_id );
 
 		$settings = Vars::get( 'settings' );
-		$values   = Vars::get( 'values' );
 
 		$content_helper = new Content_Helper();
+		$email_helper   = new Email_Helper();
 		$module_output  = new Settings_Output();
 
 		$module_output->set_email_headers();
@@ -58,51 +59,7 @@ if ( ! function_exists( 'wp_new_user_notification' ) ) {
 		$admin_email   = get_option( 'admin_email' );
 		$custom_fields = $content_helper->get_user_custom_fields( $user_id );
 
-		$headers  = array();
-		$reply_to = '';
-
-		if ( ! empty( $values['user_welcome_email_reply_to_email'] ) ) {
-			$reply_to = 'Reply-To:';
-
-			// Only check for reply to name, if reply to email exists.
-			if ( ! empty( $values['user_welcome_email_reply_to_name'] ) ) {
-				$reply_to .= ' ' . $settings['user_welcome_email_reply_to_name'];
-			}
-
-			if ( isset( $settings['user_welcome_email_reply_to_email'] ) ) {
-				$reply_to .= ' <' . $settings['user_welcome_email_reply_to_email'] . '>';
-			}
-		}
-
-		if ( ! empty( $reply_to ) ) {
-			array_push( $headers, $reply_to );
-		}
-
-		$custom_headers = $values['user_welcome_email_additional_headers'];
-		$custom_headers = trim( $custom_headers );
-		$custom_headers = str_ireplace( "\r\n", "\n", $custom_headers );
-		$custom_headers = explode( "\n", $custom_headers );
-
-		$custom_header_placeholders = array(
-			'[admin_email]',
-			'[blog_name]',
-			'[site_url]',
-		);
-
-		$custom_header_replacements = array(
-			$admin_email,
-			$blogname,
-			network_site_url(),
-		);
-
-		foreach ( $custom_headers as $custom_header ) {
-			$custom_header = trim( $custom_header );
-
-			if ( ! empty( $custom_header ) ) {
-				$custom_header = str_ireplace( $custom_header_placeholders, $custom_header_replacements, $custom_header );
-				array_push( $headers, $custom_header );
-			}
-		}
+		$headers = $email_helper->get_extra_headers();
 
 		if ( 'user' !== $notify ) {
 			$switched_locale = switch_to_locale( get_locale() );
@@ -208,8 +165,6 @@ if ( ! function_exists( 'wp_new_user_notification' ) ) {
 
 			/**
 			 * Filters the contents of the new user notification email sent to the site admin.
-			 *
-			 * @since 4.9.0
 			 *
 			 * @param array   $wp_new_user_notification_email_admin {
 			 *     Used to build wp_mail().

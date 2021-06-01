@@ -177,7 +177,7 @@ class Settings_Output extends Base_Output {
 	}
 
 	/**
-	 * Set email http headers but without the content type.
+	 * Set email http headers but only the from_email and from_name.
 	 */
 	public function set_email_from_headers() {
 

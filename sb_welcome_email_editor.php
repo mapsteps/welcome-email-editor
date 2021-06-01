@@ -22,6 +22,7 @@ define( 'WEED_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 // Helper classes.
 require __DIR__ . '/helpers/class-screen-helper.php';
 require __DIR__ . '/helpers/class-content-helper.php';
+require __DIR__ . '/helpers/class-email-helper.php';
 
 // Base module.
 require __DIR__ . '/modules/base/class-base-module.php';
