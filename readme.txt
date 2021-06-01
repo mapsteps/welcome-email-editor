@@ -80,4 +80,4 @@ This will allow the plugin to process a hook called [my_hook] and replace it wit
 
 == Changelog ==
 = 5.0 | May 22, 2021 =
-* Hey there, David here :) We have taken over the Welcome Email Editor project from our friend Sean Barton. This is our initial release - No new features were added. With this release we have reviewed & rewritten the codebase from ground up and greatly improved the settings page design. Stay tuned for more.
+* Hey there, David here :) We have taken over the Welcome Email Editor project from our friend Sean Barton. This is our initial release - Apart from some minor improvements, no new features were added. With this release we have reviewed & rewritten the codebase from ground up and greatly improved the settings page design. Stay tuned for more.
