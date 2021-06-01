@@ -211,7 +211,8 @@ class Settings_Module extends Base_Module {
 		add_settings_field( 'user-welcome-email-body', __( 'Email Body', 'welcome-email-editor' ), array( $this, 'user_welcome_email_body_field' ), 'weed-user-welcome-email-settings', 'weed-user-welcome-email-section' );
 		add_settings_field( 'user-welcome-email-attachment', __( 'Email Attachment URL', 'welcome-email-editor' ), array( $this, 'user_welcome_email_attachment_field' ), 'weed-user-welcome-email-settings', 'weed-user-welcome-email-section' );
 		add_settings_field( 'user-welcome-email-additional-headers', __( 'Additional Email Headers', 'welcome-email-editor' ), array( $this, 'user_welcome_email_additional_headers_field' ), 'weed-user-welcome-email-settings', 'weed-user-welcome-email-section' );
-		add_settings_field( 'user-welcome-email-reply-to', __( '"Reply-To" Email Address', 'welcome-email-editor' ), array( $this, 'user_welcome_email_reply_to_field' ), 'weed-user-welcome-email-settings', 'weed-user-welcome-email-section' );
+		add_settings_field( 'user-welcome-email-reply-to-email', __( '"Reply-To" Email Address', 'welcome-email-editor' ), array( $this, 'user_welcome_email_reply_to_email_field' ), 'weed-user-welcome-email-settings', 'weed-user-welcome-email-section' );
+		add_settings_field( 'user-welcome-email-reply-to-name', __( '"Reply-To" Name', 'welcome-email-editor' ), array( $this, 'user_welcome_email_reply_to_name_field' ), 'weed-user-welcome-email-settings', 'weed-user-welcome-email-section' );
 		add_settings_field( 'user-welcome-email-test', '', array( $this, 'user_welcome_email_test_field' ), 'weed-user-welcome-email-settings', 'weed-user-welcome-email-section' );
 
 		// Admin welcome email fields.
@@ -311,11 +312,21 @@ class Settings_Module extends Base_Module {
 	}
 
 	/**
-	 * User welcome email's reply to field.
+	 * User welcome email's reply to email field.
 	 */
-	public function user_welcome_email_reply_to_field() {
+	public function user_welcome_email_reply_to_email_field() {
 
-		$field = require __DIR__ . '/templates/fields/user-welcome-email/reply-to.php';
+		$field = require __DIR__ . '/templates/fields/user-welcome-email/reply-to-email.php';
+		$field( $this );
+
+	}
+
+	/**
+	 * User welcome email's reply to name field.
+	 */
+	public function user_welcome_email_reply_to_name_field() {
+
+		$field = require __DIR__ . '/templates/fields/user-welcome-email/reply-to-name.php';
 		$field( $this );
 
 	}
