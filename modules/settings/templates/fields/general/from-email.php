@@ -14,11 +14,17 @@ defined( 'ABSPATH' ) || die( "Can't access directly" );
  */
 return function ( $module ) {
 
-	$defaults = $module->defaults;
-	$values   = $module->values;
+	$values = $module->values;
+
+	$placeholder = site_url();
+	$placeholder = rtrim( $placeholder, '/' );
+	$placeholder = str_ireplace( 'https://', '', $placeholder );
+	$placeholder = str_ireplace( 'http://', '', $placeholder );
+	$placeholder = str_ireplace( 'www.', '', $placeholder );
+	$placeholder = 'wordpress@' . $placeholder;
 	?>
 
-	<input type="text" name="weed_settings[from_email]" id="weed_settings--from_email" class="regular-text" value="<?php echo esc_attr( $values['from_email'] ); ?>" placeholder="[admin_email]" />
+	<input type="text" name="weed_settings[from_email]" id="weed_settings--from_email" class="regular-text" value="<?php echo esc_attr( $values['from_email'] ); ?>" placeholder="<?php echo esc_attr( $placeholder ); ?>" />
 
 	<?php
 
