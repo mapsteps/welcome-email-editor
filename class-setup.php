@@ -100,7 +100,7 @@ class Setup {
 
 		$defaults = array(
 			// General settings.
-			'from_email'                            => '[admin_email]',
+			'from_email'                            => '',
 			'from_name'                             => '',
 			'content_type'                          => 'html',
 

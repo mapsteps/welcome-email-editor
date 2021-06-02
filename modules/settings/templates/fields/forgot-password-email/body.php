@@ -18,7 +18,7 @@ return function ( $module ) {
 	$values   = $module->values;
 	?>
 
-	<textarea name="weed_settings[forgot_password_email_body]" id="weed_settings--forgot_password_email_body" class="large-text" rows="5" value="<?php echo esc_attr( $values['forgot_password_email_body'] ); ?>" placeholder="<?php echo esc_attr( $defaults['forgot_password_email_body'] ); ?>"><?php echo esc_html( $defaults['forgot_password_email_body'] ); ?></textarea>
+	<textarea name="weed_settings[forgot_password_email_body]" id="weed_settings--forgot_password_email_body" class="large-text" rows="5" placeholder="<?php echo esc_attr( $defaults['forgot_password_email_body'] ); ?>"><?php echo esc_html( $values['forgot_password_email_body'] ); ?></textarea>
 
 	<?php
 
