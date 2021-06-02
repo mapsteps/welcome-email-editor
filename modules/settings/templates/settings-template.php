@@ -31,64 +31,73 @@ return function () {
 
 		</div>
 
-		<div class="heatbox-container heatbox-container-center">
+		<div class="heatbox-container heatbox-container-center heatbox-column-container">
 
-			<h1 style="display: none;"></h1>
+			<div class="heatbox-main">
+				<!-- Faking H1 tag to place admin notices -->
+				<h1 style="display: none;"></h1>
 
-			<form method="post" action="options.php" class="weed-settings-form">
+				<form method="post" action="options.php" class="weed-settings-form">
 
-				<?php settings_fields( 'weed-settings-group' ); ?>
+					<?php settings_fields( 'weed-settings-group' ); ?>
 
-				<div class="heatbox">
-					<?php do_settings_sections( 'weed-general-settings' ); ?>
+					<div class="heatbox">
+						<?php do_settings_sections( 'weed-general-settings' ); ?>
+					</div>
+
+					<div class="heatbox">
+						<?php do_settings_sections( 'weed-user-welcome-email-settings' ); ?>
+					</div>
+
+					<div class="heatbox">
+						<?php do_settings_sections( 'weed-admin-new-user-notif-email-settings' ); ?>
+					</div>
+
+					<div class="heatbox">
+						<?php do_settings_sections( 'weed-reset-password-email-settings' ); ?>
+					</div>
+
+					<div class="heatbox">
+						<?php do_settings_sections( 'weed-misc-settings' ); ?>
+					</div>
+
+					<div class="udb-buttons">
+						<?php
+						submit_button( '', 'button button-primary button-larger', 'submit', false );
+
+						$current_url = site_url() . $_SERVER['REQUEST_URI'];
+
+						$reset_settings_url = add_query_arg(
+							array(
+								'action'       => 'weed_reset_settings',
+								'nonce'        => wp_create_nonce( WEED_PLUGIN_DIR ),
+								'http_referer' => $current_url,
+							),
+							$current_url
+						);
+						?>
+
+						<a href="<?php echo esc_url( $reset_settings_url ); ?>" class="button button-larger weed-reset-button weed-reset-settings-button">
+							<?php _e( 'Reset Settings', 'welcome-email-editor' ); ?>
+						</a>
+					</div>
+
+				</form>
+			</div>
+
+			<div class="heatbox-sidebar">
+				<div class="weed-placeholder-notice">
+					<h4><?php _e( 'Available template placeholders:', 'welome-email-editor' ); ?></h4>
+					<p>
+						<code>[site_url]</code>, <code>[login_url]</code>, <code>[reset_pass_url]</code>, <code>[user_email]</code>, <code>[user_login]</code>, <code>[user_id]</code>, <code>[first_name]</code>, <code>[last_name]</code>, <code>[blog_name]</code>, <code>[admin_email]</code>, <code>[custom_fields]</code>, <code>[date]</code>, <code>[time]</code>, <code>[bp_custom_fields]</code> (admin only &mdash; will print buddypress custom fields), <code>[post_data]</code> (admin only &mdash; will print $_REQUEST)
+					</p>
 				</div>
-
-				<div class="heatbox">
-					<?php do_settings_sections( 'weed-user-welcome-email-settings' ); ?>
-				</div>
-
-				<div class="heatbox">
-					<?php do_settings_sections( 'weed-admin-new-user-notif-email-settings' ); ?>
-				</div>
-
-				<div class="heatbox">
-					<?php do_settings_sections( 'weed-reset-password-email-settings' ); ?>
-				</div>
-
-				<div class="heatbox">
-					<?php do_settings_sections( 'weed-misc-settings' ); ?>
-				</div>
-
-				<div class="udb-buttons">
-					<?php
-					submit_button( '', 'button button-primary button-larger', 'submit', false );
-
-					$current_url = site_url() . $_SERVER['REQUEST_URI'];
-
-					$reset_settings_url = add_query_arg(
-						array(
-							'action'       => 'weed_reset_settings',
-							'nonce'        => wp_create_nonce( WEED_PLUGIN_DIR ),
-							'http_referer' => $current_url,
-						),
-						$current_url
-					);
-					?>
-
-					<a href="<?php echo esc_url( $reset_settings_url ); ?>" class="button button-larger weed-reset-button weed-reset-settings-button">
-						<?php _e( 'Reset Settings', 'welcome-email-editor' ); ?>
-					</a>
-				</div>
-
-
-
-			</form>
-
-			<div class="heatbox-divider"></div>
+			</div>
 
 		</div>
 
 		<div class="heatbox-container heatbox-container-wide heatbox-container-center weed-featured-products">
+			<div class="heatbox-divider"></div>
 
 			<h2><?php _e( 'Check out our other free WordPress products!', 'welcome-email-editor' ); ?></h2>
 

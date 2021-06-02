@@ -62,7 +62,6 @@ class Settings_Module extends Base_Module {
 
 		add_action( 'init', array( $this, 'set_plugin_priority' ) );
 
-		add_action( 'admin_notices', array( $this, 'placeholders_notice' ) );
 		add_action( 'admin_menu', array( $this, 'submenu_page' ), 20 );
 		add_action( 'current_screen', array( $this, 'reset_settings' ) );
 		add_action( 'admin_init', array( $this, 'add_settings' ) );
@@ -104,22 +103,6 @@ class Settings_Module extends Base_Module {
 		array_splice( $active_plugins, $current_index, 1 );
 		array_unshift( $active_plugins, WEED_PLUGIN_BASENAME );
 		update_option( 'active_plugins', $active_plugins );
-
-	}
-
-	/**
-	 * Admin notice to provide list of available template placeholders.
-	 */
-	public function placeholders_notice() {
-
-		if ( ! $this->screen()->is_settings() ) {
-			return;
-		}
-
-		$description  = '<h4>' . __( 'Available template placeholders:', 'welome-email-editor' ) . '</h4>';
-		$description .= '<p><code>[site_url]</code>, <code>[login_url]</code>, <code>[reset_pass_url]</code>, <code>[user_email]</code>, <code>[user_login]</code>, <code>[user_id]</code>, <code>[first_name]</code>, <code>[last_name]</code>, <code>[blog_name]</code>, <code>[admin_email]</code>, <code>[custom_fields]</code>, <code>[date]</code>, <code>[time]</code>, <code>[bp_custom_fields]</code> (admin only &mdash; will print buddypress custom fields), <code>[post_data]</code> (admin only &mdash; will print $_REQUEST)</p>';
-
-		printf( '<div class="notice notice-info weed-placeholder-notice">%1s</div>', $description );
 
 	}
 

@@ -71,9 +71,9 @@
 
 /* Custom notice */
 .weed-placeholder-notice {
+	padding: 10px 15px;
 	color: #fff;
 	background-color: #197cff;
-	border-left-width: 0;
 }
 
 .weed-placeholder-notice h4 {
