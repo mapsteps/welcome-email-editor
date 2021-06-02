@@ -31,7 +31,7 @@
 		data.action = 'weed_test_emails'
 		
 		switch (data.email_type) {
-			case 'admin_welcome_email':
+			case 'admin_new_user_notif_email':
 				data.nonce = weedTestEmails.nonces.adminWelcomeEmail;
 				break;
 		

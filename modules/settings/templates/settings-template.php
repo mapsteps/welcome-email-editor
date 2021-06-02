@@ -48,7 +48,7 @@ return function () {
 				</div>
 
 				<div class="heatbox">
-					<?php do_settings_sections( 'weed-admin-welcome-email-settings' ); ?>
+					<?php do_settings_sections( 'weed-admin-new-user-notif-email-settings' ); ?>
 				</div>
 
 				<div class="heatbox">

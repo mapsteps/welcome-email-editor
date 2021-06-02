@@ -92,7 +92,7 @@ if ( ! function_exists( 'wp_new_user_notification' ) ) {
 				$current_time,
 			);
 
-			$admin_subject = $settings['admin_welcome_email_subject'];
+			$admin_subject = $settings['admin_new_user_notif_email_subject'];
 			$admin_subject = $admin_subject ? $admin_subject : $default_admin_subject;
 			$admin_subject = str_ireplace( $admin_subject_placeholders, $admin_subject_values, $admin_subject );
 			$admin_subject = apply_filters( 'weed_user_welcome_email_subject', $admin_subject );
@@ -143,7 +143,7 @@ if ( ! function_exists( 'wp_new_user_notification' ) ) {
 			/* translators: %s: User email address. */
 			$default_admin_body .= sprintf( __( 'Email: %s' ), $user->user_email ) . "\r\n";
 
-			$admin_body = $settings['admin_welcome_email_body'];
+			$admin_body = $settings['admin_new_user_notif_email_body'];
 			$admin_body = $admin_body ? $admin_body : $default_admin_body;
 			$admin_body = str_ireplace( $admin_body_placeholders, $admin_body_values, $admin_body );
 
@@ -183,7 +183,7 @@ if ( ! function_exists( 'wp_new_user_notification' ) ) {
 
 			$custom_recipient_emails = array();
 
-			$custom_recipients = $settings['admin_welcome_email_custom_recipients'];
+			$custom_recipients = $settings['admin_new_user_notif_email_custom_recipients'];
 			$custom_recipients = trim( $custom_recipients );
 			$custom_recipients = rtrim( $custom_recipients, ',' ); // Make sure there's no trailing comma to prevent double commas.
 

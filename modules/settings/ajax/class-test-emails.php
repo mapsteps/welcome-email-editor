@@ -60,8 +60,8 @@ class Test_Emails {
 		add_filter( 'weed_test_email_recipient', array( $this, 'set_testing_recipient' ) );
 
 		switch ( $this->email_type ) {
-			case 'admin_welcome_email':
-				$this->admin_welcome_email();
+			case 'admin_new_user_notif_email':
+				$this->admin_new_user_notif_email();
 				break;
 
 			case 'user_welcome_email':
@@ -84,7 +84,7 @@ class Test_Emails {
 	/**
 	 * Test admin's welcome email.
 	 */
-	public function admin_welcome_email() {
+	public function admin_new_user_notif_email() {
 
 		$current_user = wp_get_current_user();
 

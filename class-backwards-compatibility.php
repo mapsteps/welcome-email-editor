@@ -136,18 +136,18 @@ class Backwards_Compatibility {
 			$settings['user_welcome_email_additional_headers'] = $old_settings['header_additional'];
 		}
 
-		// Admin welcome email metabox.
+		// Admin new user notification metabox.
 
 		if ( $old_settings['admin_subject'] ) {
-			$settings['admin_welcome_email_subject'] = $old_settings['admin_subject'];
+			$settings['admin_new_user_notif_email_subject'] = $old_settings['admin_subject'];
 		}
 
 		if ( $old_settings['admin_body'] ) {
-			$settings['admin_welcome_email_body'] = $old_settings['admin_body'];
+			$settings['admin_new_user_notif_email_body'] = $old_settings['admin_body'];
 		}
 
 		if ( $old_settings['admin_notify_user_id'] ) {
-			$settings['admin_welcome_email_custom_recipients'] = $old_settings['admin_notify_user_id'];
+			$settings['admin_new_user_notif_email_custom_recipients'] = $old_settings['admin_notify_user_id'];
 		}
 
 		// Reset password metabox.

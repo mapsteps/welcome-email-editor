@@ -113,9 +113,9 @@ class Setup {
 			'user_welcome_email_additional_headers' => '',
 
 			// Welcome email settings - for admin.
-			'admin_welcome_email_subject'           => '[[blog_name]] ' . __( 'New User Registration', 'welcome-email-editor' ),
-			'admin_welcome_email_body'              => $user_welome_email_body,
-			'admin_welcome_email_custom_recipients' => '',
+			'admin_new_user_notif_email_subject'           => '[[blog_name]] ' . __( 'New User Registration', 'welcome-email-editor' ),
+			'admin_new_user_notif_email_body'              => $user_welome_email_body,
+			'admin_new_user_notif_email_custom_recipients' => '',
 
 			// Reset password email settings.
 			'reset_password_email_subject'         => '[[blog_name]] ' . __( 'Password Reset', 'welcome-email-editor' ),
