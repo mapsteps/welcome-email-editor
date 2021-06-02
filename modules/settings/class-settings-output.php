@@ -69,12 +69,6 @@ class Settings_Output extends Base_Output {
 	 */
 	public function setup() {
 
-		if ( ! isset( $this->settings['enable'] ) ) {
-			if ( ! wp_doing_ajax() || ! isset( $_POST['action'] ) || 'weed_test_emails' !== $_POST['action'] ) {
-				return;
-			}
-		}
-
 		add_filter( 'retrieve_password_title', array( $this, 'retrieve_password_title' ), 10, 3 );
 		add_filter( 'retrieve_password_message', array( $this, 'retrieve_password_message' ), 10, 4 );
 		add_filter( 'wpmu_welcome_user_notification', array( $this, 'wpmu_new_user_notification' ), 10, 3 );

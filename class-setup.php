@@ -100,17 +100,17 @@ class Setup {
 
 		$defaults = array(
 			// General settings.
-			'from_email'                            => '',
-			'from_name'                             => '',
-			'content_type'                          => 'html',
+			'from_email'                                   => '',
+			'from_name'                                    => '',
+			'content_type'                                 => 'html',
 
 			// Welcome email settings - for user.
-			'user_welcome_email_subject'            => '[[blog_name]] ' . __( 'Login Details', 'welcome-email-editor' ),
-			'user_welcome_email_body'               => $user_welcome_email_body,
-			'user_welcome_email_attachment_url'     => '',
-			'user_welcome_email_reply_to_email'     => '',
-			'user_welcome_email_reply_to_name'      => '',
-			'user_welcome_email_additional_headers' => '',
+			'user_welcome_email_subject'                   => '[[blog_name]] ' . __( 'Login Details', 'welcome-email-editor' ),
+			'user_welcome_email_body'                      => $user_welcome_email_body,
+			'user_welcome_email_attachment_url'            => '',
+			'user_welcome_email_reply_to_email'            => '',
+			'user_welcome_email_reply_to_name'             => '',
+			'user_welcome_email_additional_headers'        => '',
 
 			// Welcome email settings - for admin.
 			'admin_new_user_notif_email_subject'           => '[[blog_name]] ' . __( 'New User Registration', 'welcome-email-editor' ),
@@ -118,8 +118,8 @@ class Setup {
 			'admin_new_user_notif_email_custom_recipients' => '',
 
 			// Reset password email settings.
-			'reset_password_email_subject'         => '[[blog_name]] ' . __( 'Password Reset', 'welcome-email-editor' ),
-			'reset_password_email_body'            => $reset_password_message,
+			'reset_password_email_subject'                 => '[[blog_name]] ' . __( 'Password Reset', 'welcome-email-editor' ),
+			'reset_password_email_body'                    => $reset_password_message,
 		);
 
 		$settings = get_option( 'weed_settings', array() );

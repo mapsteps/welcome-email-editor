@@ -225,7 +225,6 @@ class Settings_Module extends Base_Module {
 		add_settings_section( 'weed-misc-section', __( 'Misc. Settings', 'welcome-email-editor' ), '', 'weed-misc-settings' );
 
 		// General fields.
-		add_settings_field( 'enable', __( 'Enable Features', 'welcome-email-editor' ), array( $this, 'enable_field' ), 'weed-general-settings', 'weed-general-section' );
 		add_settings_field( 'from-email', __( 'From Email Address', 'welcome-email-editor' ), array( $this, 'from_email_field' ), 'weed-general-settings', 'weed-general-section' );
 		add_settings_field( 'from-name', __( 'From Name', 'welcome-email-editor' ), array( $this, 'from_name_field' ), 'weed-general-settings', 'weed-general-section' );
 		add_settings_field( 'content-type', __( 'Mail Content Type', 'welcome-email-editor' ), array( $this, 'content_type_field' ), 'weed-general-settings', 'weed-general-section' );
@@ -252,16 +251,6 @@ class Settings_Module extends Base_Module {
 
 		// Misc. settings.
 		add_settings_field( 'remove-on-uninstall', __( 'Remove on Uninstall', 'welcome-email-editor' ), array( $this, 'remove_on_uninstall_field' ), 'weed-misc-settings', 'weed-misc-section' );
-
-	}
-
-	/**
-	 * Enable field.
-	 */
-	public function enable_field() {
-
-		$field = require __DIR__ . '/templates/fields/general/enable.php';
-		$field( $this );
 
 	}
 

@@ -90,14 +90,10 @@ class Backwards_Compatibility {
 			return;
 		}
 
-		// Since old setting is not empty at this point, that means it's enabled :).
-		$settings['enable'] = 1;
-
 		/**
 		 * If "Set Global Email Headers" was set to "Yes", then bring the values to the new "General Settings".
 		 * If set to "No", then leave the "General Settings" empty.
 		 *
-		 * The "Enable Features" is enabled if old setting is not empty.
 		 * The "Mail Content Type" has "html" as the default value for it's selectbox.
 		 */
 		if ( $old_settings['set_global_headers'] ) {
