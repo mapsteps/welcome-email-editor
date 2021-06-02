@@ -150,14 +150,14 @@ class Backwards_Compatibility {
 			$settings['admin_welcome_email_custom_recipients'] = $old_settings['admin_notify_user_id'];
 		}
 
-		// Forgot password metabox.
+		// Reset password metabox.
 
 		if ( $old_settings['password_reminder_subject'] ) {
-			$settings['forgot_password_email_subject'] = $old_settings['password_reminder_subject'];
+			$settings['reset_password_email_subject'] = $old_settings['password_reminder_subject'];
 		}
 
 		if ( $old_settings['password_reminder_body'] ) {
-			$settings['forgot_password_email_body'] = $old_settings['password_reminder_body'];
+			$settings['reset_password_email_body'] = $old_settings['password_reminder_body'];
 		}
 
 		update_option( 'weed_settings', $settings );

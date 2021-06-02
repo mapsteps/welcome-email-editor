@@ -18,7 +18,7 @@ return function ( $module ) {
 	$values   = $module->values;
 	?>
 
-	<button type="button" class="button button-primary weed-test-email-button" data-email-type="forgot_password_email">
+	<button type="button" class="button button-primary weed-test-email-button" data-email-type="reset_password_email">
 		<?php _e( 'Send a test email for current user', 'welcome-email-editor' ); ?>
 	</button>
 

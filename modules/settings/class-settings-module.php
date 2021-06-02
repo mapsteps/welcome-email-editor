@@ -181,7 +181,7 @@ class Settings_Module extends Base_Module {
 				'nonces' => array(
 					'adminWelcomeEmail'   => wp_create_nonce( WEED_PLUGIN_DIR . '_Admin_Welcome_Email' ),
 					'userWelcomeEmail'    => wp_create_nonce( WEED_PLUGIN_DIR . '_User_Welcome_Email' ),
-					'forgotPasswordEmail' => wp_create_nonce( WEED_PLUGIN_DIR . '_Forgot_Password_Email' ),
+					'resetPasswordEmail' => wp_create_nonce( WEED_PLUGIN_DIR . '_Reset_Password_Email' ),
 				),
 			)
 		);
@@ -218,7 +218,7 @@ class Settings_Module extends Base_Module {
 		add_settings_section( 'weed-general-section', __( 'General Settings', 'welcome-email-editor' ), '', 'weed-general-settings' );
 		add_settings_section( 'weed-user-welcome-email-section', __( 'Welcome Email Settings &mdash; For User', 'welcome-email-editor' ), '', 'weed-user-welcome-email-settings' );
 		add_settings_section( 'weed-admin-welcome-email-section', __( 'Welcome Email Settings &mdash; For Admin', 'welcome-email-editor' ), '', 'weed-admin-welcome-email-settings' );
-		add_settings_section( 'weed-forgot-password-email-section', __( 'Forgot Password Email Settings', 'welcome-email-editor' ), '', 'weed-forgot-password-email-settings' );
+		add_settings_section( 'weed-reset-password-email-section', __( 'Reset Password Email Settings', 'welcome-email-editor' ), '', 'weed-reset-password-email-settings' );
 		add_settings_section( 'weed-misc-section', __( 'Misc. Settings', 'welcome-email-editor' ), '', 'weed-misc-settings' );
 
 		// General fields.
@@ -242,10 +242,10 @@ class Settings_Module extends Base_Module {
 		add_settings_field( 'admin-welcome-email-recipients', __( 'Custom Recipients', 'welcome-email-editor' ), array( $this, 'admin_welcome_email_custom_recipients_field' ), 'weed-admin-welcome-email-settings', 'weed-admin-welcome-email-section' );
 		add_settings_field( 'admin-welcome-email-test', '', array( $this, 'admin_welcome_email_test_field' ), 'weed-admin-welcome-email-settings', 'weed-admin-welcome-email-section' );
 
-		// Forgot password email fields.
-		add_settings_field( 'forgot-password-email-subject', __( 'Email Subject', 'welcome-email-editor' ), array( $this, 'forgot_password_email_subject_field' ), 'weed-forgot-password-email-settings', 'weed-forgot-password-email-section' );
-		add_settings_field( 'forgot-password-email-body', __( 'Email Body', 'welcome-email-editor' ), array( $this, 'forgot_password_email_body_field' ), 'weed-forgot-password-email-settings', 'weed-forgot-password-email-section' );
-		add_settings_field( 'forgot-password-email-test', '', array( $this, 'forgot_password_email_test_field' ), 'weed-forgot-password-email-settings', 'weed-forgot-password-email-section' );
+		// Reset password email fields.
+		add_settings_field( 'reset-password-email-subject', __( 'Email Subject', 'welcome-email-editor' ), array( $this, 'reset_password_email_subject_field' ), 'weed-reset-password-email-settings', 'weed-reset-password-email-section' );
+		add_settings_field( 'reset-password-email-body', __( 'Email Body', 'welcome-email-editor' ), array( $this, 'reset_password_email_body_field' ), 'weed-reset-password-email-settings', 'weed-reset-password-email-section' );
+		add_settings_field( 'reset-password-email-test', '', array( $this, 'reset_password_email_test_field' ), 'weed-reset-password-email-settings', 'weed-reset-password-email-section' );
 
 		// Misc. settings.
 		add_settings_field( 'remove-on-uninstall', __( 'Remove on Uninstall', 'welcome-email-editor' ), array( $this, 'remove_on_uninstall_field' ), 'weed-misc-settings', 'weed-misc-section' );
@@ -403,31 +403,31 @@ class Settings_Module extends Base_Module {
 	}
 
 	/**
-	 * Forgot password email's subject field.
+	 * Reset password email's subject field.
 	 */
-	public function forgot_password_email_subject_field() {
+	public function reset_password_email_subject_field() {
 
-		$field = require __DIR__ . '/templates/fields/forgot-password-email/subject.php';
+		$field = require __DIR__ . '/templates/fields/reset-password-email/subject.php';
 		$field( $this );
 
 	}
 
 	/**
-	 * Forgot password email's body field.
+	 * Reset password email's body field.
 	 */
-	public function forgot_password_email_body_field() {
+	public function reset_password_email_body_field() {
 
-		$field = require __DIR__ . '/templates/fields/forgot-password-email/body.php';
+		$field = require __DIR__ . '/templates/fields/reset-password-email/body.php';
 		$field( $this );
 
 	}
 
 	/**
-	 * Forgot password email's test field.
+	 * Reset password email's test field.
 	 */
-	public function forgot_password_email_test_field() {
+	public function reset_password_email_test_field() {
 
-		$field = require __DIR__ . '/templates/fields/forgot-password-email/test-button.php';
+		$field = require __DIR__ . '/templates/fields/reset-password-email/test-button.php';
 		$field( $this );
 
 	}

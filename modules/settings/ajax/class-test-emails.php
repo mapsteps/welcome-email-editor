@@ -68,8 +68,8 @@ class Test_Emails {
 				$this->user_welcome_email();
 				break;
 
-			case 'forgot_password_email':
-				$this->forgot_password_email();
+			case 'reset_password_email':
+				$this->reset_password_email();
 				break;
 
 			default:
@@ -108,9 +108,9 @@ class Test_Emails {
 	}
 
 	/**
-	 * Test forgot password email.
+	 * Test reset password email.
 	 */
-	public function forgot_password_email() {
+	public function reset_password_email() {
 
 		$current_user = wp_get_current_user();
 

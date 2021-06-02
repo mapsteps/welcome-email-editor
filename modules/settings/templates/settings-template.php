@@ -52,7 +52,7 @@ return function () {
 				</div>
 
 				<div class="heatbox">
-					<?php do_settings_sections( 'weed-forgot-password-email-settings' ); ?>
+					<?php do_settings_sections( 'weed-reset-password-email-settings' ); ?>
 				</div>
 
 				<div class="heatbox">

@@ -117,9 +117,9 @@ class Setup {
 			'admin_welcome_email_body'              => $user_welome_email_body,
 			'admin_welcome_email_custom_recipients' => '',
 
-			// Forgot password email settings.
-			'forgot_password_email_subject'         => '[[blog_name]] ' . __( 'Password Reset', 'welcome-email-editor' ),
-			'forgot_password_email_body'            => $reset_password_message,
+			// Reset password email settings.
+			'reset_password_email_subject'         => '[[blog_name]] ' . __( 'Password Reset', 'welcome-email-editor' ),
+			'reset_password_email_body'            => $reset_password_message,
 		);
 
 		$settings = get_option( 'weed_settings', array() );

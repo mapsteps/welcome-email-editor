@@ -102,7 +102,7 @@ class Settings_Output extends Base_Output {
 	 */
 	public function retrieve_password_title( $title, $user_login, $user_data ) {
 
-		$saved_title = $this->values['forgot_password_email_subject'];
+		$saved_title = $this->values['reset_password_email_subject'];
 
 		if ( ! $saved_title ) {
 			return $title;
@@ -126,7 +126,7 @@ class Settings_Output extends Base_Output {
 	 */
 	public function retrieve_password_message( $message, $key, $user_login, $user_data ) {
 
-		$saved_message = $this->values['forgot_password_email_body'];
+		$saved_message = $this->values['reset_password_email_body'];
 
 		if ( ! $saved_message ) {
 			return $message;

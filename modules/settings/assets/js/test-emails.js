@@ -39,8 +39,8 @@
 				data.nonce = weedTestEmails.nonces.userWelcomeEmail;
 				break;
 		
-			case 'forgot_password_email':
-				data.nonce = weedTestEmails.nonces.forgotPasswordEmail;
+			case 'reset_password_email':
+				data.nonce = weedTestEmails.nonces.resetPasswordEmail;
 				break;
 		}
 	
