@@ -76,6 +76,28 @@ class Setup {
 	 */
 	public function set_data() {
 
+		/* translators: %s: User login. */
+		$user_welcome_email_body  = __( 'Username:', 'welcome-email-editor' ) . ' [user_login]' . "<br><br>\r\n\r\n";
+		$user_welcome_email_body .= __( 'To set your password, visit the following address:' ) . "<br><br>\r\n\r\n";
+		$user_welcome_email_body .= '[reset_pass_url]<br><br>' . "\r\n\r\n";
+		$user_welcome_email_body .= '[login_url]' . "\r\n";
+
+		/* translators: %s: Site title. */
+		$user_welome_email_body = __( 'New user registration on your site', 'welcome-email-editor' ) . " [blog_name]<br><br>\r\n\r\n";
+		/* translators: %s: User login. */
+		$user_welome_email_body .= __( 'Username:', 'welcome-email-editor' ) . " [user_login]<br><br>\r\n\r\n";
+		/* translators: %s: User email address. */
+		$user_welome_email_body .= __( 'Email:', 'welcome-email-editor' ) . " [user_email]<br><br>\r\n";
+
+		$reset_password_message = __( 'Someone has requested a password reset for the following account:', 'welcome-email-editor' ) . "<br><br>\r\n\r\n";
+		/* translators: %s: Site name. */
+		$reset_password_message .= __( 'Site Name:', 'welcome-email-editor' ) . " [blog_name]<br><br>\r\n\r\n";
+		/* translators: %s: User login. */
+		$reset_password_message .= __( 'Username:', 'welcome-email-editor' ) . " [user_login]<br><br>\r\n\r\n";
+		$reset_password_message .= __( 'If this was a mistake, ignore this email and nothing will happen.', 'welcome-email-editor' ) . "<br><br>\r\n\r\n";
+		$reset_password_message .= __( 'To reset your password, visit the following address:', 'welcome-email-editor' ) . "<br><br>\r\n\r\n";
+		$reset_password_message .= "[reset_url]\r\n";
+
 		$defaults = array(
 			// General settings.
 			'from_email'                            => '[admin_email]',
@@ -83,21 +105,21 @@ class Setup {
 			'content_type'                          => 'html',
 
 			// Welcome email settings - for user.
-			'user_welcome_email_subject'            => '[[blog_name]] Your username and password',
-			'user_welcome_email_body'               => 'Username: [user_login]<br>Password: [user_password]<br>[login_url]',
+			'user_welcome_email_subject'            => '[blog_name] ' . __( 'Login Details', 'welcome-email-editor' ),
+			'user_welcome_email_body'               => $user_welcome_email_body,
 			'user_welcome_email_attachment_url'     => '',
 			'user_welcome_email_reply_to_email'     => '',
 			'user_welcome_email_reply_to_name'      => '',
 			'user_welcome_email_additional_headers' => '',
 
 			// Welcome email settings - for admin.
-			'admin_welcome_email_subject'           => '[[blog_name]] New User Registration',
-			'admin_welcome_email_body'              => 'New user registration on your blog [blog_name]<br><br>Username: [user_login]<br>Email: [user_email]',
+			'admin_welcome_email_subject'           => '[blog_name] ' . __( 'New User Registration', 'welcome-email-editor' ),
+			'admin_welcome_email_body'              => $user_welome_email_body,
 			'admin_welcome_email_custom_recipients' => '',
 
 			// Forgot password email settings.
-			'forgot_password_email_subject'         => '[[blog_name]] Forgot Password',
-			'forgot_password_email_body'            => 'Someone requested that the password be reset for the following account.<br><br>[site_url]<br><br>Username: [user_login]<br><br>If this was a mistake, just ignore this email and nothing will happen.<br><br>To reset your password, visit the following address: [reset_url]',
+			'forgot_password_email_subject'         => '[blog_name] ' . __( 'Password Reset', 'welcome-email-editor' ),
+			'forgot_password_email_body'            => $reset_password_message,
 		);
 
 		$settings = get_option( 'weed_settings', array() );

@@ -334,7 +334,7 @@ if ( ! function_exists( 'wp_new_user_notification' ) ) {
 		/**
 		 * Filters the contents of the new user notification email sent to the new user.
 		 *
-		 * @since 4.9.0
+		 * This comment was taken from wp-includes/pluggable.php inside wp_new_user_notification() function.
 		 *
 		 * @param array   $wp_new_user_notification_email {
 		 *     Used to build wp_mail().
