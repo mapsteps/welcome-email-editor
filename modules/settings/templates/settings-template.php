@@ -86,12 +86,34 @@ return function () {
 			</div>
 
 			<div class="heatbox-sidebar">
-				<div class="weed-placeholder-notice">
-					<h4><?php _e( 'Available template placeholders:', 'welome-email-editor' ); ?></h4>
-					<p>
-						<code>[site_url]</code>, <code>[login_url]</code>, <code>[reset_pass_url]</code>, <code>[user_email]</code>, <code>[user_login]</code>, <code>[user_id]</code>, <code>[first_name]</code>, <code>[last_name]</code>, <code>[blog_name]</code>, <code>[admin_email]</code>, <code>[custom_fields]</code>, <code>[date]</code>, <code>[time]</code>, <code>[bp_custom_fields]</code> (admin only &mdash; will print buddypress custom fields), <code>[post_data]</code> (admin only &mdash; will print $_REQUEST)
-					</p>
+				<div class="heatbox weed-placeholder-metabox">
+					<h2><?php _e( 'Available Placeholders', 'welome-email-editor' ); ?></h2>
+					<div class="heatbox-content">
+						<p>
+							<code>[site_url]</code>, <code>[login_url]</code>, <code>[reset_pass_url]</code>, <code>[user_email]</code>, <code>[user_login]</code>, <code>[user_id]</code>, <code>[first_name]</code>, <code>[last_name]</code>, <code>[blog_name]</code>, <code>[admin_email]</code>, <code>[custom_fields]</code>, <code>[date]</code>, <code>[time]</code>
+						</p>
+					</div>
 				</div>
+
+				<div class="heatbox weed-placeholder-metabox">
+					<h2><?php _e( 'Debugging Placeholders', 'welome-email-editor' ); ?></h2>
+					<div class="heatbox-content">
+						<p>
+							<code>[post_data]</code> (admin only &mdash; will print $_REQUEST)
+						</p>
+					</div>
+				</div>
+
+				<?php if ( defined( 'BP_PLUGIN_URL' ) ) : ?>
+					<div class="heatbox weed-placeholder-metabox">
+						<h2><?php _e( 'BuddyPress Placeholders', 'welome-email-editor' ); ?></h2>
+						<div class="heatbox-content">
+							<p>
+								<code>[bp_custom_fields]</code> (admin only &mdash; will print buddypress custom fields)
+							</p>
+						</div>
+					</div>
+				<?php endif; ?>
 			</div>
 
 		</div>

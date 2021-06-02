@@ -148,11 +148,13 @@ if ( ! function_exists( 'wp_new_user_notification' ) ) {
 			$admin_body = str_ireplace( $admin_body_placeholders, $admin_body_values, $admin_body );
 
 			if ( stripos( $admin_body, '[bp_custom_fields]' ) ) {
-				$admin_body = str_replace(
-					'[bp_custom_fields]',
-					'<pre>' . print_r( $content_helper->get_bp_user_custom_fields( $user_id ), true ) . '</pre>',
-					$admin_body
-				);
+				if ( defined( 'BP_PLUGIN_URL' ) ) {
+					$admin_body = str_replace(
+						'[bp_custom_fields]',
+						'<pre>' . print_r( $content_helper->get_bp_user_custom_fields( $user_id ), true ) . '</pre>',
+						$admin_body
+					);
+				}
 			}
 
 			$admin_body = apply_filters( 'weed_user_welcome_email_body', $admin_body );

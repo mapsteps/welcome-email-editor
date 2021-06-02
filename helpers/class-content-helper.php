@@ -22,6 +22,10 @@ class Content_Helper {
 	 */
 	public function get_bp_user_custom_fields( $user_id ) {
 
+		if ( ! defined( 'BP_PLUGIN_URL' ) ) {
+			return array();
+		}
+
 		global $wpdb;
 
 		// TODO: Use BuddyPress function if it exists instead of directly touching wpdb.
