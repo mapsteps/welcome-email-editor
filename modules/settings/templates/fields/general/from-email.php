@@ -18,7 +18,7 @@ return function ( $module ) {
 	$values   = $module->values;
 	?>
 
-	<input type="text" name="weed_settings[from_email]" id="weed_settings--from_email" class="regular-text" value="<?php echo esc_attr( $values['from_email'] ); ?>" placeholder="<?php echo esc_attr( $defaults['from_email'] ); ?>" />
+	<input type="text" name="weed_settings[from_email]" id="weed_settings--from_email" class="regular-text" value="<?php echo esc_attr( $values['from_email'] ); ?>" placeholder="[admin_email]" />
 
 	<?php
 

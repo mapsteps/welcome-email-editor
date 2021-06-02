@@ -31,6 +31,7 @@ if ( ! function_exists( 'wp_new_user_notification' ) ) {
 	 *                           string (admin only), 'user', or 'both' (admin and user). Default empty.
 	 */
 	function wp_new_user_notification( $user_id, $deprecated = null, $notify = '' ) {
+
 		if ( null !== $deprecated ) {
 			_deprecated_argument( __FUNCTION__, '4.3.1' );
 		}
@@ -46,7 +47,7 @@ if ( ! function_exists( 'wp_new_user_notification' ) ) {
 
 		$content_helper = new Content_Helper();
 		$email_helper   = new Email_Helper();
-		$module_output  = new Settings_Output();
+		$module_output  = Settings_Output::get_instance();
 
 		$module_output->set_email_headers();
 

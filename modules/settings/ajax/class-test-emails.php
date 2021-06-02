@@ -112,6 +112,10 @@ class Test_Emails {
 	 */
 	public function forgot_password_email() {
 
+		$current_user = wp_get_current_user();
+
+		retrieve_password( $current_user->user_login );
+
 		wp_send_json_success( __( 'Email has been sent successfully', 'welome-email-editor' ) );
 
 	}

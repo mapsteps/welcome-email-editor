@@ -70,9 +70,6 @@ class Settings_Module extends Base_Module {
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_styles' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_scripts' ) );
 
-		// Necessary functions.
-		require_once __DIR__ . '/inc/wp-new-user-notification.php';
-
 		// The module output.
 		require_once __DIR__ . '/class-settings-output.php';
 		Settings_Output::init();

@@ -213,7 +213,7 @@ class Settings_Output extends Base_Output {
 		}
 
 		if ( 'html' === $values['content_type'] ) {
-			add_filter( 'wp_mail_content_type', array( $this, 'content_type' ), 1 );
+			add_filter( 'wp_mail_content_type', array( $this, 'html_content_type' ), 1 );
 			add_filter( 'wp_mail_charset', array( $this, 'charset' ), 1 );
 		}
 
@@ -239,7 +239,7 @@ class Settings_Output extends Base_Output {
 		}
 
 		if ( 'html' === $values['content_type'] ) {
-			remove_filter( 'wp_mail_content_type', array( $this, 'content_type' ), 1 );
+			remove_filter( 'wp_mail_content_type', array( $this, 'html_content_type' ), 1 );
 			remove_filter( 'wp_mail_charset', array( $this, 'charset' ), 1 );
 		}
 
@@ -310,6 +310,28 @@ class Settings_Output extends Base_Output {
 		$from_name = str_ireplace( $find, $replace, $from_name );
 
 		return $from_name;
+
+	}
+
+	/**
+	 * Set content type header to text/html.
+	 *
+	 * @param string $content_type The current content type.
+	 */
+	public function html_content_type( $content_type ) {
+
+		return 'text/html';
+
+	}
+
+	/**
+	 * Set charset.
+	 *
+	 * @param string $charset The current charset.
+	 */
+	public function charset( $charset ) {
+
+		return get_bloginfo( 'charset' );
 
 	}
 
