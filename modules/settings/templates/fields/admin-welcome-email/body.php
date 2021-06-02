@@ -19,7 +19,7 @@ return function ( $module ) {
 	$values   = $module->values;
 	?>
 
-	<textarea name="weed_settings[admin_welcome_email_body]" id="weed_settings--admin_welcome_email_body" class="large-text" rows="5" placeholder="<?php echo esc_attr( $defaults['admin_welcome_email_body'] ); ?>"><?php echo esc_html( $values['admin_welcome_email_body'] ); ?></textarea>
+	<textarea name="weed_settings[admin_welcome_email_body]" id="weed_settings--admin_welcome_email_body" class="large-text" rows="8" placeholder="<?php echo esc_attr( $defaults['admin_welcome_email_body'] ); ?>"><?php echo esc_html( $values['admin_welcome_email_body'] ); ?></textarea>
 
 	<?php
 
