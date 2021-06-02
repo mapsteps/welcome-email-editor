@@ -1,16 +1,24 @@
 /**
- * Test emails.
- * 
+ * Settings.
+ *
  * Used global objects:
  * - ajaxurl
- * - weedTestEmails
+ * - weedSettings
  */
 (function ($) {
 	var isRequesting = false;
 	var loading = {};
 
 	function init() {
+		$(document).on('click', '.weed-reset-settings-button', resetSettings);
 		$(document).on('click', '.weed-test-email-button', sendTestEmail);
+	}
+
+	/**
+	 * Send test email via ajax request.
+	 */
+	function resetSettings(e) {
+		if (!confirm(weedSettings.warningMessages.resetSettings)) e.preventDefault();
 	}
 
 	/**
@@ -29,21 +37,21 @@
 
 		data.email_type = this.dataset.emailType;
 		data.action = 'weed_test_emails'
-		
+
 		switch (data.email_type) {
 			case 'admin_new_user_notif_email':
-				data.nonce = weedTestEmails.nonces.adminWelcomeEmail;
+				data.nonce = weedSettings.nonces.adminWelcomeEmail;
 				break;
-		
+
 			case 'user_welcome_email':
-				data.nonce = weedTestEmails.nonces.userWelcomeEmail;
+				data.nonce = weedSettings.nonces.userWelcomeEmail;
 				break;
-		
+
 			case 'reset_password_email':
-				data.nonce = weedTestEmails.nonces.resetPasswordEmail;
+				data.nonce = weedSettings.nonces.resetPasswordEmail;
 				break;
 		}
-	
+
 		$.ajax({
 			url: ajaxurl,
 			type: 'post',

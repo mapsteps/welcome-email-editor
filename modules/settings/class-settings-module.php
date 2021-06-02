@@ -172,16 +172,19 @@ class Settings_Module extends Base_Module {
 			return;
 		}
 
-		wp_enqueue_script( 'weed-test-emails', $this->url . '/assets/js/test-emails.js', array( 'jquery', 'wp-polyfill' ), WEED_PLUGIN_VERSION, true );
+		wp_enqueue_script( 'weed-settings', $this->url . '/assets/js/settings.js', array( 'jquery', 'wp-polyfill' ), WEED_PLUGIN_VERSION, true );
 
 		wp_localize_script(
-			'weed-test-emails',
-			'weedTestEmails',
+			'weed-settings',
+			'weedSettings',
 			array(
-				'nonces' => array(
-					'adminWelcomeEmail'   => wp_create_nonce( WEED_PLUGIN_DIR . '_Admin_Welcome_Email' ),
-					'userWelcomeEmail'    => wp_create_nonce( WEED_PLUGIN_DIR . '_User_Welcome_Email' ),
+				'nonces'          => array(
+					'adminWelcomeEmail'  => wp_create_nonce( WEED_PLUGIN_DIR . '_Admin_Welcome_Email' ),
+					'userWelcomeEmail'   => wp_create_nonce( WEED_PLUGIN_DIR . '_User_Welcome_Email' ),
 					'resetPasswordEmail' => wp_create_nonce( WEED_PLUGIN_DIR . '_Reset_Password_Email' ),
+				),
+				'warningMessages' => array(
+					'resetSettings' => __( 'Caution! Are you sure you want to reset all settings?', 'welcome-email-editor' ),
 				),
 			)
 		);

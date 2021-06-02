@@ -96,22 +96,22 @@
 }
 
 /* Settings form */
-.button.udb-reset-button {
+.button.weed-reset-button {
 	margin-left: 7px;
 	color: #fff;
 	background-color: tomato;
 	border-color: tomato;
 }
 
-.button.udb-reset-button:hover,
-.button.udb-reset-button:active,
-.button.udb-reset-button:focus {
+.button.weed-reset-button:hover,
+.button.weed-reset-button:active,
+.button.weed-reset-button:focus {
 	color: #fff;
 	background-color: #f5492a;
 	border-color: #f5492a;
 }
 
-.button.udb-reset-button:focus {
+.button.weed-reset-button:focus {
 	box-shadow: 0 0 0 1px #fff, 0 0 0 3px #f5492a
 }
 

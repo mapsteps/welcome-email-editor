@@ -75,7 +75,7 @@ return function () {
 					);
 					?>
 
-					<a href="<?php echo esc_url( $reset_settings_url ); ?>" class="button button-larger udb-reset-button">
+					<a href="<?php echo esc_url( $reset_settings_url ); ?>" class="button button-larger weed-reset-button weed-reset-settings-button">
 						<?php _e( 'Reset Settings', 'welcome-email-editor' ); ?>
 					</a>
 				</div>
