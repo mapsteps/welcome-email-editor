@@ -70,7 +70,9 @@ class Settings_Output extends Base_Output {
 	public function setup() {
 
 		if ( ! isset( $this->settings['enable'] ) ) {
-			return;
+			if ( ! wp_doing_ajax() || ! isset( $_POST['action'] ) || 'weed_test_emails' !== $_POST['action'] ) {
+				return;
+			}
 		}
 
 		add_filter( 'retrieve_password_title', array( $this, 'forgot_password_title' ), 10, 3 );
