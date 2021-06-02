@@ -29,6 +29,7 @@ require __DIR__ . '/modules/base/class-base-module.php';
 require __DIR__ . '/modules/base/class-base-output.php';
 
 // Core classes.
+require __DIR__ . '/class-backwards-compatibility.php';
 require __DIR__ . '/class-vars.php';
 require __DIR__ . '/wp-new-user-notification.php';
 require __DIR__ . '/class-setup.php';
