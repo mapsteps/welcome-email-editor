@@ -217,7 +217,7 @@ class Settings_Module extends Base_Module {
 		// Register sections.
 		add_settings_section( 'weed-general-section', __( 'General Settings', 'welcome-email-editor' ), '', 'weed-general-settings' );
 		add_settings_section( 'weed-user-welcome-email-section', __( 'Welcome Email Settings &mdash; For User', 'welcome-email-editor' ), '', 'weed-user-welcome-email-settings' );
-		add_settings_section( 'weed-admin-new-user-notif-email-section', __( 'New User Notification Settings &mdash; For Admin', 'welcome-email-editor' ), '', 'weed-admin-new-user-notif-email-settings' );
+		add_settings_section( 'weed-admin-new-user-notif-email-section', __( 'New User Notification Email Settings &mdash; For Admin', 'welcome-email-editor' ), '', 'weed-admin-new-user-notif-email-settings' );
 		add_settings_section( 'weed-reset-password-email-section', __( 'Reset Password Email Settings', 'welcome-email-editor' ), '', 'weed-reset-password-email-settings' );
 		add_settings_section( 'weed-misc-section', __( 'Misc. Settings', 'welcome-email-editor' ), '', 'weed-misc-settings' );
 
