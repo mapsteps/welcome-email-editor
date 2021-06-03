@@ -69,9 +69,13 @@
 	top: -5px;
 }
 
-/* Placeholders metabox */
-.weed-placeholder-metabox p {
+/* Template tags metabox */
+.weed-tags-metabox .tags-wrapper {
 	line-height: 1.8;
+}
+
+.weed-tags-metabox .heatbox-content p:last-child {
+	margin-bottom: 0;
 }
 
 /* Settings form */
