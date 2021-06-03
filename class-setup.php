@@ -212,6 +212,7 @@ class Setup {
 		if ( $remove_on_uninstall ) {
 
 			delete_option( 'weed_settings' );
+			delete_option( 'weed_v5_compatibility' );
 
 		}
 

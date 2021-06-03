@@ -34,4 +34,5 @@ require __DIR__ . '/class-vars.php';
 require __DIR__ . '/wp-new-user-notification.php';
 require __DIR__ . '/class-setup.php';
 
+Weed\Backwards_Compatibility::init();
 Weed\Setup::init();
