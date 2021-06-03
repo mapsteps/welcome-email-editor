@@ -209,8 +209,6 @@ class Settings_Output extends Base_Output {
 			add_filter( 'wp_mail_from_name', array( $this, 'from_name' ) );
 		}
 
-		do_action( 'weed_set_email_from_headers' );
-
 	}
 
 	/**
@@ -232,8 +230,6 @@ class Settings_Output extends Base_Output {
 			add_filter( 'wp_mail_content_type', array( $this, 'html_content_type' ) );
 			add_filter( 'wp_mail_charset', array( $this, 'charset' ) );
 		}
-
-		do_action( 'weed_set_email_headers' );
 
 	}
 
@@ -258,8 +254,6 @@ class Settings_Output extends Base_Output {
 			remove_filter( 'wp_mail_content_type', array( $this, 'html_content_type' ) );
 			remove_filter( 'wp_mail_charset', array( $this, 'charset' ) );
 		}
-
-		do_action( 'weed_reset_email_headers' );
 
 	}
 
