@@ -86,7 +86,7 @@ return function () {
 			</div>
 
 			<div class="heatbox-sidebar">
-				<div class="heatbox weed-placeholder-metabox">
+				<div class="heatbox weed-tags-metabox">
 					<h2><?php _e( 'Template Tags', 'welome-email-editor' ); ?></h2>
 					<div class="heatbox-content">
 						<p><?php _e( 'Use the template tags below in any fields to output certain information.', 'welcome-email-editor' ); ?></p>
@@ -97,7 +97,7 @@ return function () {
 				</div>
 
 				<?php if ( defined( 'BP_PLUGIN_URL' ) ) : ?>
-				<div class="heatbox weed-placeholder-metabox">
+				<div class="heatbox weed-tags-metabox">
 					<h2><?php _e( 'BuddyPress Template Tags', 'welome-email-editor' ); ?></h2>
 					<div class="heatbox-content">
 						<p><?php _e( 'Use the template tag below in your <strong>Admin Email</strong>.', 'welcome-email-editor' ); ?></p>
@@ -109,7 +109,7 @@ return function () {
 				</div>
 				<?php endif; ?>
 
-				<div class="heatbox weed-placeholder-metabox">
+				<div class="heatbox weed-tags-metabox">
 					<h2><?php _e( 'Debugging', 'welome-email-editor' ); ?></h2>
 					<div class="heatbox-content">
 						<p><?php _e( 'Use the template tag below in your <strong>Admin Email</strong> for debugging.', 'welcome-email-editor' ); ?></p>
