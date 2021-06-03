@@ -18,7 +18,7 @@ return function ( $module ) {
 	$values   = $module->values;
 	?>
 
-	<input type="email" name="weed_settings[user_welcome_email_reply_to_email]" id="weed_settings--user_welcome_email_reply_to_email" class="regular-text" value="<?php echo esc_attr( $values['user_welcome_email_reply_to_email'] ); ?>" placeholder="<?php echo esc_attr( $defaults['user_welcome_email_reply_to_email'] ); ?>" />
+	<input type="text" name="weed_settings[user_welcome_email_reply_to_email]" id="weed_settings--user_welcome_email_reply_to_email" class="regular-text" value="<?php echo esc_attr( $values['user_welcome_email_reply_to_email'] ); ?>" placeholder="<?php echo esc_attr( $defaults['user_welcome_email_reply_to_email'] ); ?>" />
 
 	<?php
 

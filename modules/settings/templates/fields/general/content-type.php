@@ -19,7 +19,7 @@ return function ( $module ) {
 
 	<select name="weed_settings[content_type]" id="weed_settings--content_type" class="regular-text">
 		<option value="html" <?php selected( $values['content_type'], 'html' ); ?>><?php _e( 'HTML', 'welcome-email-editor' ); ?></option>
-		<option value="text" <?php selected( $values['content_type'], 'builder' ); ?>><?php _e( 'Text', 'welcome-email-editor' ); ?></option>
+		<option value="text" <?php selected( $values['content_type'], 'text' ); ?>><?php _e( 'Text', 'welcome-email-editor' ); ?></option>
 	</select>
 
 	<?php
