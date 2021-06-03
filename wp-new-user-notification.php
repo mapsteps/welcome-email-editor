@@ -203,7 +203,10 @@ if ( ! function_exists( 'wp_new_user_notification' ) ) {
 							$custom_recipient_user = get_userdata( $custom_recipient );
 
 							if ( $custom_recipient_user ) {
-								array_push( $custom_recipient_emails, $custom_recipient_user->user_email );
+								// Prevent the email from being sent twice to admin_email.
+								if ( $custom_recipient_user->user_email !== $admin_email ) {
+									array_push( $custom_recipient_emails, $custom_recipient_user->user_email );
+								}
 							}
 						}
 					}
