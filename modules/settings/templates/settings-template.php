@@ -18,12 +18,17 @@ return function () {
 
 				<div class="logo-container">
 
-					<span class="title">
-						<?php _e( 'Welcome Email Editor', 'welcome-email-editor' ); ?>
-						<span class="version"><?php echo esc_html( WEED_PLUGIN_VERSION ); ?></span>
-					</span>
+					<div>
+						<span class="title">
+							<?php _e( 'Welcome Email Editor', 'welcome-email-editor' ); ?>
+							<span class="version"><?php echo esc_html( WEED_PLUGIN_VERSION ); ?></span>
+						</span>
+						<p class="subtitle"><?php _e( 'Change WordPress\' Welcome & Reset Password Emails', 'welcome-email-editor' ); ?></p>
+					</div>
 
-					<p class="subtitle"><?php _e( 'Change WordPress\' Welcome & Reset Password Emails', 'welcome-email-editor' ); ?></p>
+					<div>
+						<img src="<?php echo esc_url( WEED_PLUGIN_URL ); ?>/assets/images/welcome-email-editor-logo.png">
+					</div>
 
 				</div>
 

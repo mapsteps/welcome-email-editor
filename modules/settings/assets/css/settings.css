@@ -49,26 +49,6 @@
 	border: 1px solid #ddd;
 }
 
-/* Override heatbox */
-.heatbox-header .logo-container {
-	justify-content: space-between;
-	flex-wrap: wrap;
-}
-
-.heatbox-header .logo-container .title,
-.heatbox-header .logo-container .subtitle {
-	width: 45%;
-}
-
-.heatbox-wrap .subtitle {
-	margin-top: 0;
-}
-
-.heatbox-wrap .version {
-	position: relative;
-	top: -5px;
-}
-
 /* Template tags metabox */
 .weed-tags-metabox .tags-wrapper {
 	line-height: 1.8;
