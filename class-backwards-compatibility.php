@@ -63,8 +63,6 @@ class Backwards_Compatibility {
 
 		$this->v5_compatibility();
 
-		do_action( 'weed_compatibility_check' );
-
 	}
 
 	/**
