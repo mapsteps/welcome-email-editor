@@ -171,7 +171,7 @@ class Setup {
 	}
 
 	/**
-	 * Load Woocommerce Quick View modules.
+	 * Load modules.
 	 */
 	public function load_modules() {
 
