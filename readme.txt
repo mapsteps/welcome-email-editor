@@ -51,30 +51,6 @@ If you like Welcome Email Editor, make sure to check out our other products:
 = Why is the password not included in the welcome email? =
 Since version 4.3 the password is no longer sent to the user via email and instead a reset password link is sent instead. This was a controversial decision but it was done for good reason.
 
-= Can I add my own hooks? =
-There are two ways to do this. You can use the filter to get the email content and parse it yourself or the easier method would be to use the 'sb_we_replace_array' filter which expects an array which the plugin will parse. See below for examples:
-
-`$admin_message = apply_filters('sb_we_email_admin_message', $admin_message, $settings, $user_id);`
-`$admin_subject = apply_filters('sb_we_email_admin_subject', $admin_subject, $settings, $user_id);`
-`$user_subject = apply_filters('sb_we_email_subject', $user_subject, $settings, $user_id);`
-`$user_message = apply_filters('sb_we_email_message', $user_message, $settings, $user_id);`
-
-The above code is from the plugin. You can edit the admin and user subject lines and body contents in any way you like. I won't explain any further as this is either something you know or you don't. The following method is easier:
-
-`$user_message_replace = apply_filters('sb_we_replace_array', array(), $user_id, $settings);`
-
-This method passes a filter an array and you can write in your own code to add hooks to the array for parsing. You can do the following:
-
-`add_filter('sb_we_replace_array', 'my_sb_we_replace_array', 10, 3);
-
-function my_sb_we_replace_array($hooks, $user_id, $settings) {
-    $hooks['my_hook'] = 'test';
-    
-    return $hooks;
-}`
-
-This will allow the plugin to process a hook called [my_hook] and replace it with the word test. The user id is passed to the function as well so you can get information about the user and replace that in as well as the settings array from the welcome email editor plugin. If you need help with this please get in touch.
-
 == Screenshots ==
 1. Welcome Email Editor Settings Page
 
