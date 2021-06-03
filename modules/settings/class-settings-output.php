@@ -102,6 +102,26 @@ class Settings_Output extends Base_Output {
 			return $title;
 		}
 
+		// The blogname option is escaped with esc_html() on the way into the database in sanitize_option().
+		// We want to reverse this for the plain text arena of emails.
+		$blogname = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
+
+		$find = array(
+			'[blog_name]',
+			'[user_login]',
+			'[first_name]',
+			'[last_name]',
+		);
+
+		$replace = array(
+			$blogname,
+			$user_login,
+			$user_data->first_name,
+			$user_data->last_name,
+		);
+
+		$saved_title = str_ireplace( $find, $replace, $saved_title );
+
 		$this->set_email_headers();
 
 		return $saved_title;
@@ -128,11 +148,9 @@ class Settings_Output extends Base_Output {
 
 		$site_url = get_site_url();
 
-		if ( is_multisite() ) {
-			$blogname = $GLOBALS['current_site']->site_name;
-		} else {
-			$blogname = get_option( 'blogname' );
-		}
+		// The blogname option is escaped with esc_html() on the way into the database in sanitize_option().
+		// We want to reverse this for the plain text arena of emails.
+		$blogname = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
 
 		// $reset_url = network_site_url("wp-login.php?action=rp&key=$key&login=" . rawurlencode($user_login), 'login');
 		$reset_url = wp_login_url() . '?action=rp&key=' . $key . '&login=' . rawurlencode( $user_login );
@@ -184,11 +202,11 @@ class Settings_Output extends Base_Output {
 		$values = $this->values;
 
 		if ( $values['from_email'] ) {
-			add_filter( 'wp_mail_from', array( $this, 'from_email' ), 1 );
+			add_filter( 'wp_mail_from', array( $this, 'from_email' ) );
 		}
 
 		if ( $values['from_name'] ) {
-			add_filter( 'wp_mail_from_name', array( $this, 'from_name' ), 1 );
+			add_filter( 'wp_mail_from_name', array( $this, 'from_name' ) );
 		}
 
 		do_action( 'weed_set_email_from_headers' );
@@ -203,16 +221,16 @@ class Settings_Output extends Base_Output {
 		$values = $this->values;
 
 		if ( $values['from_email'] ) {
-			add_filter( 'wp_mail_from', array( $this, 'from_email' ), 1 );
+			add_filter( 'wp_mail_from', array( $this, 'from_email' ) );
 		}
 
 		if ( $values['from_name'] ) {
-			add_filter( 'wp_mail_from_name', array( $this, 'from_name' ), 1 );
+			add_filter( 'wp_mail_from_name', array( $this, 'from_name' ) );
 		}
 
 		if ( 'html' === $values['content_type'] ) {
-			add_filter( 'wp_mail_content_type', array( $this, 'html_content_type' ), 1 );
-			add_filter( 'wp_mail_charset', array( $this, 'charset' ), 1 );
+			add_filter( 'wp_mail_content_type', array( $this, 'html_content_type' ) );
+			add_filter( 'wp_mail_charset', array( $this, 'charset' ) );
 		}
 
 		do_action( 'weed_set_email_headers' );
@@ -229,16 +247,16 @@ class Settings_Output extends Base_Output {
 		$values = $this->values;
 
 		if ( $values['from_email'] ) {
-			remove_filter( 'wp_mail_from', array( $this, 'from_email' ), 1 );
+			remove_filter( 'wp_mail_from', array( $this, 'from_email' ) );
 		}
 
 		if ( $values['from_name'] ) {
-			remove_filter( 'wp_mail_from_name', array( $this, 'from_name' ), 1 );
+			remove_filter( 'wp_mail_from_name', array( $this, 'from_name' ) );
 		}
 
 		if ( 'html' === $values['content_type'] ) {
-			remove_filter( 'wp_mail_content_type', array( $this, 'html_content_type' ), 1 );
-			remove_filter( 'wp_mail_charset', array( $this, 'charset' ), 1 );
+			remove_filter( 'wp_mail_content_type', array( $this, 'html_content_type' ) );
+			remove_filter( 'wp_mail_charset', array( $this, 'charset' ) );
 		}
 
 		do_action( 'weed_reset_email_headers' );
@@ -272,7 +290,7 @@ class Settings_Output extends Base_Output {
 			$admin_email,
 		);
 
-		$from_email = str_ireplace( $find, $replace, $from_email );
+		$from_email = str_ireplace( $find, $replace, $values['from_email'] );
 
 		return $from_email;
 
@@ -305,7 +323,7 @@ class Settings_Output extends Base_Output {
 			$admin_email,
 		);
 
-		$from_name = str_ireplace( $find, $replace, $from_name );
+		$from_name = str_ireplace( $find, $replace, $values['from_name'] );
 
 		return $from_name;
 
