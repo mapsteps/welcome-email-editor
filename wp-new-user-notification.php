@@ -358,7 +358,11 @@ if ( ! function_exists( 'wp_new_user_notification' ) ) {
 
 		$attachment = $values['user_welcome_email_attachment_url'];
 		$attachment = trim( $attachment );
-		$attachment = empty( $attachment ) ? '' : array( $attachment );
+		$attachment = empty( $attachment ) ? '' : $attachment;
+
+		if ( ! empty( $attachment ) ) {
+			$attachment = str_replace( trailingslashit( site_url() ), trailingslashit( $_SERVER['DOCUMENT_ROOT'] ), $attachment );
+		}
 
 		wp_mail(
 			$wp_new_user_notification_email['to'],
