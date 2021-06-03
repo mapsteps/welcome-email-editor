@@ -111,10 +111,10 @@ class Settings_Output extends Base_Output {
 	/**
 	 * Retrieve password message.
 	 *
-	 * @param string $message Email message.
-	 * @param string $key The activation key.
-	 * @param string $user_login The activation key.
-	 * @param string $user_data WP_User object.
+	 * @param string  $message Email message.
+	 * @param string  $key The activation key.
+	 * @param string  $user_login The activation key.
+	 * @param WP_User $user_data WP_User object.
 	 *
 	 * @return string
 	 */
@@ -138,17 +138,21 @@ class Settings_Output extends Base_Output {
 		$reset_url = wp_login_url() . '?action=rp&key=' . $key . '&login=' . rawurlencode( $user_login );
 
 		$find = array(
-			'[user_login]',
 			'[blog_name]',
 			'[site_url]',
 			'[reset_url]',
+			'[user_login]',
+			'[first_name]',
+			'[last_name]',
 		);
 
 		$replace = array(
-			$user_login,
 			$blogname,
 			$site_url,
 			$reset_url,
+			$user_login,
+			$user_data->first_name,
+			$user_data->last_name,
 		);
 
 		$saved_message = str_ireplace( $find, $replace, $saved_message );
