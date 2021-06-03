@@ -207,7 +207,6 @@ class Setup {
 		$settings = get_option( 'weed_settings' );
 
 		$remove_on_uninstall = isset( $settings['remove_on_uninstall'] ) ? true : false;
-		$remove_on_uninstall = apply_filters( 'weed_clean_uninstall', $remove_on_uninstall );
 
 		if ( $remove_on_uninstall ) {
 
