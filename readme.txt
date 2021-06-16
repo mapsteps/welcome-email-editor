@@ -1,7 +1,7 @@
 === Welcome Email Editor ===
 Contributors: davidvongries, seanbarton
 Tags: welcome email, wordpress welcome email, welcome email editor, mail, email, new user email, password reminder, lost password, welcome email attachment, mail attachment, email attachment
-Requires at least: 4.9
+Requires at least: 4.6
 Tested up to: 5.7
 Stable tag: 5.0
 License: GPLv2 or later
