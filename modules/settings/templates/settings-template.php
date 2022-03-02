@@ -135,14 +135,14 @@ return function () {
 
 			<ul class="products">
 				<li class="heatbox">
-					<a href="https://wordpress.org/plugins/swift-control/" target="_blank">
+					<a href="https://wordpress.org/plugins/better-admin-bar/" target="_blank">
 						<img src="<?php echo esc_url( WEED_PLUGIN_URL ); ?>/assets/images/swift-control.jpg">
 					</a>
 					<div class="heatbox-content">
-						<h3><?php _e( 'WP Swift Control', 'welcome-email-editor' ); ?></h3>
+						<h3><?php _e( 'Better Admin Bar', 'welcome-email-editor' ); ?></h3>
 						<p class="subheadline"><?php _e( 'Replace the boring WordPress Admin Bar with this!', 'welcome-email-editor' ); ?></p>
-						<p><?php _e( 'Swift Control is the plugin that make your clients love WordPress. It drastically improves the user experience when working with WordPress and allows you to replace the boring WordPress admin bar with your own navigation panel.', 'welcome-email-editor' ); ?></p>
-						<a href="https://wordpress.org/plugins/swift-control/" target="_blank" class="button"><?php _e( 'View Features', 'welcome-email-editor' ); ?></a>
+						<p><?php _e( 'Better Admin Bar is the plugin that make your clients love WordPress. It drastically improves the user experience when working with WordPress and allows you to replace the boring WordPress admin bar with your own navigation panel.', 'welcome-email-editor' ); ?></p>
+						<a href="https://wordpress.org/plugins/better-admin-bar/" target="_blank" class="button"><?php _e( 'View Features', 'welcome-email-editor' ); ?></a>
 					</div>
 				</li>
 				<li class="heatbox">
