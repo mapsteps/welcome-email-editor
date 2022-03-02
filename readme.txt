@@ -2,8 +2,8 @@
 Contributors: davidvongries, seanbarton
 Tags: welcome email, wordpress welcome email, welcome email editor, mail, email, new user email, password reminder, lost password, welcome email attachment, mail attachment, email attachment
 Requires at least: 4.6
-Tested up to: 5.7
-Stable tag: 5.0.1
+Tested up to: 5.9
+Stable tag: 5.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -55,6 +55,9 @@ Since version 4.3 the password is no longer sent to the user via email and inste
 1. Welcome Email Editor Settings Page
 
 == Changelog ==
+= 5.0.2 | March 02, 2022 =
+* Tested up to 5.9
+* Tweak: Updated plugin description
 = 5.0.1 | June 16, 2021 =
 * Fixed: Textdomain issue causing is_readable() warning
 = 5.0 | May 22, 2021 =
