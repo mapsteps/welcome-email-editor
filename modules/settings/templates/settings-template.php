@@ -157,7 +157,7 @@ return function () {
 					</div>
 				</li>
 				<li class="heatbox">
-					<a href="https://wordpress.org/plugins/responsive-youtube-vimeo-popup/" target="_blank">
+					<a href="https://wordpress.org/themes/page-builder-framework/" target="_blank">
 						<img src="<?php echo esc_url( WEED_PLUGIN_URL ); ?>/assets/images/page-builder-framework.jpg">
 					</a>
 					<div class="heatbox-content">
