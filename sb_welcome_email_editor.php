@@ -4,7 +4,7 @@
  * Description: Welcome Email Editor allows you to change the default WordPress welcome & reset password emails.
  * Version: 5.0.3
  * Author: David Vongries
- * Author URI: https://ultimatedashboard.com
+ * Author URI: https://davidvongries.com/
  * Text Domain: welcome-email-editor
  *
  * @package Welcome_Email_Editor
