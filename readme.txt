@@ -55,6 +55,8 @@ Since version 4.3 the password is no longer sent to the user via email and inste
 1. Welcome Email Editor Settings Page
 
 == Changelog ==
+= 5.0.4 | May 11, 2022 =
+* Minor Change: Prevent confusion by merging [reset_pass_url] and [reset_url] to only [reset_pass_url]
 = 5.0.3 | April 27, 2022 =
 * Fixed: Wrong link target in the recommended section
 = 5.0.2 | March 02, 2022 =
