@@ -88,7 +88,7 @@ class Setup {
 		$reset_password_message .= __( 'Username:', 'welcome-email-editor' ) . " [user_login]<br><br>\r\n\r\n";
 		$reset_password_message .= __( 'If this was a mistake, ignore this email and nothing will happen.', 'welcome-email-editor' ) . "<br><br>\r\n\r\n";
 		$reset_password_message .= __( 'To reset your password, visit the following address:', 'welcome-email-editor' ) . "<br><br>\r\n\r\n";
-		$reset_password_message .= '<a href="[reset_url]">[reset_url]</a>' . "\r\n";
+		$reset_password_message .= '<a href="[reset_pass_url]">[reset_pass_url]</a>' . "\r\n";
 
 		$defaults = array(
 			// General settings.

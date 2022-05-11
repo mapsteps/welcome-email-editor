@@ -158,7 +158,8 @@ class Settings_Output extends Base_Output {
 		$find = array(
 			'[blog_name]',
 			'[site_url]',
-			'[reset_url]',
+			'[reset_url]', // Deprecated, this is here for compatibility purpose.
+			'[reset_pass_url]',
 			'[user_login]',
 			'[first_name]',
 			'[last_name]',
@@ -167,6 +168,7 @@ class Settings_Output extends Base_Output {
 		$replace = array(
 			$blogname,
 			$site_url,
+			$reset_url,
 			$reset_url,
 			$user_login,
 			$user_data->first_name,
