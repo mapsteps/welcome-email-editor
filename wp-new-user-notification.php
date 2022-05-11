@@ -321,7 +321,7 @@ if ( ! function_exists( 'wp_new_user_notification' ) ) {
 			$admin_email,
 			wp_login_url(),
 			$reset_pass_url,
-			'<a href="' . $reset_pass_url . '" target="_blank">' . __( 'Click to set', 'welome-email-editor' ) . '</a>',
+			'<a href="' . $reset_pass_url . '" target="_blank">' . __( 'Click to set', 'welcome-email-editor' ) . '</a>',
 			'*****',
 			'*****',
 		);

@@ -75,11 +75,11 @@ class Setup {
 		$user_welcome_email_body .= '[login_url]' . "\r\n";
 
 		/* translators: %s: Site title. */
-		$user_welome_email_body = __( 'New user registration on your site', 'welcome-email-editor' ) . " [blog_name]<br><br>\r\n\r\n";
+		$user_welcome_email_body = __( 'New user registration on your site', 'welcome-email-editor' ) . " [blog_name]<br><br>\r\n\r\n";
 		/* translators: %s: User login. */
-		$user_welome_email_body .= __( 'Username:', 'welcome-email-editor' ) . " [user_login]<br><br>\r\n\r\n";
+		$user_welcome_email_body .= __( 'Username:', 'welcome-email-editor' ) . " [user_login]<br><br>\r\n\r\n";
 		/* translators: %s: User email address. */
-		$user_welome_email_body .= __( 'Email:', 'welcome-email-editor' ) . " [user_email]<br><br>\r\n";
+		$user_welcome_email_body .= __( 'Email:', 'welcome-email-editor' ) . " [user_email]<br><br>\r\n";
 
 		$reset_password_message = __( 'Someone has requested a password reset for the following account:', 'welcome-email-editor' ) . "<br><br>\r\n\r\n";
 		/* translators: %s: Site name. */
@@ -106,7 +106,7 @@ class Setup {
 
 			// Welcome email settings - for admin.
 			'admin_new_user_notif_email_subject'           => '[[blog_name]] ' . __( 'New User Registration', 'welcome-email-editor' ),
-			'admin_new_user_notif_email_body'              => $user_welome_email_body,
+			'admin_new_user_notif_email_body'              => $user_welcome_email_body,
 			'admin_new_user_notif_email_custom_recipients' => '',
 
 			// Reset password email settings.

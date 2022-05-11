@@ -90,7 +90,7 @@ class Test_Emails {
 
 		wp_new_user_notification( $current_user->ID, null, 'admin' );
 
-		wp_send_json_success( __( 'Email has been sent successfully', 'welome-email-editor' ) );
+		wp_send_json_success( __( 'Email has been sent successfully', 'welcome-email-editor' ) );
 
 	}
 
@@ -103,7 +103,7 @@ class Test_Emails {
 
 		wp_new_user_notification( $current_user->ID, null, 'user' );
 
-		wp_send_json_success( __( 'Email has been sent successfully', 'welome-email-editor' ) );
+		wp_send_json_success( __( 'Email has been sent successfully', 'welcome-email-editor' ) );
 
 	}
 
@@ -116,7 +116,7 @@ class Test_Emails {
 
 		retrieve_password( $current_user->user_login );
 
-		wp_send_json_success( __( 'Email has been sent successfully', 'welome-email-editor' ) );
+		wp_send_json_success( __( 'Email has been sent successfully', 'welcome-email-editor' ) );
 
 	}
 
