@@ -72,7 +72,7 @@ class Setup {
 		$user_welcome_email_body  = __( 'Username:', 'welcome-email-editor' ) . ' [user_login]' . "<br><br>\r\n\r\n";
 		$user_welcome_email_body .= __( 'To set your password, visit the following address:' ) . "<br><br>\r\n\r\n";
 		$user_welcome_email_body .= '<a href="[reset_pass_url]">[reset_pass_url]</a><br><br>' . "\r\n\r\n";
-		$user_welcome_email_body .= '[login_url]' . "\r\n";
+		$user_welcome_email_body .= '<a href="[login_url]">[login_url]</a>' . "\r\n";
 
 		/* translators: %s: Site title. */
 		$admin_welcome_email_body = __( 'New user registration on your site', 'welcome-email-editor' ) . " [blog_name]<br><br>\r\n\r\n";
@@ -88,7 +88,7 @@ class Setup {
 		$reset_password_message .= __( 'Username:', 'welcome-email-editor' ) . " [user_login]<br><br>\r\n\r\n";
 		$reset_password_message .= __( 'If this was a mistake, ignore this email and nothing will happen.', 'welcome-email-editor' ) . "<br><br>\r\n\r\n";
 		$reset_password_message .= __( 'To reset your password, visit the following address:', 'welcome-email-editor' ) . "<br><br>\r\n\r\n";
-		$reset_password_message .= '<a class="[reset_url]">[reset_url]</a>' . "\r\n";
+		$reset_password_message .= '<a href="[reset_url]">[reset_url]</a>' . "\r\n";
 
 		$defaults = array(
 			// General settings.
