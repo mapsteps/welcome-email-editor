@@ -57,7 +57,7 @@ Since version 4.3 the password is no longer sent to the user via email and inste
 == Changelog ==
 = 5.0.4 | May 11, 2022 =
 * Tweak: Replace [reset_url] with [reset_pass_url] to keep things uniform
-* Fixed: Some links were not rendered properly in some cases Mail Content Type was set to HTML
+* Fixed: Some links were not rendered properly in some cases if Mail Content Type was set to HTML
 * Fixed: Wrong textdomains
 = 5.0.3 | April 27, 2022 =
 * Fixed: Wrong link target in the recommended section
