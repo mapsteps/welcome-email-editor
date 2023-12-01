@@ -29,6 +29,13 @@ class Test_Emails {
 	public $email_type;
 
 	/**
+	 * The nonce.
+	 *
+	 * @var string
+	 */
+	public $nonce;
+
+	/**
 	 * Get instance of the class.
 	 */
 	public static function get_instance() {
@@ -48,6 +55,12 @@ class Test_Emails {
 
 		$this->email_type = isset( $_POST['email_type'] ) ? sanitize_text_field( $_POST['email_type'] ) : '';
 		$this->nonce      = isset( $_POST['nonce'] ) ? sanitize_text_field( $_POST['nonce'] ) : '';
+
+		$capability = apply_filters( 'weed_settings_capability', 'manage_options' );
+
+		if ( ! current_user_can( $capability ) ) {
+			wp_send_json_error( 'You do not have permission to do this', 'welcome-email-editor' );
+		}
 
 		if ( ! $this->email_type ) {
 			wp_send_json_error( 'Email type is required', 'welcome-email-editor' );
@@ -70,10 +83,6 @@ class Test_Emails {
 
 			case 'reset_password_email':
 				$this->reset_password_email();
-				break;
-
-			default:
-				// code...
 				break;
 		}
 
