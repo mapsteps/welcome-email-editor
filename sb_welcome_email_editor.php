@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Welcome Email Editor
  * Description: Welcome Email Editor allows you to change the default WordPress welcome & reset password emails.
- * Version: 5.0.5
+ * Version: 5.0.6
  * Author: David Vongries
  * Author URI: https://davidvongries.com/
  * Text Domain: welcome-email-editor
@@ -15,7 +15,7 @@ defined( 'ABSPATH' ) || die( "Can't access directly" );
 // Plugin constants.
 define( 'WEED_PLUGIN_DIR', rtrim( plugin_dir_path( __FILE__ ), '/' ) );
 define( 'WEED_PLUGIN_URL', rtrim( plugin_dir_url( __FILE__ ), '/' ) );
-define( 'WEED_PLUGIN_VERSION', '5.0.5' );
+define( 'WEED_PLUGIN_VERSION', '5.0.6' );
 define( 'WEED_PLUGIN_NAME', 'Welcome Email Editor' );
 define( 'WEED_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 
