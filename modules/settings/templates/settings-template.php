@@ -94,10 +94,13 @@ return function () {
 				<div class="heatbox weed-tags-metabox">
 					<h2><?php _e( 'Template Tags', 'welcome-email-editor' ); ?></h2>
 					<div class="heatbox-content">
-						<p><?php _e( 'Use the template tags below in any fields to output certain information.', 'welcome-email-editor' ); ?></p>
-						<p class="tags-wrapper">
-							<code>[site_url]</code>, <code>[login_url]</code>, <code>[reset_pass_url]</code>, <code>[user_email]</code>, <code>[user_login]</code>, <code>[user_id]</code>, <code>[first_name]</code>, <code>[last_name]</code>, <code>[blog_name]</code>, <code>[admin_email]</code>, <code>[custom_fields]</code>, <code>[date]</code>, <code>[time]</code>
+						<p>
+							<?php _e( 'Use the template tags below in any fields to output certain information.', 'welcome-email-editor' ); ?>
+							<!-- <br><strong><?php _e( '(Click to copy)', 'welcome-email-editor' ); ?></strong> -->
 						</p>
+						<div class="tags-wrapper">
+							<code>[site_url]</code> <code>[login_url]</code> <code>[reset_pass_url]</code> <code>[user_email]</code> <code>[user_login]</code> <code>[user_id]</code> <code>[first_name]</code> <code>[last_name]</code> <code>[blog_name]</code> <code>[admin_email]</code> <code>[custom_fields]</code> <code>[date]</code> <code>[time]</code>
+						</div>
 					</div>
 				</div>
 
