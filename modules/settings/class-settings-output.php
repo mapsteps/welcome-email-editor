@@ -192,7 +192,11 @@ class Settings_Output extends Base_Output {
 	 */
 	public function wpmu_new_user_notification( $user_id, $password, $meta = array() ) {
 
-		return wp_new_user_notification( $user_id, null, 'both' ); // @todo.. check this does something and fix.
+		// This function call doesn't return anything.
+		wp_new_user_notification( $user_id, null, 'both' );
+
+		// Since we already sent the email, we can return false to disable the default welcome email.
+		return false;
 
 	}
 
