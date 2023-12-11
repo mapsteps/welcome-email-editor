@@ -55,7 +55,7 @@ class Email_Helper {
 		}
 
 		if ( ! empty( $reply_to ) ) {
-			array_push( $headers, $reply_to );
+			$headers[] = $reply_to;
 		}
 
 		$custom_headers = $values['user_welcome_email_additional_headers'];
@@ -80,7 +80,7 @@ class Email_Helper {
 
 			if ( ! empty( $custom_header ) ) {
 				$custom_header = str_ireplace( $placeholders, $replacements, $custom_header );
-				array_push( $headers, $custom_header );
+				$headers[]     = $custom_header;
 			}
 		}
 

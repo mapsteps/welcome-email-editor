@@ -5,6 +5,8 @@
  * @package Welcome_Email_Editor
  */
 
+use Weed\Settings\Settings_Module;
+
 defined( 'ABSPATH' ) || die( "Can't access directly" );
 
 /**

@@ -7,12 +7,14 @@
 
 namespace Weed\Settings;
 
+use WP_User;
+
 defined( 'ABSPATH' ) || die( "Can't access directly" );
 
 use Weed\Base\Base_Output;
 
 /**
- * Class to setup dashboard output.
+ * Class to set up dashboard output.
  */
 class Settings_Output extends Base_Output {
 
@@ -75,7 +77,7 @@ class Settings_Output extends Base_Output {
 
 		/**
 		 * Supporting https://s2member.com/ plugin.
-		 * This support brought from the our plugin's old code.
+		 * This support brought from the plugin's old code.
 		 *
 		 * @see https://www.s2member.com/codex/stable/s2member/email_configs/package-filters/#src_doc_ws_plugin__s2member_after_email_config_release
 		 */
@@ -88,8 +90,8 @@ class Settings_Output extends Base_Output {
 	 *
 	 * @see https://developer.wordpress.org/reference/hooks/retrieve_password_title/
 	 *
-	 * @param string  $title Email subject.
-	 * @param string  $user_login The username for the user.
+	 * @param string $title Email subject.
+	 * @param string $user_login The username for the user.
 	 * @param WP_User $user_data WP_User object.
 	 *
 	 * @return string
@@ -131,9 +133,9 @@ class Settings_Output extends Base_Output {
 	/**
 	 * Retrieve password message.
 	 *
-	 * @param string  $message Email message.
-	 * @param string  $key The activation key.
-	 * @param string  $user_login The activation key.
+	 * @param string $message Email message.
+	 * @param string $key The activation key.
+	 * @param string $user_login The activation key.
 	 * @param WP_User $user_data WP_User object.
 	 *
 	 * @return string
@@ -175,9 +177,7 @@ class Settings_Output extends Base_Output {
 			$user_data->last_name,
 		);
 
-		$saved_message = str_ireplace( $find, $replace, $saved_message );
-
-		return $saved_message;
+		return str_ireplace( $find, $replace, $saved_message );
 
 	}
 
@@ -186,9 +186,9 @@ class Settings_Output extends Base_Output {
 	 *
 	 * Returning false disables the welcome email.
 	 *
-	 * @param int    $user_id  User ID.
+	 * @param int $user_id User ID.
 	 * @param string $password User password.
-	 * @param array  $meta     Signup meta data. Default empty array.
+	 * @param array $meta Signup meta data. Default empty array.
 	 */
 	public function wpmu_new_user_notification( $user_id, $password, $meta = array() ) {
 
@@ -286,9 +286,7 @@ class Settings_Output extends Base_Output {
 			$admin_email,
 		);
 
-		$from_email = str_ireplace( $find, $replace, $values['from_email'] );
-
-		return $from_email;
+		return str_ireplace( $find, $replace, $values['from_email'] );
 
 	}
 
@@ -319,9 +317,7 @@ class Settings_Output extends Base_Output {
 			$admin_email,
 		);
 
-		$from_name = str_ireplace( $find, $replace, $values['from_name'] );
-
-		return $from_name;
+		return str_ireplace( $find, $replace, $values['from_name'] );
 
 	}
 

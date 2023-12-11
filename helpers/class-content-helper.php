@@ -7,6 +7,8 @@
 
 namespace Weed\Helpers;
 
+use wpdb;
+
 defined( 'ABSPATH' ) || die( "Can't access directly" );
 
 /**
@@ -18,6 +20,7 @@ class Content_Helper {
 	 * Get BuddyPress custom profile fields.
 	 *
 	 * @param int $user_id The user ID.
+	 *
 	 * @return array
 	 */
 	public function get_bp_user_custom_fields( $user_id ) {
@@ -26,6 +29,9 @@ class Content_Helper {
 			return array();
 		}
 
+		/**
+		 * @global wpdb $wpdb
+		 */
 		global $wpdb;
 
 		// TODO: Use BuddyPress function if it exists instead of directly touching wpdb.
@@ -43,9 +49,7 @@ class Content_Helper {
 			$assoc_array[ $value->name ] = $value->value;
 		}
 
-		$assoc_array = apply_filters( 'weed_bp_custom_fields', $assoc_array );
-
-		return $assoc_array;
+		return apply_filters( 'weed_bp_custom_fields', $assoc_array );
 
 	}
 
@@ -53,10 +57,14 @@ class Content_Helper {
 	 * Get user's custom fields.
 	 *
 	 * @param int $user_id The user ID.
+	 *
 	 * @return array
 	 */
 	public function get_user_custom_fields( $user_id ) {
 
+		/**
+		 * @global wpdb $wpdb
+		 */
 		global $wpdb;
 
 		// TODO: Use get_user_meta instead of directly touching wpdb.

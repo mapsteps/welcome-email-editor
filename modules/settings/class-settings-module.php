@@ -9,11 +9,10 @@ namespace Weed\Settings;
 
 defined( 'ABSPATH' ) || die( "Can't access directly" );
 
-use Weed\Vars;
 use Weed\Base\Base_Module;
 
 /**
- * Class to setup quick view module.
+ * Class to set up quick view module.
  */
 class Settings_Module extends Base_Module {
 

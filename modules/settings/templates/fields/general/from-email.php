@@ -5,6 +5,8 @@
  * @package Welcome_Email_Editor
  */
 
+use Weed\Settings\Settings_Module;
+
 defined( 'ABSPATH' ) || die( "Can't access directly" );
 
 /**
@@ -24,7 +26,9 @@ return function ( $module ) {
 	$placeholder = 'wordpress@' . $placeholder;
 	?>
 
-	<input type="text" name="weed_settings[from_email]" id="weed_settings--from_email" class="regular-text" value="<?php echo esc_attr( $values['from_email'] ); ?>" placeholder="<?php echo esc_attr( $placeholder ); ?>" />
+	<input type="text" name="weed_settings[from_email]" id="weed_settings--from_email" class="regular-text"
+		   value="<?php echo esc_attr( $values['from_email'] ); ?>"
+		   placeholder="<?php echo esc_attr( $placeholder ); ?>"/>
 
 	<?php
 

@@ -5,6 +5,8 @@
  * @package Welcome_Email_Editor
  */
 
+use Weed\Settings\Settings_Module;
+
 defined( 'ABSPATH' ) || die( "Can't access directly" );
 
 /**
@@ -15,11 +17,12 @@ defined( 'ABSPATH' ) || die( "Can't access directly" );
 return function ( $module ) {
 
 	$defaults = $module->defaults;
-	$settings = $module->settings;
 	$values   = $module->values;
 	?>
 
-	<textarea name="weed_settings[admin_new_user_notif_email_body]" id="weed_settings--admin_new_user_notif_email_body" class="large-text" rows="8" placeholder="<?php echo esc_attr( $defaults['admin_new_user_notif_email_body'] ); ?>"><?php echo esc_html( $values['admin_new_user_notif_email_body'] ); ?></textarea>
+	<textarea name="weed_settings[admin_new_user_notif_email_body]" id="weed_settings--admin_new_user_notif_email_body"
+			  class="large-text" rows="8"
+			  placeholder="<?php echo esc_attr( $defaults['admin_new_user_notif_email_body'] ); ?>"><?php echo esc_html( $values['admin_new_user_notif_email_body'] ); ?></textarea>
 
 	<?php
 

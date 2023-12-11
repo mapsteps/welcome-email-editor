@@ -13,7 +13,7 @@ use Weed\Vars;
 use Weed\Helpers\Screen_Helper;
 
 /**
- * Class to setup base module.
+ * Class to set up base module.
  */
 class Base_Module {
 	/**

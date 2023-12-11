@@ -9,10 +9,8 @@ namespace Weed;
 
 defined( 'ABSPATH' ) || die( "Can't access directly" );
 
-use Weed\Vars;
-
 /**
- * Class to setup Ultimate Quick View plugin.
+ * Class to set up Ultimate Quick View plugin.
  */
 class Setup {
 	/**
@@ -47,7 +45,7 @@ class Setup {
 	}
 
 	/**
-	 * Setup the class.
+	 * Set up the class.
 	 */
 	public function setup() {
 
@@ -69,7 +67,7 @@ class Setup {
 	public function set_data() {
 
 		/* translators: %s: User login. */
-		$user_welcome_email_body  = __( 'Username:', 'welcome-email-editor' ) . ' [user_login]' . "<br><br>\r\n\r\n";
+		$user_welcome_email_body = __( 'Username:', 'welcome-email-editor' ) . ' [user_login]' . "<br><br>\r\n\r\n";
 		$user_welcome_email_body .= __( 'To set your password, visit the following address:' ) . "<br><br>\r\n\r\n";
 		$user_welcome_email_body .= '<a href="[reset_pass_url]">[reset_pass_url]</a><br><br>' . "\r\n\r\n";
 		$user_welcome_email_body .= '<a href="[login_url]">[login_url]</a>' . "\r\n";
@@ -128,6 +126,7 @@ class Setup {
 	 * Add action links displayed in plugins page.
 	 *
 	 * @param array $links The action links array.
+	 *
 	 * @return array The modified action links array.
 	 */
 	public function plugin_action_links( $links ) {
@@ -142,6 +141,7 @@ class Setup {
 	 * Admin body class.
 	 *
 	 * @param string $classes The existing body classes.
+	 *
 	 * @return string The body classes.
 	 */
 	public function admin_body_class( $classes ) {

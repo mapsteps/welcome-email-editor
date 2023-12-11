@@ -1,6 +1,6 @@
 <?php
 /**
- * Remove on uninstall field.
+ * "Remove on uninstall" field.
  *
  * @package Welcome_Email_Editor
  */

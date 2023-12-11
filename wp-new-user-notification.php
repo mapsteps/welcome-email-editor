@@ -92,7 +92,7 @@ if ( ! function_exists( 'wp_new_user_notification' ) ) {
 			);
 
 			$admin_subject = $values['admin_new_user_notif_email_subject'];
-			$admin_subject = $admin_subject ? $admin_subject : $default_admin_subject;
+			$admin_subject = $admin_subject ?: $default_admin_subject;
 			$admin_subject = str_ireplace( $admin_subject_placeholders, $admin_subject_values, $admin_subject );
 			$admin_subject = apply_filters( 'weed_user_welcome_email_subject', $admin_subject );
 
@@ -143,7 +143,7 @@ if ( ! function_exists( 'wp_new_user_notification' ) ) {
 			$default_admin_body .= sprintf( __( 'Email: %s' ), $user->user_email ) . "\r\n";
 
 			$admin_body = $values['admin_new_user_notif_email_body'];
-			$admin_body = $admin_body ? $admin_body : $default_admin_body;
+			$admin_body = $admin_body ?: $default_admin_body;
 			$admin_body = str_ireplace( $admin_body_placeholders, $admin_body_values, $admin_body );
 
 			if ( stripos( $admin_body, '[bp_custom_fields]' ) ) {
@@ -196,7 +196,7 @@ if ( ! function_exists( 'wp_new_user_notification' ) ) {
 					$custom_recipient = trim( $custom_recipient );
 
 					if ( ! empty( $custom_recipient ) ) {
-						// Let's keep this checking separately, think about future possibility if would add custom recipient(s) as email string.
+						// Let's keep this checking separately, think about future possibility if we would add custom recipient(s) as email string.
 						if ( is_numeric( $custom_recipient ) ) {
 							$custom_recipient = absint( $custom_recipient );
 
@@ -205,7 +205,7 @@ if ( ! function_exists( 'wp_new_user_notification' ) ) {
 							if ( $custom_recipient_user ) {
 								// Prevent the email from being sent twice to admin_email.
 								if ( $custom_recipient_user->user_email !== $admin_email ) {
-									array_push( $custom_recipient_emails, $custom_recipient_user->user_email );
+									$custom_recipient_emails[] = $custom_recipient_user->user_email;
 								}
 							}
 						}
@@ -238,7 +238,7 @@ if ( ! function_exists( 'wp_new_user_notification' ) ) {
 			}
 		}
 
-		// `$deprecated` was pre-4.3 `$plaintext_pass`. An empty `$plaintext_pass` didn't sent a user notification.
+		// `$deprecated` was pre-4.3 `$plaintext_pass`. An empty `$plaintext_pass` didn't send a user notification.
 		if ( 'admin' === $notify || ( empty( $deprecated ) && empty( $notify ) ) ) {
 			return;
 		}
@@ -280,7 +280,7 @@ if ( ! function_exists( 'wp_new_user_notification' ) ) {
 		);
 
 		$user_subject = $values['user_welcome_email_subject'];
-		$user_subject = $user_subject ? $user_subject : $default_user_subject;
+		$user_subject = $user_subject ?: $default_user_subject;
 		$user_subject = str_ireplace( $user_subject_placeholders, $user_subject_values, $user_subject );
 		$user_subject = apply_filters( 'weed_user_welcome_email_subject', $user_subject );
 
@@ -327,7 +327,7 @@ if ( ! function_exists( 'wp_new_user_notification' ) ) {
 		);
 
 		$user_body = $values['user_welcome_email_body'];
-		$user_body = $user_body ? $user_body : $default_user_body;
+		$user_body = $user_body ?: $default_user_body;
 		$user_body = str_ireplace( $user_body_placeholders, $user_body_values, $user_body );
 
 		$wp_new_user_notification_email = array(

@@ -14,8 +14,6 @@ defined( 'ABSPATH' ) || die( "Can't access directly" );
  */
 return function ( $module ) {
 
-	$defaults = $module->defaults;
-	$values   = $module->values;
 	?>
 
 	<button type="button" class="button button-primary weed-test-email-button" data-email-type="reset_password_email">

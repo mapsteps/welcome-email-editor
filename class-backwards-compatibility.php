@@ -43,7 +43,7 @@ class Backwards_Compatibility {
 	}
 
 	/**
-	 * Setup the class.
+	 * Set up the class.
 	 */
 	public function setup() {
 

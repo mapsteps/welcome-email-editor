@@ -5,6 +5,8 @@
  * @package Welcome_Email_Editor
  */
 
+use Weed\Settings\Settings_Module;
+
 defined( 'ABSPATH' ) || die( "Can't access directly" );
 
 /**
@@ -14,11 +16,10 @@ defined( 'ABSPATH' ) || die( "Can't access directly" );
  */
 return function ( $module ) {
 
-	$defaults = $module->defaults;
-	$values   = $module->values;
 	?>
 
-	<button type="button" class="button button-primary weed-test-email-button" data-email-type="admin_new_user_notif_email">
+	<button type="button" class="button button-primary weed-test-email-button"
+			data-email-type="admin_new_user_notif_email">
 		<?php _e( 'Send a test email for current user (save first!)', 'welcome-email-editor' ); ?>
 	</button>
 

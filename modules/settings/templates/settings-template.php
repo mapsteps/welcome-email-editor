@@ -27,7 +27,7 @@ return function () {
 					</div>
 
 					<div>
-						<img src="<?php echo esc_url( WEED_PLUGIN_URL ); ?>/assets/images/welcome-email-editor-logo.png">
+						<img src="<?php echo esc_url( WEED_PLUGIN_URL ); ?>/assets/images/welcome-email-editor-logo.png" alt="SwiftSMTP">
 					</div>
 
 				</div>

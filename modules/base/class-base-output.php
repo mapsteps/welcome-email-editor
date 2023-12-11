@@ -13,7 +13,7 @@ use Weed\Vars;
 use Weed\Helpers\Screen_Helper;
 
 /**
- * Class to setup base output.
+ * Class to set up base output.
  */
 class Base_Output {
 	/**

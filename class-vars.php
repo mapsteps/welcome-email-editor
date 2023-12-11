@@ -12,14 +12,11 @@ defined( 'ABSPATH' ) || die( "Can't access directly" );
 /**
  * Global setter & getter utility
  *
+ * Setting up value:
  * Vars::set($key, $value);
  *
- * @param   string/array  $key
- * @param   mix           $value
- *
+ * Getting value:
  * Vars::get($key);
- * @param   string  $key
- * @return  mix     $value
  */
 class Vars {
 
@@ -34,11 +31,11 @@ class Vars {
 	 * Get value from a given key
 	 *
 	 * @param string $name The key name.
+	 *
 	 * @return mixed
 	 */
 	public static function get( $name ) {
-		$value = isset( self::$vars[ $name ] ) ? self::$vars[ $name ] : '';
-		return $value;
+		return isset( self::$vars[ $name ] ) ? self::$vars[ $name ] : '';
 	}
 
 	/**
@@ -48,6 +45,7 @@ class Vars {
 	 *
 	 * @param string $name Can be either key name or array of key-value pairs.
 	 * @param string $value The data.
+	 *
 	 * @return void
 	 */
 	public static function set( $name, $value = '' ) {
