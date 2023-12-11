@@ -15,7 +15,7 @@
 	}
 
 	/**
-	 * Send test email via ajax request.
+	 * Reset settings.
 	 */
 	function resetSettings(e) {
 		if (!confirm(weedSettings.warningMessages.resetSettings)) e.preventDefault();

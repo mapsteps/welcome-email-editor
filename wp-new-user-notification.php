@@ -13,7 +13,7 @@ use Weed\Settings\Settings_Output;
 if ( ! function_exists( 'wp_new_user_notification' ) ) {
 
 	/**
-	 * Email login credentials to a newly-registered user.
+	 * Emails login credentials to a newly-registered user.
 	 *
 	 * A new user registration notification is also sent to admin email.
 	 *

@@ -70,6 +70,10 @@ class Test_Emails {
 			wp_send_json_error( 'Invalid nonce', 'welcome-email-editor' );
 		}
 
+		if ( ! $this->verifyNonce() ) {
+			wp_send_json_error( 'Invalid nonce', 'welcome-email-editor' );
+		}
+
 		add_filter( 'weed_test_email_recipient', array( $this, 'set_testing_recipient' ) );
 
 		switch ( $this->email_type ) {
@@ -87,6 +91,35 @@ class Test_Emails {
 		}
 
 		remove_filter( 'weed_test_email_recipient', array( $this, 'set_testing_recipient' ) );
+
+	}
+
+	/**
+	 * Verify nonce.
+	 *
+	 * @return bool
+	 */
+	private function verifyNonce() {
+
+		$nonce_action = '';
+
+		switch ( $this->email_type ) {
+			case 'admin_new_user_notif_email':
+				$nonce_action = WEED_PLUGIN_DIR . '_Admin_Welcome_Email';
+				break;
+
+			case 'user_welcome_email':
+				$nonce_action = WEED_PLUGIN_DIR . '_User_Welcome_Email';
+				break;
+
+			case 'reset_password_email':
+				$nonce_action = WEED_PLUGIN_DIR . '_Reset_Password_Email';
+				break;
+		}
+
+		$is_valid = wp_verify_nonce( $this->nonce, $nonce_action );
+
+		return (bool) $is_valid;
 
 	}
 
