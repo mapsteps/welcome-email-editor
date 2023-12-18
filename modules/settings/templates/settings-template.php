@@ -172,7 +172,7 @@ return function () {
 				</li>
 			</ul>
 
-			<p class="credit"><?php _e( 'Made with ❤ in Aschaffenburg, Germany', 'welcome-email-editor' ); ?></p>
+			<p class="credit"><?php _e( 'Made with ❤ in Torsby, Sweden', 'welcome-email-editor' ); ?></p>
 
 		</div>
 
