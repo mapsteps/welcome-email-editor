@@ -54,6 +54,33 @@
 	line-height: 1.8;
 }
 
+.weed-tags-metabox h2 {
+	position: relative;
+}
+
+.weed-tags-metabox h2 .action-status {
+	display: inline-block;
+	position: absolute;
+	right: 20px;
+	top: 50%;
+	padding: 10px;
+	height: 30px;
+	line-height: 10px;
+	font-size: 11px;
+	color: #fff;
+	background-color: #444;
+	border-radius: 4px;
+	opacity: 0;
+	visibility: hidden;
+	transform: translateY(-50%);
+	transition: all 0.3s ease-in-out;
+}
+
+.weed-tags-metabox h2 .action-status.is-shown {
+	opacity: 1;
+	visibility: visible;
+}
+
 .weed-tags-metabox .heatbox-content p:last-child {
 	margin-bottom: 0;
 }
@@ -75,7 +102,7 @@
 }
 
 .button.weed-reset-button:focus {
-	box-shadow: 0 0 0 1px #fff, 0 0 0 3px #f5492a
+	box-shadow: 0 0 0 1px #fff, 0 0 0 3px #f5492a;
 }
 
 /* Featured */

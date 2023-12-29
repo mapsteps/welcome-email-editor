@@ -5,10 +5,9 @@
 		"target": "ESNext",
 		"module": "ESNext",
 		"moduleResolution": "node",
-		"strict": true,
-		"baseUrl": "./",
-		"paths": {
-			"~/*": ["./modules/**/js/*.ts"]
-		}
-	}
+		"strict": true
+	},
+	"exclude": [
+		"node_modules"
+	]
 }

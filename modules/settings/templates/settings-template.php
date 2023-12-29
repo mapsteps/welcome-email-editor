@@ -92,7 +92,10 @@ return function () {
 
 			<div class="heatbox-sidebar">
 				<div class="heatbox weed-tags-metabox">
-					<h2><?php _e( 'Template Tags', 'welcome-email-editor' ); ?></h2>
+					<h2>
+						<?php _e( 'Template Tags', 'welcome-email-editor' ); ?>
+						<span class="action-status">📋 Copied</span>
+					</h2>
 					<div class="heatbox-content">
 						<p>
 							<?php _e( 'Use the template tags below in any fields to output certain information.', 'welcome-email-editor' ); ?>
