@@ -8,15 +8,18 @@
 	"alias": {
 		"jquery": {
 			"global": "jQuery"
-		},
-		"van": {
-			"global": "van"
 		}
 	},
 	"devDependencies": {
+		"@types/jquery": "^3.5.29",
 		"parcel": "^2.10.3"
 	},
 	"dependencies": {
+		"jquery": "^3.7.1",
 		"vanjs-core": "^1.2.7"
+	},
+	"scripts": {
+		"watch": "parcel watch modules/settings/assets/js/settings.ts --dist-dir modules/settings/assets/js",
+		"build": "parcel build modules/settings/assets/js/settings.ts --dist-dir modules/settings/assets/js"
 	}
 }
