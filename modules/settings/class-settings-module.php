@@ -210,6 +210,7 @@ class Settings_Module extends Base_Module {
 
 		// Register sections.
 		add_settings_section( 'weed-general-section', __( 'General Settings', 'welcome-email-editor' ), '', 'weed-general-settings' );
+		add_settings_section( 'weed-smtp-section', __( 'SMTP Settings', 'welcome-email-editor' ), '', 'weed-smtp-settings' );
 		add_settings_section( 'weed-user-welcome-email-section', __( 'Welcome Email Settings &mdash; For User', 'welcome-email-editor' ), '', 'weed-user-welcome-email-settings' );
 		add_settings_section( 'weed-admin-new-user-notif-email-section', __( 'New User Notification Email Settings &mdash; For Admin', 'welcome-email-editor' ), '', 'weed-admin-new-user-notif-email-settings' );
 		add_settings_section( 'weed-reset-password-email-section', __( 'Reset Password Email Settings', 'welcome-email-editor' ), '', 'weed-reset-password-email-settings' );
@@ -247,6 +248,65 @@ class Settings_Module extends Base_Module {
 			),
 			'weed-general-settings',
 			'weed-general-section'
+		);
+
+		// SMTP fields.
+		add_settings_field(
+			'smtp-host',
+			__( 'SMTP Host', 'welcome-email-editor' ),
+			array(
+				$this,
+				'smtp_host_field',
+			),
+			'weed-smtp-settings',
+			'weed-smtp-section'
+		);
+
+		add_settings_field(
+			'smtp-encryption',
+			__( 'SMTP Encryption', 'welcome-email-editor' ) .
+			'<p class="description">' .
+			__( 'For most server, TLS is the recommended option.', 'welcome-email-editor' ) .
+			'</p>',
+			array(
+				$this,
+				'smtp_encryption_field',
+			),
+			'weed-smtp-settings',
+			'weed-smtp-section'
+		);
+
+		add_settings_field(
+			'smtp-port',
+			__( 'SMTP Port', 'welcome-email-editor' ),
+			array(
+				$this,
+				'smtp_port_field',
+			),
+			'weed-smtp-settings',
+			'weed-smtp-section'
+		);
+
+		add_settings_field(
+			'smtp-username',
+			__( 'SMTP Username', 'welcome-email-editor' ),
+			array(
+				$this,
+				'smtp_username_field',
+			),
+			'weed-smtp-settings',
+			'weed-smtp-section'
+		);
+
+		add_settings_field(
+			'smtp-password',
+			__( 'SMTP Password', 'welcome-email-editor' ),
+			array(
+				$this,
+				'smtp_password_field',
+			),
+			'weed-smtp-settings',
+			'weed-smtp-section'
 		);
 
 		// User welcome email fields.
@@ -446,6 +506,56 @@ class Settings_Module extends Base_Module {
 	public function content_type_field() {
 
 		$field = require __DIR__ . '/templates/fields/general/content-type.php';
+		$field( $this );
+
+	}
+
+	/**
+	 * SMTP host field.
+	 */
+	public function smtp_host_field() {
+
+		$field = require __DIR__ . '/templates/fields/smtp/host.php';
+		$field( $this );
+
+	}
+
+	/**
+	 * SMTP encryption field.
+	 */
+	public function smtp_encryption_field() {
+
+		$field = require __DIR__ . '/templates/fields/smtp/encryption.php';
+		$field( $this );
+
+	}
+
+	/**
+	 * SMTP port field.
+	 */
+	public function smtp_port_field() {
+
+		$field = require __DIR__ . '/templates/fields/smtp/port.php';
+		$field( $this );
+
+	}
+
+	/**
+	 * SMTP username field.
+	 */
+	public function smtp_username_field() {
+
+		$field = require __DIR__ . '/templates/fields/smtp/username.php';
+		$field( $this );
+
+	}
+
+	/**
+	 * SMTP password field.
+	 */
+	public function smtp_password_field() {
+
+		$field = require __DIR__ . '/templates/fields/smtp/password.php';
 		$field( $this );
 
 	}

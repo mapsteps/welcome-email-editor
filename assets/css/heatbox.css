@@ -331,6 +331,11 @@
 	cursor: pointer;
 }
 
+.heatbox .radio-label {
+	padding-left: 30px;
+	margin-right: 25px;
+}
+
 .heatbox .label input {
 	position: absolute;
 	z-index: -1;
