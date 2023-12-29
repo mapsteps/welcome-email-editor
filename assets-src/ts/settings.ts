@@ -1,6 +1,6 @@
 import van from "vanjs-core";
 import jQuery from "jquery";
-import { copyToClipboard } from "../../../../assets-src/utils";
+import { copyToClipboard } from "../utils";
 
 declare var ajaxurl: string;
 

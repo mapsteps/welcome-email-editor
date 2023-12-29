@@ -11,6 +11,7 @@
 		}
 	},
 	"devDependencies": {
+		"@parcel/transformer-sass": "2.10.3",
 		"@types/jquery": "^3.5.29",
 		"parcel": "^2.10.3",
 		"typescript": "^5.3.3"
@@ -20,7 +21,11 @@
 		"vanjs-core": "^1.2.7"
 	},
 	"scripts": {
-		"watch": "parcel watch modules/settings/assets/js/settings.ts --dist-dir modules/settings/assets/js",
-		"build": "parcel build modules/settings/assets/js/settings.ts --dist-dir modules/settings/assets/js"
+		"watch-js": "parcel watch assets-src/ts/*.ts --dist-dir assets/js",
+		"watch-css": "parcel watch assets-src/scss/*.scss --dist-dir assets/css",
+		"watch": "npm run watch-js & npm run watch-css",
+		"build-js": "parcel build assets-src/ts/*.ts --dist-dir assets/js",
+		"build-scss": "parcel build assets-src/scss/*.scss --dist-dir assets/css",
+		"build": "npm run build-js && npm run build-scss"
 	}
 }

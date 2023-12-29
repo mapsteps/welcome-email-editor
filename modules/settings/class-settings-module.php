@@ -141,7 +141,7 @@ class Settings_Module extends Base_Module {
 		}
 
 		wp_enqueue_style( 'heatbox', WEED_PLUGIN_URL . '/assets/css/heatbox.css', array(), WEED_PLUGIN_VERSION );
-		wp_enqueue_style( 'weed-admin', $this->url . '/assets/css/settings.css', array(), WEED_PLUGIN_VERSION );
+		wp_enqueue_style( 'weed-admin', WEED_PLUGIN_URL . '/assets/css/settings.css', array(), WEED_PLUGIN_VERSION );
 
 	}
 
@@ -154,7 +154,16 @@ class Settings_Module extends Base_Module {
 			return;
 		}
 
-		wp_enqueue_script( 'weed-settings', $this->url . '/assets/js/settings.js', array( 'jquery', 'wp-polyfill' ), WEED_PLUGIN_VERSION, true );
+		wp_enqueue_script(
+			'weed-settings',
+			WEED_PLUGIN_URL . '/assets/js/settings.js',
+			array(
+				'jquery',
+				'wp-polyfill',
+			),
+			WEED_PLUGIN_VERSION,
+			true
+		);
 
 		wp_localize_script(
 			'weed-settings',
@@ -207,32 +216,207 @@ class Settings_Module extends Base_Module {
 		add_settings_section( 'weed-misc-section', __( 'Misc. Settings', 'welcome-email-editor' ), '', 'weed-misc-settings' );
 
 		// General fields.
-		add_settings_field( 'from-email', __( 'From Email Address', 'welcome-email-editor' ), array( $this, 'from_email_field' ), 'weed-general-settings', 'weed-general-section' );
-		add_settings_field( 'from-name', __( 'From Name', 'welcome-email-editor' ), array( $this, 'from_name_field' ), 'weed-general-settings', 'weed-general-section' );
-		add_settings_field( 'content-type', __( 'Mail Content Type', 'welcome-email-editor' ), array( $this, 'content_type_field' ), 'weed-general-settings', 'weed-general-section' );
+		add_settings_field(
+			'from-email',
+			__( 'From Email Address', 'welcome-email-editor' ),
+			array(
+				$this,
+				'from_email_field',
+			),
+			'weed-general-settings',
+			'weed-general-section'
+		);
+
+		add_settings_field(
+			'from-name',
+			__( 'From Name', 'welcome-email-editor' ),
+			array(
+				$this,
+				'from_name_field',
+			),
+			'weed-general-settings',
+			'weed-general-section'
+		);
+
+		add_settings_field(
+			'content-type',
+			__( 'Mail Content Type', 'welcome-email-editor' ),
+			array(
+				$this,
+				'content_type_field',
+			),
+			'weed-general-settings',
+			'weed-general-section'
+		);
 
 		// User welcome email fields.
-		add_settings_field( 'user-welcome-email-subject', __( 'Email Subject', 'welcome-email-editor' ), array( $this, 'user_welcome_email_subject_field' ), 'weed-user-welcome-email-settings', 'weed-user-welcome-email-section' );
-		add_settings_field( 'user-welcome-email-body', __( 'Email Body', 'welcome-email-editor' ), array( $this, 'user_welcome_email_body_field' ), 'weed-user-welcome-email-settings', 'weed-user-welcome-email-section' );
-		add_settings_field( 'user-welcome-email-attachment', __( 'Email Attachment URL', 'welcome-email-editor' ), array( $this, 'user_welcome_email_attachment_field' ), 'weed-user-welcome-email-settings', 'weed-user-welcome-email-section' );
-		add_settings_field( 'user-welcome-email-reply-to-email', __( '"Reply-To" Email Address', 'welcome-email-editor' ), array( $this, 'user_welcome_email_reply_to_email_field' ), 'weed-user-welcome-email-settings', 'weed-user-welcome-email-section' );
-		add_settings_field( 'user-welcome-email-reply-to-name', __( '"Reply-To" Name', 'welcome-email-editor' ), array( $this, 'user_welcome_email_reply_to_name_field' ), 'weed-user-welcome-email-settings', 'weed-user-welcome-email-section' );
-		add_settings_field( 'user-welcome-email-additional-headers', __( 'Additional Email Headers', 'welcome-email-editor' ), array( $this, 'user_welcome_email_additional_headers_field' ), 'weed-user-welcome-email-settings', 'weed-user-welcome-email-section' );
-		add_settings_field( 'user-welcome-email-test', '', array( $this, 'user_welcome_email_test_field' ), 'weed-user-welcome-email-settings', 'weed-user-welcome-email-section' );
+		add_settings_field(
+			'user-welcome-email-subject',
+			__( 'Email Subject', 'welcome-email-editor' ),
+			array(
+				$this,
+				'user_welcome_email_subject_field',
+			),
+			'weed-user-welcome-email-settings',
+			'weed-user-welcome-email-section'
+		);
+
+		add_settings_field(
+			'user-welcome-email-body',
+			__( 'Email Body', 'welcome-email-editor' ),
+			array(
+				$this,
+				'user_welcome_email_body_field',
+			),
+			'weed-user-welcome-email-settings',
+			'weed-user-welcome-email-section'
+		);
+
+		add_settings_field(
+			'user-welcome-email-attachment',
+			__( 'Email Attachment URL', 'welcome-email-editor' ),
+			array(
+				$this,
+				'user_welcome_email_attachment_field',
+			),
+			'weed-user-welcome-email-settings',
+			'weed-user-welcome-email-section'
+		);
+
+		add_settings_field(
+			'user-welcome-email-reply-to-email',
+			__( '"Reply-To" Email Address', 'welcome-email-editor' ),
+			array(
+				$this,
+				'user_welcome_email_reply_to_email_field',
+			),
+			'weed-user-welcome-email-settings',
+			'weed-user-welcome-email-section'
+		);
+
+		add_settings_field(
+			'user-welcome-email-reply-to-name',
+			__( '"Reply-To" Name', 'welcome-email-editor' ),
+			array(
+				$this,
+				'user_welcome_email_reply_to_name_field',
+			),
+			'weed-user-welcome-email-settings',
+			'weed-user-welcome-email-section'
+		);
+
+		add_settings_field(
+			'user-welcome-email-additional-headers',
+			__( 'Additional Email Headers', 'welcome-email-editor' ),
+			array(
+				$this,
+				'user_welcome_email_additional_headers_field',
+			),
+			'weed-user-welcome-email-settings',
+			'weed-user-welcome-email-section'
+		);
+
+		add_settings_field(
+			'user-welcome-email-test',
+			'',
+			array(
+				$this,
+				'user_welcome_email_test_field',
+			),
+			'weed-user-welcome-email-settings',
+			'weed-user-welcome-email-section'
+		);
 
 		// Admin new user notification email fields.
-		add_settings_field( 'admin-new-user-notif-email-subject', __( 'Email Subject', 'welcome-email-editor' ), array( $this, 'admin_new_user_notif_email_subject_field' ), 'weed-admin-new-user-notif-email-settings', 'weed-admin-new-user-notif-email-section' );
-		add_settings_field( 'admin-new-user-notif-email-body', __( 'Email Body', 'welcome-email-editor' ), array( $this, 'admin_new_user_notif_email_body_field' ), 'weed-admin-new-user-notif-email-settings', 'weed-admin-new-user-notif-email-section' );
-		add_settings_field( 'admin-new-user-notif-email-recipients', __( 'Additional Recipients', 'welcome-email-editor' ), array( $this, 'admin_new_user_notif_email_custom_recipients_field' ), 'weed-admin-new-user-notif-email-settings', 'weed-admin-new-user-notif-email-section' );
-		add_settings_field( 'admin-new-user-notif-email-test', '', array( $this, 'admin_new_user_notif_email_test_field' ), 'weed-admin-new-user-notif-email-settings', 'weed-admin-new-user-notif-email-section' );
+		add_settings_field(
+			'admin-new-user-notif-email-subject',
+			__( 'Email Subject', 'welcome-email-editor' ),
+			array(
+				$this,
+				'admin_new_user_notif_email_subject_field',
+			),
+			'weed-admin-new-user-notif-email-settings',
+			'weed-admin-new-user-notif-email-section'
+		);
+
+		add_settings_field(
+			'admin-new-user-notif-email-body',
+			__( 'Email Body', 'welcome-email-editor' ),
+			array(
+				$this,
+				'admin_new_user_notif_email_body_field',
+			),
+			'weed-admin-new-user-notif-email-settings',
+			'weed-admin-new-user-notif-email-section'
+		);
+
+		add_settings_field(
+			'admin-new-user-notif-email-recipients',
+			__( 'Additional Recipients', 'welcome-email-editor' ),
+			array(
+				$this,
+				'admin_new_user_notif_email_custom_recipients_field',
+			),
+			'weed-admin-new-user-notif-email-settings',
+			'weed-admin-new-user-notif-email-section'
+		);
+
+		add_settings_field(
+			'admin-new-user-notif-email-test',
+			'',
+			array(
+				$this,
+				'admin_new_user_notif_email_test_field',
+			),
+			'weed-admin-new-user-notif-email-settings',
+			'weed-admin-new-user-notif-email-section'
+		);
 
 		// Reset password email fields.
-		add_settings_field( 'reset-password-email-subject', __( 'Email Subject', 'welcome-email-editor' ), array( $this, 'reset_password_email_subject_field' ), 'weed-reset-password-email-settings', 'weed-reset-password-email-section' );
-		add_settings_field( 'reset-password-email-body', __( 'Email Body', 'welcome-email-editor' ), array( $this, 'reset_password_email_body_field' ), 'weed-reset-password-email-settings', 'weed-reset-password-email-section' );
-		add_settings_field( 'reset-password-email-test', '', array( $this, 'reset_password_email_test_field' ), 'weed-reset-password-email-settings', 'weed-reset-password-email-section' );
+		add_settings_field(
+			'reset-password-email-subject',
+			__( 'Email Subject', 'welcome-email-editor' ),
+			array(
+				$this,
+				'reset_password_email_subject_field',
+			),
+			'weed-reset-password-email-settings',
+			'weed-reset-password-email-section'
+		);
+
+		add_settings_field(
+			'reset-password-email-body',
+			__( 'Email Body', 'welcome-email-editor' ),
+			array(
+				$this,
+				'reset_password_email_body_field',
+			),
+			'weed-reset-password-email-settings',
+			'weed-reset-password-email-section'
+		);
+
+		add_settings_field(
+			'reset-password-email-test',
+			'',
+			array(
+				$this,
+				'reset_password_email_test_field',
+			),
+			'weed-reset-password-email-settings',
+			'weed-reset-password-email-section'
+		);
 
 		// Misc. settings.
-		add_settings_field( 'remove-on-uninstall', __( 'Remove on Uninstall', 'welcome-email-editor' ), array( $this, 'remove_on_uninstall_field' ), 'weed-misc-settings', 'weed-misc-section' );
+		add_settings_field(
+			'remove-on-uninstall',
+			__( 'Remove on Uninstall', 'welcome-email-editor' ),
+			array(
+				$this,
+				'remove_on_uninstall_field',
+			),
+			'weed-misc-settings',
+			'weed-misc-section'
+		);
 
 	}
 
@@ -415,5 +599,4 @@ class Settings_Module extends Base_Module {
 		$field( $this );
 
 	}
-
 }
