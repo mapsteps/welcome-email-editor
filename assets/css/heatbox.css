@@ -170,6 +170,7 @@
 	.heatbox-sidebar {
 		width: 100%;
 	}
+
 	.heatbox-main {
 		margin-right: 0;
 	}
@@ -236,6 +237,25 @@
 	margin-bottom: 20px;
 }
 
+/* Loading Button */
+@-webkit-keyframes heatboxLoadingSpinner {
+	from {
+		transform: rotate(0);
+	}
+	to {
+		transform: rotate(359deg);
+	}
+}
+
+@keyframes heatboxLoadingSpinner {
+	from {
+		transform: rotate(0);
+	}
+	to {
+		transform: rotate(359deg);
+	}
+}
+
 /* Buttons */
 .heatbox-wrap .button-larger {
 	padding: 5px 20px;
@@ -244,6 +264,29 @@
 .heatbox-wrap .button-full {
 	width: 100%;
 	text-align: center;
+}
+
+.heatbox-wrap .button.is-loading {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	color: transparent !important;
+	pointer-events: none;
+}
+
+.heatbox-wrap .button.is-loading::after {
+	content: "";
+	position: absolute;
+	width: 1em;
+	display: block;
+	height: 1em;
+	border: 2px solid #dbdbdb;
+	/* border: 2px solid $accent-color; */
+	border-color: transparent transparent #fff #fff !important;
+	/* border-color: transparent transparent $accent-color $accent-color !important; */
+	border-radius: 290486px;
+	-webkit-animation: heatboxLoadingSpinner 0.5s infinite linear;
+	animation: heatboxLoadingSpinner 0.5s infinite linear;
 }
 
 /* Settings */
@@ -418,20 +461,20 @@
 }
 
 /* Toggle switch */
-.heatbox .toggle-switch {
+.heatbox-wrap .toggle-switch {
 	position: relative;
 	display: inline-block;
 	width: 36px;
 	height: 20px;
 }
 
-.heatbox .toggle-switch input {
+.heatbox-wrap .toggle-switch input {
 	opacity: 0;
 	width: 0;
 	height: 0;
 }
 
-.heatbox .toggle-switch .switch-track {
+.heatbox-wrap .toggle-switch .switch-track {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -443,7 +486,7 @@
 	transition: background-color 0.3s;
 }
 
-.heatbox .switch-thumb {
+.heatbox-wrap .switch-thumb {
 	position: absolute;
 	top: 2px;
 	left: 2px;
@@ -454,11 +497,11 @@
 	transition: transform 0.3s;
 }
 
-.heatbox .toggle-switch input:checked + .switch-track {
+.heatbox-wrap .toggle-switch input:checked + .switch-track {
 	background-color: #5bcb86;
 }
 
-.heatbox .toggle-switch input:checked + .switch-track .switch-thumb {
+.heatbox-wrap .toggle-switch input:checked + .switch-track .switch-thumb {
 	transform: translateX(16px);
 }
 
