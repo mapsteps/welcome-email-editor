@@ -1,0 +1,17 @@
+{
+	"compilerOptions": {
+		"allowSyntheticDefaultImports": true,
+		"esModuleInterop": true,
+		"target": "ESNext",
+		"module": "ESNext",
+		"moduleResolution": "node",
+		"strict": true,
+		"baseUrl": "./",
+		"paths": {
+			"~/*": ["./assets-src/*"]
+		}
+	},
+	"exclude": [
+		"node_modules"
+	]
+}

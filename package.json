@@ -1,0 +1,18 @@
+{
+	"name": "swift-smtp",
+	"version": "1.0.0",
+	"description": "Dev tooling for Swift SMTP",
+	"keywords": [],
+	"author": "David Vongries",
+	"license": "GPL-3.0-or-later",
+	"scripts": {
+		"watch-settings": "parcel build assets-src/ts/settings-page.ts --dist-dir assets/js",
+		"build-settings": "parcel build assets-src/ts/settings-page.ts --dist-dir assets/js"
+	},
+	"devDependencies": {
+		"parcel": "^2.10.3"
+	},
+	"dependencies": {
+		"vanjs-core": "^1.2.7"
+	}
+}
