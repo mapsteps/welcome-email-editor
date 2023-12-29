@@ -1,31 +1,31 @@
 {
-	"name": "swift-smtp",
-	"version": "1.0.0",
-	"description": "Dev tooling for Swift SMTP",
-	"keywords": [],
-	"author": "David Vongries",
-	"license": "GPL-3.0-or-later",
-	"alias": {
-		"jquery": {
-			"global": "jQuery"
-		}
-	},
-	"devDependencies": {
-		"@parcel/transformer-sass": "2.10.3",
-		"@types/jquery": "^3.5.29",
-		"parcel": "^2.10.3",
-		"typescript": "^5.3.3"
-	},
-	"dependencies": {
-		"jquery": "^3.7.1",
-		"vanjs-core": "^1.2.7"
-	},
-	"scripts": {
-		"watch-js": "parcel watch assets-src/ts/*.ts --dist-dir assets/js",
-		"watch-css": "parcel watch assets-src/scss/*.scss --dist-dir assets/css",
-		"watch": "npm run watch-js & npm run watch-css",
-		"build-js": "parcel build assets-src/ts/*.ts --dist-dir assets/js",
-		"build-scss": "parcel build assets-src/scss/*.scss --dist-dir assets/css",
-		"build": "npm run build-js && npm run build-scss"
-	}
+  "name": "swift-smtp",
+  "version": "1.0.0",
+  "description": "Dev tooling for Swift SMTP",
+  "keywords": [],
+  "author": "David Vongries",
+  "license": "GPL-3.0-or-later",
+  "alias": {
+    "jquery": {
+      "global": "jQuery"
+    }
+  },
+  "devDependencies": {
+    "@parcel/transformer-sass": "2.10.3",
+    "@types/jquery": "^3.5.29",
+    "parcel": "^2.10.3",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "jquery": "^3.7.1",
+    "vanjs-core": "^1.2.7"
+  },
+  "scripts": {
+    "watch-js": "parcel watch assets-src/ts/settings.ts --dist-dir assets/js",
+    "watch-css": "parcel watch assets-src/scss/settings.css --dist-dir assets/css",
+    "watch": "npm run watch-js & npm run watch-css",
+    "build-js": "parcel build assets-src/ts/settings.ts --dist-dir assets/js",
+    "build-css": "parcel build assets-src/scss/settings.scss --dist-dir assets/css",
+    "build": "npm run build-js && npm run build-css"
+  }
 }

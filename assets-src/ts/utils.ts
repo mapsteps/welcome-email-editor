@@ -31,3 +31,13 @@ export async function copyToClipboardViaExecCommand(text: string) {
 
 	document.body.removeChild(textArea);
 }
+
+export function startLoading(button: HTMLButtonElement | null) {
+	if (!button) return;
+	button.classList.add("is-loading");
+}
+
+export function stopLoading(button: HTMLButtonElement | null) {
+	if (!button) return;
+	button.classList.remove("is-loading");
+}

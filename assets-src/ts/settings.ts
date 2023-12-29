@@ -1,6 +1,6 @@
-import van from "vanjs-core";
 import jQuery from "jquery";
-import { copyToClipboard } from "../utils";
+import {copyToClipboard, startLoading, stopLoading} from "./utils";
+import {setupTabs} from "./tabs";
 
 declare var ajaxurl: string;
 
@@ -18,6 +18,8 @@ declare var weedSettings: {
 let isRequesting = false;
 
 function init() {
+	setupTabs(jQuery);
+
 	// @ts-ignore
 	jQuery(document).on("click", ".weed-reset-settings-button", resetSettings);
 
@@ -111,14 +113,5 @@ function sendTestEmail(e: MouseEvent) {
 		});
 }
 
-function startLoading(button: HTMLButtonElement | null) {
-	if (!button) return;
-	button.classList.add("is-loading");
-}
-
-function stopLoading(button: HTMLButtonElement | null) {
-	if (!button) return;
-	button.classList.remove("is-loading");
-}
 
 init();

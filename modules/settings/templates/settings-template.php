@@ -12,7 +12,7 @@ return function () {
 
 	<div class="wrap heatbox-wrap weed-settings-page">
 
-		<div class="heatbox-header heatbox-margin-bottom">
+		<div class="heatbox-header heatbox-has-tab-nav heatbox-margin-bottom">
 
 			<div class="heatbox-container heatbox-container-center">
 
@@ -27,10 +27,23 @@ return function () {
 					</div>
 
 					<div>
-						<img src="<?php echo esc_url( WEED_PLUGIN_URL ); ?>/assets/images/welcome-email-editor-logo.png" alt="SwiftSMTP">
+						<img src="<?php echo esc_url( WEED_PLUGIN_URL ); ?>/assets/images/welcome-email-editor-logo.png"
+							 alt="SwiftSMTP">
 					</div>
 
 				</div>
+
+				<nav>
+					<ul class="heatbox-tab-nav">
+						<li class="heatbox-tab-nav-item smtp-panel"><a
+								href="#smtp"><?php _e( 'SMTP', 'welcome-email-editor' ); ?></a></li>
+						<li class="heatbox-tab-nav-item welcome-email-panel"><a
+								href="#welcome-email"><?php _e( 'Welcome Email', 'welcome-email-editor' ); ?></a></li>
+						<li class="heatbox-tab-nav-item misc-panel"><a
+								href="#misc"><?php _e( 'Misc', 'welcome-email-editor' ); ?></a>
+						</li>
+					</ul>
+				</nav>
 
 			</div>
 
@@ -46,24 +59,30 @@ return function () {
 
 					<?php settings_fields( 'weed-settings-group' ); ?>
 
-					<div class="heatbox">
-						<?php do_settings_sections( 'weed-general-settings' ); ?>
+					<div class="heatbox-admin-panel weed-smtp-panel">
+						<div class="heatbox">
+							<?php do_settings_sections( 'weed-general-settings' ); ?>
+						</div>
 					</div>
 
-					<div class="heatbox">
-						<?php do_settings_sections( 'weed-user-welcome-email-settings' ); ?>
+					<div class="heatbox-admin-panel weed-welcome-email-panel">
+						<div class="heatbox">
+							<?php do_settings_sections( 'weed-user-welcome-email-settings' ); ?>
+						</div>
+
+						<div class="heatbox">
+							<?php do_settings_sections( 'weed-admin-new-user-notif-email-settings' ); ?>
+						</div>
+
+						<div class="heatbox">
+							<?php do_settings_sections( 'weed-reset-password-email-settings' ); ?>
+						</div>
 					</div>
 
-					<div class="heatbox">
-						<?php do_settings_sections( 'weed-admin-new-user-notif-email-settings' ); ?>
-					</div>
-
-					<div class="heatbox">
-						<?php do_settings_sections( 'weed-reset-password-email-settings' ); ?>
-					</div>
-
-					<div class="heatbox">
-						<?php do_settings_sections( 'weed-misc-settings' ); ?>
+					<div class="heatbox-admin-panel weed-misc-panel">
+						<div class="heatbox">
+							<?php do_settings_sections( 'weed-misc-settings' ); ?>
+						</div>
 					</div>
 
 					<div class="udb-buttons">
@@ -82,7 +101,8 @@ return function () {
 						);
 						?>
 
-						<a href="<?php echo esc_url( $reset_settings_url ); ?>" class="button button-larger weed-reset-button weed-reset-settings-button">
+						<a href="<?php echo esc_url( $reset_settings_url ); ?>"
+						   class="button button-larger weed-reset-button weed-reset-settings-button">
 							<?php _e( 'Reset Settings', 'welcome-email-editor' ); ?>
 						</a>
 					</div>
@@ -102,22 +122,25 @@ return function () {
 							<!-- <br><strong><?php _e( '(Click to copy)', 'welcome-email-editor' ); ?></strong> -->
 						</p>
 						<div class="tags-wrapper">
-							<code>[site_url]</code> <code>[login_url]</code> <code>[reset_pass_url]</code> <code>[user_email]</code> <code>[user_login]</code> <code>[user_id]</code> <code>[first_name]</code> <code>[last_name]</code> <code>[blog_name]</code> <code>[admin_email]</code> <code>[custom_fields]</code> <code>[date]</code> <code>[time]</code>
+							<code>[site_url]</code> <code>[login_url]</code> <code>[reset_pass_url]</code> <code>[user_email]</code>
+							<code>[user_login]</code> <code>[user_id]</code> <code>[first_name]</code>
+							<code>[last_name]</code> <code>[blog_name]</code> <code>[admin_email]</code> <code>[custom_fields]</code>
+							<code>[date]</code> <code>[time]</code>
 						</div>
 					</div>
 				</div>
 
 				<?php if ( defined( 'BP_PLUGIN_URL' ) ) : ?>
-				<div class="heatbox weed-tags-metabox">
-					<h2><?php _e( 'BuddyPress Template Tags', 'welcome-email-editor' ); ?></h2>
-					<div class="heatbox-content">
-						<p><?php _e( 'Use the template tag below in your <strong>Admin Email</strong>.', 'welcome-email-editor' ); ?></p>
-						<p><?php _e( 'This will print BuddyPress custom fields.', 'welcome-email-editor' ); ?></p>
-						<p class="tags-wrapper">
-							<code>[bp_custom_fields]</code>
-						</p>
+					<div class="heatbox weed-tags-metabox">
+						<h2><?php _e( 'BuddyPress Template Tags', 'welcome-email-editor' ); ?></h2>
+						<div class="heatbox-content">
+							<p><?php _e( 'Use the template tag below in your <strong>Admin Email</strong>.', 'welcome-email-editor' ); ?></p>
+							<p><?php _e( 'This will print BuddyPress custom fields.', 'welcome-email-editor' ); ?></p>
+							<p class="tags-wrapper">
+								<code>[bp_custom_fields]</code>
+							</p>
+						</div>
 					</div>
-				</div>
 				<?php endif; ?>
 
 				<div class="heatbox weed-tags-metabox">
@@ -148,7 +171,8 @@ return function () {
 						<h3><?php _e( 'Better Admin Bar', 'welcome-email-editor' ); ?></h3>
 						<p class="subheadline"><?php _e( 'Replace the boring WordPress Admin Bar with this!', 'welcome-email-editor' ); ?></p>
 						<p><?php _e( 'Better Admin Bar is the plugin that make your clients love WordPress. It drastically improves the user experience when working with WordPress and allows you to replace the boring WordPress admin bar with your own navigation panel.', 'welcome-email-editor' ); ?></p>
-						<a href="https://wordpress.org/plugins/better-admin-bar/" target="_blank" class="button"><?php _e( 'View Features', 'welcome-email-editor' ); ?></a>
+						<a href="https://wordpress.org/plugins/better-admin-bar/" target="_blank"
+						   class="button"><?php _e( 'View Features', 'welcome-email-editor' ); ?></a>
 					</div>
 				</li>
 				<li class="heatbox">
@@ -159,7 +183,8 @@ return function () {
 						<h3><?php _e( 'Ultimate Dashboard', 'welcome-email-editor' ); ?></h3>
 						<p class="subheadline"><?php _e( 'The #1 plugin to customize your WordPress dashboard.', 'welcome-email-editor' ); ?></p>
 						<p><?php _e( 'Ultimate Dashboard is a clean & lightweight plugin that was made to optimize the user experience for clients inside the WordPress admin area.', 'welcome-email-editor' ); ?></p>
-						<a href="https://wordpress.org/plugins/ultimate-dashboard/" target="_blank" class="button"><?php _e( 'View Features', 'welcome-email-editor' ); ?></a>
+						<a href="https://wordpress.org/plugins/ultimate-dashboard/" target="_blank"
+						   class="button"><?php _e( 'View Features', 'welcome-email-editor' ); ?></a>
 					</div>
 				</li>
 				<li class="heatbox">
@@ -170,7 +195,8 @@ return function () {
 						<h3><?php _e( 'Page Builder Framework', 'welcome-email-editor' ); ?></h3>
 						<p class="subheadline"><?php _e( 'A modern, fast & minimalistic theme designed for the new WordPress Era.', 'welcome-email-editor' ); ?></p>
 						<p><?php _e( 'The theme was designed specifically to work with WordPress page builders, like Elementor, Beaver Builder & Brizy.', 'welcome-email-editor' ); ?></p>
-						<a href="https://wordpress.org/themes/page-builder-framework/" target="_blank" class="button"><?php _e( 'View Features', 'welcome-email-editor' ); ?></a>
+						<a href="https://wordpress.org/themes/page-builder-framework/" target="_blank"
+						   class="button"><?php _e( 'View Features', 'welcome-email-editor' ); ?></a>
 					</div>
 				</li>
 			</ul>
