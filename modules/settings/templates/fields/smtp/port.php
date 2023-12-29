@@ -20,8 +20,8 @@ return function ( $module ) {
 	$value  = ! empty( $values['smtp_port'] ) ? $values['smtp_port'] : '';
 	?>
 
-	<input type="text" name="weed_settings[smtp_port]" id="weed_settings--smtp_port" class="short-text"
-		   value="<?php echo esc_attr( $value ); ?>" placeholder="e.g: in-v3.mailjet.com"/>
+	<input type="text" name="weed_settings[smtp_port]" id="weed_settings--smtp_port" class="small"
+		   value="<?php echo esc_attr( $value ); ?>" placeholder="587"/>
 
 	<?php
 

@@ -20,7 +20,7 @@ return function ( $module ) {
 	$value  = ! empty( $values['smtp_password'] ) ? $values['smtp_password'] : '';
 	?>
 
-	<input type="text" name="weed_settings[smtp_password]" id="weed_settings--smtp_password" class="regular-text"
+	<input type="password" name="weed_settings[smtp_password]" id="weed_settings--smtp_password" class="regular-text"
 		   value="<?php echo esc_attr( $value ); ?>" placeholder="Enter SMTP password"/>
 
 	<?php

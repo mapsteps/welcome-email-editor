@@ -1,46 +1,51 @@
-import jQuery from "jquery";
+export function setupTabs(): void {
+	const tabLinkList = document.querySelectorAll(".heatbox-tab-nav-item a") as NodeListOf<HTMLAnchorElement>;
 
-export function setupTabs($: typeof jQuery): void {
-	$(".heatbox-tab-nav-item").on("click", function (_e) {
-		$(".heatbox-tab-nav-item").removeClass("active");
-		this.classList.add("active");
-	});
-
-	$(".smtp-panel").on("click", function (_e) {
-		$(".heatbox-admin-panel").css("display", "none");
-		$(".weed-smtp-panel").css("display", "block");
-	});
-
-	$(".welcome-email-panel").on("click", function (_e) {
-		$(".heatbox-admin-panel").css("display", "none");
-		$(".weed-welcome-email-panel").css("display", "block");
-	});
-
-	$(".misc-panel").on("click", function (_e) {
-		$(".heatbox-admin-panel").css("display", "none");
-		$(".weed-misc-panel").css("display", "block");
+	tabLinkList.forEach(function (tabLink) {
+		tabLink.addEventListener("click", function (e) {
+			const href = tabLink.href;
+			const hrefValue = href ? href.split("#")[1] : "";
+			switchTab(hrefValue);
+		});
 	});
 
 	window.addEventListener("load", function (_e) {
 		let hash = window.location.hash;
+		hash = hash ? hash : "#smtp";
+		const hashValue = hash.replace("#", "");
 
-		if (!hash) {
-			hash = "#smtp";
+		switchTab(hashValue);
+	});
+}
+
+function switchTab(tab: string): void {
+	const tabLinkList = document.querySelectorAll(".heatbox-tab-nav-item a") as NodeListOf<HTMLAnchorElement>;
+
+	tabLinkList.forEach(function (tabLink) {
+		const parentEl = tabLink.parentElement;
+		if (!parentEl) return;
+
+		const href = tabLink.href;
+		const hrefValue = href ? href.split("#")[1] : "";
+
+		if (hrefValue === tab) {
+			parentEl.classList.add("active");
+		} else {
+			parentEl.classList.remove("active");
 		}
+	});
 
-		if ("#smtp" === hash) {
-			$(".heatbox-tab-nav-item.smtp-panel").addClass("active");
-			$(".weed-smtp-panel").css("display", "block");
-		}
+	const tabContentList = document.querySelectorAll("[data-show-when-tab]") as NodeListOf<HTMLElement>;
 
-		if ("#welcome-email" === hash) {
-			$(".heatbox-tab-nav-item.welcome-email-panel").addClass("active");
-			$(".weed-welcome-email-panel").css("display", "block");
-		}
+	tabContentList.forEach(function (tabContent) {
+		const rawTabValue = tabContent.dataset.showWhenTab;
+		const tabValues = rawTabValue ? rawTabValue.split(",") : [];
+		const tabValuesTrimmed = tabValues.map((value) => value.trim());
 
-		if ("#misc" === hash) {
-			$(".heatbox-tab-nav-item.misc-panel").addClass("active");
-			$(".weed-misc-panel").css("display", "block");
+		if (tabValuesTrimmed.includes(tab)) {
+			tabContent.style.display = "block";
+		} else {
+			tabContent.style.display = "none";
 		}
 	});
 }

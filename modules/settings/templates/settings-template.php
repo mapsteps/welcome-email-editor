@@ -23,7 +23,7 @@ return function () {
 							<?php _e( 'Welcome Email Editor', 'welcome-email-editor' ); ?>
 							<span class="version"><?php echo esc_html( WEED_PLUGIN_VERSION ); ?></span>
 						</span>
-						<p class="subtitle"><?php _e( 'Change WordPress\' Welcome & Reset Password Emails', 'welcome-email-editor' ); ?></p>
+						<p class="subtitle"><?php _e( 'Change WordPress\' welcome & reset password emails', 'welcome-email-editor' ); ?></p>
 					</div>
 
 					<div>
@@ -35,12 +35,20 @@ return function () {
 
 				<nav>
 					<ul class="heatbox-tab-nav">
-						<li class="heatbox-tab-nav-item smtp-panel"><a
-								href="#smtp"><?php _e( 'SMTP', 'welcome-email-editor' ); ?></a></li>
-						<li class="heatbox-tab-nav-item welcome-email-panel"><a
-								href="#welcome-email"><?php _e( 'Welcome Email', 'welcome-email-editor' ); ?></a></li>
-						<li class="heatbox-tab-nav-item misc-panel"><a
-								href="#misc"><?php _e( 'Misc', 'welcome-email-editor' ); ?></a>
+						<li class="heatbox-tab-nav-item">
+							<a href="#smtp">
+								<?php _e( 'SMTP', 'welcome-email-editor' ); ?>
+							</a>
+						</li>
+						<li class="heatbox-tab-nav-item">
+							<a href="#welcome-email">
+								<?php _e( 'Welcome Email', 'welcome-email-editor' ); ?>
+							</a>
+						</li>
+						<li class="heatbox-tab-nav-item">
+							<a href="#misc">
+								<?php _e( 'Misc', 'welcome-email-editor' ); ?>
+							</a>
 						</li>
 					</ul>
 				</nav>
@@ -59,7 +67,7 @@ return function () {
 
 					<?php settings_fields( 'weed-settings-group' ); ?>
 
-					<div class="heatbox-admin-panel weed-smtp-panel">
+					<div class="heatbox-admin-panel" data-show-when-tab="smtp">
 						<div class="heatbox">
 							<?php do_settings_sections( 'weed-general-settings' ); ?>
 						</div>
@@ -69,7 +77,7 @@ return function () {
 						</div>
 					</div>
 
-					<div class="heatbox-admin-panel weed-welcome-email-panel">
+					<div class="heatbox-admin-panel" data-show-when-tab="welcome-email">
 						<div class="heatbox">
 							<?php do_settings_sections( 'weed-user-welcome-email-settings' ); ?>
 						</div>
@@ -83,7 +91,7 @@ return function () {
 						</div>
 					</div>
 
-					<div class="heatbox-admin-panel weed-misc-panel">
+					<div class="heatbox-admin-panel" data-show-when-tab="misc">
 						<div class="heatbox">
 							<?php do_settings_sections( 'weed-misc-settings' ); ?>
 						</div>
@@ -115,47 +123,19 @@ return function () {
 			</div>
 
 			<div class="heatbox-sidebar">
-				<div class="heatbox weed-tags-metabox">
-					<h2>
-						<?php _e( 'Template Tags', 'welcome-email-editor' ); ?>
-						<span class="action-status">📋 Copied</span>
-					</h2>
-					<div class="heatbox-content">
-						<p>
-							<?php _e( 'Use the template tags below in any fields to output certain information.', 'welcome-email-editor' ); ?>
-							<!-- <br><strong><?php _e( '(Click to copy)', 'welcome-email-editor' ); ?></strong> -->
-						</p>
-						<div class="tags-wrapper">
-							<code>[site_url]</code> <code>[login_url]</code> <code>[reset_pass_url]</code> <code>[user_email]</code>
-							<code>[user_login]</code> <code>[user_id]</code> <code>[first_name]</code>
-							<code>[last_name]</code> <code>[blog_name]</code> <code>[admin_email]</code> <code>[custom_fields]</code>
-							<code>[date]</code> <code>[time]</code>
-						</div>
-					</div>
+				<div class="heatbox-admin-panel" data-show-when-tab="welcome-email">
+					<?php require __DIR__ . '/metaboxes/template-tags-metabox.php'; ?>
 				</div>
 
-				<?php if ( defined( 'BP_PLUGIN_URL' ) ) : ?>
-					<div class="heatbox weed-tags-metabox">
-						<h2><?php _e( 'BuddyPress Template Tags', 'welcome-email-editor' ); ?></h2>
-						<div class="heatbox-content">
-							<p><?php _e( 'Use the template tag below in your <strong>Admin Email</strong>.', 'welcome-email-editor' ); ?></p>
-							<p><?php _e( 'This will print BuddyPress custom fields.', 'welcome-email-editor' ); ?></p>
-							<p class="tags-wrapper">
-								<code>[bp_custom_fields]</code>
-							</p>
-						</div>
-					</div>
-				<?php endif; ?>
+				<div class="heatbox-admin-panel" data-show-when-tab="smtp">
+					<?php
+					require __DIR__ . '/metaboxes/review-metabox.php';
+					require __DIR__ . '/metaboxes/resources-metabox.php';
+					?>
+				</div>
 
-				<div class="heatbox weed-tags-metabox">
-					<h2><?php _e( 'Debugging', 'welcome-email-editor' ); ?></h2>
-					<div class="heatbox-content">
-						<p><?php _e( 'Use the template tag below in your <strong>Admin Email</strong> for debugging.', 'welcome-email-editor' ); ?></p>
-						<p><?php _e( 'This will print $_REQUEST.', 'welcome-email-editor' ); ?></p>
-						<p class="tags-wrapper">
-							<code>[post_data]</code>
-						</p>
-					</div>
+				<div class="heatbox-admin-panel" data-show-when-tab="misc">
+					<?php require __DIR__ . '/metaboxes/review-metabox.php'; ?>
 				</div>
 			</div>
 
