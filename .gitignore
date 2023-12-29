@@ -1,16 +1,36 @@
+# NPM
+node_modules
+npm-debug.log
+package-lock.json
+pnpm-lock.yaml
+
 # Cache
-.parcel-cache/
+.parcel-cache
 
-# DS_Store
+# Un-used OS generated files
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
 
-# phpcs & editor's setting related
+# Composer devDependencies
+vendor/bin
+vendor/composer/installers
+vendor/composer/autoload_files.php
+vendor/dealerdirect
+vendor/phpcompatibility
+vendor/squizlabs
+vendor/wp-coding-standards
+
+# SVN
+.svn
+svn
+
+# Linting & editor's settings related
 .idea
-.vscode/
+.vscode
 phpcs.xml
 .editorconfig
-
-# ignore build tools
-node_modules/
-package-lock.json
-manifest.json
