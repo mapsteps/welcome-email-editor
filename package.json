@@ -5,9 +5,13 @@
 	"keywords": [],
 	"author": "David Vongries",
 	"license": "GPL-3.0-or-later",
-	"scripts": {
-		"watch-settings": "parcel build assets-src/ts/settings-page.ts --dist-dir assets/js",
-		"build-settings": "parcel build assets-src/ts/settings-page.ts --dist-dir assets/js"
+	"alias": {
+		"jquery": {
+			"global": "jQuery"
+		},
+		"van": {
+			"global": "van"
+		}
 	},
 	"devDependencies": {
 		"parcel": "^2.10.3"

@@ -1,5 +1,7 @@
 {
 	"compilerOptions": {
+		"allowJs": true,
+		"checkJs": true,
 		"allowSyntheticDefaultImports": true,
 		"esModuleInterop": true,
 		"target": "ESNext",
@@ -8,7 +10,7 @@
 		"strict": true,
 		"baseUrl": "./",
 		"paths": {
-			"~/*": ["./assets-src/*"]
+			"~/*": ["./modules/**/js/*.ts"]
 		}
 	},
 	"exclude": [
