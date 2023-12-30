@@ -24,7 +24,7 @@ return function ( $module ) {
 		<label for="weed_settings--smtp_encryption-none" class="label radio-label">
 			<?php _e( 'None', 'welcome-email-editor' ); ?>
 			<input type="radio" name="weed_settings[smtp_encryption]" id="weed_settings--smtp_encryption-none"
-				   value="none" <?php checked( $value, '' ); ?>/>
+				   value="" <?php checked( $value, '' ); ?>/>
 			<div class="indicator"></div>
 		</label>
 

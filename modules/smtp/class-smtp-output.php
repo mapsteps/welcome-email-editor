@@ -7,7 +7,9 @@
 
 namespace Weed\Smtp;
 
+use PHPMailer\PHPMailer\PHPMailer;
 use Weed\Base\Base_Output;
+use Weed\Vars;
 
 defined( 'ABSPATH' ) || die( "Can't access directly" );
 
@@ -68,6 +70,44 @@ class Smtp_Output extends Base_Output {
 	 * Setup SMTP output.
 	 */
 	public function setup() {
+
+		add_action( 'phpmailer_init', array( $this, 'phpmailer_init' ), 9999 );
+
+	}
+
+	/**
+	 * Hook into phpmailer_init to set up SMTP.
+	 *
+	 * @param PHPMailer $php_mailer The PHPMailer instance.
+	 */
+	public function phpmailer_init( $php_mailer ) {
+
+		$values = Vars::get( 'values' );
+
+		if ( empty( $values['enable_smtp'] ) ) {
+			return;
+		}
+
+		if ( empty( $values['smtp_host'] ) || empty( $values['smtp_port'] ) ) {
+			return;
+		}
+
+		$php_mailer->isSMTP();
+
+		// phpcs:disable
+		$php_mailer->Host     = $values['smtp_host'];
+		$php_mailer->SMTPAuth = true;
+		$php_mailer->Username = $values['smtp_username'];
+		$php_mailer->Password = $values['smtp_password'];
+		$php_mailer->Port     = $values['smtp_port'];
+
+		if ( ! empty( $values['smtp_encryption'] ) ) {
+			$php_mailer->SMTPSecure = $values['smtp_encryption'] === 'ssl'
+				? PHPMailer::ENCRYPTION_SMTPS
+				: PHPMailer::ENCRYPTION_STARTTLS;
+		}
+		// phpcs:enable
+
 	}
 
 }

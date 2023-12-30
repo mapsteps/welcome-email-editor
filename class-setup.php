@@ -97,7 +97,7 @@ class Setup {
 
 			// SMTP settings.
 			'smtp_host'                                    => '',
-			'smtp_port'                                    => '',
+			'smtp_port'                                    => 0,
 			'smtp_encryption'                              => '',
 			'smtp_username'                                => '',
 			'smtp_password'                                => '',
@@ -122,6 +122,14 @@ class Setup {
 
 		$settings = get_option( 'weed_settings', array() );
 
+		if ( ! is_bool( $settings['enable_smtp'] ) ) {
+			$settings['enable_smtp'] = ! empty( $settings['enable_smtp'] );
+		}
+
+		if ( ! empty( $settings['smtp_port'] ) && is_string( $settings['smtp_port'] ) ) {
+			$settings['smtp_port'] = absint( $settings['smtp_port'] );
+		}
+
 		$values = wp_parse_args( $settings, $defaults );
 
 		Vars::set( 'default_settings', $defaults );
@@ -138,7 +146,7 @@ class Setup {
 		$modules = array();
 
 		$modules['Weed\\Settings\\Settings_Module'] = __DIR__ . '/modules/settings/class-settings-module.php';
-		$modules['Weed\\Smtp\\Smtp_Module']         = __DIR__ . '/modules/settings/class-smtp-module.php';
+		$modules['Weed\\Smtp\\Smtp_Module']         = __DIR__ . '/modules/smtp/class-smtp-module.php';
 
 		$modules = apply_filters( 'weed_modules', $modules );
 
