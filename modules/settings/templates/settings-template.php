@@ -74,7 +74,7 @@ return function () {
 							<?php do_settings_sections( 'weed-general-settings' ); ?>
 						</div>
 
-						<div class="heatbox">
+						<div class="heatbox" data-show-when-checked="weed_settings[enable_smtp]">
 							<?php do_settings_sections( 'weed-smtp-settings' ); ?>
 						</div>
 					</div>

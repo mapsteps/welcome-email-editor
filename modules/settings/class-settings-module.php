@@ -112,8 +112,8 @@ class Settings_Module extends Base_Module {
 
 		add_submenu_page(
 			'options-general.php',
-			__( 'Welcome Email Editor', 'welcome-email-editor' ),
-			__( 'Welcome Email Editor', 'welcome-email-editor' ),
+			__( 'Swift SMTP', 'welcome-email-editor' ),
+			__( 'Swift SMTP', 'welcome-email-editor' ),
 			apply_filters( 'weed_settings_capability', 'manage_options' ),
 			'weed_settings',
 			array( $this, 'submenu_page_content' )
@@ -245,6 +245,17 @@ class Settings_Module extends Base_Module {
 			array(
 				$this,
 				'content_type_field',
+			),
+			'weed-general-settings',
+			'weed-general-section'
+		);
+
+		add_settings_field(
+			'enable-smtp',
+			__( 'Enable SMTP', 'welcome-email-editor' ),
+			array(
+				$this,
+				'enable_smtp_field',
 			),
 			'weed-general-settings',
 			'weed-general-section'
@@ -506,6 +517,16 @@ class Settings_Module extends Base_Module {
 	public function content_type_field() {
 
 		$field = require __DIR__ . '/templates/fields/general/content-type.php';
+		$field( $this );
+
+	}
+
+	/**
+	 * Content type field.
+	 */
+	public function enable_smtp_field() {
+
+		$field = require __DIR__ . '/templates/fields/general/enable-smtp.php';
 		$field( $this );
 
 	}
