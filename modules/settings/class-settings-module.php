@@ -213,10 +213,10 @@ class Settings_Module extends Base_Module {
 		// Register sections.
 		add_settings_section( 'weed-general-section', __( 'General settings', 'welcome-email-editor' ), '', 'weed-general-settings' );
 		add_settings_section( 'weed-smtp-section', __( 'SMTP settings', 'welcome-email-editor' ), '', 'weed-smtp-settings' );
-		add_settings_section( 'weed-user-welcome-email-section', __( 'Welcome email settings &mdash; For user', 'welcome-email-editor' ), '', 'weed-user-welcome-email-settings' );
-		add_settings_section( 'weed-admin-new-user-notif-email-section', __( 'New user notification email settings &mdash; For admin', 'welcome-email-editor' ), '', 'weed-admin-new-user-notif-email-settings' );
-		add_settings_section( 'weed-reset-password-email-section', __( 'Reset password email settings', 'welcome-email-editor' ), '', 'weed-reset-password-email-settings' );
-		add_settings_section( 'weed-misc-section', __( 'Misc. settings', 'welcome-email-editor' ), '', 'weed-misc-settings' );
+		add_settings_section( 'weed-user-welcome-email-section', __( 'Welcome email (for users)', 'welcome-email-editor' ), '', 'weed-user-welcome-email-settings' );
+		add_settings_section( 'weed-admin-new-user-notif-email-section', __( 'New user notification email (for admins)', 'welcome-email-editor' ), '', 'weed-admin-new-user-notif-email-settings' );
+		add_settings_section( 'weed-reset-password-email-section', __( 'Reset password email', 'welcome-email-editor' ), '', 'weed-reset-password-email-settings' );
+		add_settings_section( 'weed-misc-section', __( 'Other', 'welcome-email-editor' ), '', 'weed-misc-settings' );
 
 		// General fields.
 		add_settings_field(
@@ -479,10 +479,10 @@ class Settings_Module extends Base_Module {
 			'weed-reset-password-email-section'
 		);
 
-		// Misc. settings.
+		// Misc settings.
 		add_settings_field(
 			'remove-on-uninstall',
-			__( 'Remove on uninstall', 'welcome-email-editor' ),
+			__( 'Remove on uninstall <p class="description">This setting will remove all related database entries when uninstalling the plugin.</p>', 'welcome-email-editor' ),
 			array(
 				$this,
 				'remove_on_uninstall_field',

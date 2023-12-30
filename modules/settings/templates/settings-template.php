@@ -39,17 +39,17 @@ return function () {
 					<ul class="heatbox-tab-nav">
 						<li class="heatbox-tab-nav-item">
 							<a href="#smtp">
-								<?php _e( 'SMTP', 'welcome-email-editor' ); ?>
+								<?php _e( 'SMTP settings', 'welcome-email-editor' ); ?>
 							</a>
 						</li>
 						<li class="heatbox-tab-nav-item">
 							<a href="#welcome-email">
-								<?php _e( 'Welcome Email', 'welcome-email-editor' ); ?>
+								<?php _e( 'Welcome emails', 'welcome-email-editor' ); ?>
 							</a>
 						</li>
 						<li class="heatbox-tab-nav-item">
 							<a href="#misc">
-								<?php _e( 'Misc', 'welcome-email-editor' ); ?>
+								<?php _e( 'Other', 'welcome-email-editor' ); ?>
 							</a>
 						</li>
 					</ul>
