@@ -12,14 +12,14 @@ defined( 'ABSPATH' ) || die( "Can't access directly" );
 use Weed\Base\Base_Module;
 
 /**
- * Class to set up quick view module.
+ * Class to set up settings module.
  */
 class Settings_Module extends Base_Module {
 
 	/**
 	 * The class instance.
 	 *
-	 * @var object
+	 * @var self
 	 */
 	public static $instance;
 
@@ -42,20 +42,7 @@ class Settings_Module extends Base_Module {
 	}
 
 	/**
-	 * Get instance of the class.
-	 */
-	public static function get_instance() {
-
-		if ( null === self::$instance ) {
-			self::$instance = new self();
-		}
-
-		return self::$instance;
-
-	}
-
-	/**
-	 * Setup tool module.
+	 * Set up the module.
 	 */
 	public function setup() {
 
@@ -83,6 +70,21 @@ class Settings_Module extends Base_Module {
 
 		require_once __DIR__ . '/ajax/class-test-emails.php';
 		add_action( 'wp_ajax_weed_test_emails', array( Ajax\Test_Emails::get_instance(), 'ajax_handler' ) );
+
+	}
+
+	/**
+	 * Get instance of the class.
+	 *
+	 * @return self
+	 */
+	public static function get_instance() {
+
+		if ( null === self::$instance ) {
+			self::$instance = new self();
+		}
+
+		return self::$instance;
 
 	}
 

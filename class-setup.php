@@ -21,6 +21,17 @@ class Setup {
 	public static $instance;
 
 	/**
+	 * Init the class setup.
+	 */
+	public static function init() {
+
+		$class = self::get_instance();
+
+		add_action( 'plugins_loaded', array( $class, 'setup' ) );
+
+	}
+
+	/**
 	 * Get instance of the class.
 	 */
 	public static function get_instance() {
@@ -30,17 +41,6 @@ class Setup {
 		}
 
 		return self::$instance;
-
-	}
-
-	/**
-	 * Init the class setup.
-	 */
-	public static function init() {
-
-		$class = self::get_instance();
-
-		add_action( 'plugins_loaded', array( $class, 'setup' ) );
 
 	}
 
@@ -123,6 +123,36 @@ class Setup {
 	}
 
 	/**
+	 * Load modules.
+	 */
+	public function load_modules() {
+
+		$modules = array();
+
+		$modules['Weed\\Settings\\Settings_Module'] = __DIR__ . '/modules/settings/class-settings-module.php';
+		$modules['Weed\\Smtp\\Smtp_Module']         = __DIR__ . '/modules/settings/class-smtp-module.php';
+
+		$modules = apply_filters( 'weed_modules', $modules );
+
+		foreach ( $modules as $class => $file ) {
+			$splits      = explode( '/', $file );
+			$module_name = $splits[ count( $splits ) - 2 ];
+			$filter_name = str_ireplace( '-', '_', $module_name );
+			$filter_name = 'weed_' . $filter_name;
+
+			// We have a filter here weed_$module_name to allow us to prevent loading modules under certain circumstances.
+			if ( apply_filters( $filter_name, true ) ) {
+
+				require_once $file;
+				$module = new $class();
+				$module->setup();
+
+			}
+		}
+
+	}
+
+	/**
 	 * Add action links displayed in plugins page.
 	 *
 	 * @param array $links The action links array.
@@ -159,35 +189,6 @@ class Setup {
 		$classes .= ' heatbox-admin has-header';
 
 		return $classes;
-
-	}
-
-	/**
-	 * Load modules.
-	 */
-	public function load_modules() {
-
-		$modules = array();
-
-		$modules['Weed\\Settings\\Settings_Module'] = __DIR__ . '/modules/settings/class-settings-module.php';
-
-		$modules = apply_filters( 'weed_modules', $modules );
-
-		foreach ( $modules as $class => $file ) {
-			$splits      = explode( '/', $file );
-			$module_name = $splits[ count( $splits ) - 2 ];
-			$filter_name = str_ireplace( '-', '_', $module_name );
-			$filter_name = 'weed_' . $filter_name;
-
-			// We have a filter here weed_$module_name to allow us to prevent loading modules under certain circumstances.
-			if ( apply_filters( $filter_name, true ) ) {
-
-				require_once $file;
-				$module = new $class();
-				$module->setup();
-
-			}
-		}
 
 	}
 

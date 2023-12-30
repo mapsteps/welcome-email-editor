@@ -7,14 +7,13 @@
 
 namespace Weed\Settings;
 
+use Weed\Base\Base_Output;
 use WP_User;
 
 defined( 'ABSPATH' ) || die( "Can't access directly" );
 
-use Weed\Base\Base_Output;
-
 /**
- * Class to set up dashboard output.
+ * Class to set up settings output.
  */
 class Settings_Output extends Base_Output {
 
@@ -131,6 +130,28 @@ class Settings_Output extends Base_Output {
 	}
 
 	/**
+	 * Set email http headers.
+	 */
+	public function set_email_headers() {
+
+		$values = $this->values;
+
+		if ( $values['from_email'] ) {
+			add_filter( 'wp_mail_from', array( $this, 'from_email' ) );
+		}
+
+		if ( $values['from_name'] ) {
+			add_filter( 'wp_mail_from_name', array( $this, 'from_name' ) );
+		}
+
+		if ( 'html' === $values['content_type'] ) {
+			add_filter( 'wp_mail_content_type', array( $this, 'html_content_type' ) );
+			add_filter( 'wp_mail_charset', array( $this, 'charset' ) );
+		}
+
+	}
+
+	/**
 	 * Retrieve password message.
 	 *
 	 * @param string $message Email message.
@@ -213,28 +234,6 @@ class Settings_Output extends Base_Output {
 
 		if ( $values['from_name'] ) {
 			add_filter( 'wp_mail_from_name', array( $this, 'from_name' ) );
-		}
-
-	}
-
-	/**
-	 * Set email http headers.
-	 */
-	public function set_email_headers() {
-
-		$values = $this->values;
-
-		if ( $values['from_email'] ) {
-			add_filter( 'wp_mail_from', array( $this, 'from_email' ) );
-		}
-
-		if ( $values['from_name'] ) {
-			add_filter( 'wp_mail_from_name', array( $this, 'from_name' ) );
-		}
-
-		if ( 'html' === $values['content_type'] ) {
-			add_filter( 'wp_mail_content_type', array( $this, 'html_content_type' ) );
-			add_filter( 'wp_mail_charset', array( $this, 'charset' ) );
 		}
 
 	}
