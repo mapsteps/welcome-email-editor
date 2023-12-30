@@ -20,10 +20,12 @@ return function () {
 
 					<div>
 						<span class="title">
-							<?php _e( 'Welcome Email Editor', 'welcome-email-editor' ); ?>
+							<?php esc_html_e( 'Swift SMTP', 'welcome-email-editor' ); ?>
 							<span class="version"><?php echo esc_html( WEED_PLUGIN_VERSION ); ?></span>
 						</span>
-						<p class="subtitle"><?php _e( 'Change WordPress\' welcome & reset password emails', 'welcome-email-editor' ); ?></p>
+						<p class="subtitle">
+							<?php esc_html_e( 'Simple SMTP setup & change WordPress\' welcome + reset password emails', 'welcome-email-editor' ); ?>
+						</p>
 					</div>
 
 					<div>
@@ -97,7 +99,7 @@ return function () {
 						</div>
 					</div>
 
-					<div class="udb-buttons">
+					<div class="weed-buttons">
 						<?php
 						submit_button( '', 'button button-primary button-larger', 'submit', false );
 

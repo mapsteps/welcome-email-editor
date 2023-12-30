@@ -21,6 +21,26 @@ $light-grey: #f5492a;
 }
 
 // Heatbox override
+.heatbox-header {
+	.logo-container > div:first-child {
+		width: 70%;
+	}
+
+	.logo-container .subtitle {
+		line-height: 1.4;
+	}
+
+	.logo-container > div:last-child {
+		width: 30%;
+	}
+}
+
+@media screen and (max-width: 990px) {
+	.heatbox-sidebar {
+		margin-top: 20px;
+	}
+}
+
 @media screen and (max-width: 780px) {
 	.heatbox-header {
 		.logo-container {
@@ -31,6 +51,14 @@ $light-grey: #f5492a;
 			.subtitle {
 				width: 100%;
 			}
+		}
+	}
+}
+
+@media screen and (max-width: 576px) {
+	.heatbox-header {
+		.logo-container img {
+			width: 80px;
 		}
 	}
 }
@@ -83,6 +111,13 @@ $light-grey: #f5492a;
 	display: none;
 }
 
+@media screen and (max-width: 320px) {
+	.weed-radio-fields .radio-label {
+		display: block;
+		margin-bottom: 10px;
+	}
+}
+
 // Buttons
 .button.weed-test-email-button {
 	display: flex;
@@ -110,29 +145,44 @@ $light-grey: #f5492a;
 	}
 }
 
-.button.weed-reset-button {
-	margin-left: 7px;
-	color: $white-color;
-	background-color: tomato;
-	border-color: tomato;
-
-	&:hover {
+.weed-buttons {
+	.weed-reset-button {
+		margin-left: 7px;
 		color: $white-color;
-		background-color: $light-grey;
-		border-color: $light-grey;
+		background-color: tomato;
+		border-color: tomato;
+		text-align: center;
+
+		&:hover {
+			color: $white-color;
+			background-color: $light-grey;
+			border-color: $light-grey;
+		}
+
+		&:active {
+			color: $white-color;
+			background-color: $light-grey;
+			border-color: $light-grey;
+		}
+
+		&:focus {
+			color: $white-color;
+			background-color: $light-grey;
+			border-color: $light-grey;
+			box-shadow: 0 0 0 1px #fff, 0 0 0 3px #f5492a;
+		}
 	}
 
-	&:active {
-		color: $white-color;
-		background-color: $light-grey;
-		border-color: $light-grey;
-	}
+	@media screen and (max-width: 320px) {
+		.button {
+			display: block;
+			width: 100%;
+		}
 
-	&:focus {
-		color: $white-color;
-		background-color: $light-grey;
-		border-color: $light-grey;
-		box-shadow: 0 0 0 1px #fff, 0 0 0 3px #f5492a;
+		.weed-reset-button {
+			margin-left: 0;
+			margin-top: 10px;
+		}
 	}
 }
 
@@ -189,14 +239,23 @@ $light-grey: #f5492a;
 		text-align: center;
 		margin-bottom: 50px;
 		font-size: 24px;
+
+		@media screen and (max-width: 576px) {
+			line-height: 1.4;
+		}
 	}
 
 	.products {
 		display: flex;
 		justify-content: space-between;
+		flex-wrap: wrap;
 
 		li {
 			width: 32%;
+
+			@media screen and (max-width: 780px) {
+				width: 100%;
+			}
 		}
 
 		.subheadline {
