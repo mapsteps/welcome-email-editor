@@ -93,6 +93,14 @@ class Setup {
 			'from_email'                                   => '',
 			'from_name'                                    => '',
 			'content_type'                                 => 'html',
+			'enable_smtp'                                  => false,
+
+			// SMTP settings.
+			'smtp_host'                                    => '',
+			'smtp_port'                                    => '',
+			'smtp_encryption'                              => '',
+			'smtp_username'                                => '',
+			'smtp_password'                                => '',
 
 			// Welcome email settings - for user.
 			'user_welcome_email_subject'                   => '[[blog_name]] ' . __( 'Login Details', 'welcome-email-editor' ),
