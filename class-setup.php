@@ -122,9 +122,7 @@ class Setup {
 
 		$settings = get_option( 'weed_settings', array() );
 
-		if ( ! is_bool( $settings['enable_smtp'] ) ) {
-			$settings['enable_smtp'] = ! empty( $settings['enable_smtp'] );
-		}
+		$settings['enable_smtp'] = ! empty( $settings['enable_smtp'] );
 
 		if ( ! empty( $settings['smtp_port'] ) && is_string( $settings['smtp_port'] ) ) {
 			$settings['smtp_port'] = absint( $settings['smtp_port'] );
