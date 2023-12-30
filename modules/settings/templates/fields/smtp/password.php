@@ -21,7 +21,7 @@ return function ( $module ) {
 	?>
 
 	<input type="password" name="weed_settings[smtp_password]" id="weed_settings--smtp_password" class="regular-text"
-		   value="<?php echo esc_attr( $value ); ?>" placeholder="Enter SMTP password"/>
+		   value="<?php echo esc_attr( $value ); ?>" placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;"/>
 
 	<?php
 

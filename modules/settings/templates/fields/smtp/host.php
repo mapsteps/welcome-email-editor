@@ -21,7 +21,7 @@ return function ( $module ) {
 	?>
 
 	<input type="text" name="weed_settings[smtp_host]" id="weed_settings--smtp_host" class="regular-text"
-		   value="<?php echo esc_attr( $value ); ?>" placeholder="e.g: in-v3.mailjet.com"/>
+		   value="<?php echo esc_attr( $value ); ?>" placeholder="Example: smtp.zoho.com"/>
 
 	<?php
 

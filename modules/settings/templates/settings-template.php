@@ -24,12 +24,12 @@ return function () {
 							<span class="version"><?php echo esc_html( WEED_PLUGIN_VERSION ); ?></span>
 						</span>
 						<p class="subtitle">
-							<?php esc_html_e( 'Simple SMTP setup & change WordPress\' welcome + reset password emails', 'welcome-email-editor' ); ?>
+							<?php esc_html_e( 'A free & simple SMTP Plugin for WordPress.', 'welcome-email-editor' ); ?>
 						</p>
 					</div>
 
 					<div>
-						<img src="<?php echo esc_url( WEED_PLUGIN_URL ); ?>/assets/images/welcome-email-editor-logo.png"
+						<img src="<?php echo esc_url( WEED_PLUGIN_URL ); ?>/assets/images/swift-smtp-logo.png"
 							 alt="SwiftSMTP">
 					</div>
 
@@ -39,12 +39,12 @@ return function () {
 					<ul class="heatbox-tab-nav">
 						<li class="heatbox-tab-nav-item">
 							<a href="#smtp">
-								<?php _e( 'SMTP settings', 'welcome-email-editor' ); ?>
+								<?php _e( 'SMTP Settings', 'welcome-email-editor' ); ?>
 							</a>
 						</li>
 						<li class="heatbox-tab-nav-item">
 							<a href="#welcome-email">
-								<?php _e( 'Welcome emails', 'welcome-email-editor' ); ?>
+								<?php _e( 'Welcome Email Editor', 'welcome-email-editor' ); ?>
 							</a>
 						</li>
 						<li class="heatbox-tab-nav-item">

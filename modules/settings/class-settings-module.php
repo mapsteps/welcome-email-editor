@@ -211,17 +211,17 @@ class Settings_Module extends Base_Module {
 		register_setting( 'weed-settings-group', 'weed_settings' );
 
 		// Register sections.
-		add_settings_section( 'weed-general-section', __( 'General settings', 'welcome-email-editor' ), '', 'weed-general-settings' );
-		add_settings_section( 'weed-smtp-section', __( 'SMTP settings', 'welcome-email-editor' ), '', 'weed-smtp-settings' );
-		add_settings_section( 'weed-user-welcome-email-section', __( 'Welcome email (for users)', 'welcome-email-editor' ), '', 'weed-user-welcome-email-settings' );
-		add_settings_section( 'weed-admin-new-user-notif-email-section', __( 'New user notification email (for admins)', 'welcome-email-editor' ), '', 'weed-admin-new-user-notif-email-settings' );
-		add_settings_section( 'weed-reset-password-email-section', __( 'Reset password email', 'welcome-email-editor' ), '', 'weed-reset-password-email-settings' );
+		add_settings_section( 'weed-general-section', __( 'General Settings', 'welcome-email-editor' ), '', 'weed-general-settings' );
+		add_settings_section( 'weed-smtp-section', __( 'SMTP Settings', 'welcome-email-editor' ), '', 'weed-smtp-settings' );
+		add_settings_section( 'weed-user-welcome-email-section', __( 'Welcome Email (for Users)', 'welcome-email-editor' ), '', 'weed-user-welcome-email-settings' );
+		add_settings_section( 'weed-admin-new-user-notif-email-section', __( 'New User Notification Email (for Admins)', 'welcome-email-editor' ), '', 'weed-admin-new-user-notif-email-settings' );
+		add_settings_section( 'weed-reset-password-email-section', __( 'Reset Password Email', 'welcome-email-editor' ), '', 'weed-reset-password-email-settings' );
 		add_settings_section( 'weed-misc-section', __( 'Other', 'welcome-email-editor' ), '', 'weed-misc-settings' );
 
 		// General fields.
 		add_settings_field(
 			'from-email',
-			__( 'From email address', 'welcome-email-editor' ),
+			__( 'From Email Address', 'welcome-email-editor' ),
 			array(
 				$this,
 				'from_email_field',
@@ -232,7 +232,7 @@ class Settings_Module extends Base_Module {
 
 		add_settings_field(
 			'from-name',
-			__( 'From name', 'welcome-email-editor' ),
+			__( 'From Name', 'welcome-email-editor' ),
 			array(
 				$this,
 				'from_name_field',
@@ -243,7 +243,7 @@ class Settings_Module extends Base_Module {
 
 		add_settings_field(
 			'content-type',
-			__( 'Mail content type', 'welcome-email-editor' ),
+			__( 'Mail Content Type', 'welcome-email-editor' ),
 			array(
 				$this,
 				'content_type_field',
@@ -266,7 +266,7 @@ class Settings_Module extends Base_Module {
 		// SMTP fields.
 		add_settings_field(
 			'smtp-host',
-			__( 'SMTP host', 'welcome-email-editor' ),
+			__( 'SMTP Host', 'welcome-email-editor' ),
 			array(
 				$this,
 				'smtp_host_field',
@@ -277,10 +277,7 @@ class Settings_Module extends Base_Module {
 
 		add_settings_field(
 			'smtp-encryption',
-			__( 'SMTP encryption', 'welcome-email-editor' ) .
-			'<p class="description">' .
-			__( 'For most server, TLS is the recommended option.', 'welcome-email-editor' ) .
-			'</p>',
+			__( 'SMTP Encryption', 'welcome-email-editor' ),
 			array(
 				$this,
 				'smtp_encryption_field',
@@ -291,7 +288,7 @@ class Settings_Module extends Base_Module {
 
 		add_settings_field(
 			'smtp-port',
-			__( 'SMTP port', 'welcome-email-editor' ),
+			__( 'SMTP Port', 'welcome-email-editor' ),
 			array(
 				$this,
 				'smtp_port_field',
@@ -302,7 +299,7 @@ class Settings_Module extends Base_Module {
 
 		add_settings_field(
 			'smtp-username',
-			__( 'SMTP username', 'welcome-email-editor' ),
+			__( 'SMTP Username', 'welcome-email-editor' ),
 			array(
 				$this,
 				'smtp_username_field',
@@ -313,7 +310,7 @@ class Settings_Module extends Base_Module {
 
 		add_settings_field(
 			'smtp-password',
-			__( 'SMTP password', 'welcome-email-editor' ),
+			__( 'SMTP Password', 'welcome-email-editor' ),
 			array(
 				$this,
 				'smtp_password_field',
@@ -325,7 +322,7 @@ class Settings_Module extends Base_Module {
 		// User welcome email fields.
 		add_settings_field(
 			'user-welcome-email-subject',
-			__( 'Email subject', 'welcome-email-editor' ),
+			__( 'Email Subject', 'welcome-email-editor' ),
 			array(
 				$this,
 				'user_welcome_email_subject_field',
@@ -336,7 +333,7 @@ class Settings_Module extends Base_Module {
 
 		add_settings_field(
 			'user-welcome-email-body',
-			__( 'Email body', 'welcome-email-editor' ),
+			__( 'Email Body', 'welcome-email-editor' ),
 			array(
 				$this,
 				'user_welcome_email_body_field',
@@ -347,7 +344,7 @@ class Settings_Module extends Base_Module {
 
 		add_settings_field(
 			'user-welcome-email-attachment',
-			__( 'Email attachment URL', 'welcome-email-editor' ),
+			__( 'Email Attachment URL', 'welcome-email-editor' ),
 			array(
 				$this,
 				'user_welcome_email_attachment_field',
@@ -358,7 +355,7 @@ class Settings_Module extends Base_Module {
 
 		add_settings_field(
 			'user-welcome-email-reply-to-email',
-			__( '"Reply-To" email address', 'welcome-email-editor' ),
+			__( '"Reply-To" Email', 'welcome-email-editor' ),
 			array(
 				$this,
 				'user_welcome_email_reply_to_email_field',
@@ -369,7 +366,7 @@ class Settings_Module extends Base_Module {
 
 		add_settings_field(
 			'user-welcome-email-reply-to-name',
-			__( '"Reply-To" name', 'welcome-email-editor' ),
+			__( '"Reply-To" Name', 'welcome-email-editor' ),
 			array(
 				$this,
 				'user_welcome_email_reply_to_name_field',
@@ -380,7 +377,7 @@ class Settings_Module extends Base_Module {
 
 		add_settings_field(
 			'user-welcome-email-additional-headers',
-			__( 'Additional email headers', 'welcome-email-editor' ),
+			__( 'Additional Email Headers', 'welcome-email-editor' ),
 			array(
 				$this,
 				'user_welcome_email_additional_headers_field',
@@ -403,7 +400,7 @@ class Settings_Module extends Base_Module {
 		// Admin new user notification email fields.
 		add_settings_field(
 			'admin-new-user-notif-email-subject',
-			__( 'Email subject', 'welcome-email-editor' ),
+			__( 'Email Subject', 'welcome-email-editor' ),
 			array(
 				$this,
 				'admin_new_user_notif_email_subject_field',
@@ -414,7 +411,7 @@ class Settings_Module extends Base_Module {
 
 		add_settings_field(
 			'admin-new-user-notif-email-body',
-			__( 'Email body', 'welcome-email-editor' ),
+			__( 'Email Body', 'welcome-email-editor' ),
 			array(
 				$this,
 				'admin_new_user_notif_email_body_field',
@@ -425,7 +422,7 @@ class Settings_Module extends Base_Module {
 
 		add_settings_field(
 			'admin-new-user-notif-email-recipients',
-			__( 'Additional recipients', 'welcome-email-editor' ),
+			__( 'Additional Recipients', 'welcome-email-editor' ),
 			array(
 				$this,
 				'admin_new_user_notif_email_custom_recipients_field',
@@ -448,7 +445,7 @@ class Settings_Module extends Base_Module {
 		// Reset password email fields.
 		add_settings_field(
 			'reset-password-email-subject',
-			__( 'Email subject', 'welcome-email-editor' ),
+			__( 'Email Subject', 'welcome-email-editor' ),
 			array(
 				$this,
 				'reset_password_email_subject_field',
@@ -459,7 +456,7 @@ class Settings_Module extends Base_Module {
 
 		add_settings_field(
 			'reset-password-email-body',
-			__( 'Email body', 'welcome-email-editor' ),
+			__( 'Email Body', 'welcome-email-editor' ),
 			array(
 				$this,
 				'reset_password_email_body_field',
@@ -482,7 +479,7 @@ class Settings_Module extends Base_Module {
 		// Misc settings.
 		add_settings_field(
 			'remove-on-uninstall',
-			__( 'Remove on uninstall <p class="description">This setting will remove all related database entries when uninstalling the plugin.</p>', 'welcome-email-editor' ),
+			__( 'Remove on Uninstall <p class="description">This setting will remove all related database entries when deleting the plugin.</p>', 'welcome-email-editor' ),
 			array(
 				$this,
 				'remove_on_uninstall_field',

@@ -18,9 +18,9 @@ return function ( $module ) {
 
 	?>
 
-	<button type="button" class="button button-primary weed-test-email-button"
+	<button type="button" class="button button-larger button-primary weed-test-email-button"
 			data-email-type="admin_new_user_notif_email">
-		<?php _e( 'Send a test email for current user (save first!)', 'welcome-email-editor' ); ?>
+		<?php _e( 'Send Test Email (Save First!)', 'welcome-email-editor' ); ?>
 	</button>
 
 	<?php

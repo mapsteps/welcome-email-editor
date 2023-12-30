@@ -21,7 +21,7 @@ return function ( $module ) {
 	?>
 
 	<input type="text" name="weed_settings[smtp_username]" id="weed_settings--smtp_username" class="regular-text"
-		   value="<?php echo esc_attr( $value ); ?>" placeholder="Enter SMTP username"/>
+		   value="<?php echo esc_attr( $value ); ?>" placeholder="yourname@yourwebsite.com"/>
 
 	<?php
 

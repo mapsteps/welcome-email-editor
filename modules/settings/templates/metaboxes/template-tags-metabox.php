@@ -63,3 +63,21 @@
 		</p>
 	</div>
 </div>
+
+<div class="heatbox weed-tags-metabox">
+	<h2>
+		<?php esc_html_e( 'Test Emails', 'welcome-email-editor' ); ?>
+	</h2>
+
+	<div class="heatbox-content">
+		<p>
+			<?php _e( 'Sending a test email will send the respective welcome email to the current user (you).', 'welcome-email-editor' ); ?>
+		</p>
+		<p>
+			<?php _e( 'Before sending a test email, please save your settings.', 'welcome-email-editor' ); ?>
+		</p>
+		<p>
+			<?php _e( 'If you haven\'t received the test email, please check your spam folder and ensure the SMTP settings are configured correctly.', 'welcome-email-editor' ); ?>
+		</p>
+	</div>
+</div>

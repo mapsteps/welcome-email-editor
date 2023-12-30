@@ -25,11 +25,8 @@ return function ( $module ) {
 			  placeholder="<?php echo esc_attr( $defaults['user_welcome_email_additional_headers'] ); ?>"><?php echo esc_html( $values['user_welcome_email_additional_headers'] ); ?></textarea>
 
 	<p class="description">
-		<?php _e( 'Add custom http header string for your email sending. E.g:', 'welcome-email-editor' ); ?>
-		<br>
-		<code>Content-Type: text/plain</code>
-		<br>
-		<?php _e( 'If you would like to add multiple headers, then add them in multi lines format.', 'welcome-email-editor' ); ?>
+		<?php _e( 'Add custom HTTP headers to your email, such as: <code>Content-Type: text/plain</code>.', 'welcome-email-editor' ); ?><br>
+		<?php _e( 'Please use one line per HTTP header.', 'welcome-email-editor' ); ?>
 	</p>
 
 	<?php

@@ -10,7 +10,7 @@ defined( 'ABSPATH' ) || die( "Can't access directly" );
 
 <div class="heatbox weed-review-metabox">
 	<h2>
-		<?php esc_html_e( 'Leave us a review', 'page-builder-framework' ); ?>
+		<?php esc_html_e( 'Leave us a Review', 'page-builder-framework' ); ?>
 	</h2>
 
 	<div class="heatbox-content">
@@ -19,7 +19,7 @@ defined( 'ABSPATH' ) || die( "Can't access directly" );
 		</p>
 		<a href="https://wordpress.org/support/plugin/welcome-email-editor/reviews/#new-post" target="_blank"
 		   class="button">
-			<?php esc_html_e( 'Leave a review', 'welcome-email-editor' ); ?>
+			<?php esc_html_e( 'Leave a Review', 'welcome-email-editor' ); ?>
 		</a>
 	</div>
 </div>
