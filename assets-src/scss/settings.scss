@@ -233,6 +233,13 @@ $light-grey: #f5492a;
 	}
 }
 
+// Test SMTP metabox.
+.weed-test-smtp-metabox {
+	th {
+		display: none;
+	}
+}
+
 // Featured products
 .weed-featured-products {
 	> h2 {

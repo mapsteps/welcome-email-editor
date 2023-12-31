@@ -214,6 +214,7 @@ class Settings_Module extends Base_Module {
 		// Register sections.
 		add_settings_section( 'weed-general-section', __( 'General Settings', 'welcome-email-editor' ), '', 'weed-general-settings' );
 		add_settings_section( 'weed-smtp-section', __( 'SMTP Settings', 'welcome-email-editor' ), '', 'weed-smtp-settings' );
+		add_settings_section( 'weed-test-smtp-section', __( 'Send Test Email', 'welcome-email-editor' ), '', 'weed-test-smtp-settings' );
 		add_settings_section( 'weed-user-welcome-email-section', __( 'Welcome Email (for Users)', 'welcome-email-editor' ), '', 'weed-user-welcome-email-settings' );
 		add_settings_section( 'weed-admin-new-user-notif-email-section', __( 'New User Notification Email (for Admins)', 'welcome-email-editor' ), '', 'weed-admin-new-user-notif-email-settings' );
 		add_settings_section( 'weed-reset-password-email-section', __( 'Reset Password Email', 'welcome-email-editor' ), '', 'weed-reset-password-email-settings' );
@@ -307,6 +308,17 @@ class Settings_Module extends Base_Module {
 			),
 			'weed-smtp-settings',
 			'weed-smtp-section'
+		);
+
+		add_settings_field(
+			'test-smtp',
+			'',
+			array(
+				$this,
+				'test_smtp_field',
+			),
+			'weed-test-smtp-settings',
+			'weed-test-smtp-section'
 		);
 
 		// User welcome email fields.
@@ -556,6 +568,16 @@ class Settings_Module extends Base_Module {
 	public function smtp_password_field() {
 
 		$field = require __DIR__ . '/templates/fields/smtp/password.php';
+		$field( $this );
+
+	}
+
+	/**
+	 * Test SMTP field.
+	 */
+	public function test_smtp_field() {
+
+		$field = require __DIR__ . '/templates/fields/test-smtp/test-smtp.php';
 		$field( $this );
 
 	}

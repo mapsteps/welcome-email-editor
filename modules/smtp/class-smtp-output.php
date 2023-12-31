@@ -10,6 +10,7 @@ namespace Weed\Smtp;
 use PHPMailer\PHPMailer\PHPMailer;
 use Weed\Base\Base_Output;
 use Weed\Vars;
+use WP_Error;
 
 defined( 'ABSPATH' ) || die( "Can't access directly" );
 
@@ -72,6 +73,7 @@ class Smtp_Output extends Base_Output {
 	public function setup() {
 
 		add_action( 'phpmailer_init', array( $this, 'phpmailer_init' ), 9999 );
+		add_action( 'wp_mail_failed', array( $this, 'wp_mail_failed' ), 10 );
 
 	}
 
@@ -104,6 +106,18 @@ class Smtp_Output extends Base_Output {
 		}
 		// phpcs:enable
 
+	}
+
+	/**
+	 * Hook into wp_mail_failed to catch errors.
+	 *
+	 * @param WP_Error $wp_error The WP_Error instance.
+	 */
+	public function wp_mail_failed( $wp_error ) {
+
+		$error = $wp_error->get_error_message();
+
+		Vars::set( 'wp_mail_failed', $error );
 	}
 
 }

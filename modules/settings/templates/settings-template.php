@@ -59,13 +59,13 @@ return function () {
 
 		</div>
 
-		<div class="heatbox-container heatbox-container-center heatbox-column-container">
+		<form method="post" action="options.php" class="weed-settings-form">
+			<div class="heatbox-container heatbox-container-center heatbox-column-container">
 
-			<div class="heatbox-main">
-				<!-- Faking H1 tag to place admin notices -->
-				<h1 style="display: none;"></h1>
+				<div class="heatbox-main">
+					<!-- Faking H1 tag to place admin notices -->
+					<h1 style="display: none;"></h1>
 
-				<form method="post" action="options.php" class="weed-settings-form">
 
 					<?php settings_fields( 'weed-settings-group' ); ?>
 
@@ -121,28 +121,27 @@ return function () {
 						</a>
 					</div>
 
-				</form>
+				</div>
+
+				<div class="heatbox-sidebar">
+					<div class="heatbox-admin-panel" data-show-when-tab="welcome-email">
+						<?php require __DIR__ . '/metaboxes/template-tags-metabox.php'; ?>
+					</div>
+
+					<div class="heatbox-admin-panel" data-show-when-tab="smtp">
+						<?php
+						require __DIR__ . '/metaboxes/test-smtp-metabox.php';
+						require __DIR__ . '/metaboxes/review-metabox.php';
+						?>
+					</div>
+
+					<div class="heatbox-admin-panel" data-show-when-tab="misc">
+						<?php require __DIR__ . '/metaboxes/review-metabox.php'; ?>
+					</div>
+				</div>
+
 			</div>
-
-			<div class="heatbox-sidebar">
-				<div class="heatbox-admin-panel" data-show-when-tab="welcome-email">
-					<?php require __DIR__ . '/metaboxes/template-tags-metabox.php'; ?>
-				</div>
-
-				<div class="heatbox-admin-panel" data-show-when-tab="smtp">
-					<?php
-					require __DIR__ . '/metaboxes/test-smtp-metabox.php';
-					require __DIR__ . '/metaboxes/review-metabox.php';
-					require __DIR__ . '/metaboxes/resources-metabox.php';
-					?>
-				</div>
-
-				<div class="heatbox-admin-panel" data-show-when-tab="misc">
-					<?php require __DIR__ . '/metaboxes/review-metabox.php'; ?>
-				</div>
-			</div>
-
-		</div>
+		</form>
 
 		<div class="heatbox-container heatbox-container-wide heatbox-container-center weed-featured-products">
 			<div class="heatbox-divider"></div>

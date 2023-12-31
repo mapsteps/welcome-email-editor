@@ -58,7 +58,7 @@ export function setupTestEmails() {
 
 			case "test_smtp_email":
 				data.nonce = weedSettings.nonces.testSmtpEmail;
-				const toEmailField = document.querySelector('#weed-test-smtp') as HTMLInputElement;
+				const toEmailField = document.querySelector('#weed_settings--test_smtp_recipient_email') as HTMLInputElement;
 				data.to_email = toEmailField ? toEmailField.value : '';
 				break;
 		}
