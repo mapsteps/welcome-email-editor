@@ -171,6 +171,7 @@ defined( 'ABSPATH' ) || die( "Can't access directly" );
 
 			.es-button-border {
 				display: block !important
+				max-width: 100%;
 			}
 
 			a.es-button, button.es-button {
