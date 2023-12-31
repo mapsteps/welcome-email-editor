@@ -244,6 +244,26 @@ $light-grey: #f5492a;
 	}
 }
 
+.weed-submission-notice {
+	padding: 5px 10px;
+	font-weight: 700c;
+	margin-bottom: 15px;
+	border-width: 2px;
+	border-style: solid;
+
+	&.is-error {
+		background-color: rgba(255, 99, 71, .1);
+		border-color: tomato;
+		color: tomato;
+	}
+
+	&.is-success {
+		background-color: rgba(79, 225, 144, .1);
+		border-color: #4fe190;
+		color: #4fe190;
+	}
+}
+
 // Featured products
 .weed-featured-products {
 	> h2 {

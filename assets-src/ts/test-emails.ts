@@ -16,6 +16,7 @@ declare var weedSettings: {
 
 export function setupTestEmails() {
 	let isRequesting = false;
+	const noticeEl = document.querySelector('.weed-submission-notice');
 
 	init();
 
@@ -63,6 +64,12 @@ export function setupTestEmails() {
 				break;
 		}
 
+		if (noticeEl) {
+			noticeEl.classList.add('is-hidden');
+			noticeEl.classList.remove('is-error');
+			noticeEl.classList.remove('is-success');
+		}
+
 		jQuery
 			.ajax({
 				url: ajaxurl,
@@ -70,9 +77,17 @@ export function setupTestEmails() {
 				dataType: "json",
 				data: data,
 			})
-			.always(function () {
+			.always(function (r) {
 				isRequesting = false;
 				stopLoading(button);
+
+				console.log(r);
+
+				if (noticeEl) {
+					noticeEl.classList.remove('is-hidden');
+					noticeEl.classList.add(r.success ? 'is-success' : 'is-error');
+					noticeEl.innerHTML = r.data ? r.data : '';
+				}
 			});
 	}
 }
