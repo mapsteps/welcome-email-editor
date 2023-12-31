@@ -573,10 +573,10 @@ defined( 'ABSPATH' ) || die( "Can't access directly" );
 																	target="_blank" href="https://davidvongries.com/"
 																	style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#2CB543;font-size:16px"><img
 																		class="adapt-img"
-																		src="http://swiftsmtp.com/wp-content/uploads/autograph.jpg"
+																		src="http://swiftsmtp.com/wp-content/uploads/signature.jpg"
 																		alt="David Vongries"
 																		style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"
-																		width="120" title="David Vongries"></a></td>
+																		width="72" title="David Vongries"></a></td>
 														</tr>
 													</table>
 												</td>
