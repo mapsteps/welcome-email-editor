@@ -519,17 +519,17 @@ defined( 'ABSPATH' ) || die( "Can't access directly" );
 															<td align="left" class="es-m-txt-c"
 																style="padding:0;Margin:0;padding-top:5px;padding-bottom:5px">
 																<p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:roboto, 'helvetica neue', helvetica, arial, sans-serif;line-height:24px;color:#131313;font-size:16px">
-																	Thanks for exploring Swift SMTP! We're here to
-																	provide a free and easy SMTP setup. We're thrilled
-																	you're on board.</p>
+																	Thank you for checking out Swift SMTP! We're here to
+																	offer a straightforward SMTP setup - for free. Thank you
+																	for being with us.</p>
 																<p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:roboto, 'helvetica neue', helvetica, arial, sans-serif;line-height:24px;color:#131313;font-size:16px">
 																	<br></p>
 																<p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:roboto, 'helvetica neue', helvetica, arial, sans-serif;line-height:24px;color:#131313;font-size:16px">
-																	Do you enjoy Swift SMTP? Please leave a review in
-																	the <a target="_blank"
+																	Do you enjoy Swift SMTP? Please consider leaving a review in
+																	the official <a target="_blank"
 																			href="https://wordpress.org/plugins/welcome-email-editor/"
 																			style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#2CB543;font-size:16px">WordPress
-																		directory</a> and spread the word!</p></td>
+																		directory</a> and help us spread the word!</p></td>
 														</tr>
 														<tr>
 															<td align="center"
@@ -539,7 +539,7 @@ defined( 'ABSPATH' ) || die( "Can't access directly" );
 																		href="https://wordpress.org/support/plugin/welcome-email-editor/reviews/#new-post"
 																		class="es-button es-button-1625643206450"
 																		target="_blank"
-																		style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:16px;padding:10px 20px;display:inline-block;background:#071F4F;border-radius:5px;font-family:roboto, 'helvetica neue', helvetica, arial, sans-serif;font-weight:normal;font-style:normal;line-height:19px;width:auto;text-align:center;mso-padding-alt:0;mso-border-alt:10px solid #071F4F">Leave a Review </a></span>
+																		style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:16px;padding:15px 25px;display:inline-block;background:#071F4F;border-radius:4px;font-family:roboto, 'helvetica neue', helvetica, arial, sans-serif;font-weight:normal;font-style:normal;line-height:19px;width:auto;text-align:center;mso-padding-alt:0;mso-border-alt:10px solid #071F4F">Leave a Review</a></span>
 															</td>
 														</tr>
 													</table>
@@ -576,7 +576,7 @@ defined( 'ABSPATH' ) || die( "Can't access directly" );
 																		src="http://swiftsmtp.com/wp-content/uploads/signature.jpg"
 																		alt="David Vongries"
 																		style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"
-																		width="100" title="David Vongries"></a></td>
+																		width="90" title="David Vongries"></a></td>
 														</tr>
 													</table>
 												</td>
@@ -605,10 +605,10 @@ defined( 'ABSPATH' ) || die( "Can't access directly" );
 															style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
 														<tr>
 															<td align="center" style="padding:0;Margin:0"><p
-																	style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:roboto, 'helvetica neue', helvetica, arial, sans-serif;line-height:24px;color:#131313;font-size:16px;text-align:left">
+																	style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:roboto, 'helvetica neue', helvetica, arial, sans-serif;line-height:21px;color:#131313;font-size:14px;text-align:left">
 																	David Vongries</p>
 																<p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:roboto, 'helvetica neue', helvetica, arial, sans-serif;line-height:21px;color:#131313;font-size:14px;text-align:left">
-																	Author, Swift SMTP</p></td>
+																	Founder, Swift SMTP</p></td>
 														</tr>
 													</table>
 												</td>
