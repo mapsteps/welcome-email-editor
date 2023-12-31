@@ -70,6 +70,8 @@ class Settings_Output extends Base_Output {
 	 */
 	public function setup() {
 
+		$this->set_email_headers();
+
 		add_filter( 'retrieve_password_title', array( $this, 'retrieve_password_title' ), 10, 3 );
 		add_filter( 'retrieve_password_message', array( $this, 'retrieve_password_message' ), 10, 4 );
 		add_filter( 'wpmu_welcome_user_notification', array( $this, 'wpmu_new_user_notification' ), 10, 3 );
@@ -121,11 +123,7 @@ class Settings_Output extends Base_Output {
 			$user_data->last_name,
 		);
 
-		$saved_title = str_ireplace( $find, $replace, $saved_title );
-
-		$this->set_email_headers();
-
-		return $saved_title;
+		return str_ireplace( $find, $replace, $saved_title );
 
 	}
 

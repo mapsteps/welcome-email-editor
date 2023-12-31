@@ -188,11 +188,7 @@ class Test_Emails {
 		require WEED_PLUGIN_DIR . '/modules/settings/templates/emails/test-smtp-email.php';
 		$body = ob_get_clean();
 
-		$is_sent = wp_mail( $recipient, $subject, $body, $headers );
-
-		error_log( 'is_sent: ' . $is_sent );
-		error_log( 'subject: ' . $subject );
-		error_log( 'recipient: ' . $recipient );
+		wp_mail( $recipient, $subject, $body, $headers );
 
 		wp_send_json_success( __( 'Email has been sent successfully', 'welcome-email-editor' ) );
 

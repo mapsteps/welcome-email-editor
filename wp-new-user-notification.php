@@ -25,9 +25,9 @@ if ( ! function_exists( 'wp_new_user_notification' ) ) {
 	 * @since 4.3.1 The `$plaintext_pass` parameter was deprecated. `$notify` added as a third parameter.
 	 * @since 4.6.0 The `$notify` parameter accepts 'user' for sending notification only to the user created.
 	 *
-	 * @param int    $user_id    User ID.
+	 * @param int    $user_id User ID.
 	 * @param null   $deprecated Not used (argument deprecated).
-	 * @param string $notify     Optional. Type of notification that should happen. Accepts 'admin' or an empty
+	 * @param string $notify Optional. Type of notification that should happen. Accepts 'admin' or an empty
 	 *                           string (admin only), 'user', or 'both' (admin and user). Default empty.
 	 */
 	function wp_new_user_notification( $user_id, $deprecated = null, $notify = '' ) {
@@ -47,9 +47,6 @@ if ( ! function_exists( 'wp_new_user_notification' ) ) {
 
 		$content_helper = new Content_Helper();
 		$email_helper   = new Email_Helper();
-		$module_output  = Settings_Output::get_instance();
-
-		$module_output->set_email_headers();
 
 		// The blogname option is escaped with esc_html() on the way into the database in sanitize_option().
 		// We want to reverse this for the plain text arena of emails.
@@ -65,7 +62,8 @@ if ( ! function_exists( 'wp_new_user_notification' ) ) {
 		if ( 'user' !== $notify ) {
 			$switched_locale = switch_to_locale( get_locale() );
 
-			$default_admin_subject = __( '[%s] New User Registration' );
+			// translators: New user registration notification email subject. %s: Site title.
+			$default_admin_subject = __( '[%s] New User Registration', 'welcome-email-editor' );
 
 			$admin_subject_placeholders = array(
 				'[blog_name]',
@@ -169,16 +167,17 @@ if ( ! function_exists( 'wp_new_user_notification' ) ) {
 			/**
 			 * Filters the contents of the new user notification email sent to the site admin.
 			 *
-			 * @param array   $wp_new_user_notification_email_admin {
+			 * @param array $wp_new_user_notification_email_admin {
 			 *     Used to build wp_mail().
 			 *
-			 *     @type string $to      The intended recipient - site admin email address.
-			 *     @type string $subject The subject of the email.
-			 *     @type string $message The body of the email.
-			 *     @type string $headers The headers of the email.
+			 * @type string $to The intended recipient - site admin email address.
+			 * @type string $subject The subject of the email.
+			 * @type string $message The body of the email.
+			 * @type string $headers The headers of the email.
 			 * }
-			 * @param WP_User $user     User object for new user.
-			 * @param string  $blogname The site title.
+			 *
+			 * @param WP_User $user User object for new user.
+			 * @param string $blogname The site title.
 			 */
 			$wp_new_user_notification_email_admin = apply_filters( 'wp_new_user_notification_email_admin', $wp_new_user_notification_email_admin, $user, $blogname );
 
@@ -343,16 +342,17 @@ if ( ! function_exists( 'wp_new_user_notification' ) ) {
 		 *
 		 * This comment was taken from wp-includes/pluggable.php inside wp_new_user_notification() function.
 		 *
-		 * @param array   $wp_new_user_notification_email {
+		 * @param array $wp_new_user_notification_email {
 		 *     Used to build wp_mail().
 		 *
-		 *     @type string $to      The intended recipient - New user email address.
-		 *     @type string $subject The subject of the email.
-		 *     @type string $message The body of the email.
-		 *     @type string $headers The headers of the email.
+		 * @type string $to The intended recipient - New user email address.
+		 * @type string $subject The subject of the email.
+		 * @type string $message The body of the email.
+		 * @type string $headers The headers of the email.
 		 * }
-		 * @param WP_User $user     User object for new user.
-		 * @param string  $blogname The site title.
+		 *
+		 * @param WP_User $user User object for new user.
+		 * @param string $blogname The site title.
 		 */
 		$wp_new_user_notification_email = apply_filters( 'wp_new_user_notification_email', $wp_new_user_notification_email, $user, $blogname );
 
@@ -375,7 +375,6 @@ if ( ! function_exists( 'wp_new_user_notification' ) ) {
 		if ( $switched_locale ) {
 			restore_previous_locale();
 		}
-
-		$module_output->reset_email_headers();
 	}
+
 }
