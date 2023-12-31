@@ -25,7 +25,7 @@ $admin_email = get_bloginfo( 'admin_email' );
 			</div>
 
 			<button type="button" class="button button-larger button-primary weed-test-email-button" data-email-type="test_smtp_email">
-				<?php esc_html_e( 'Send (Safe First!)', 'welcome-email-editor' ); ?>
+				<?php esc_html_e( 'Send Test Email (Save First!)', 'welcome-email-editor' ); ?>
 			</button>
 		</div>
 	</div>
