@@ -30,7 +30,7 @@ return function () {
 
 					<div>
 						<img src="<?php echo esc_url( WEED_PLUGIN_URL ); ?>/assets/images/swift-smtp-logo.png"
-							 alt="SwiftSMTP">
+							alt="SwiftSMTP">
 					</div>
 
 				</div>
@@ -39,17 +39,17 @@ return function () {
 					<ul class="heatbox-tab-nav">
 						<li class="heatbox-tab-nav-item">
 							<a href="#smtp">
-								<?php _e( 'SMTP Settings', 'welcome-email-editor' ); ?>
+								<?php esc_html_e( 'SMTP Settings', 'welcome-email-editor' ); ?>
 							</a>
 						</li>
 						<li class="heatbox-tab-nav-item">
 							<a href="#welcome-email">
-								<?php _e( 'Welcome Email Editor', 'welcome-email-editor' ); ?>
+								<?php esc_html_e( 'Welcome Email Editor', 'welcome-email-editor' ); ?>
 							</a>
 						</li>
 						<li class="heatbox-tab-nav-item">
 							<a href="#misc">
-								<?php _e( 'Other', 'welcome-email-editor' ); ?>
+								<?php esc_html_e( 'Other', 'welcome-email-editor' ); ?>
 							</a>
 						</li>
 					</ul>
@@ -74,7 +74,7 @@ return function () {
 							<?php do_settings_sections( 'weed-general-settings' ); ?>
 						</div>
 
-						<div class="heatbox" data-show-when-checked="weed_settings[enable_smtp]">
+						<div class="heatbox">
 							<?php do_settings_sections( 'weed-smtp-settings' ); ?>
 						</div>
 					</div>
@@ -109,15 +109,15 @@ return function () {
 							array(
 								'action'       => 'weed_reset_settings',
 								'nonce'        => wp_create_nonce( WEED_PLUGIN_DIR ),
-								'http_referer' => $current_url,
+								'http_referer' => esc_url( $current_url ),
 							),
-							$current_url
+							esc_url( $current_url )
 						);
 						?>
 
 						<a href="<?php echo esc_url( $reset_settings_url ); ?>"
-						   class="button button-larger weed-reset-button weed-reset-settings-button">
-							<?php _e( 'Reset Settings', 'welcome-email-editor' ); ?>
+							class="button button-larger weed-reset-button weed-reset-settings-button">
+							<?php esc_html_e( 'Reset Settings', 'welcome-email-editor' ); ?>
 						</a>
 					</div>
 
@@ -146,7 +146,7 @@ return function () {
 		<div class="heatbox-container heatbox-container-wide heatbox-container-center weed-featured-products">
 			<div class="heatbox-divider"></div>
 
-			<h2><?php _e( 'Check out our other free WordPress products!', 'welcome-email-editor' ); ?></h2>
+			<h2><?php esc_html_e( 'Check out our other free WordPress products!', 'welcome-email-editor' ); ?></h2>
 
 			<ul class="products">
 				<li class="heatbox">
@@ -154,11 +154,18 @@ return function () {
 						<img src="<?php echo esc_url( WEED_PLUGIN_URL ); ?>/assets/images/swift-control.jpg">
 					</a>
 					<div class="heatbox-content">
-						<h3><?php _e( 'Better Admin Bar', 'welcome-email-editor' ); ?></h3>
-						<p class="subheadline"><?php _e( 'Replace the boring WordPress Admin Bar with this!', 'welcome-email-editor' ); ?></p>
-						<p><?php _e( 'Better Admin Bar is the plugin that make your clients love WordPress. It drastically improves the user experience when working with WordPress and allows you to replace the boring WordPress admin bar with your own navigation panel.', 'welcome-email-editor' ); ?></p>
-						<a href="https://wordpress.org/plugins/better-admin-bar/" target="_blank"
-						   class="button"><?php _e( 'View Features', 'welcome-email-editor' ); ?></a>
+						<h3>
+							<?php esc_html_e( 'Better Admin Bar', 'welcome-email-editor' ); ?>
+						</h3>
+						<p class="subheadline">
+							<?php esc_html_e( 'Replace the boring WordPress Admin Bar with this!', 'welcome-email-editor' ); ?>
+						</p>
+						<p>
+							<?php esc_html_e( 'Better Admin Bar is the plugin that make your clients love WordPress. It drastically improves the user experience when working with WordPress and allows you to replace the boring WordPress admin bar with your own navigation panel.', 'welcome-email-editor' ); ?>
+						</p>
+						<a href="https://wordpress.org/plugins/better-admin-bar/" target="_blank" class="button">
+							<?php esc_html_e( 'View Features', 'welcome-email-editor' ); ?>
+						</a>
 					</div>
 				</li>
 				<li class="heatbox">
@@ -166,11 +173,18 @@ return function () {
 						<img src="<?php echo esc_url( WEED_PLUGIN_URL ); ?>/assets/images/ultimate-dashboard.jpg">
 					</a>
 					<div class="heatbox-content">
-						<h3><?php _e( 'Ultimate Dashboard', 'welcome-email-editor' ); ?></h3>
-						<p class="subheadline"><?php _e( 'The #1 plugin to customize your WordPress dashboard.', 'welcome-email-editor' ); ?></p>
-						<p><?php _e( 'Ultimate Dashboard is a clean & lightweight plugin that was made to optimize the user experience for clients inside the WordPress admin area.', 'welcome-email-editor' ); ?></p>
-						<a href="https://wordpress.org/plugins/ultimate-dashboard/" target="_blank"
-						   class="button"><?php _e( 'View Features', 'welcome-email-editor' ); ?></a>
+						<h3>
+							<?php esc_html_e( 'Ultimate Dashboard', 'welcome-email-editor' ); ?>
+						</h3>
+						<p class="subheadline">
+							<?php esc_html_e( 'The #1 plugin to customize your WordPress dashboard.', 'welcome-email-editor' ); ?>
+						</p>
+						<p>
+							<?php esc_html_e( 'Ultimate Dashboard is a clean & lightweight plugin that was made to optimize the user experience for clients inside the WordPress admin area.', 'welcome-email-editor' ); ?>
+						</p>
+						<a href="https://wordpress.org/plugins/ultimate-dashboard/" target="_blank" class="button">
+							<?php esc_html_e( 'View Features', 'welcome-email-editor' ); ?>
+						</a>
 					</div>
 				</li>
 				<li class="heatbox">
@@ -178,16 +192,25 @@ return function () {
 						<img src="<?php echo esc_url( WEED_PLUGIN_URL ); ?>/assets/images/page-builder-framework.jpg">
 					</a>
 					<div class="heatbox-content">
-						<h3><?php _e( 'Page Builder Framework', 'welcome-email-editor' ); ?></h3>
-						<p class="subheadline"><?php _e( 'A modern, fast & minimalistic theme designed for the new WordPress Era.', 'welcome-email-editor' ); ?></p>
-						<p><?php _e( 'The theme was designed specifically to work with WordPress page builders, like Elementor, Beaver Builder & Brizy.', 'welcome-email-editor' ); ?></p>
-						<a href="https://wordpress.org/themes/page-builder-framework/" target="_blank"
-						   class="button"><?php _e( 'View Features', 'welcome-email-editor' ); ?></a>
+						<h3>
+							<?php esc_html_e( 'Page Builder Framework', 'welcome-email-editor' ); ?>
+						</h3>
+						<p class="subheadline">
+							<?php esc_html_e( 'A modern, fast & minimalistic theme designed for the new WordPress Era.', 'welcome-email-editor' ); ?>
+						</p>
+						<p>
+							<?php esc_html_e( 'The theme was designed specifically to work with WordPress page builders, like Elementor, Beaver Builder & Brizy.', 'welcome-email-editor' ); ?>
+						</p>
+						<a href="https://wordpress.org/themes/page-builder-framework/" target="_blank" class="button">
+							<?php esc_html_e( 'View Features', 'welcome-email-editor' ); ?>
+						</a>
 					</div>
 				</li>
 			</ul>
 
-			<p class="credit"><?php _e( 'Made with ❤ in Torsby, Sweden', 'welcome-email-editor' ); ?></p>
+			<p class="credit">
+				<?php esc_html_e( 'Made with ❤ in Torsby, Sweden', 'welcome-email-editor' ); ?>
+			</p>
 
 		</div>
 

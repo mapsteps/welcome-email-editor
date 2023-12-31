@@ -84,10 +84,6 @@ class Smtp_Output extends Base_Output {
 
 		$values = Vars::get( 'values' );
 
-		if ( empty( $values['enable_smtp'] ) ) {
-			return;
-		}
-
 		if ( empty( $values['smtp_host'] ) || empty( $values['smtp_port'] ) ) {
 			return;
 		}

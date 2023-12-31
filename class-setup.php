@@ -67,7 +67,7 @@ class Setup {
 	public function set_data() {
 
 		/* translators: %s: User login. */
-		$user_welcome_email_body = __( 'Username:', 'welcome-email-editor' ) . ' [user_login]' . "<br><br>\r\n\r\n";
+		$user_welcome_email_body  = __( 'Username:', 'welcome-email-editor' ) . ' [user_login]' . "<br><br>\r\n\r\n";
 		$user_welcome_email_body .= __( 'To set your password, visit the following address:' ) . "<br><br>\r\n\r\n";
 		$user_welcome_email_body .= '<a href="[reset_pass_url]">[reset_pass_url]</a><br><br>' . "\r\n\r\n";
 		$user_welcome_email_body .= '<a href="[login_url]">[login_url]</a>' . "\r\n";
@@ -93,7 +93,6 @@ class Setup {
 			'from_email'                                   => '',
 			'from_name'                                    => '',
 			'content_type'                                 => 'html',
-			'enable_smtp'                                  => false,
 
 			// SMTP settings.
 			'smtp_host'                                    => '',
@@ -121,8 +120,6 @@ class Setup {
 		);
 
 		$settings = get_option( 'weed_settings', array() );
-
-		$settings['enable_smtp'] = ! empty( $settings['enable_smtp'] );
 
 		if ( ! empty( $settings['smtp_port'] ) && is_string( $settings['smtp_port'] ) ) {
 			$settings['smtp_port'] = absint( $settings['smtp_port'] );

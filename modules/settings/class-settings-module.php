@@ -252,17 +252,6 @@ class Settings_Module extends Base_Module {
 			'weed-general-section'
 		);
 
-		add_settings_field(
-			'enable-smtp',
-			__( 'Enable SMTP', 'welcome-email-editor' ),
-			array(
-				$this,
-				'enable_smtp_field',
-			),
-			'weed-general-settings',
-			'weed-general-section'
-		);
-
 		// SMTP fields.
 		add_settings_field(
 			'smtp-host',
@@ -516,16 +505,6 @@ class Settings_Module extends Base_Module {
 	public function content_type_field() {
 
 		$field = require __DIR__ . '/templates/fields/general/content-type.php';
-		$field( $this );
-
-	}
-
-	/**
-	 * Content type field.
-	 */
-	public function enable_smtp_field() {
-
-		$field = require __DIR__ . '/templates/fields/general/enable-smtp.php';
 		$field( $this );
 
 	}
