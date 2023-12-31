@@ -171,7 +171,7 @@ class Test_Emails {
 	}
 
 	/**
-	 * Test SMTP email.
+	 * Test email.
 	 */
 	public function test_smtp_email() {
 
@@ -182,7 +182,7 @@ class Test_Emails {
 			'Content-Type: text/html; charset=UTF-8',
 		);
 
-		$subject = __( 'Swift SMTP: Test SMTP Email', 'welcome-email-editor' );
+		$subject = __( 'Swift SMTP: Test Email', 'welcome-email-editor' );
 
 		ob_start();
 		require WEED_PLUGIN_DIR . '/modules/settings/templates/emails/test-smtp-email.php';
