@@ -576,7 +576,7 @@ defined( 'ABSPATH' ) || die( "Can't access directly" );
 																		src="http://swiftsmtp.com/wp-content/uploads/signature.jpg"
 																		alt="David Vongries"
 																		style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"
-																		width="72" title="David Vongries"></a></td>
+																		width="100" title="David Vongries"></a></td>
 														</tr>
 													</table>
 												</td>
