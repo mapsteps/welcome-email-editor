@@ -39,7 +39,7 @@ return function ( $module ) {
 
 		<div class="weed-submission-notice is-hidden"></div>
 
-		<button type="button" class="button button-larger button-primary weed-test-email-button"
+		<button type="button" class="button button-full button-larger button-primary weed-test-email-button"
 				data-email-type="test_smtp_email">
 			<?php esc_html_e( 'Send Test Email (Save First!)', 'welcome-email-editor' ); ?>
 		</button>

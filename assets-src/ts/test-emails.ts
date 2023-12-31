@@ -81,8 +81,6 @@ export function setupTestEmails() {
 				isRequesting = false;
 				stopLoading(button);
 
-				console.log(r);
-
 				if (noticeEl) {
 					noticeEl.classList.remove('is-hidden');
 					noticeEl.classList.add(r.success ? 'is-success' : 'is-error');
