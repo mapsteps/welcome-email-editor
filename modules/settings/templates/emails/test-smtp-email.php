@@ -76,17 +76,6 @@ defined( 'ABSPATH' ) || die( "Can't access directly" );
 			mso-hide: all;
 		}
 
-		.es-button-border:hover {
-			border-style: solid solid solid solid !important;
-			background: #0b317e !important;
-			border-color: #42d159 #42d159 #42d159 #42d159 !important;
-		}
-
-		.es-button-border:hover a.es-button,
-		.es-button-border:hover button.es-button {
-			background: #0b317e !important;
-		}
-
 		@media only screen and (max-width: 600px) {
 			p, ul li, ol li, a {
 				line-height: 150% !important
@@ -538,11 +527,11 @@ defined( 'ABSPATH' ) || die( "Can't access directly" );
 															<td align="center"
 																style="Margin:0;padding-left:10px;padding-right:10px;padding-top:30px;padding-bottom:20px">
 																<span class="es-button-border"
-																		style="border-style:solid;border-color:#2CB543;background:#071F4F;border-width:0px;display:inline-block;border-radius:5px;width:auto"><a
+																		style="border-style:solid;border-color:#FE337C;background:#FE337C;border-width:0px;display:inline-block;border-radius:5px;width:auto"><a
 																		href="https://wordpress.org/support/plugin/welcome-email-editor/reviews/#new-post"
 																		class="es-button es-button-1625643206450"
 																		target="_blank"
-																		style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:16px;padding:15px 25px;display:inline-block;background:#071F4F;border-radius:4px;font-family:roboto, 'helvetica neue', helvetica, arial, sans-serif;font-weight:normal;font-style:normal;line-height:19px;width:100%;text-align:center;mso-padding-alt:0;mso-border-alt:10px solid #071F4F">Leave a Review</a></span>
+																		style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:16px;padding:15px 25px;display:inline-block;background:#FE337C;border-radius:4px;font-family:roboto, 'helvetica neue', helvetica, arial, sans-serif;font-weight:normal;font-style:normal;line-height:19px;width:100%;text-align:center;mso-padding-alt:0;mso-border-alt:10px solid #FE337C">Leave a Review</a></span>
 															</td>
 														</tr>
 													</table>
