@@ -1,4 +1,4 @@
-=== Swift SMTP (formerly known as Welcome Email Editor) ===
+=== Swift SMTP (formerly Welcome Email Editor) ===
 Contributors: davidvongries
 Tags: SMTP, change SMTP, custom SMTP, mail SMTP, welcome email, wordpress welcome email, mail, email, new user email, password reminder, lost password, welcome email attachment, mail attachment, email attachment
 Requires at least: 4.6
@@ -10,9 +10,9 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 == Description ==
 **Swift SMTP** is a free & simple SMTP Plugin for WordPress.
 
-= 📤 Custom SMTP Settings =
 Struggeling with emails not being delivered from your WordPress website? Look no further.
 
+= 📤 Custom SMTP Settings =
 Swift SMTP allows you to configure custom SMTP settings for your WordPress site, ensuring more reliable sending and delivery through your preferred service.
 
 * Set "From" email address
@@ -59,7 +59,7 @@ Since version 4.3, the password is no longer sent to the user via email, and ins
 
 == Changelog ==
 = 6.0 | December 30, 2023 =
-* Welcome Email Editor is now Swift SMTP!
+* **Welcome Email Editor is now Swift SMTP!** We've revamped Welcome Email Editor to bring you an easy-to-use & free SMTP plugin for WordPress!
 = 5.0.7 | December 12, 2023 =
 * Fixed: Minor security issue
 = 5.0.6 | December 01, 2023 =
