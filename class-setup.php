@@ -94,6 +94,9 @@ class Setup {
 			'from_name'                                    => '',
 			'content_type'                                 => 'html',
 
+			// Test SMTP settings.
+			'test_smtp_recipient_email'                    => get_bloginfo( 'admin_email' ),
+
 			// SMTP settings.
 			'smtp_host'                                    => '',
 			'smtp_port'                                    => 25,

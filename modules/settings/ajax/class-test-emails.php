@@ -7,6 +7,8 @@
 
 namespace Weed\Settings\Ajax;
 
+use Weed\Vars;
+
 defined( 'ABSPATH' ) || die( "Can't access directly" );
 
 /**
@@ -140,6 +142,12 @@ class Test_Emails {
 
 		wp_new_user_notification( $current_user->ID, null, 'admin' );
 
+		$error_msg = Vars::get( 'wp_mail_failed' );
+
+		if ( $error_msg ) {
+			wp_send_json_error( $error_msg );
+		}
+
 		wp_send_json_success( __( 'Email has been sent successfully', 'welcome-email-editor' ) );
 
 	}
@@ -153,6 +161,12 @@ class Test_Emails {
 
 		wp_new_user_notification( $current_user->ID, null, 'user' );
 
+		$error_msg = Vars::get( 'wp_mail_failed' );
+
+		if ( $error_msg ) {
+			wp_send_json_error( $error_msg );
+		}
+
 		wp_send_json_success( __( 'Email has been sent successfully', 'welcome-email-editor' ) );
 
 	}
@@ -165,6 +179,12 @@ class Test_Emails {
 		$current_user = wp_get_current_user();
 
 		retrieve_password( $current_user->user_login );
+
+		$error_msg = Vars::get( 'wp_mail_failed' );
+
+		if ( $error_msg ) {
+			wp_send_json_error( $error_msg );
+		}
 
 		wp_send_json_success( __( 'Email has been sent successfully', 'welcome-email-editor' ) );
 
@@ -189,6 +209,12 @@ class Test_Emails {
 		$body = ob_get_clean();
 
 		wp_mail( $recipient, $subject, $body, $headers );
+
+		$error_msg = Vars::get( 'wp_mail_failed' );
+
+		if ( $error_msg ) {
+			wp_send_json_error( $error_msg );
+		}
 
 		wp_send_json_success( __( 'Email has been sent successfully', 'welcome-email-editor' ) );
 
