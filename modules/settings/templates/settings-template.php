@@ -70,12 +70,11 @@ return function () {
 					<?php settings_fields( 'weed-settings-group' ); ?>
 
 					<div class="heatbox-admin-panel" data-show-when-tab="smtp">
-						<div class="heatbox">
-							<?php do_settings_sections( 'weed-general-settings' ); ?>
-						</div>
-
-						<div class="heatbox">
-							<?php do_settings_sections( 'weed-smtp-settings' ); ?>
+						<div class="heatbox is-grouped">
+							<?php
+							do_settings_sections( 'weed-general-settings' );
+							do_settings_sections( 'weed-smtp-settings' );
+							?>
 						</div>
 					</div>
 
