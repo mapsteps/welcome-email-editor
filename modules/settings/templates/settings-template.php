@@ -30,7 +30,7 @@ return function () {
 
 					<div>
 						<img src="<?php echo esc_url( WEED_PLUGIN_URL ); ?>/assets/images/swift-smtp-logo.png"
-							alt="SwiftSMTP">
+							alt="Swift SMTP">
 					</div>
 
 				</div>

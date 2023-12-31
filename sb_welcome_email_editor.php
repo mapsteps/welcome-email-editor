@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Swift SMTP (formerly known as Welcome Email Editor)
+ * Plugin Name: Swift SMTP (formerly Welcome Email Editor)
  * Description: Swift SMTP is a free & simple SMTP Plugin for WordPress.
  * Version: 6.0
  * Author: David Vongries

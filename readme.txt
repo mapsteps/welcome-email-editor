@@ -1,4 +1,4 @@
-=== Swift SMTP (formerly known as Welcome Email Editor) ===
+=== Swift SMTP (formerly Welcome Email Editor) ===
 Contributors: davidvongries
 Tags: SMTP, change SMTP, custom SMTP, mail SMTP, welcome email, wordpress welcome email, mail, email, new user email, password reminder, lost password, welcome email attachment, mail attachment, email attachment
 Requires at least: 4.6
