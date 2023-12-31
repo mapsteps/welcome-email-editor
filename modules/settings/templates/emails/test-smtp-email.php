@@ -520,16 +520,19 @@ defined( 'ABSPATH' ) || die( "Can't access directly" );
 																style="padding:0;Margin:0;padding-top:5px;padding-bottom:5px">
 																<p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:roboto, 'helvetica neue', helvetica, arial, sans-serif;line-height:24px;color:#131313;font-size:16px">
 																	Thank you for checking out Swift SMTP! We're here to
-																	offer a straightforward SMTP setup - for free. Thank you
+																	offer a straightforward SMTP setup - for free. Thank
+																	you
 																	for being with us.</p>
 																<p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:roboto, 'helvetica neue', helvetica, arial, sans-serif;line-height:24px;color:#131313;font-size:16px">
 																	<br></p>
 																<p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:roboto, 'helvetica neue', helvetica, arial, sans-serif;line-height:24px;color:#131313;font-size:16px">
-																	Do you enjoy Swift SMTP? Please consider leaving a review in
+																	Do you enjoy Swift SMTP? Please consider leaving a
+																	review in
 																	the official <a target="_blank"
-																			href="https://wordpress.org/plugins/welcome-email-editor/"
-																			style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#2CB543;font-size:16px">WordPress
-																		directory</a> and help us spread the word!</p></td>
+																					href="https://wordpress.org/plugins/welcome-email-editor/"
+																					style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#2CB543;font-size:16px">WordPress
+																		directory</a> and help us spread the word!</p>
+															</td>
 														</tr>
 														<tr>
 															<td align="center"
@@ -539,7 +542,7 @@ defined( 'ABSPATH' ) || die( "Can't access directly" );
 																		href="https://wordpress.org/support/plugin/welcome-email-editor/reviews/#new-post"
 																		class="es-button es-button-1625643206450"
 																		target="_blank"
-																		style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:16px;padding:15px 25px;display:inline-block;background:#071F4F;border-radius:4px;font-family:roboto, 'helvetica neue', helvetica, arial, sans-serif;font-weight:normal;font-style:normal;line-height:19px;width:auto;text-align:center;mso-padding-alt:0;mso-border-alt:10px solid #071F4F">Leave a Review</a></span>
+																		style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:16px;padding:15px 25px;display:inline-block;background:#071F4F;border-radius:4px;font-family:roboto, 'helvetica neue', helvetica, arial, sans-serif;font-weight:normal;font-style:normal;line-height:19px;width:100%;text-align:center;mso-padding-alt:0;mso-border-alt:10px solid #071F4F">Leave a Review</a></span>
 															</td>
 														</tr>
 													</table>
@@ -569,7 +572,8 @@ defined( 'ABSPATH' ) || die( "Can't access directly" );
 													<table cellpadding="0" cellspacing="0" width="100%"
 															style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
 														<tr>
-															<td align="left" style="padding:0;Margin:0;font-size:0px"><a
+															<td align="center" style="padding:0;Margin:0;font-size:0px">
+																<a
 																	target="_blank" href="https://davidvongries.com/"
 																	style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#2CB543;font-size:16px"><img
 																		class="adapt-img"
@@ -605,9 +609,9 @@ defined( 'ABSPATH' ) || die( "Can't access directly" );
 															style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
 														<tr>
 															<td align="center" style="padding:0;Margin:0"><p
-																	style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:roboto, 'helvetica neue', helvetica, arial, sans-serif;line-height:21px;color:#131313;font-size:14px;text-align:left">
+																	style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:roboto, 'helvetica neue', helvetica, arial, sans-serif;line-height:21px;color:#131313;font-size:14px;text-align:center">
 																	David Vongries</p>
-																<p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:roboto, 'helvetica neue', helvetica, arial, sans-serif;line-height:21px;color:#131313;font-size:14px;text-align:left">
+																<p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:roboto, 'helvetica neue', helvetica, arial, sans-serif;line-height:21px;color:#131313;font-size:14px;text-align:center">
 																	Founder, Swift SMTP</p></td>
 														</tr>
 													</table>
