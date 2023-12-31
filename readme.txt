@@ -10,9 +10,9 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 == Description ==
 **Swift SMTP** is a free & simple SMTP Plugin for WordPress.
 
-= 📤 Custom SMTP Settings =
 Struggeling with emails not being delivered from your WordPress website? Look no further.
 
+= 📤 Custom SMTP Settings =
 Swift SMTP allows you to configure custom SMTP settings for your WordPress site, ensuring more reliable sending and delivery through your preferred service.
 
 * Set "From" email address
