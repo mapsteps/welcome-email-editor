@@ -73,6 +73,7 @@ return function () {
 						<div class="heatbox">
 							<?php do_settings_sections( 'weed-general-settings' ); ?>
 						</div>
+
 						<div class="heatbox">
 							<?php do_settings_sections( 'weed-smtp-settings' ); ?>
 						</div>
