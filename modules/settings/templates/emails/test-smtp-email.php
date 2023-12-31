@@ -481,13 +481,13 @@ defined( 'ABSPATH' ) || die( "Can't access directly" );
 														<tr>
 															<td align="center" style="padding:0;Margin:0"><p
 																	style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:roboto, 'helvetica neue', helvetica, arial, sans-serif;line-height:24px;color:#f0f8ff;font-size:16px">
-																	<strong>Congratulations</strong></p></td>
+																	CONGRATULATIONS</p></td>
 														</tr>
 														<tr>
 															<td align="center" class="es-m-txt-c"
 																style="padding:0;Margin:0;padding-bottom:10px"><h1
 																	style="Margin:0;line-height:38px;mso-line-height-rule:exactly;font-family:roboto, 'helvetica neue', helvetica, arial, sans-serif;font-size:32px;font-style:normal;font-weight:bold;color:#ffffff">
-																	Test email was sent successfully!</h1></td>
+																	Test email was sent successfully</h1></td>
 														</tr>
 													</table>
 												</td>
@@ -536,7 +536,7 @@ defined( 'ABSPATH' ) || die( "Can't access directly" );
 														</tr>
 														<tr>
 															<td align="center"
-																style="Margin:0;padding-left:10px;padding-right:10px;padding-top:15px;padding-bottom:15px">
+																style="Margin:0;padding-left:10px;padding-right:10px;padding-top:30px;padding-bottom:20px">
 																<span class="es-button-border"
 																		style="border-style:solid;border-color:#2CB543;background:#071F4F;border-width:0px;display:inline-block;border-radius:5px;width:auto"><a
 																		href="https://wordpress.org/support/plugin/welcome-email-editor/reviews/#new-post"
