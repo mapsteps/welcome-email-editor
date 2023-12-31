@@ -70,7 +70,7 @@ class Test_Emails {
 			wp_send_json_error( 'Invalid nonce', 'welcome-email-editor' );
 		}
 
-		if ( ! $this->verifyNonce() ) {
+		if ( ! $this->verify_nonce() ) {
 			wp_send_json_error( 'Invalid nonce', 'welcome-email-editor' );
 		}
 
@@ -88,6 +88,10 @@ class Test_Emails {
 			case 'reset_password_email':
 				$this->reset_password_email();
 				break;
+
+			case 'test_smtp_email':
+				$this->test_smtp_email();
+				break;
 		}
 
 		remove_filter( 'weed_test_email_recipient', array( $this, 'set_testing_recipient' ) );
@@ -99,7 +103,7 @@ class Test_Emails {
 	 *
 	 * @return bool
 	 */
-	private function verifyNonce() {
+	private function verify_nonce() {
 
 		$nonce_action = '';
 
@@ -114,6 +118,10 @@ class Test_Emails {
 
 			case 'reset_password_email':
 				$nonce_action = WEED_PLUGIN_DIR . '_Reset_Password_Email';
+				break;
+
+			case 'test_smtp_email':
+				$nonce_action = WEED_PLUGIN_DIR . '_Test_SMTP_Email';
 				break;
 		}
 
@@ -157,6 +165,34 @@ class Test_Emails {
 		$current_user = wp_get_current_user();
 
 		retrieve_password( $current_user->user_login );
+
+		wp_send_json_success( __( 'Email has been sent successfully', 'welcome-email-editor' ) );
+
+	}
+
+	/**
+	 * Test SMTP email.
+	 */
+	public function test_smtp_email() {
+
+		$admin_email = get_bloginfo( 'admin_email' );
+		$recipient   = isset( $_POST['to_email'] ) ? sanitize_text_field( wp_unslash( $_POST['to_email'] ) ) : $admin_email;
+
+		$headers = array(
+			'Content-Type: text/html; charset=UTF-8',
+		);
+
+		$subject = __( 'Swift SMTP: Test SMTP Email', 'welcome-email-editor' );
+
+		ob_start();
+		require WEED_PLUGIN_DIR . '/modules/settings/templates/emails/test-smtp-email.php';
+		$body = ob_get_clean();
+
+		$is_sent = wp_mail( $recipient, $subject, $body, $headers );
+
+		error_log( 'is_sent: ' . $is_sent );
+		error_log( 'subject: ' . $subject );
+		error_log( 'recipient: ' . $recipient );
 
 		wp_send_json_success( __( 'Email has been sent successfully', 'welcome-email-editor' ) );
 

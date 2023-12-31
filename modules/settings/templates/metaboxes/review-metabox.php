@@ -10,7 +10,7 @@ defined( 'ABSPATH' ) || die( "Can't access directly" );
 
 <div class="heatbox weed-review-metabox">
 	<h2>
-		<?php esc_html_e( 'Leave us a Review', 'page-builder-framework' ); ?>
+		<?php esc_html_e( 'Leave us a Review', 'welcome-email-editor' ); ?>
 	</h2>
 
 	<div class="heatbox-content">

@@ -7,6 +7,7 @@ declare var weedSettings: {
 		adminWelcomeEmail: string;
 		userWelcomeEmail: string;
 		resetPasswordEmail: string;
+		testSmtpEmail: string;
 	};
 	warningMessages: {
 		resetSettings: string;
@@ -19,9 +20,6 @@ export function setupTestEmails() {
 	init();
 
 	function init() {
-		// @ts-ignore
-		jQuery(document).on("click", ".weed-reset-settings-button", resetSettings);
-
 		// @ts-ignore
 		jQuery(document).on("click", ".weed-test-email-button", sendTestEmail);
 	}
@@ -57,6 +55,12 @@ export function setupTestEmails() {
 			case "reset_password_email":
 				data.nonce = weedSettings.nonces.resetPasswordEmail;
 				break;
+
+			case "test_smtp_email":
+				data.nonce = weedSettings.nonces.testSmtpEmail;
+				const toEmailField = document.querySelector('#weed-test-smtp') as HTMLInputElement;
+				data.to_email = toEmailField ? toEmailField.value : '';
+				break;
 		}
 
 		jQuery
@@ -70,10 +74,5 @@ export function setupTestEmails() {
 				isRequesting = false;
 				stopLoading(button);
 			});
-	}
-
-	function resetSettings(e: MouseEvent) {
-		if (!confirm(weedSettings.warningMessages.resetSettings))
-			e.preventDefault();
 	}
 }
