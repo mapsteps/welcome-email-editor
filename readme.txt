@@ -59,7 +59,7 @@ Since version 4.3, the password is no longer sent to the user via email, and ins
 
 == Changelog ==
 = 6.0 | December 30, 2023 =
-* Welcome Email Editor is now Swift SMTP!
+* **Welcome Email Editor is now Swift SMTP!** We've revamped Welcome Email Editor to bring you an easy-to-use & free SMTP plugin for WordPress!
 = 5.0.7 | December 12, 2023 =
 * Fixed: Minor security issue
 = 5.0.6 | December 01, 2023 =
