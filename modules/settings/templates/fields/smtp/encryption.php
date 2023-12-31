@@ -22,23 +22,23 @@ return function ( $module ) {
 
 	<div class="weed-fields weed-radio-fields">
 		<label for="weed_settings--smtp_encryption-none" class="label radio-label">
-			<?php _e( 'None', 'welcome-email-editor' ); ?>
+			<?php esc_html_e( 'None', 'welcome-email-editor' ); ?>
 			<input type="radio" name="weed_settings[smtp_encryption]" id="weed_settings--smtp_encryption-none"
-				   value="" <?php checked( $value, '' ); ?>/>
+					value="" <?php checked( $value, '' ); ?>/>
 			<div class="indicator"></div>
 		</label>
 
 		<label for="weed_settings--smtp_encryption-ssl" class="label radio-label">
-			<?php _e( 'SSL', 'welcome-email-editor' ); ?>
+			<?php esc_html_e( 'SSL', 'welcome-email-editor' ); ?>
 			<input type="radio" name="weed_settings[smtp_encryption]" id="weed_settings--smtp_encryption-ssl"
-				   value="ssl" <?php checked( $value, 'ssl' ); ?>/>
+					value="ssl" <?php checked( $value, 'ssl' ); ?>/>
 			<div class="indicator"></div>
 		</label>
 
 		<label for="weed_settings--smtp_encryption-tls" class="label radio-label">
-			<?php _e( 'TLS', 'welcome-email-editor' ); ?>
+			<?php esc_html_e( 'TLS', 'welcome-email-editor' ); ?>
 			<input type="radio" name="weed_settings[smtp_encryption]" id="weed_settings--smtp_encryption-tls"
-				   value="tls" <?php checked( $value, 'tls' ); ?>/>
+					value="tls" <?php checked( $value, 'tls' ); ?>/>
 			<div class="indicator"></div>
 		</label>
 	</div>

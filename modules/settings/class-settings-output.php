@@ -89,8 +89,8 @@ class Settings_Output extends Base_Output {
 	 *
 	 * @see https://developer.wordpress.org/reference/hooks/retrieve_password_title/
 	 *
-	 * @param string $title Email subject.
-	 * @param string $user_login The username for the user.
+	 * @param string  $title Email subject.
+	 * @param string  $user_login The username for the user.
 	 * @param WP_User $user_data WP_User object.
 	 *
 	 * @return string
@@ -154,9 +154,9 @@ class Settings_Output extends Base_Output {
 	/**
 	 * Retrieve password message.
 	 *
-	 * @param string $message Email message.
-	 * @param string $key The activation key.
-	 * @param string $user_login The activation key.
+	 * @param string  $message Email message.
+	 * @param string  $key The activation key.
+	 * @param string  $user_login The activation key.
 	 * @param WP_User $user_data WP_User object.
 	 *
 	 * @return string
@@ -207,9 +207,9 @@ class Settings_Output extends Base_Output {
 	 *
 	 * Returning false disables the welcome email.
 	 *
-	 * @param int $user_id User ID.
+	 * @param int    $user_id User ID.
 	 * @param string $password User password.
-	 * @param array $meta Signup meta data. Default empty array.
+	 * @param array  $meta Signup meta data. Default empty array.
 	 */
 	public function wpmu_new_user_notification( $user_id, $password, $meta = array() ) {
 
