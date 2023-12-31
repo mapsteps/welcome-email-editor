@@ -96,8 +96,8 @@ class Setup {
 
 			// SMTP settings.
 			'smtp_host'                                    => '',
-			'smtp_port'                                    => 587,
-			'smtp_encryption'                              => 'tls',
+			'smtp_port'                                    => 25,
+			'smtp_encryption'                              => '',
 			'smtp_username'                                => '',
 			'smtp_password'                                => '',
 
