@@ -56,7 +56,6 @@ Since version 4.3, the password is no longer sent to the user via email, and ins
 
 == Screenshots ==
 1. Swift SMTP Settings
-1. Welcome Email Editor Settings
 
 == Changelog ==
 = 6.0 | December 30, 2023 =
