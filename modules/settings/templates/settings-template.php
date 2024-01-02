@@ -59,13 +59,16 @@ return function () {
 
 		</div>
 
+		<?php
+		$current_url = site_url() . $_SERVER['REQUEST_URI'];
+		?>
+
 		<form method="post" action="options.php" class="weed-settings-form">
 			<div class="heatbox-container heatbox-container-center heatbox-column-container">
 
 				<div class="heatbox-main">
 					<!-- Faking H1 tag to place admin notices -->
 					<h1 style="display: none;"></h1>
-
 
 					<?php settings_fields( 'weed-settings-group' ); ?>
 
@@ -103,15 +106,13 @@ return function () {
 						<?php
 						submit_button( '', 'button button-primary button-larger', 'submit', false );
 
-						$current_url = site_url() . $_SERVER['REQUEST_URI'];
-
 						$reset_settings_url = add_query_arg(
 							array(
 								'action'       => 'weed_reset_settings',
 								'nonce'        => wp_create_nonce( WEED_PLUGIN_DIR ),
-								'http_referer' => esc_url( $current_url ),
+								'http_referer' => $current_url,
 							),
-							esc_url( $current_url )
+							$current_url
 						);
 						?>
 
