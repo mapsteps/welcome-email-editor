@@ -66,14 +66,28 @@ function switchTab(tab: string): void {
  */
 function setRefererValue(hashValue: string) {
 	const refererField = document.querySelector('[name="_wp_http_referer"]') as HTMLInputElement | null;
-	if (!refererField) return;
 
-	if (refererField.value.includes("#")) {
-		const urlSplits = refererField.value.split("#");
-		const url = urlSplits[0];
+	if (refererField) {
+		if (refererField.value.includes("#")) {
+			const urlSplits = refererField.value.split("#");
+			const url = urlSplits[0];
 
-		refererField.value = url + "#" + hashValue;
-	} else {
-		refererField.value = refererField.value + "#" + hashValue;
+			refererField.value = url + "#" + hashValue;
+		} else {
+			refererField.value = refererField.value + "#" + hashValue;
+		}
+	}
+
+	const resetLink = document.querySelector('.weed-reset-button') as HTMLAnchorElement | null;
+
+	if (resetLink) {
+		if (resetLink.href.includes("#")) {
+			const urlSplits = resetLink.href.split("#");
+			const url = urlSplits[0];
+
+			resetLink.href = url + "#" + hashValue;
+		} else {
+			resetLink.href = resetLink.href + "#" + hashValue;
+		}
 	}
 }
