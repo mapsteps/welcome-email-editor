@@ -18,8 +18,11 @@ return function ( $module ) {
 
 	?>
 
-	<button type="button" class="button button-larger button-primary weed-test-email-button" data-email-type="user_welcome_email">
-		<?php _e( 'Send Test Email (Save First!)', 'welcome-email-editor' ); ?>
+	<div class="weed-submission-notice is-hidden"></div>
+
+	<button type="button" class="button button-larger button-primary weed-test-email-button"
+			data-email-type="user_welcome_email">
+		<?php esc_html_e( 'Send Test Email (Save First!)', 'welcome-email-editor' ); ?>
 	</button>
 
 	<?php

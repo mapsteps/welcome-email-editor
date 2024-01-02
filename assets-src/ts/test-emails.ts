@@ -1,4 +1,4 @@
-import {startLoading, stopLoading} from "./utils";
+import {hideNotice, showNotice, startLoading, stopLoading} from "./utils";
 
 declare var ajaxurl: string;
 
@@ -16,7 +16,6 @@ declare var weedSettings: {
 
 export function setupTestEmails() {
 	let isRequesting = false;
-	const noticeEl = document.querySelector('.weed-submission-notice');
 
 	init();
 
@@ -34,6 +33,15 @@ export function setupTestEmails() {
 		// @ts-ignore
 		const button = this as HTMLButtonElement | null;
 		if (!button) return;
+
+		const allNoticeEls = document.querySelectorAll('.weed-submission-notice') as NodeListOf<HTMLElement>;
+
+		allNoticeEls.forEach(function (el) {
+			hideNotice(el);
+		});
+
+		const parentEl = button.parentElement as HTMLElement | null;
+		const noticeEl = parentEl ? parentEl.querySelector('.weed-submission-notice') as HTMLElement | null : null;
 
 		if (isRequesting) return;
 		isRequesting = true;
@@ -64,11 +72,7 @@ export function setupTestEmails() {
 				break;
 		}
 
-		if (noticeEl) {
-			noticeEl.classList.add('is-hidden');
-			noticeEl.classList.remove('is-error');
-			noticeEl.classList.remove('is-success');
-		}
+		if (noticeEl) hideNotice(noticeEl);
 
 		jQuery
 			.ajax({
@@ -82,9 +86,11 @@ export function setupTestEmails() {
 				stopLoading(button);
 
 				if (noticeEl) {
-					noticeEl.classList.remove('is-hidden');
-					noticeEl.classList.add(r.success ? 'is-success' : 'is-error');
-					noticeEl.innerHTML = r.data ? r.data : '';
+					showNotice({
+						el: noticeEl,
+						type: r.success ? 'success' : 'error',
+						msg: r.data,
+					});
 				}
 			});
 	}

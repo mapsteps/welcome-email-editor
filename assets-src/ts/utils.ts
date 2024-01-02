@@ -41,3 +41,28 @@ export function stopLoading(button: HTMLButtonElement | null) {
 	if (!button) return;
 	button.classList.remove("is-loading");
 }
+
+export type HideNoticeProps = {
+	el: HTMLElement;
+	type?: 'success' | 'error' | 'failed' | 'warning' | 'info';
+	msg?: string;
+}
+
+export function showNotice(props: HideNoticeProps) {
+	const type = props.type ? props.type : 'success';
+	const msg = props.msg ? props.msg : '';
+
+	props.el.classList.add("is-" + type);
+	props.el.innerHTML = msg;
+	props.el.classList.remove("is-hidden");
+}
+
+export function hideNotice(el: HTMLElement) {
+	el.classList.add("is-hidden");
+	el.classList.remove("is-success");
+	el.classList.remove("is-error");
+	el.classList.remove("is-failed");
+	el.classList.remove("is-warning");
+	el.classList.remove("is-info");
+	el.innerHTML = '';
+}

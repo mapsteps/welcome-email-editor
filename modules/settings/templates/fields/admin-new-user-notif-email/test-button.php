@@ -18,9 +18,11 @@ return function ( $module ) {
 
 	?>
 
+	<div class="weed-submission-notice is-hidden"></div>
+
 	<button type="button" class="button button-larger button-primary weed-test-email-button"
 			data-email-type="admin_new_user_notif_email">
-		<?php _e( 'Send Test Email (Save First!)', 'welcome-email-editor' ); ?>
+		<?php esc_html_e( 'Send Test Email (Save First!)', 'welcome-email-editor' ); ?>
 	</button>
 
 	<?php
