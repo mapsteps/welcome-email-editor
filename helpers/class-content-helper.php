@@ -30,6 +30,8 @@ class Content_Helper {
 		}
 
 		/**
+		 * Global wpdb instance.
+		 *
 		 * @global wpdb $wpdb
 		 */
 		global $wpdb;
@@ -63,6 +65,8 @@ class Content_Helper {
 	public function get_user_custom_fields( $user_id ) {
 
 		/**
+		 * Global wpdb instance.
+		 *
 		 * @global wpdb $wpdb
 		 */
 		global $wpdb;
@@ -83,6 +87,77 @@ class Content_Helper {
 		}
 
 		return $custom_fields;
+
+	}
+
+	/**
+	 * Replace placeholders with values.
+	 *
+	 * @param array  $pairs Array of find and replace pairs.
+	 * @param string $content Content to replace.
+	 *
+	 * @return string Replaced content.
+	 */
+	public function replace_content( $pairs, $content ) {
+
+		if ( empty( $pairs ) ) {
+			return $content;
+		}
+
+		$find    = array();
+		$replace = array();
+
+		foreach ( $pairs as $key => $value ) {
+			$find[]    = $key;
+			$replace[] = $value;
+		}
+
+		return str_ireplace( $find, $replace, $content );
+
+	}
+
+	/**
+	 * Replace conditional placeholders.
+	 *
+	 * @param string $content Content to replace.
+	 *
+	 * @return string Replaced content.
+	 */
+	public function replace_conditional_placeholders( $content ) {
+
+		// Collect substrings between [not_logged_in][/not_logged_in] placeholders.
+		preg_match_all( '/\[not_logged_in](.*?)\[\/not_logged_in]/s', $content, $not_logged_in_matches );
+
+		// Collect substrings between [logged_in][/logged_in] placeholders.
+		preg_match_all( '/\[logged_in](.*?)\[\/logged_in]/s', $content, $logged_in_matches );
+
+		// Parse the content for [not_logged_in][/not_logged_in] placeholders.
+		if ( ! empty( $not_logged_in_matches[0] ) ) {
+			foreach ( $not_logged_in_matches[0] as $key => $value ) {
+				$not_logged_in_content = $not_logged_in_matches[1][ $key ];
+
+				if ( ! is_user_logged_in() ) {
+					$content = str_ireplace( $value, $not_logged_in_content, $content );
+				} else {
+					$content = str_ireplace( $value, '', $content );
+				}
+			}
+		}
+
+		// Parse the content for [logged_in][/logged_in] placeholders.
+		if ( ! empty( $logged_in_matches[0] ) ) {
+			foreach ( $logged_in_matches[0] as $key => $value ) {
+				$logged_in_content = $logged_in_matches[1][ $key ];
+
+				if ( is_user_logged_in() ) {
+					$content = str_ireplace( $value, $logged_in_content, $content );
+				} else {
+					$content = str_ireplace( $value, '', $content );
+				}
+			}
+		}
+
+		return $content;
 
 	}
 

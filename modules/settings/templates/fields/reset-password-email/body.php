@@ -20,7 +20,7 @@ return function ( $module ) {
 	$values   = $module->values;
 	?>
 
-	<textarea name="weed_settings[reset_password_email_body]" id="weed_settings--reset_password_email_body" class="large-text" rows="8" placeholder="<?php echo esc_attr( $defaults['reset_password_email_body'] ); ?>"><?php echo esc_html( $values['reset_password_email_body'] ); ?></textarea>
+	<textarea name="weed_settings[reset_password_email_body]" id="weed_settings--reset_password_email_body" class="large-text" rows="15" placeholder="<?php echo esc_attr( $defaults['reset_password_email_body'] ); ?>"><?php echo esc_html( $values['reset_password_email_body'] ); ?></textarea>
 
 	<?php
 

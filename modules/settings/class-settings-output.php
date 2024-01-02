@@ -8,6 +8,7 @@
 namespace Weed\Settings;
 
 use Weed\Base\Base_Output;
+use Weed\Helpers\Content_Helper;
 use WP_User;
 
 defined( 'ABSPATH' ) || die( "Can't access directly" );
@@ -109,21 +110,19 @@ class Settings_Output extends Base_Output {
 		// We want to reverse this for the plain text arena of emails.
 		$blogname = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
 
-		$find = array(
-			'[blog_name]',
-			'[user_login]',
-			'[first_name]',
-			'[last_name]',
+		$content_helper = new Content_Helper();
+
+		$content = $content_helper->replace_content(
+			array(
+				'[blog_name]'  => $blogname,
+				'[user_login]' => $user_login,
+				'[first_name]' => $user_data->first_name,
+				'[last_name]'  => $user_data->last_name,
+			),
+			$saved_title
 		);
 
-		$replace = array(
-			$blogname,
-			$user_login,
-			$user_data->first_name,
-			$user_data->last_name,
-		);
-
-		return str_ireplace( $find, $replace, $saved_title );
+		return $content_helper->replace_conditional_placeholders( $content );
 
 	}
 
@@ -176,27 +175,23 @@ class Settings_Output extends Base_Output {
 		// $reset_url = network_site_url("wp-login.php?action=rp&key=$key&login=" . rawurlencode($user_login), 'login');
 		$reset_url = wp_login_url() . '?action=rp&key=' . $key . '&login=' . rawurlencode( $user_login );
 
-		$find = array(
-			'[blog_name]',
-			'[site_url]',
-			'[reset_url]', // Deprecated, this is here for compatibility purpose.
-			'[reset_pass_url]',
-			'[user_login]',
-			'[first_name]',
-			'[last_name]',
+		$content_helper = new Content_Helper();
+
+		$content = $content_helper->replace_content(
+			array(
+				'[blog_name]'      => $blogname,
+				'[site_url]'       => $site_url,
+				'[reset_url]'      => $reset_url, // Deprecated, this is here for compatibility purpose.
+				'[reset_pass_url]' => $reset_url,
+				'[user_login]'     => $user_login,
+				'[first_name]'     => $user_data->first_name,
+				'[last_name]'      => $user_data->last_name,
+				'[user_ip]'        => isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( $_SERVER['REMOTE_ADDR'] ) : '',
+			),
+			$saved_message
 		);
 
-		$replace = array(
-			$blogname,
-			$site_url,
-			$reset_url,
-			$reset_url,
-			$user_login,
-			$user_data->first_name,
-			$user_data->last_name,
-		);
-
-		return str_ireplace( $find, $replace, $saved_message );
+		return $content_helper->replace_conditional_placeholders( $content );
 
 	}
 

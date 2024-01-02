@@ -21,7 +21,8 @@
 			<code>[site_url]</code> <code>[login_url]</code> <code>[reset_pass_url]</code> <code>[user_email]</code>
 			<code>[user_login]</code> <code>[user_id]</code> <code>[first_name]</code>
 			<code>[last_name]</code> <code>[blog_name]</code> <code>[admin_email]</code> <code>[custom_fields]</code>
-			<code>[date]</code> <code>[time]</code>
+			<code>[date]</code> <code>[time]</code> <code>[user_ip]</code>
+			<code>[not_logged_in][/not_logged_in]</code> <code>[logged_in][/logged_in]</code>
 		</div>
 	</div>
 </div>
