@@ -221,7 +221,7 @@ if ( ! function_exists( 'wp_new_user_notification' ) ) {
 				$wp_new_user_notification_email_admin['headers']
 			);
 
-			if ( empty( $testing_recipient ) ) {
+			if ( ! empty( $custom_recipient_emails ) ) {
 				foreach ( $custom_recipient_emails as $custom_recipient_email ) {
 					wp_mail(
 						$custom_recipient_email,
