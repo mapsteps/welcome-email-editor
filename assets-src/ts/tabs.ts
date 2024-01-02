@@ -54,4 +54,26 @@ function switchTab(tab: string): void {
 			tabContent.style.display = "none";
 		}
 	});
+
+	setRefererValue(tab);
+}
+
+/**
+ * Set referer value for the tabs navigation of settings page.
+ * This is being used to preserve the active tab after saving the settings page.
+ *
+ * @param {string} hashValue The hash value.
+ */
+function setRefererValue(hashValue: string) {
+	const refererField = document.querySelector('[name="_wp_http_referer"]') as HTMLInputElement | null;
+	if (!refererField) return;
+
+	if (refererField.value.includes("#")) {
+		const urlSplits = refererField.value.split("#");
+		const url = urlSplits[0];
+
+		refererField.value = url + "#" + hashValue;
+	} else {
+		refererField.value = refererField.value + "#" + hashValue;
+	}
 }
