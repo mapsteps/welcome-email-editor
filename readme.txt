@@ -32,7 +32,7 @@ When a user is added to or signs up for a website, WordPress sends notifications
 * & more
 
 = 🔐 Change WordPress Reset Password Email =
-"Swift SMTP also lets you customize the default **Forgot Password** email in WordPress."
+Swift SMTP also lets you customize the default **Forgot Password** email in WordPress.
 
 * Change email subject
 * Change email content
@@ -56,6 +56,7 @@ Since version 4.3, the password is no longer sent to the user via email, and ins
 
 == Screenshots ==
 1. Swift SMTP Settings
+1. Welcome Email Editor Settings
 
 == Changelog ==
 = 6.0 | December 30, 2023 =
