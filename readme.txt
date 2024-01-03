@@ -3,7 +3,7 @@ Contributors: davidvongries
 Tags: SMTP, change SMTP, custom SMTP, mail SMTP, welcome email, wordpress welcome email, mail, email, new user email, password reminder, lost password, welcome email attachment, mail attachment, email attachment
 Requires at least: 4.6
 Tested up to: 6.4
-Stable tag: 6.0
+Stable tag: 6.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -58,6 +58,12 @@ Since version 4.3, the password is no longer sent to the user via email, and ins
 1. Swift SMTP Settings
 
 == Changelog ==
+= 6.1 | December 30, 2023 =
+* New: [logged_in] & [not_logged_in] tags for Welcome Email Editor
+* Tweak: Visual feedback when sending test emails in Welcome Email Editor
+* Tweak: Make sure the Welcome Emails mimick WordPress' default emails
+* Tweak: Improved email template when triggering a test email from the SMTP settings tab
+* Fixed: Multiple recipients didn't work in Welcome Email Editor
 = 6.0 | December 30, 2023 =
 * **Welcome Email Editor is now Swift SMTP!** We've revamped Welcome Email Editor to bring you an easy-to-use & free SMTP plugin for WordPress!
 = 5.0.7 | December 12, 2023 =
