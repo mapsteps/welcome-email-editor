@@ -58,7 +58,7 @@ Since version 4.3, the password is no longer sent to the user via email, and ins
 1. Swift SMTP Settings
 
 == Changelog ==
-= 6.1 | December 30, 2023 =
+= 6.0.1 | January 03, 2024 =
 * New: [logged_in] & [not_logged_in] tags for Welcome Email Editor
 * Tweak: Visual feedback when sending test emails in Welcome Email Editor
 * Tweak: Make sure the Welcome Emails mimick WordPress' default emails
