@@ -198,17 +198,17 @@ class Test_Emails {
 		$admin_email = get_bloginfo( 'admin_email' );
 		$recipient   = isset( $_POST['to_email'] ) ? sanitize_text_field( wp_unslash( $_POST['to_email'] ) ) : $admin_email;
 
-		$headers = array(
-			'Content-Type: text/html; charset=UTF-8',
-		);
+		$values = Vars::get( 'values' );
+
+		$content_type = isset( $values['content_type'] ) ? $values['content_type'] : 'text';
 
 		$subject = __( 'Swift SMTP: Test Email', 'welcome-email-editor' );
 
 		ob_start();
-		require WEED_PLUGIN_DIR . '/modules/settings/templates/emails/test-smtp-email.php';
+		require WEED_PLUGIN_DIR . '/modules/settings/templates/emails/smtp-test' . ( $content_type === 'html' ? '-' . $content_type : '' ) . '-email.php';
 		$body = ob_get_clean();
 
-		wp_mail( $recipient, $subject, $body, $headers );
+		wp_mail( $recipient, $subject, $body );
 
 		$error_msg = Vars::get( 'wp_mail_failed' );
 
