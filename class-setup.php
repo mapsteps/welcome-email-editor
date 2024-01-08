@@ -67,33 +67,33 @@ class Setup {
 	public function set_data() {
 
 		/* translators: %s: User login. */
-		$user_welcome_email_body  = __( 'Username:', 'welcome-email-editor' ) . ' [user_login]' . "<br><br>\r\n\r\n";
-		$user_welcome_email_body .= __( 'To set your password, visit the following address:' ) . "<br><br>\r\n\r\n";
-		$user_welcome_email_body .= '<a href="[reset_pass_url]">[reset_pass_url]</a><br><br>' . "\r\n\r\n";
-		$user_welcome_email_body .= '<a href="[login_url]">[login_url]</a>' . "\r\n";
+		$user_welcome_email_body = __( 'Username:', 'welcome-email-editor' ) . ' [user_login]' . "\r\n\r\n";
+		$user_welcome_email_body .= __( 'To set your password, visit the following address:' ) . "\r\n\r\n";
+		$user_welcome_email_body .= '[reset_pass_url]' . "\r\n\r\n";
+		$user_welcome_email_body .= '[login_url]' . "\r\n";
 
 		/* translators: %s: Site title. */
-		$admin_welcome_email_body = __( 'New user registration on your site', 'welcome-email-editor' ) . " [blog_name]<br><br>\r\n\r\n";
+		$admin_welcome_email_body = __( 'New user registration on your site', 'welcome-email-editor' ) . " [blog_name]\r\n\r\n";
 		/* translators: %s: User login. */
-		$admin_welcome_email_body .= __( 'Username:', 'welcome-email-editor' ) . " [user_login]<br><br>\r\n\r\n";
+		$admin_welcome_email_body .= __( 'Username:', 'welcome-email-editor' ) . " [user_login]\r\n\r\n";
 		/* translators: %s: User email address. */
-		$admin_welcome_email_body .= __( 'Email:', 'welcome-email-editor' ) . " [user_email]<br><br>\r\n";
+		$admin_welcome_email_body .= __( 'Email:', 'welcome-email-editor' ) . " [user_email]\r\n";
 
-		$reset_password_message = __( 'Someone has requested a password reset for the following account:', 'welcome-email-editor' ) . "<br><br>\r\n\r\n";
+		$reset_password_message = __( 'Someone has requested a password reset for the following account:', 'welcome-email-editor' ) . "\r\n\r\n";
 		/* translators: %s: Site name. */
-		$reset_password_message .= __( 'Site Name:', 'welcome-email-editor' ) . " [blog_name]<br><br>\r\n\r\n";
+		$reset_password_message .= __( 'Site Name:', 'welcome-email-editor' ) . " [blog_name]\r\n\r\n";
 		/* translators: %s: User login. */
-		$reset_password_message .= __( 'Username:', 'welcome-email-editor' ) . " [user_login]<br><br>\r\n\r\n";
-		$reset_password_message .= __( 'If this was a mistake, ignore this email and nothing will happen.', 'welcome-email-editor' ) . "<br><br>\r\n\r\n";
-		$reset_password_message .= __( 'To reset your password, visit the following address:', 'welcome-email-editor' ) . "<br><br>\r\n\r\n";
-		$reset_password_message .= '<a href="[reset_pass_url]">[reset_pass_url]</a>' . "\r\n\r\n";
-		$reset_password_message .= "[not_logged_in]<br><br>This password reset request originated from the IP address [user_ip].[/not_logged_in]\r\n";
+		$reset_password_message .= __( 'Username:', 'welcome-email-editor' ) . " [user_login]\r\n\r\n";
+		$reset_password_message .= __( 'If this was a mistake, ignore this email and nothing will happen.', 'welcome-email-editor' ) . "\r\n\r\n";
+		$reset_password_message .= __( 'To reset your password, visit the following address:', 'welcome-email-editor' ) . "\r\n\r\n";
+		$reset_password_message .= '[reset_pass_url]' . "\r\n\r\n";
+		$reset_password_message .= "[not_logged_in]This password reset request originated from the IP address [user_ip].[/not_logged_in]\r\n";
 
 		$defaults = array(
 			// General settings.
 			'from_email'                                   => '',
 			'from_name'                                    => '',
-			'content_type'                                 => 'html',
+			'content_type'                                 => 'text',
 
 			// Test SMTP settings.
 			'test_smtp_recipient_email'                    => get_bloginfo( 'admin_email' ),
