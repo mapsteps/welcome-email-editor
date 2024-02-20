@@ -9,6 +9,7 @@ namespace Weed\Settings;
 
 use Weed\Base\Base_Output;
 use Weed\Helpers\Content_Helper;
+use Weed\Helpers\Email_Helper;
 use WP_User;
 
 defined( 'ABSPATH' ) || die( "Can't access directly" );
@@ -268,8 +269,18 @@ class Settings_Output extends Base_Output {
 			return $from_email;
 		}
 
+		// Return early if the feature is disabled via filter.
 		if ( ! apply_filters( 'weed_use_from_email', true ) ) {
 			return $from_email;
+		}
+
+		if ( ! $values['force_from_email'] ) {
+			$default_from_email = ( new Email_Helper() )->get_default_wp_from_email();
+
+			// When we don't force the "from email", we only set the value if it's not the default.
+			if ( $from_email !== $default_from_email ) {
+				return $from_email;
+			}
 		}
 
 		$admin_email = get_option( 'admin_email' );
@@ -299,8 +310,16 @@ class Settings_Output extends Base_Output {
 			return $from_name;
 		}
 
+		// Return early if the feature is disabled via filter.
 		if ( ! apply_filters( 'weed_use_from_name', true ) ) {
 			return $from_name;
+		}
+
+		if ( ! $values['force_from_name'] ) {
+			// When we don't force the "from name", we only set the value if it's not the default.
+			if ( 'WordPress' !== $from_name ) {
+				return $from_name;
+			}
 		}
 
 		$admin_email = get_option( 'admin_email' );

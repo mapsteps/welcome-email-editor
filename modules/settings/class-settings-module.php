@@ -233,11 +233,33 @@ class Settings_Module extends Base_Module {
 		);
 
 		add_settings_field(
+			'force-from-email',
+			__( 'Force From Email', 'welcome-email-editor' ),
+			array(
+				$this,
+				'force_from_email_field',
+			),
+			'weed-general-settings',
+			'weed-general-section'
+		);
+
+		add_settings_field(
 			'from-name',
 			__( 'From Name', 'welcome-email-editor' ),
 			array(
 				$this,
 				'from_name_field',
+			),
+			'weed-general-settings',
+			'weed-general-section'
+		);
+
+		add_settings_field(
+			'force-from-name',
+			__( 'Force From Name', 'welcome-email-editor' ),
+			array(
+				$this,
+				'force_from_name_field',
 			),
 			'weed-general-settings',
 			'weed-general-section'
@@ -503,11 +525,31 @@ class Settings_Module extends Base_Module {
 	}
 
 	/**
+	 * Force from email field.
+	 */
+	public function force_from_email_field() {
+
+		$field = require __DIR__ . '/templates/fields/general/force-from-email.php';
+		$field( $this );
+
+	}
+
+	/**
 	 * From name field.
 	 */
 	public function from_name_field() {
 
 		$field = require __DIR__ . '/templates/fields/general/from-name.php';
+		$field( $this );
+
+	}
+
+	/**
+	 * Force from name field.
+	 */
+	public function force_from_name_field() {
+
+		$field = require __DIR__ . '/templates/fields/general/force-from-name.php';
 		$field( $this );
 
 	}

@@ -87,4 +87,24 @@ class Email_Helper {
 		return $headers;
 
 	}
+
+	/**
+	 * Get WordPress default wp_mail's "from email".
+	 *
+	 * @return string
+	 */
+	public function get_default_wp_from_email() {
+		$sitename   = wp_parse_url( network_home_url(), PHP_URL_HOST );
+		$from_email = 'wordpress@';
+
+		if ( null !== $sitename ) {
+			if ( str_starts_with( $sitename, 'www.' ) ) {
+				$sitename = substr( $sitename, 4 );
+			}
+
+			$from_email .= $sitename;
+		}
+
+		return $from_email;
+	}
 }

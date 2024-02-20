@@ -92,7 +92,9 @@ class Setup {
 		$defaults = array(
 			// General settings.
 			'from_email'                                   => '',
+			'force_from_email'                             => false,
 			'from_name'                                    => '',
+			'force_from_name'                              => false,
 			'content_type'                                 => 'text',
 
 			// Test SMTP settings.
