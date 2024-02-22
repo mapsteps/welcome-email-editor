@@ -95,9 +95,16 @@ class Smtp_Output extends Base_Output {
 		// phpcs:disable
 		$php_mailer->Host     = $values['smtp_host'];
 		$php_mailer->SMTPAuth = true;
-		$php_mailer->Username = $values['smtp_username'];
-		$php_mailer->Password = $values['smtp_password'];
-		$php_mailer->Port     = $values['smtp_port'];
+
+		if ( ! empty( $values['smtp_username'] ) ) {
+			$php_mailer->Username = $values['smtp_username'];
+		}
+
+		if ( ! empty( $values['smtp_password'] ) ) {
+			$php_mailer->Password = $values['smtp_password'];
+		}
+
+		$php_mailer->Port = $values['smtp_port'];
 
 		if ( ! empty( $values['smtp_encryption'] ) ) {
 			$php_mailer->SMTPSecure = $values['smtp_encryption'] === 'ssl'
