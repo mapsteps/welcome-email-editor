@@ -22,7 +22,6 @@ return function ( $module ) {
 	$force_from_email_description = __(
 		'
 			If enabled, the "From Email" setting above will be used for all emails, ignoring values set by other plugins or themes.
-			It\'s recommended to enable this if you\'re using SMTP features.
 		',
 		'welcome-email-editor'
 	);
