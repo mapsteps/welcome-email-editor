@@ -3,7 +3,7 @@ Contributors: davidvongries
 Tags: SMTP, change SMTP, custom SMTP, mail SMTP, welcome email, wordpress welcome email, mail, email, new user email, password reminder, lost password, welcome email attachment, mail attachment, email attachment
 Requires at least: 4.6
 Tested up to: 6.4
-Stable tag: 6.1
+Stable tag: 6.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -58,6 +58,9 @@ Since version 4.3, the password is no longer sent to the user via email, and ins
 1. Swift SMTP Settings
 
 == Changelog ==
+= 6.1 | January 08, 2024 =
+* New: Setting to force sender name & email
+* Tweak: Add additional check to test email to be able to skip authentification
 = 6.1 | January 08, 2024 =
 * Tweak: We are now using Plain Text instead of HTML as the default content type for the welcome emails & smtp settings as this better aligns with WordPress' core default emails.
 = 6.0.1 | January 03, 2024 =
