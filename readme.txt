@@ -58,7 +58,7 @@ Since version 4.3, the password is no longer sent to the user via email, and ins
 1. Swift SMTP Settings
 
 == Changelog ==
-= 6.1.2 | May 20, 2024 =
+= 6.1.2 | May 10, 2024 =
 * Tested up to WordPress 6.5
 = 6.1.1 | January 08, 2024 =
 * New: Setting to force sender name & email
