@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Swift SMTP (formerly Welcome Email Editor)
  * Description: Swift SMTP is a free & simple SMTP Plugin for WordPress.
- * Version: 6.1.1
+ * Version: 6.1.2
  * Author: David Vongries
  * Author URI: https://davidvongries.com/
  * Text Domain: welcome-email-editor
@@ -15,7 +15,7 @@ defined( 'ABSPATH' ) || die( "Can't access directly" );
 // Plugin constants.
 define( 'WEED_PLUGIN_DIR', rtrim( plugin_dir_path( __FILE__ ), '/' ) );
 define( 'WEED_PLUGIN_URL', rtrim( plugin_dir_url( __FILE__ ), '/' ) );
-define( 'WEED_PLUGIN_VERSION', '6.1.1' );
+define( 'WEED_PLUGIN_VERSION', '6.1.2' );
 define( 'WEED_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 
 // Helper classes.
