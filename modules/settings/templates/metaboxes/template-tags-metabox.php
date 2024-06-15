@@ -6,7 +6,7 @@
  */
 ?>
 
-<div class="heatbox weed-tags-metabox">
+<div class="heatbox tags-heatbox">
 	<h2>
 		<?php esc_html_e( 'Template tags', 'welcome-email-editor' ); ?>
 		<span class="action-status">📋 Copied</span>
@@ -28,7 +28,7 @@
 </div>
 
 <?php if ( defined( 'BP_PLUGIN_URL' ) ) : ?>
-	<div class="heatbox weed-tags-metabox">
+	<div class="heatbox tags-heatbox">
 		<h2>
 			<?php esc_html_e( 'BuddyPress Template Tags', 'welcome-email-editor' ); ?>
 		</h2>
@@ -47,7 +47,7 @@
 	</div>
 <?php endif; ?>
 
-<div class="heatbox weed-tags-metabox">
+<div class="heatbox tags-heatbox">
 	<h2>
 		<?php esc_html_e( 'Debugging', 'welcome-email-editor' ); ?>
 	</h2>
@@ -65,7 +65,7 @@
 	</div>
 </div>
 
-<div class="heatbox weed-tags-metabox">
+<div class="heatbox tags-heatbox">
 	<h2>
 		<?php esc_html_e( 'Test Emails', 'welcome-email-editor' ); ?>
 	</h2>

@@ -1,10 +1,10 @@
-import {copyToClipboard} from "./utils";
+import { copyToClipboard } from "./utils";
 
 export function setupTemplateTags() {
 	init();
 
 	function init() {
-		const metabox = document.querySelector(".weed-tags-metabox");
+		const metabox = document.querySelector(".tags-heatbox");
 		if (!metabox) return;
 
 		const tags = metabox.querySelectorAll("code");
@@ -26,7 +26,7 @@ export function setupTemplateTags() {
 		await copyToClipboard(value);
 
 		const notice = document.querySelector(
-			".weed-tags-metabox .action-status",
+			".tags-heatbox .action-status"
 		) as HTMLElement | null;
 		if (!notice) return;
 

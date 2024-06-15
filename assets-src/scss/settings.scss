@@ -191,48 +191,6 @@ $light-grey: #f5492a;
 	border: 1px solid #ddd;
 }
 
-// Template tags metabox
-.weed-tags-metabox {
-	.tags-wrapper {
-		line-height: 1.8;
-	}
-
-	h2 {
-		position: relative;
-
-		.action-status {
-			display: inline-block;
-			position: absolute;
-			right: 20px;
-			top: 50%;
-			padding: 10px;
-			height: 30px;
-			line-height: 10px;
-			font-size: 11px;
-			color: $white-color;
-			background-color: $dark-grey;
-			border-radius: 4px;
-			opacity: 0;
-			visibility: hidden;
-			transform: translateY(-50%);
-			transition: all 0.3s ease-in-out;
-		}
-
-		.action-status.is-shown {
-			opacity: 1;
-			visibility: visible;
-		}
-	}
-
-	.heatbox-content {
-		p {
-			&:last-child {
-				margin-bottom: 0;
-			}
-		}
-	}
-}
-
 // Test SMTP metabox.
 .weed-test-smtp-metabox {
 	th {
