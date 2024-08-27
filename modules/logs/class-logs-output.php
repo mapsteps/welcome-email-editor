@@ -72,10 +72,11 @@ class Logs_Output extends Base_Output {
 	 */
 	public function setup() {
  
-		add_filter('manage_email_logs_posts_columns', array( $this, 'set_custom_email_logs_columns' ));
+		add_filter('manage_email_logs_posts_columns', array( $this, 'set_custom_email_logs_columns'));
 		add_action('manage_email_logs_posts_custom_column', array( $this, 'custom_email_logs_column'), 10, 2);
 		add_action('restrict_manage_posts', array( $this, 'filter_email_logs_by_status'));
 		add_action('pre_get_posts', array( $this, 'filter_email_logs_query_by_status'));
+		add_action('admin_head', array( $this, 'custom_email_logs_status_styles'));
 
 	}
   
@@ -113,12 +114,31 @@ class Logs_Output extends Base_Output {
 				echo esc_html(get_post_meta($post_id, 'recipient', true));
 				break;
 			case 'status':
-				echo esc_html(get_post_meta($post_id, 'status', true));
+				$status = get_post_meta($post_id, 'status', true);
+				// Conditionally style the status
+				if ($status == 'Sent') {
+					echo '<span style="color: green; font-weight: bold;">' . esc_html($status) . '</span>';
+				} elseif ($status == 'Failed') {
+					echo '<span style="color: red; font-weight: bold;">' . esc_html($status) . '</span>';
+				} else {
+					echo esc_html($status);
+				}
 				break;
 			case 'date_time':
 				echo esc_html(get_post_meta($post_id, 'date_time', true));
 				break;
 		}
+	}
+
+	/**
+	 * Add inline CSS for better styling.
+	 */
+	public function custom_email_logs_status_styles() {
+		echo '
+		<style>
+			.column-email_status { width: 150px; }
+		</style>
+		';
 	}
 
 	/**
