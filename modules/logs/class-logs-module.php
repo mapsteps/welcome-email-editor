@@ -81,8 +81,7 @@ class Logs_Module extends Base_Module {
  		add_action( 'admin_menu', array( $this, 'email_logs_submenu' ), 20 );		 
 		add_action( 'phpmailer_init', array( $this, 'update_email_status_to_cpt') );
 		add_filter( 'wp_mail', array($this, 'capture_email_details_for_logging'), 10, 1 );
-		add_action( 'phpmailer_init', array($this, 'handle_sent_email') );
-		add_action( 'phpmailer_init', array($this, 'handle_failed_email') );
+		add_action( 'phpmailer_init', array($this, 'handle_sent_email') ); 
 
 		// The module output.
 		require_once __DIR__ . '/class-logs-output.php';
@@ -170,23 +169,17 @@ class Logs_Module extends Base_Module {
 	}
 
 	/**
-	 * Action to handle sent emails (success).
+	 * Action to handle sent emails.
 	 */
 	public function handle_sent_email($phpmailer) {
 		if (isset($GLOBALS['current_email_log'])) {
+
 			// Check if the email was sent successfully
 			if (empty($phpmailer->ErrorInfo)) {
 				// Log the email as sent
 				$this->log_email_event('Sent');
 			}
-		}
-	}
- 
-	/**
-	 * Action to handle failed emails.
-	 */
-	public function handle_failed_email($phpmailer) {
-		if (isset($GLOBALS['current_email_log'])) {
+		 
 			// Check if the email failed to send
 			if (!empty($phpmailer->ErrorInfo)) {
 				// Log the email as failed
