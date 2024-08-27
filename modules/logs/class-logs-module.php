@@ -66,7 +66,8 @@ class Logs_Module extends Base_Module {
  		add_action( 'admin_menu', array( $this, 'email_logs_submenu' ), 20 );		 
 		add_action( 'phpmailer_init', array( $this, 'update_email_status_to_cpt') );
 		add_filter( 'wp_mail', array($this, 'capture_email_details_for_logging'), 10, 1 );
-		add_action( 'phpmailer_init', array($this, 'handle_sent_email') ); 
+		add_action( 'phpmailer_init', array($this, 'handle_sent_email') );
+		add_action( 'phpmailer_init', array($this, 'handle_failed_email') );
 
 		// The module output.
 		require_once __DIR__ . '/class-logs-output.php';
@@ -165,5 +166,55 @@ class Logs_Module extends Base_Module {
 			}
 		}
 	}
-  
+ 
+	/**
+	 * Action to handle failed emails.
+	 */
+	public function handle_failed_email($phpmailer) {
+		if (isset($GLOBALS['current_email_log'])) {
+			// Check if the email failed to send
+			if (!empty($phpmailer->ErrorInfo)) {
+				// Log the email as failed
+				$this->log_email_event('Failed');
+			}
+		}
+	}
+
+	// Step 4: Helper function to log email events
+	public function log_email_event($status) {
+		// Use the captured email details from the global variable
+		$email_log = $GLOBALS['current_email_log'];
+	 
+		// Determine the type of email based on the subject (customize as needed)
+		$email_type = '';
+		if (strpos($email_log['subject'], 'Password') !== false) {
+			$email_type = 'Reset Password ';
+		} elseif (strpos($email_log['subject'], 'New User') !== false) {
+			$email_type = 'New User';
+		} elseif (strpos($email_log['subject'], 'Login Details') !== false) {
+			$email_type = 'Welcome Email';
+		} elseif (strpos($email_log['subject'], 'Test Email') !== false) {
+			$email_type = 'Test Email';
+		} else {
+			$email_type = 'General';
+		}
+
+		// Insert the email log as a custom post type entry
+		wp_insert_post(array(
+			'post_title'   => $email_log['subject'],
+			'post_type'    => 'email_logs',
+			'post_status'  => 'publish',
+			'meta_input'   => array(
+				'email_type'  => $email_type,
+				'email_body'  => $email_log['email_body'],
+				'recipient'   => $email_log['recipient'],
+				'status'      => $status,
+				'date_time'   => current_time('mysql'),
+			),
+		));
+
+		// Clear the global variable after logging
+		unset($GLOBALS['current_email_log']);
+	}
+
 }
