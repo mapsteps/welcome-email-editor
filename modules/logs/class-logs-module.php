@@ -61,6 +61,13 @@ class Logs_Module extends Base_Module {
 	 * Set up the module.
 	 */
 	public function setup() {
+		$module     = new Settings_Module;
+		$settings   = $module->settings;
+		$is_checked = isset( $settings['enable_email_logging'] ) ? 1 : 0;
+
+		if (!$is_checked) {
+			return;
+		}
 
 		add_action( 'init', array( $this, 'register_email_logs_cpt' ), 20 ); 
  		add_action( 'admin_menu', array( $this, 'email_logs_submenu' ), 20 );		 
