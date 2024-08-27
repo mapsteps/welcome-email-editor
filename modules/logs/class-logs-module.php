@@ -64,7 +64,8 @@ class Logs_Module extends Base_Module {
 
 		add_action( 'init', array( $this, 'register_email_logs_cpt' ), 20 ); 
  		add_action( 'admin_menu', array( $this, 'email_logs_submenu' ), 20 );		 
-		add_action( 'phpmailer_init', array( $this, 'update_email_status_to_cpt') ); 
+		add_action( 'phpmailer_init', array( $this, 'update_email_status_to_cpt') );
+		add_filter( 'wp_mail', array($this, 'capture_email_details_for_logging'), 10, 1 ); 
 
 		// The module output.
 		require_once __DIR__ . '/class-logs-output.php';
@@ -134,5 +135,21 @@ class Logs_Module extends Base_Module {
 			unset($GLOBALS['current_email_log_post_id']); // Clear the global variable after updating
 		}
 	}
-  
+ 
+	/**
+	 * Hook into wp_mail to capture email details before sending
+	 */
+	public function capture_email_details_for_logging($args) {
+	 
+		$GLOBALS['current_email_log'] = array(
+			'subject'     => $args['subject'],
+			'email_body'  => $args['message'],
+			'recipient'   => is_array($args['to']) ? implode(', ', $args['to']) : $args['to'],
+			'headers'     => $args['headers'],
+			'attachments' => $args['attachments'],
+		);
+		
+		return $args;
+	}
+ 
 }
