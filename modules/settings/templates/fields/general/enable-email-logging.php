@@ -13,15 +13,22 @@ return function ( $module ) {
 	$is_checked = isset( $settings['enable_email_logging'] ) ? 1 : 0;
 
 	$enable_email_logging_description = __(
-		'If checked, all emails sent from your site will be recorded and shown under the "Email logs" sub menu.',
+		'If enabled, all emails sent from your site will be recorded and shown under the "Email logs" sub menu.',
 		'welcome-email-editor'
 	);
 	?>
 
-	<label for="weed_settings[enable_email_logging]" class="label checkbox-label">
-		&nbsp;
-		<input type="checkbox" name="weed_settings[enable_email_logging]" id="weed_settings[enable_email_logging]" value="1" <?php checked( $is_checked, 1 ); ?>>
-		<div class="indicator"></div>
+	<label for="weed_settings--enable_email_logging" class="toggle-switch">
+		<input
+			type="checkbox"
+			name="weed_settings[enable_email_logging]"
+			id="weed_settings--enable_email_logging"
+			value="1"
+			<?php checked( $is_checked, true ); ?>
+		/>
+		<div class="switch-track">
+			<div class="switch-thumb"></div>
+		</div>
 	</label>
 
 	<p class="description">
