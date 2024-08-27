@@ -276,6 +276,17 @@ class Settings_Module extends Base_Module {
 			'weed-general-section'
 		);
 
+		add_settings_field(
+			'enable-email-logging',
+			__( 'Enable Email Logging', 'welcome-email-editor' ),
+			array(
+				$this,
+				'enable_email_logging_field',
+			),
+			'weed-general-settings',
+			'weed-general-section'
+		);
+
 		// SMTP fields.
 		add_settings_field(
 			'smtp-host',
@@ -560,6 +571,16 @@ class Settings_Module extends Base_Module {
 	public function content_type_field() {
 
 		$field = require __DIR__ . '/templates/fields/general/content-type.php';
+		$field( $this );
+
+	}
+
+	/**
+	 * Content type field.
+	 */
+	public function enable_email_logging_field() {
+
+		$field = require __DIR__ . '/templates/fields/general/enable-email-logging.php';
 		$field( $this );
 
 	}
