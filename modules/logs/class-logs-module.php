@@ -62,7 +62,8 @@ class Logs_Module extends Base_Module {
 	 */
 	public function setup() {
 
-		add_action( 'init', array( $this, 'register_email_logs_cpt' ), 20 ); 		
+		add_action( 'init', array( $this, 'register_email_logs_cpt' ), 20 ); 
+ 		add_action( 'admin_menu', array( $this, 'email_logs_submenu' ), 20 ); 
 
 		// The module output.
 		require_once __DIR__ . '/class-logs-output.php';
@@ -105,6 +106,20 @@ class Logs_Module extends Base_Module {
 		);
 
 		register_post_type( 'email_logs', $args );
+	}
+
+	/**
+	 * Add email logs as sub menu of the SMTP settings.
+	 */
+	public function email_logs_submenu() { 
+
+		add_submenu_page(
+			'weed_settings', // parent slug
+			'Email Logs', // page title
+			'Email Logs', // sub-menu title
+			'edit_posts', // capability
+			'edit.php?post_type=email_logs' // your menu menu slug
+		);
 	} 
 
 }
