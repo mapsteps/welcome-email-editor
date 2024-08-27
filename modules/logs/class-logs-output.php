@@ -89,6 +89,7 @@ class Logs_Output extends Base_Output {
 		unset($columns['date']);
 
 		$columns['email_type'] = __('Email Type', 'weed');
+		$columns['sender']     = __('Sender', 'weed');
 		$columns['email_body'] = __('Email Body', 'weed');
 		$columns['recipient']  = __('Recipient', 'weed');
 		$columns['status']     = __('Status', 'weed');
@@ -106,6 +107,9 @@ class Logs_Output extends Base_Output {
 		switch ($column) {
 			case 'email_type':
 				echo esc_html(get_post_meta($post_id, 'email_type', true));
+				break;
+			case 'sender':
+				echo esc_html(get_post_meta($post_id, 'sender', true));
 				break;
 			case 'email_body':
 				echo esc_html(get_post_meta($post_id, 'email_body', true));

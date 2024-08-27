@@ -32,13 +32,23 @@ class Logs_Module extends Base_Module {
 	public $url;
 
 	/**
+	 * The current module url.
+	 *
+	 * @var string
+	 */
+	public $settings;
+
+	/**
 	 * Module constructor.
 	 */
 	public function __construct() {
 
 		parent::__construct();
 
+		$module     = new Settings_Module; 
+
 		$this->url = WEED_PLUGIN_URL . '/modules/logs';
+		$this->settings = $module->settings;
 
 	}
 
@@ -60,10 +70,8 @@ class Logs_Module extends Base_Module {
 	/**
 	 * Set up the module.
 	 */
-	public function setup() {
-		$module     = new Settings_Module;
-		$settings   = $module->settings;
-		$is_checked = isset( $settings['enable_email_logging'] ) ? 1 : 0;
+	public function setup() {		
+		$is_checked = isset( $this->settings['enable_email_logging'] ) ? 1 : 0;
 
 		if (!$is_checked) {
 			return;
@@ -151,7 +159,7 @@ class Logs_Module extends Base_Module {
 	public function capture_email_details_for_logging($args) {
 	 
 		$GLOBALS['current_email_log'] = array(
-			'subject'     => $args['subject'],
+			'subject'     => $args['subject'], 
 			'email_body'  => $args['message'],
 			'recipient'   => is_array($args['to']) ? implode(', ', $args['to']) : $args['to'],
 			'headers'     => $args['headers'],
@@ -187,10 +195,15 @@ class Logs_Module extends Base_Module {
 		}
 	}
 
-	// Step 4: Helper function to log email events
+	/**
+	 * Helper function to log email events
+	 */ 
 	public function log_email_event($status) {
 		// Use the captured email details from the global variable
 		$email_log = $GLOBALS['current_email_log'];
+
+		$force_from_email = $this->settings['force_from_email'];
+		$sender           = ($force_from_email && isset( $this->settings['from_email'] )) ? $this->settings['from_email'] : get_bloginfo('admin_email');
 	 
 		// Determine the type of email based on the subject (customize as needed)
 		$email_type = '';
@@ -212,16 +225,18 @@ class Logs_Module extends Base_Module {
 			'post_type'    => 'email_logs',
 			'post_status'  => 'publish',
 			'meta_input'   => array(
-				'email_type'  => $email_type,
-				'email_body'  => $email_log['email_body'],
-				'recipient'   => $email_log['recipient'],
-				'status'      => $status,
-				'date_time'   => current_time('mysql'),
+				'email_type' => $email_type,
+				'sender'     => $sender,
+				'email_body' => $email_log['email_body'],
+				'recipient'  => $email_log['recipient'],
+				'status'     => $status,
+				'date_time'  => current_time('mysql'),
 			),
 		));
 
 		// Clear the global variable after logging
 		unset($GLOBALS['current_email_log']);
 	}
+ 
 
 }
