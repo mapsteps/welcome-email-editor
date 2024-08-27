@@ -63,7 +63,8 @@ class Logs_Module extends Base_Module {
 	public function setup() {
 
 		add_action( 'init', array( $this, 'register_email_logs_cpt' ), 20 ); 
- 		add_action( 'admin_menu', array( $this, 'email_logs_submenu' ), 20 ); 
+ 		add_action( 'admin_menu', array( $this, 'email_logs_submenu' ), 20 );		 
+		add_action( 'phpmailer_init', array( $this, 'update_email_status_to_cpt') ); 
 
 		// The module output.
 		require_once __DIR__ . '/class-logs-output.php';
@@ -121,5 +122,17 @@ class Logs_Module extends Base_Module {
 			'edit.php?post_type=email_logs' // your menu menu slug
 		);
 	} 
+ 
+	/**
+	 * Capture email status (success or failure) using phpmailer_init
+	 */
+	public function update_email_status_to_cpt($phpmailer) {
+		if (isset($GLOBALS['current_email_log_post_id'])) {
+			$status = $phpmailer->ErrorInfo ? 'Failed' : 'Sent';
 
+			update_post_meta($GLOBALS['current_email_log_post_id'], 'status', $status);
+			unset($GLOBALS['current_email_log_post_id']); // Clear the global variable after updating
+		}
+	}
+  
 }
