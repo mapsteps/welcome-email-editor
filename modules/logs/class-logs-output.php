@@ -74,6 +74,8 @@ class Logs_Output extends Base_Output {
  
 		add_filter('manage_email_logs_posts_columns', array( $this, 'set_custom_email_logs_columns' ));
 		add_action('manage_email_logs_posts_custom_column', array( $this, 'custom_email_logs_column'), 10, 2);
+		add_action('restrict_manage_posts', array( $this, 'filter_email_logs_by_status'));
+		add_action('pre_get_posts', array( $this, 'filter_email_logs_query_by_status'));
 
 	}
   
@@ -118,4 +120,45 @@ class Logs_Output extends Base_Output {
 				break;
 		}
 	}
+
+	/**
+	 * Add the filter dropdown to the admin list view
+	 * 
+	 */ 
+	public function filter_email_logs_by_status() {
+		global $typenow;
+
+		// Only add the filter for the 'email_logs' post type
+		if ( $typenow == 'email_logs' ) {
+			$selected = isset($_GET['email_status']) ? $_GET['email_status'] : '';
+			
+			// Dropdown options for email status
+			?>
+			<select name="email_status" id="email_status">
+				<option value=""><?php _e( 'All Statuses', 'weed' ); ?></option>
+				<option value="Sent" <?php selected( $selected, 'Sent' ); ?>><?php _e( 'Sent', 'weed' ); ?></option>
+				<option value="Failed" <?php selected( $selected, 'Failed' ); ?>><?php _e( 'Failed', 'weed' ); ?></option>
+			</select>
+			<?php
+		}
+	}
+
+	/**
+	 * Modify the query based on the selected email status
+	 */
+	public function filter_email_logs_query_by_status( $query ) {
+		global $pagenow;
+		$post_type = isset( $_GET['post_type'] ) ? $_GET['post_type'] : '';
+
+		if ( $post_type == 'email_logs' && is_admin() && $pagenow == 'edit.php' && isset( $_GET['email_status'] ) && $_GET['email_status'] != '' ) {
+			$meta_query = array(
+				array(
+					'key'   => 'status',
+					'value' => sanitize_text_field( $_GET['email_status'] ),
+				)
+			);
+			$query->set( 'meta_query', $meta_query );
+		}
+	}
+
 }
