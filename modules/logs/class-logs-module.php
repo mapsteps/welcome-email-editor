@@ -145,7 +145,7 @@ class Logs_Module extends Base_Module {
 	 */
 	public function update_email_status_to_cpt($phpmailer) {
 		if ( isset($GLOBALS['current_email_log_post_id']) ) {
-			$status = $phpmailer->ErrorInfo ? 'Failed' : 'Sent';
+			$status = $phpmailer->ErrorInfo ? 'Failed' : 'Success';
 
 			update_post_meta($GLOBALS['current_email_log_post_id'], 'status', $status);
 			unset($GLOBALS['current_email_log_post_id']); // Clear the global variable after updating
@@ -176,7 +176,7 @@ class Logs_Module extends Base_Module {
 
 			if ( empty($phpmailer->ErrorInfo) ) {
 				// Log the email as sent
-				$this->log_email_event('Sent');
+				$this->log_email_event('Success');
 			} else {
 				// Log the email as failed
 				$this->log_email_event('Failed');
@@ -191,7 +191,7 @@ class Logs_Module extends Base_Module {
 		// Use the captured email details from the global variable
 		$email_log = $GLOBALS['current_email_log'];
 
-		$force_from_email = $this->settings['force_from_email'];
+		$force_from_email = isset( $this->settings['force_from_email'] ) ? 1 : 0;
 		$sender           = ( $force_from_email && isset( $this->settings['from_email'] ) ) ? $this->settings['from_email'] : get_bloginfo('admin_email');
 	 
 		// Determine the type of email based on the subject (customize as needed)

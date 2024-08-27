@@ -113,7 +113,7 @@ class Logs_Output extends Base_Output {
 			case 'status':
 				$status = get_post_meta($post_id, 'status', true);
 				// Conditionally style the status
-				if ($status == 'Sent') {
+				if ($status == 'Success') {
 					echo '<span style="color: green; font-weight: bold;">' . esc_html($status) . '</span>';
 				} elseif ($status == 'Failed') {
 					echo '<span style="color: red; font-weight: bold;">' . esc_html($status) . '</span>';
@@ -153,7 +153,7 @@ class Logs_Output extends Base_Output {
 			?>
 			<select name="email_status" id="email_status">
 				<option value=""><?php _e( 'All Statuses', 'weed' ); ?></option>
-				<option value="Sent" <?php selected( $selected, 'Sent' ); ?>><?php _e( 'Sent', 'weed' ); ?></option>
+				<option value="Success" <?php selected( $selected, 'Success' ); ?>><?php _e( 'Success', 'weed' ); ?></option>
 				<option value="Failed" <?php selected( $selected, 'Failed' ); ?>><?php _e( 'Failed', 'weed' ); ?></option>
 			</select>
 			<?php
