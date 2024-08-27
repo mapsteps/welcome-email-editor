@@ -73,7 +73,7 @@ class Logs_Module extends Base_Module {
 	public function setup() {		
 		$is_checked = isset( $this->settings['enable_email_logging'] ) ? 1 : 0;
 
-		if (!$is_checked) {
+		if ( !$is_checked ) {
 			return;
 		}
 
@@ -144,7 +144,7 @@ class Logs_Module extends Base_Module {
 	 * Capture email status (success or failure) using phpmailer_init
 	 */
 	public function update_email_status_to_cpt($phpmailer) {
-		if (isset($GLOBALS['current_email_log_post_id'])) {
+		if ( isset($GLOBALS['current_email_log_post_id']) ) {
 			$status = $phpmailer->ErrorInfo ? 'Failed' : 'Sent';
 
 			update_post_meta($GLOBALS['current_email_log_post_id'], 'status', $status);
@@ -174,14 +174,10 @@ class Logs_Module extends Base_Module {
 	public function handle_sent_email($phpmailer) {
 		if (isset($GLOBALS['current_email_log'])) {
 
-			// Check if the email was sent successfully
-			if (empty($phpmailer->ErrorInfo)) {
+			if ( empty($phpmailer->ErrorInfo) ) {
 				// Log the email as sent
 				$this->log_email_event('Sent');
-			}
-		 
-			// Check if the email failed to send
-			if (!empty($phpmailer->ErrorInfo)) {
+			} else {
 				// Log the email as failed
 				$this->log_email_event('Failed');
 			}
@@ -196,20 +192,18 @@ class Logs_Module extends Base_Module {
 		$email_log = $GLOBALS['current_email_log'];
 
 		$force_from_email = $this->settings['force_from_email'];
-		$sender           = ($force_from_email && isset( $this->settings['from_email'] )) ? $this->settings['from_email'] : get_bloginfo('admin_email');
+		$sender           = ( $force_from_email && isset( $this->settings['from_email'] ) ) ? $this->settings['from_email'] : get_bloginfo('admin_email');
 	 
 		// Determine the type of email based on the subject (customize as needed)
-		$email_type = '';
-		if (strpos($email_log['subject'], 'Password') !== false) {
+		$email_type = 'General';
+		if ( strpos($email_log['subject'], 'Password') !== false ) {
 			$email_type = 'Reset Password ';
-		} elseif (strpos($email_log['subject'], 'New User') !== false) {
+		} elseif ( strpos($email_log['subject'], 'New User') !== false ) {
 			$email_type = 'New User';
-		} elseif (strpos($email_log['subject'], 'Login Details') !== false) {
+		} elseif ( strpos($email_log['subject'], 'Login Details') !== false ) {
 			$email_type = 'Welcome Email';
-		} elseif (strpos($email_log['subject'], 'Test Email') !== false) {
+		} elseif ( strpos($email_log['subject'], 'Test Email') !== false ) {
 			$email_type = 'Test Email';
-		} else {
-			$email_type = 'General';
 		}
 
 		// Insert the email log as a custom post type entry
@@ -228,7 +222,7 @@ class Logs_Module extends Base_Module {
 		));
 
 		// Clear the global variable after logging
-		unset($GLOBALS['current_email_log']);
+		unset( $GLOBALS['current_email_log'] );
 	}
  
 

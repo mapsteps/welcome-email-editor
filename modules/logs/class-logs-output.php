@@ -6,11 +6,8 @@
  */
 
 namespace Weed\Logs;
-
-use PHPMailer\PHPMailer\PHPMailer;
-use Weed\Base\Base_Output;
-use Weed\Vars;
-use WP_Error;
+ 
+use Weed\Base\Base_Output; 
 
 defined( 'ABSPATH' ) || die( "Can't access directly" );
 
@@ -72,11 +69,11 @@ class Logs_Output extends Base_Output {
 	 */
 	public function setup() {
  
-		add_filter('manage_email_logs_posts_columns', array( $this, 'set_custom_email_logs_columns'));
-		add_action('manage_email_logs_posts_custom_column', array( $this, 'custom_email_logs_column'), 10, 2);
-		add_action('restrict_manage_posts', array( $this, 'filter_email_logs_by_status'));
-		add_action('pre_get_posts', array( $this, 'filter_email_logs_query_by_status'));
-		add_action('admin_head', array( $this, 'custom_email_logs_status_styles'));
+		add_filter( 'manage_email_logs_posts_columns', array( $this, 'set_custom_email_logs_columns' ) );
+		add_action( 'manage_email_logs_posts_custom_column', array( $this, 'custom_email_logs_column' ), 10, 2 );
+		add_action( 'restrict_manage_posts', array( $this, 'filter_email_logs_by_status' ) );
+		add_action( 'pre_get_posts', array( $this, 'filter_email_logs_query_by_status' ) );
+		add_action( 'admin_head', array( $this, 'custom_email_logs_status_styles' ) );
 
 	}
   
