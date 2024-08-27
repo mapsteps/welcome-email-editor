@@ -48,7 +48,7 @@ class Settings_Module extends Base_Module {
 
 		add_action( 'init', array( $this, 'set_plugin_priority' ) );
 
-		add_action( 'admin_menu', array( $this, 'submenu_page' ), 20 );
+		add_action( 'admin_menu', array( $this, 'menu_page' ), 20 );
 		add_action( 'current_screen', array( $this, 'reset_settings' ) );
 		add_action( 'admin_init', array( $this, 'add_settings' ) );
 
@@ -108,19 +108,19 @@ class Settings_Module extends Base_Module {
 	}
 
 	/**
-	 * Add submenu page.
+	 * Add menu page.
 	 */
-	public function submenu_page() {
-
-		add_submenu_page(
-			'options-general.php',
-			__( 'Swift SMTP', 'welcome-email-editor' ),
-			__( 'Swift SMTP', 'welcome-email-editor' ),
-			apply_filters( 'weed_settings_capability', 'manage_options' ),
-			'weed_settings',
-			array( $this, 'submenu_page_content' )
+	public function menu_page() {
+		add_menu_page(
+			__( 'Swift SMTP', 'welcome-email-editor' ), // Page title
+			__( 'Swift SMTP', 'welcome-email-editor' ), // Menu title
+			apply_filters( 'weed_settings_capability', 'manage_options' ), // Capability
+			'weed_settings', // Menu slug
+			array( $this, 'submenu_page_content' ), // Function to display the page content
+			'dashicons-email', // Icon (you can change this to any Dashicon)
+			60 // Position in the menu
 		);
-
+	
 	}
 
 	/**
