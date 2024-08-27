@@ -224,13 +224,13 @@ class Logs_Module extends Base_Module {
 			'post_title'   => $email_log['subject'],
 			'post_type'    => 'email_logs',
 			'post_status'  => 'publish',
+			'post_content' => $email_log['email_body'],
+			'post_date'    => current_time('mysql'),
 			'meta_input'   => array(
 				'email_type' => $email_type,
 				'sender'     => $sender,
-				'email_body' => $email_log['email_body'],
 				'recipient'  => $email_log['recipient'],
-				'status'     => $status,
-				'date_time'  => current_time('mysql'),
+				'status'     => $status
 			),
 		));
 

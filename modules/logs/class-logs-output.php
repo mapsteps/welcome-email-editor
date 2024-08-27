@@ -89,10 +89,10 @@ class Logs_Output extends Base_Output {
 		unset($columns['date']);
 
 		$columns['email_type'] = __('Email Type', 'weed');
-		$columns['sender']     = __('Sender', 'weed'); 
+		$columns['sender']     = __('Sender', 'weed');
 		$columns['recipient']  = __('Recipient', 'weed');
 		$columns['status']     = __('Status', 'weed');
-		$columns['date_time']  = __('Date/Time', 'weed');
+		$columns['date']       = __('Date/Time', 'weed');
 
 		return $columns;
 	}
@@ -124,8 +124,8 @@ class Logs_Output extends Base_Output {
 					echo esc_html($status);
 				}
 				break;
-			case 'date_time':
-				echo esc_html(get_post_meta($post_id, 'date_time', true));
+			case 'date': 
+				echo esc_html(get_the_date('', $post_id));
 				break;
 		}
 	}
