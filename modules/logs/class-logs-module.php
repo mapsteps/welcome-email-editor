@@ -81,13 +81,14 @@ class Logs_Module extends Base_Module {
  		add_action( 'admin_menu', array( $this, 'email_logs_submenu' ), 20 );		 
 		add_action( 'phpmailer_init', array( $this, 'update_email_status_to_cpt') );
 		add_filter( 'wp_mail', array($this, 'capture_email_details_for_logging'), 10, 1 );
-		add_action( 'phpmailer_init', array($this, 'handle_sent_email') ); 
+		add_action( 'phpmailer_init', array($this, 'handle_success_email') ); 
+		add_action( 'wp_mail_failed', array($this, 'handle_failed_email') );
 
 		// The module output.
 		require_once __DIR__ . '/class-logs-output.php';
 		Logs_Output::init();
 
-	}
+	} 
 
 	/**
 	 * Register a Custom Post Type for Email Logs
@@ -171,16 +172,26 @@ class Logs_Module extends Base_Module {
 	/**
 	 * Action to handle sent emails.
 	 */
-	public function handle_sent_email($phpmailer) {
-		if (isset($GLOBALS['current_email_log'])) {
-
-			if ( empty( $phpmailer->ErrorInfo ) ) {
-				// Log the email as sent
+	public function handle_success_email($phpmailer) { 
+		 if (isset($GLOBALS['current_email_log'])) {
+			// Defer the logging to after the email has been attempted to send
+			add_action('wp_mail_succeeded', function() {
 				$this->log_email_event('Success');
-			} else {
-				// Log the email as failed
-				$this->log_email_event('Failed');
-			}
+				unset($GLOBALS['current_email_log']);
+			});
+		}
+	}
+
+	/**
+	 * Hook into the wp_mail_failed action to handle email failures
+	 * @param [type] $wp_error
+	 */
+	// 
+	public function handle_failed_email($wp_error) {
+		if (isset($GLOBALS['current_email_log'])) {
+			// Log the email as failed
+			$this->log_email_event('Failed');
+			unset($GLOBALS['current_email_log']);
 		}
 	}
 
