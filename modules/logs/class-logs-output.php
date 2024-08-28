@@ -73,7 +73,9 @@ class Logs_Output extends Base_Output {
 		add_action( 'manage_email_logs_posts_custom_column', array( $this, 'custom_email_logs_column' ), 10, 2 );
 		add_action( 'restrict_manage_posts', array( $this, 'filter_email_logs_by_status' ) );
 		add_action( 'pre_get_posts', array( $this, 'filter_email_logs_query_by_status' ) );
-		add_action( 'admin_head', array( $this, 'custom_email_logs_status_styles' ) );
+		add_action( 'admin_head', array( $this, 'custom_email_logs_status_styles' ) ); 
+		add_action( 'current_screen', array( $this, 'restrict_access_to_email_logs') );
+		add_action( 'admin_menu', array( $this, 'hide_email_logs_menu' ), 999 ); 
 
 	}
   
@@ -175,6 +177,35 @@ class Logs_Output extends Base_Output {
 				)
 			);
 			$query->set( 'meta_query', $meta_query );
+		}
+	}
+
+	/**
+	 * Restrict access to the email logs menu page
+	 */
+	public function restrict_access_to_email_logs() {
+		// Get the current screen object
+    	$screen = get_current_screen();
+ 
+		// Check if the current screen is related to the 'email_logs' post type
+		if ( $screen && $screen->post_type === 'email_logs' ) {
+			// Check if the user has the 'manage_options' capability
+			if ( !current_user_can('manage_options') ) {
+				// If not, terminate the script with an error message
+				wp_die(__('You do not have sufficient permissions to access this page.', 'weed'));
+				
+			}
+		}
+	}
+
+	/**
+	 * Hide the email logs menu page from the admin menu 
+	 */
+	public function hide_email_logs_menu() {
+		// Check if the user does not have the 'manage_options' capability
+		if ( !current_user_can('manage_options') ) {
+			// Remove the 'email_logs' menu page
+			remove_menu_page('edit.php?post_type=email_logs');
 		}
 	}
 
