@@ -74,9 +74,9 @@ class Logs_Output extends Base_Output {
 		add_action( 'restrict_manage_posts', array( $this, 'filter_email_logs_by_status' ) );
 		add_action( 'pre_get_posts', array( $this, 'filter_email_logs_query_by_status' ) );
 		add_action( 'admin_head', array( $this, 'custom_email_logs_status_styles' ) ); 
-		add_action( 'current_screen', array( $this, 'restrict_access_to_email_logs') );
+		add_action( 'current_screen', array( $this, 'restrict_access_to_email_logs' ) );
 		add_action( 'admin_menu', array( $this, 'hide_email_logs_menu' ), 999 ); 
-		add_action( 'add_meta_boxes', array( $this, 'add_email_logs_metabox') );
+		add_action( 'add_meta_boxes', array( $this, 'add_email_logs_metabox' ) );
 	}
   
 	/**
