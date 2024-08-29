@@ -189,8 +189,10 @@ class Logs_Module extends Base_Module {
 	// 
 	public function handle_failed_email($wp_error) {
 		if (isset($GLOBALS['current_email_log'])) {
+			$error_message = $wp_error->get_error_message();
+
 			// Log the email as failed
-			$this->log_email_event('Failed');
+			$this->log_email_event('Failed', $error_message);
 			unset($GLOBALS['current_email_log']);
 		}
 	}
@@ -198,7 +200,7 @@ class Logs_Module extends Base_Module {
 	/**
 	 * Helper function to log email events
 	 */ 
-	public function log_email_event($status) {
+	public function log_email_event($status, $error_message = '') {
 		// Use the captured email details from the global variable
 		$email_log = $GLOBALS['current_email_log'];
 
@@ -228,7 +230,8 @@ class Logs_Module extends Base_Module {
 				'email_type' => $email_type,
 				'sender'     => $sender,
 				'recipient'  => $email_log['recipient'],
-				'status'     => $status
+				'status'     => $status,
+				'email_error_message' => $error_message, // Store the error message
 			),
 		));
 
