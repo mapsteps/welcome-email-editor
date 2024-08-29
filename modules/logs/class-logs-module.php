@@ -121,7 +121,7 @@ class Logs_Module extends Base_Module {
 			'has_archive'        => false,
 			'hierarchical'       => false,
 			'menu_position'      => null,
-			'supports'           => array( 'title', 'editor', 'custom-fields' )
+			'supports'           => array( 'title', 'editor' )
 		);
 
 		register_post_type( 'email_logs', $args );

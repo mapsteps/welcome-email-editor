@@ -65,7 +65,7 @@ class Logs_Output extends Base_Output {
 	}
 
 	/**
-	 * Setup SMTP output.
+	 * Setup Logging output.
 	 */
 	public function setup() {
  
@@ -76,7 +76,7 @@ class Logs_Output extends Base_Output {
 		add_action( 'admin_head', array( $this, 'custom_email_logs_status_styles' ) ); 
 		add_action( 'current_screen', array( $this, 'restrict_access_to_email_logs') );
 		add_action( 'admin_menu', array( $this, 'hide_email_logs_menu' ), 999 ); 
-
+		add_action( 'add_meta_boxes', array( $this, 'add_email_logs_metabox') );
 	}
   
 	/**
@@ -207,6 +207,63 @@ class Logs_Output extends Base_Output {
 			// Remove the 'email_logs' menu page
 			remove_menu_page('edit.php?post_type=email_logs');
 		}
+	}
+
+	/**
+	 * Add metabox to the email logs post type
+	 */
+	public function add_email_logs_metabox() {
+		add_meta_box(
+			'email_logs_metabox',      
+			__('Email Log Details'),   
+			array($this, 'email_logs_metabox_callback'),
+			'email_logs',              
+			'normal',                  
+			'high'                     
+		);
+	}
+
+	/**
+	 * Render the metabox content for the email logs post type
+	 *
+	 * @param [object] $post The post object.
+	 */
+	public function email_logs_metabox_callback($post) {
+		// Retrieve meta data
+		$email_type 			= get_post_meta($post->ID, 'email_type', true); 
+		$recipient 				= get_post_meta($post->ID, 'recipient', true);
+		$status 				= get_post_meta($post->ID, 'status', true);
+		$sender 				= get_post_meta($post->ID, 'sender', true);
+		$email_error_message 	= get_post_meta($post->ID, 'email_error_message', true);
+
+		// Display the meta data in a table or any structured format
+		?>
+		<table class="form-table">
+			<tr>
+				<th><label for="email_type"><?php _e('Email Type'); ?></label></th>
+				<td><input type="text" id="email_type" value="<?php echo esc_attr($email_type); ?>" readonly /></td>
+			</tr>
+			<tr>
+				<th><label for="recipient"><?php _e('Recipient'); ?></label></th>
+				<td><input type="text" id="recipient" value="<?php echo esc_attr($recipient); ?>" readonly /></td>
+			</tr>
+		
+			<tr>
+				<th><label for="sender"><?php _e('Sender'); ?></label></th>
+				<td><input type="text" id="sender" value="<?php echo esc_attr($sender); ?>" readonly /></td>
+			</tr>
+			<tr>
+				<th><label for="status"><?php _e('Status'); ?></label></th>
+				<td><input type="text" id="status" value="<?php echo esc_attr($status); ?>" readonly /></td>
+			</tr>
+			<?php if ($email_error_message): // Only show this if there's an error ?>
+			<tr>
+				<th><label for="email_error_message"><?php _e('Error Message'); ?></label></th>
+				<td><textarea id="email_error_message" rows="3" cols="40" readonly><?php echo esc_textarea($email_error_message); ?></textarea></td>
+			</tr>
+			<?php endif; ?>
+		</table>
+		<?php
 	}
 
 }
