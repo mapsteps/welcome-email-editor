@@ -77,6 +77,7 @@ class Logs_Output extends Base_Output {
 		add_action( 'current_screen', array( $this, 'restrict_access_to_email_logs' ) );
 		add_action( 'admin_menu', array( $this, 'hide_email_logs_menu' ), 999 );
 		add_action( 'add_meta_boxes', array( $this, 'add_email_logs_metabox' ) );
+		
 	}
 
 	/**
@@ -298,8 +299,7 @@ class Logs_Output extends Base_Output {
 
 		</div>
 		<?php
-
-
+		
 	}
 
 }
