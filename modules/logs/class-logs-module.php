@@ -70,10 +70,11 @@ class Logs_Module extends Base_Module {
 	/**
 	 * Set up the module.
 	 */
-	public function setup() {		
+	public function setup() {	
+
 		$is_checked = isset( $this->settings['enable_email_logging'] ) ? 1 : 0;
 
-		if ( !$is_checked ) {
+		if ( ! $is_checked ) {
 			return;
 		}
 
@@ -93,6 +94,7 @@ class Logs_Module extends Base_Module {
 	 * Register a Custom Post Type for Email Logs
 	 */ 
 	public function register_email_logs_cpt() {
+
 		$labels = array(
 			'name'               => _x( 'Email Logs', 'post type general name', 'welcome-email-editor' ),
 			'singular_name'      => _x( 'Email Log', 'post type singular name', 'welcome-email-editor' ),
@@ -124,6 +126,7 @@ class Logs_Module extends Base_Module {
 		);
 
 		register_post_type( 'email_logs', $args );
+
 	}
 
 	/**
@@ -143,7 +146,7 @@ class Logs_Module extends Base_Module {
 	/**
 	 * Hook into wp_mail to capture email details before sending
 	 */
-	public function capture_email_details_for_logging($args) {
+	public function capture_email_details_for_logging( $args ) {
 	 
 		$GLOBALS['current_email_log'] = array(
 			'subject'     => $args['subject'], 
@@ -154,17 +157,18 @@ class Logs_Module extends Base_Module {
 		);
 		
 		return $args;
+
 	}
 
 	/**
 	 * Action to handle successful emails.
 	 */
-	public function handle_success_email($mail_data) { 
-		 if (isset($GLOBALS['current_email_log'])) {
+	public function handle_success_email( $mail_data ) { 
+		 if ( isset( $GLOBALS['current_email_log'] ) ) {
 
 			// Defer the logging to after the email has been attempted to send
-			$this->log_email_event('Success');
-			unset($GLOBALS['current_email_log']);
+			$this->log_email_event( 'Success' );
+			unset( $GLOBALS['current_email_log'] );
 
 		}
 	}
