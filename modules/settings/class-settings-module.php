@@ -218,6 +218,7 @@ class Settings_Module extends Base_Module {
 		add_settings_section( 'weed-user-welcome-email-section', __( 'Welcome Email (for Users)', 'welcome-email-editor' ), '', 'weed-user-welcome-email-settings' );
 		add_settings_section( 'weed-admin-new-user-notif-email-section', __( 'New User Notification Email (for Admins)', 'welcome-email-editor' ), '', 'weed-admin-new-user-notif-email-settings' );
 		add_settings_section( 'weed-reset-password-email-section', __( 'Reset Password Email', 'welcome-email-editor' ), '', 'weed-reset-password-email-settings' );
+		add_settings_section( 'weed-enable-logging-section', __( 'Email Logging', 'welcome-email-editor' ), '', 'weed-enable-logging-settings' );
 		add_settings_section( 'weed-misc-section', __( 'Other', 'welcome-email-editor' ), '', 'weed-misc-settings' );
 
 		// General fields.
@@ -271,17 +272,6 @@ class Settings_Module extends Base_Module {
 			array(
 				$this,
 				'content_type_field',
-			),
-			'weed-general-settings',
-			'weed-general-section'
-		);
-
-		add_settings_field(
-			'enable-email-logging',
-			__( 'Enable Email Logging', 'welcome-email-editor' ),
-			array(
-				$this,
-				'enable_email_logging_field',
 			),
 			'weed-general-settings',
 			'weed-general-section'
@@ -511,6 +501,18 @@ class Settings_Module extends Base_Module {
 			'weed-reset-password-email-section'
 		);
 
+		// Email Logging settings.
+		add_settings_field(
+			'enable-email-logging',
+			'Enable Email Logging',
+			array(
+				$this,
+				'enable_email_logging_field',
+			),
+			'weed-enable-logging-settings',
+			'weed-enable-logging-section'
+		);
+
 		// Misc settings.
 		add_settings_field(
 			'remove-on-uninstall',
@@ -573,17 +575,7 @@ class Settings_Module extends Base_Module {
 		$field = require __DIR__ . '/templates/fields/general/content-type.php';
 		$field( $this );
 
-	}
-
-	/**
-	 * Content type field.
-	 */
-	public function enable_email_logging_field() {
-
-		$field = require __DIR__ . '/templates/fields/general/enable-email-logging.php';
-		$field( $this );
-
-	}
+	} 
 
 	/**
 	 * SMTP host field.
@@ -781,6 +773,16 @@ class Settings_Module extends Base_Module {
 	public function reset_password_email_test_field() {
 
 		$field = require __DIR__ . '/templates/fields/reset-password-email/test-button.php';
+		$field( $this );
+
+	}
+
+	/**
+	 * Content type field.
+	 */
+	public function enable_email_logging_field() {
+
+		$field = require __DIR__ . '/templates/fields/logging/enable-email-logging.php';
 		$field( $this );
 
 	}
