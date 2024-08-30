@@ -69,15 +69,14 @@ class Logs_Output extends Base_Output {
 	 */
 	public function setup() {
 
-		add_filter( 'manage_email_logs_posts_columns', array( $this, 'set_custom_email_logs_columns' ) );
-		add_action( 'manage_email_logs_posts_custom_column', array( $this, 'custom_email_logs_column' ), 10, 2 );
+		add_filter( 'manage_weed_email_logs_posts_columns', array( $this, 'set_custom_email_logs_columns' ) );
+		add_action( 'manage_weed_email_logs_posts_custom_column', array( $this, 'custom_email_logs_column' ), 10, 2 );
 		add_action( 'restrict_manage_posts', array( $this, 'filter_email_logs_by_status' ) );
 		add_action( 'pre_get_posts', array( $this, 'filter_email_logs_query_by_status' ) );
 		add_action( 'admin_head', array( $this, 'custom_email_logs_status_styles' ) );
-		add_action( 'current_screen', array( $this, 'restrict_access_to_email_logs' ) );
 		add_action( 'admin_menu', array( $this, 'hide_email_logs_menu' ), 999 );
 		add_action( 'add_meta_boxes', array( $this, 'add_email_logs_metabox' ) );
-		
+
 	}
 
 	/**
@@ -89,11 +88,11 @@ class Logs_Output extends Base_Output {
 
 		unset( $columns['date'] );
 
-		$columns['subject']    = __( 'Subject', 'welcome-email-editor' );
-		$columns['sender']     = __( 'Sender', 'welcome-email-editor' );
-		$columns['recipient']  = __( 'Recipient', 'welcome-email-editor' );
-		$columns['status']     = __( 'Status', 'welcome-email-editor' );
-		$columns['date']       = __( 'Date/Time', 'welcome-email-editor' );
+		$columns['subject']   = __( 'Subject', 'welcome-email-editor' );
+		$columns['sender']    = __( 'Sender', 'welcome-email-editor' );
+		$columns['recipient'] = __( 'Recipient', 'welcome-email-editor' );
+		$columns['status']    = __( 'Status', 'welcome-email-editor' );
+		$columns['date']      = __( 'Date/Time', 'welcome-email-editor' );
 
 		return $columns;
 
@@ -155,7 +154,7 @@ class Logs_Output extends Base_Output {
 		global $typenow;
 
 		// Only add the filter for the 'email_logs' post type
-		if ( $typenow == 'email_logs' ) {
+		if ( $typenow == 'weed_email_logs' ) {
 			$selected = isset( $_GET['email_status'] ) ? $_GET['email_status'] : '';
 
 			// Dropdown options for email status
@@ -179,7 +178,7 @@ class Logs_Output extends Base_Output {
 
 		$post_type = isset( $_GET['post_type'] ) ? $_GET['post_type'] : '';
 
-		if ( $post_type == 'email_logs' && is_admin() && $pagenow == 'edit.php' && isset( $_GET['email_status'] ) && $_GET['email_status'] != '' ) {
+		if ( $post_type == 'weed_email_logs' && is_admin() && $pagenow == 'edit.php' && isset( $_GET['email_status'] ) && $_GET['email_status'] != '' ) {
 			$meta_query = array(
 				array(
 					'key'   => 'status',
@@ -192,26 +191,6 @@ class Logs_Output extends Base_Output {
 	}
 
 	/**
-	 * Restrict access to the email logs menu page
-	 */
-	public function restrict_access_to_email_logs() {
-
-		// Get the current screen object
-		$screen = get_current_screen();
-
-		// Check if the current screen is related to the 'email_logs' post type
-		if ( $screen && $screen->post_type === 'email_logs' ) {
-			// Check if the user has the 'manage_options' capability
-			if ( ! current_user_can( 'manage_options' ) ) {
-				// If not, terminate the script with an error message
-				wp_die( __( 'You do not have sufficient permissions to access this page.', 'welcome-email-editor' ) );
-
-			}
-		}
-
-	}
-
-	/**
 	 * Hide the email logs menu page from the admin menu
 	 */
 	public function hide_email_logs_menu() {
@@ -219,7 +198,7 @@ class Logs_Output extends Base_Output {
 		// Check if the user does not have the 'manage_options' capability
 		if ( ! current_user_can( 'manage_options' ) ) {
 			// Remove the 'email_logs' menu page
-			remove_menu_page( 'edit.php?post_type=email_logs' );
+			remove_menu_page( 'edit.php?post_type=weed_email_logs' );
 		}
 
 	}
@@ -233,7 +212,7 @@ class Logs_Output extends Base_Output {
 			'email_logs_metabox',
 			__( 'Email Log Details' ),
 			array( $this, 'email_logs_metabox_callback' ),
-			'email_logs',
+			'weed_email_logs',
 			'normal',
 			'high'
 		);
@@ -288,7 +267,7 @@ class Logs_Output extends Base_Output {
 			// Display the server response with different colors based on the status
 			$response_class = ( $status === 'Success' ) ? 'server-response-success' : 'server-response-failed';
 			if ( ! empty( $server_response ) ) :
-			?>
+				?>
 				<div class="email-log-details">
 					<label><?php esc_html_e( 'Server Response:', 'welcome-email-editor' ); ?></label>
 					<span class="<?php echo esc_attr( $response_class ); ?>">
@@ -299,7 +278,7 @@ class Logs_Output extends Base_Output {
 
 		</div>
 		<?php
-		
+
 	}
 
 }
