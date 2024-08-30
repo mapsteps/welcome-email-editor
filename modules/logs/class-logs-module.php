@@ -83,6 +83,7 @@ class Logs_Module extends Base_Module {
 		add_filter( 'wp_mail', array( $this, 'capture_email_details_for_logging' ), 10, 1 );
 		add_action( 'wp_mail_succeeded', array( $this, 'handle_success_email' ) );
 		add_action( 'wp_mail_failed', array( $this, 'handle_failed_email' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'email_logs_detail_styles' ) );
 
 		// The module output.
 		require_once __DIR__ . '/class-logs-output.php';
@@ -164,50 +165,50 @@ class Logs_Module extends Base_Module {
 	 * Action to handle successful emails.
 	 */
 	public function handle_success_email( $mail_data ) {
+	 
+		 if ( isset( $GLOBALS['current_email_log'] ) ) {
+        	// Assuming $mail_data or another global variable contains the server response
+			$server_response = 'Email sent successfully.'; // Initialize an empty response 
 
-		if ( isset( $GLOBALS['current_email_log'] ) ) {
-
-			// Defer the logging to after the email has been attempted to send
-			$this->log_email_event( 'Success' );
+			// Log the email with success status and the server response
+			$this->log_email_event('Success', $server_response);
 			unset( $GLOBALS['current_email_log'] );
 
 		}
-
-	}
+		
+	} 
 
 	/**
 	 * Hook into the wp_mail_failed action to handle email failures
-	 *
 	 * @param [type] $wp_error
-	 */
+	 */ 
 	public function handle_failed_email( $wp_error ) {
-
+		
 		if ( isset( $GLOBALS['current_email_log'] ) ) {
-			$error_message = $wp_error->get_error_message();
+			$server_response = $wp_error->get_error_message();
 
 			// Log the email as failed
-			$this->log_email_event( 'Failed', $error_message );
+			$this->log_email_event( 'Failed', $server_response );
 			unset( $GLOBALS['current_email_log'] );
-		}
 
+		}
 	}
 
 	/**
 	 * Helper function to log email events
 	 */
-	public function log_email_event( $status, $error_message = '' ) {
+	public function log_email_event( $status, $server_response = '' ) {
 
 		$email_log = $this->get_current_email_log();
 
 		if ( ! $email_log ) {
 			return; // If no email log data exists, do nothing
 		}
-
-		$email_type = $this->determine_email_type( $email_log['subject'] );
+ 
 		$sender     = $this->get_sender_email();
 
 		// Insert the email log as a custom post type entry
-		$this->insert_email_log_post( $email_log, $email_type, $sender, $status, $error_message );
+		$this->insert_email_log_post( $email_log, $sender, $status, $server_response );
 
 		// Clear the global variable after logging
 		unset( $GLOBALS['current_email_log'] );
@@ -220,28 +221,6 @@ class Logs_Module extends Base_Module {
 	protected function get_current_email_log() {
 
 		return isset( $GLOBALS['current_email_log'] ) ? $GLOBALS['current_email_log'] : false;
-
-	}
-
-	/**
-	 * Determine the email type based on the subject
-	 */
-	protected function determine_email_type( $subject ) {
-
-		$email_type_mappings = array(
-			'Password'      => 'Reset Password',
-			'New User'      => 'New User',
-			'Login Details' => 'Welcome Email',
-			'Test Email'    => 'Test Email',
-		);
-
-		foreach ( $email_type_mappings as $keyword => $type ) {
-			if ( strpos( $subject, $keyword ) !== false ) {
-				return $type;
-			}
-		}
-
-		return 'General';
 
 	}
 
@@ -263,7 +242,7 @@ class Logs_Module extends Base_Module {
 	/**
 	 * Insert the email log as a custom post type entry
 	 */
-	protected function insert_email_log_post( $email_log, $email_type, $sender, $status, $error_message ) {
+	protected function insert_email_log_post( $email_log, $sender, $status, $server_response ) {
 
 		wp_insert_post(array(
 			'post_title'   => $email_log['subject'],
@@ -272,13 +251,28 @@ class Logs_Module extends Base_Module {
 			'post_content' => $email_log['email_body'],
 			'post_date'    => current_time( 'mysql' ),
 			'meta_input'   => array(
-				'email_type'          => $email_type,
-				'sender'              => $sender,
-				'recipient'           => $email_log['recipient'],
-				'status'              => $status,
-				'email_error_message' => $error_message,
+				'subject'      	  => $email_log['subject'],
+				'sender'          => $sender,
+				'recipient'       => $email_log['recipient'],
+				'status'          => $status,
+				'server_response' => $server_response,
 			),
 		));
+
+	}
+
+	/**
+	 * Enqueue email logs details styles.
+	 */
+	public function email_logs_detail_styles() {
+
+		// Get the current screen object
+    	$screen = get_current_screen(); 
+		
+		// Check if the current screen is related to the 'email_logs' post type
+		if ( $screen && $screen->id === 'email_logs' ) {
+			wp_enqueue_style( 'email-logs-details', $this->url . '/assets/css/email-logs-detail.css', array(), WEED_PLUGIN_VERSION );
+		}	 
 
 	}
 

@@ -88,7 +88,7 @@ class Logs_Output extends Base_Output {
 
 		unset( $columns['date'] );
 
-		$columns['email_type'] = __( 'Email Type', 'welcome-email-editor' );
+		$columns['subject']    = __( 'Subject', 'welcome-email-editor' );
 		$columns['sender']     = __( 'Sender', 'welcome-email-editor' );
 		$columns['recipient']  = __( 'Recipient', 'welcome-email-editor' );
 		$columns['status']     = __( 'Status', 'welcome-email-editor' );
@@ -106,8 +106,8 @@ class Logs_Output extends Base_Output {
 	public function custom_email_logs_column( $column, $post_id ) {
 
 		switch ( $column ) {
-			case 'email_type':
-				echo esc_html( get_post_meta( $post_id, 'email_type', true ) );
+			case 'subject':
+				echo esc_html( get_post_meta( $post_id, 'subject', true ) );
 				break;
 			case 'sender':
 				echo esc_html( get_post_meta( $post_id, 'sender', true ) );
@@ -247,40 +247,58 @@ class Logs_Output extends Base_Output {
 	public function email_logs_metabox_callback( $post ) {
 
 		// Retrieve meta data
-		$email_type          = get_post_meta( $post->ID, 'email_type', true );
-		$recipient           = get_post_meta( $post->ID, 'recipient', true );
-		$status              = get_post_meta( $post->ID, 'status', true );
-		$sender              = get_post_meta( $post->ID, 'sender', true );
-		$email_error_message = get_post_meta( $post->ID, 'email_error_message', true );
+		$subject         = get_post_meta( $post->ID, 'subject', true );
+		$recipient       = get_post_meta( $post->ID, 'recipient', true );
+		$status          = get_post_meta( $post->ID, 'status', true );
+		$sender          = get_post_meta( $post->ID, 'sender', true );
+		$server_response = get_post_meta( $post->ID, 'server_response', true );
 
-		// Display the meta data in a table or any structured format
+		// Display the details with improved styling
 		?>
-		<table class="form-table">
-			<tr>
-				<th><label for="email_type"><?php _e( 'Email Type' ); ?></label></th>
-				<td><input type="text" id="email_type" value="<?php echo esc_attr( $email_type ); ?>" readonly /></td>
-			</tr>
-			<tr>
-				<th><label for="recipient"><?php _e( 'Recipient' ); ?></label></th>
-				<td><input type="text" id="recipient" value="<?php echo esc_attr( $recipient ); ?>" readonly /></td>
-			</tr>
-		
-			<tr>
-				<th><label for="sender"><?php _e( 'Sender' ); ?></label></th>
-				<td><input type="text" id="sender" value="<?php echo esc_attr( $sender ); ?>" readonly /></td>
-			</tr>
-			<tr>
-				<th><label for="status"><?php _e( 'Status' ); ?></label></th>
-				<td><input type="text" id="status" value="<?php echo esc_attr( $status ); ?>" readonly /></td>
-			</tr>
-			<?php if ( $email_error_message ) : // Only show this if there's an error ?>
-			<tr>
-				<th><label for="email_error_message"><?php _e( 'Error Message' ); ?></label></th>
-				<td><textarea id="email_error_message" rows="3" cols="40" readonly><?php echo esc_textarea( $email_error_message ); ?></textarea></td>
-			</tr>
+		<div class="email-log-details-wrapper">
+
+			<div class="email-log-details">
+				<label><?php esc_html_e( 'Subject:', 'welcome-email-editor' ); ?></label>
+				<?php echo esc_html( $subject ); ?>
+			</div>
+
+			<div class="email-log-details">
+				<label><?php esc_html_e( 'Sender:', 'welcome-email-editor' ); ?></label>
+				<?php echo esc_html( $sender ); ?>
+			</div>
+
+			<div class="email-log-details">
+				<label><?php esc_html_e( 'Recipient:', 'welcome-email-editor' ); ?></label>
+				<?php echo esc_html( $recipient ); ?>
+			</div>
+
+			<?php
+			// Display the status as a button with color and padding
+			$status_class = ( $status === 'Success' ) ? 'status-success' : 'status-failed';
+			?>
+			<div class="email-log-details">
+				<label><?php esc_html_e( 'Status:', 'welcome-email-editor' ); ?></label>
+				<span class="status-button <?php echo esc_attr( $status_class ); ?>">
+					<?php echo esc_html( $status ); ?>
+				</span>
+			</div>
+
+			<?php
+			// Display the server response with different colors based on the status
+			$response_class = ( $status === 'Success' ) ? 'server-response-success' : 'server-response-failed';
+			if ( ! empty( $server_response ) ) :
+			?>
+				<div class="email-log-details">
+					<label><?php esc_html_e( 'Server Response:', 'welcome-email-editor' ); ?></label>
+					<span class="<?php echo esc_attr( $response_class ); ?>">
+						<?php echo esc_html( $server_response ); ?>
+					</span>
+				</div>
 			<?php endif; ?>
-		</table>
+
+		</div>
 		<?php
+
 
 	}
 
