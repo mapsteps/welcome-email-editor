@@ -87,11 +87,11 @@ class Logs_Output extends Base_Output {
 	public function set_custom_email_logs_columns($columns) {
 		unset($columns['date']);
 
-		$columns['email_type'] = __('Email Type', 'weed');
-		$columns['sender']     = __('Sender', 'weed');
-		$columns['recipient']  = __('Recipient', 'weed');
-		$columns['status']     = __('Status', 'weed');
-		$columns['date']       = __('Date/Time', 'weed');
+		$columns['email_type'] = __('Email Type', 'welcome-email-editor');
+		$columns['sender']     = __('Sender', 'welcome-email-editor');
+		$columns['recipient']  = __('Recipient', 'welcome-email-editor');
+		$columns['status']     = __('Status', 'welcome-email-editor');
+		$columns['date']       = __('Date/Time', 'welcome-email-editor');
 
 		return $columns;
 	}
@@ -154,9 +154,9 @@ class Logs_Output extends Base_Output {
 			// Dropdown options for email status
 			?>
 			<select name="email_status" id="email_status">
-				<option value=""><?php _e( 'All Statuses', 'weed' ); ?></option>
-				<option value="Success" <?php selected( $selected, 'Success' ); ?>><?php _e( 'Success', 'weed' ); ?></option>
-				<option value="Failed" <?php selected( $selected, 'Failed' ); ?>><?php _e( 'Failed', 'weed' ); ?></option>
+				<option value=""><?php _e( 'All Statuses', 'welcome-email-editor' ); ?></option>
+				<option value="Success" <?php selected( $selected, 'Success' ); ?>><?php _e( 'Success', 'welcome-email-editor' ); ?></option>
+				<option value="Failed" <?php selected( $selected, 'Failed' ); ?>><?php _e( 'Failed', 'welcome-email-editor' ); ?></option>
 			</select>
 			<?php
 		}
@@ -192,7 +192,7 @@ class Logs_Output extends Base_Output {
 			// Check if the user has the 'manage_options' capability
 			if ( !current_user_can('manage_options') ) {
 				// If not, terminate the script with an error message
-				wp_die(__('You do not have sufficient permissions to access this page.', 'weed'));
+				wp_die(__('You do not have sufficient permissions to access this page.', 'welcome-email-editor'));
 				
 			}
 		}

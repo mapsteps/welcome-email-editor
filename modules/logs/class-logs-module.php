@@ -94,19 +94,19 @@ class Logs_Module extends Base_Module {
 	 */ 
 	public function register_email_logs_cpt() {
 		$labels = array(
-			'name'               => _x( 'Email Logs', 'post type general name', 'weed' ),
-			'singular_name'      => _x( 'Email Log', 'post type singular name', 'weed' ),
-			'menu_name'          => _x( 'Email Logs', 'admin menu', 'weed' ),
-			'name_admin_bar'     => _x( 'Email Log', 'add new on admin bar', 'weed' ),
-			'add_new'            => _x( 'Add New', 'email log', 'weed' ),
-			'add_new_item'       => __( 'Add New Email Log', 'weed' ),
-			'new_item'           => __( 'New Email Log', 'weed' ),
-			'edit_item'          => __( 'Edit Email Log', 'weed' ),
-			'view_item'          => __( 'View Email Log', 'weed' ),
-			'all_items'          => __( 'All Email Logs', 'weed' ),
-			'search_items'       => __( 'Search Email Logs', 'weed' ),
-			'not_found'          => __( 'No email logs found.', 'weed' ),
-			'not_found_in_trash' => __( 'No email logs found in Trash.', 'weed' )
+			'name'               => _x( 'Email Logs', 'post type general name', 'welcome-email-editor' ),
+			'singular_name'      => _x( 'Email Log', 'post type singular name', 'welcome-email-editor' ),
+			'menu_name'          => _x( 'Email Logs', 'admin menu', 'welcome-email-editor' ),
+			'name_admin_bar'     => _x( 'Email Log', 'add new on admin bar', 'welcome-email-editor' ),
+			'add_new'            => _x( 'Add New', 'email log', 'welcome-email-editor' ),
+			'add_new_item'       => __( 'Add New Email Log', 'welcome-email-editor' ),
+			'new_item'           => __( 'New Email Log', 'welcome-email-editor' ),
+			'edit_item'          => __( 'Edit Email Log', 'welcome-email-editor' ),
+			'view_item'          => __( 'View Email Log', 'welcome-email-editor' ),
+			'all_items'          => __( 'All Email Logs', 'welcome-email-editor' ),
+			'search_items'       => __( 'Search Email Logs', 'welcome-email-editor' ),
+			'not_found'          => __( 'No email logs found.', 'welcome-email-editor' ),
+			'not_found_in_trash' => __( 'No email logs found in Trash.', 'welcome-email-editor' )
 		);
 
 		$args = array(
