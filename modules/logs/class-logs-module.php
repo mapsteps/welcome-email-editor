@@ -80,7 +80,7 @@ class Logs_Module extends Base_Module {
 
 		add_action( 'init', array( $this, 'register_email_logs_cpt' ), 20 );
 		add_action( 'admin_menu', array( $this, 'email_logs_submenu' ), 20 );
-		add_filter( 'pre_wp_mail', array( $this, 'capture_email_details_for_logging' ), 10, 2 );
+		add_filter( 'wp_mail', array( $this, 'capture_email_details_for_logging' ), 10, 2 );
 		add_action( 'phpmailer_init', array( $this, 'capture_email_sender' ), 10, 1 );
 		add_action( 'wp_mail_succeeded', array( $this, 'handle_success_email' ) );
 		add_action( 'wp_mail_failed', array( $this, 'handle_failed_email' ) );
@@ -164,17 +164,17 @@ class Logs_Module extends Base_Module {
 	/**
 	 * Hook into pre_wp_mail to capture email details before sending
 	 */
-	public function capture_email_details_for_logging( $return, $atts ) {
+	public function capture_email_details_for_logging( $args ) {
 
 		$GLOBALS['current_email_log'] = array(
-			'subject'     => $atts['subject'],
-			'email_body'  => $atts['message'],
-			'recipient'   => is_array( $atts['to'] ) ? implode( ', ', $atts['to'] ) : $atts['to'],
-			'headers'     => $atts['headers'],
-			'attachments' => $atts['attachments'],
+			'subject'     => $args['subject'],
+			'email_body'  => $args['message'],
+			'recipient'   => is_array( $args['to'] ) ? implode( ', ', $args['to'] ) : $args['to'],
+			'headers'     => $args['headers'],
+			'attachments' => $args['attachments'],
 		);
 
-		return $return;
+		return $args;
 
 	}
 
