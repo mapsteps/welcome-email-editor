@@ -18,6 +18,13 @@ use Weed\Settings\Settings_Module;
 class Logs_Module extends Base_Module {
 
 	/**
+	 * The global variable name for storing current email log details.
+	 *
+	 * @var string
+	 */
+	public $log_global_var = 'weed_current_email_log';
+
+	/**
 	 * The class instance.
 	 *
 	 * @var self
@@ -166,7 +173,7 @@ class Logs_Module extends Base_Module {
 	 */
 	public function capture_email_details_for_logging( $args ) {
 
-		$GLOBALS['current_email_log'] = array(
+		$GLOBALS[ $this->log_global_var ] = array(
 			'subject'     => $args['subject'],
 			'email_body'  => $args['message'],
 			'recipient'   => is_array( $args['to'] ) ? implode( ', ', $args['to'] ) : $args['to'],
@@ -187,8 +194,8 @@ class Logs_Module extends Base_Module {
 		// Get the 'From' email
 		$from_email = $phpmailer->From;
 
-		if ( isset( $GLOBALS['current_email_log'] ) ) {
-			$GLOBALS['current_email_log']['sender'] = $from_email;
+		if ( isset( $GLOBALS[ $this->log_global_var ] ) ) {
+			$GLOBALS[ $this->log_global_var ]['sender'] = $from_email;
 		}
 
 	}
@@ -198,13 +205,13 @@ class Logs_Module extends Base_Module {
 	 */
 	public function handle_success_email( $mail_data ) {
 
-		if ( isset( $GLOBALS['current_email_log'] ) ) {
+		if ( isset( $GLOBALS[ $this->log_global_var ] ) ) {
 			// Assuming $mail_data or another global variable contains the server response
 			$server_response = 'Email sent successfully.'; // Initialize an empty response
 
 			// Log the email with success status and the server response
 			$this->log_email_event( 'Success', $server_response );
-			unset( $GLOBALS['current_email_log'] );
+			unset( $GLOBALS[ $this->log_global_var ] );
 
 		}
 
@@ -217,12 +224,12 @@ class Logs_Module extends Base_Module {
 	 */
 	public function handle_failed_email( $wp_error ) {
 
-		if ( isset( $GLOBALS['current_email_log'] ) ) {
+		if ( isset( $GLOBALS[ $this->log_global_var ] ) ) {
 			$server_response = $wp_error->get_error_message();
 
 			// Log the email as failed
 			$this->log_email_event( 'Failed', $server_response );
-			unset( $GLOBALS['current_email_log'] );
+			unset( $GLOBALS[ $this->log_global_var ] );
 
 		}
 	}
@@ -244,7 +251,7 @@ class Logs_Module extends Base_Module {
 		$this->insert_email_log_post( $email_log, $sender, $status, $server_response );
 
 		// Clear the global variable after logging
-		unset( $GLOBALS['current_email_log'] );
+		unset( $GLOBALS[ $this->log_global_var ] );
 
 	}
 
@@ -253,7 +260,7 @@ class Logs_Module extends Base_Module {
 	 */
 	protected function get_current_email_log() {
 
-		return isset( $GLOBALS['current_email_log'] ) ? $GLOBALS['current_email_log'] : false;
+		return isset( $GLOBALS[ $this->log_global_var ] ) ? $GLOBALS[ $this->log_global_var ] : false;
 
 	}
 
