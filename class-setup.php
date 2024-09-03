@@ -220,21 +220,23 @@ class Setup {
 		$remove_on_uninstall = isset( $settings['remove_on_uninstall'] ) ? true : false;
 
 		if ( $remove_on_uninstall ) {
-			// Delete all settings
+
+			// Delete all settings.
 			delete_option( 'weed_settings' );
 			delete_option( 'weed_v5_compatibility' );
 
-			// Remove all email logs
-			$email_logs = get_posts(array(
+			// Remove all email logs.
+			$email_logs = get_posts( array(
 				'post_type'   => 'weed_email_logs',
-				'numberposts' => -1, // Retrieve all email logs
-				'post_status' => 'any', // Includes all statuses
+				'numberposts' => -1, // Retrieve all email logs.
+				'post_status' => 'any', // Includes all statuses.
 			));
 
-			// Loop through each email log and delete it
+			// Loop through each email log and delete it.
 			foreach ( $email_logs as $email_log ) {
-				wp_delete_post( $email_log->ID, true ); // 'true' forces deletion without sending to trash
+				wp_delete_post( $email_log->ID, true ); // 'true' forces deletion without sending to trash.
 			}
+
 		}
 
 	}
