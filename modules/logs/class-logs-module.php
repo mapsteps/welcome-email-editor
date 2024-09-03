@@ -159,11 +159,11 @@ class Logs_Module extends Base_Module {
 	public function email_logs_submenu() {
 
 		add_submenu_page(
-			'weed_settings', // parent slug
-			'Email Logs', // page title
-			'Email Logs', // sub-menu title
-			'manage_options', // capability
-			'edit.php?post_type=weed_email_logs' // your menu menu slug
+			'weed_settings',
+			'Email Logs',
+			'Email Logs',
+			'manage_options',
+			'edit.php?post_type=weed_email_logs'
 		);
 
 	}
@@ -207,7 +207,8 @@ class Logs_Module extends Base_Module {
 
 		if ( isset( $GLOBALS[ $this->log_global_var ] ) ) {
 			// Assuming $mail_data or another global variable contains the server response
-			$server_response = 'Email sent successfully.'; // Initialize an empty response
+			// Initialize an empty response
+			$server_response = 'Email sent successfully.';
 
 			// Log the email with success status and the server response
 			$this->log_email_event( 'Success', $server_response );
@@ -241,8 +242,9 @@ class Logs_Module extends Base_Module {
 
 		$email_log = $this->get_current_email_log();
 
+		// If no email log data exists, do nothing
 		if ( ! $email_log ) {
-			return; // If no email log data exists, do nothing
+			return;
 		}
 
 		$sender = $email_log['sender'];
