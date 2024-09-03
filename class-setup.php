@@ -67,7 +67,7 @@ class Setup {
 	public function set_data() {
 
 		/* translators: %s: User login. */
-		$user_welcome_email_body = __( 'Username:', 'welcome-email-editor' ) . ' [user_login]' . "\r\n\r\n";
+		$user_welcome_email_body  = __( 'Username:', 'welcome-email-editor' ) . ' [user_login]' . "\r\n\r\n";
 		$user_welcome_email_body .= __( 'To set your password, visit the following address:' ) . "\r\n\r\n";
 		$user_welcome_email_body .= '[reset_pass_url]' . "\r\n\r\n";
 		$user_welcome_email_body .= '[login_url]' . "\r\n";
@@ -195,7 +195,7 @@ class Setup {
 	public function admin_body_class( $classes ) {
 
 		$screens = array(
-			'settings_page_weed_settings',
+			'toplevel_page_weed_settings',
 		);
 
 		$screen = get_current_screen();
