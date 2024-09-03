@@ -43,10 +43,15 @@ return function () {
 							</a>
 						</li>
 						<li class="heatbox-tab-nav-item">
+							<a href="#email-logging">
+								<?php esc_html_e( 'Email Logging', 'welcome-email-editor' ); ?>
+							</a>
+						</li>
+						<li class="heatbox-tab-nav-item">
 							<a href="#welcome-email">
 								<?php esc_html_e( 'Welcome Email Editor', 'welcome-email-editor' ); ?>
 							</a>
-						</li>
+						</li>						
 						<li class="heatbox-tab-nav-item">
 							<a href="#misc">
 								<?php esc_html_e( 'Other', 'welcome-email-editor' ); ?>
@@ -82,6 +87,12 @@ return function () {
 						</div>
 					</div>
 
+					<div class="heatbox-admin-panel" data-show-when-tab="email-logging">
+						<div class="heatbox">
+							<?php do_settings_sections( 'weed-enable-logging-settings' ); ?>
+						</div>
+					</div>
+					
 					<div class="heatbox-admin-panel" data-show-when-tab="welcome-email">
 						<div class="heatbox">
 							<?php do_settings_sections( 'weed-user-welcome-email-settings' ); ?>

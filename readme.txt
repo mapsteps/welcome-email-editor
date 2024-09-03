@@ -2,8 +2,8 @@
 Contributors: davidvongries
 Tags: SMTP, change SMTP, custom SMTP, mail SMTP, welcome email, wordpress welcome email, mail, email, new user email, password reminder, lost password, welcome email attachment, mail attachment, email attachment
 Requires at least: 4.6
-Tested up to: 6.5
-Stable tag: 6.1.2
+Tested up to: 6.6
+Stable tag: 6.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -21,6 +21,9 @@ Swift SMTP allows you to configure custom SMTP settings for your WordPress site,
 * Set SMTP host
 * Set up SMTP encryption & port (SSL or TSL)
 * Set up SMTP authentification through username & password
+
+= 💾 Email Logging (New!) =
+* Log all outgoing emails
 
 = 📨 Customize WordPress Welcome Emails =
 When a user is added to or signs up for a website, WordPress sends notifications to both the site administrator and the new user. This plugin allows you to customize & change those emails.
@@ -58,6 +61,9 @@ Since version 4.3, the password is no longer sent to the user via email, and ins
 1. Swift SMTP Settings
 
 == Changelog ==
+= 6.2 | September 03, 2024 =
+* New: Email Logging
+* Tested up to WordPress 6.6
 = 6.1.2 | May 10, 2024 =
 * Tested up to WordPress 6.5
 = 6.1.1 | January 08, 2024 =

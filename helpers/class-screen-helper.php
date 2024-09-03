@@ -22,7 +22,7 @@ class Screen_Helper {
 
 		$current_screen = get_current_screen();
 
-		return 'settings_page_weed_settings' === $current_screen->id;
+		return 'toplevel_page_weed_settings' === $current_screen->id;
 
 	}
 }

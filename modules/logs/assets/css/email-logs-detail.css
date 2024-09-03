@@ -1,0 +1,43 @@
+ 
+	.email-log-details-wrapper {
+		padding: 20px;
+		background-color: #F6F7F7;
+	}
+
+	.email-log-details-wrapper > :last-child {
+		margin-bottom: 0;
+	}
+
+	.email-log-details {
+		margin-bottom: 20px;
+	}
+
+	.email-log-details label {
+		font-weight: bold;
+		display: block;
+		margin-bottom: 5px;
+		font-size: 15px;
+	}
+
+	.email-log-details div {
+		margin-bottom: 10px;
+		font-size: 15px;
+		padding: 10px;
+		background-color: #fff;
+		border-radius: 8px;
+		border: 1px solid #e0e0e0;
+	}
+
+	.status-button {
+		padding: 5px 10px;
+		border-radius: 4px;
+		color: white;
+		font-weight: bold;
+		display: inline-block;
+		text-align: center;
+	}
+
+	.status-success { background-color: #28a745; } /* Green */
+	.status-failed { background-color: #dc3545; } /* Red */
+	.server-response-success { color: #28a745; } /* Green */
+	.server-response-failed { color: #dc3545; } /* Red */ 

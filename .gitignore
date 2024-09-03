@@ -32,5 +32,4 @@ svn
 # Linting & editor's settings related
 .idea
 .vscode
-phpcs.xml
 .editorconfig

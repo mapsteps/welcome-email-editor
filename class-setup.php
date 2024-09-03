@@ -67,7 +67,7 @@ class Setup {
 	public function set_data() {
 
 		/* translators: %s: User login. */
-		$user_welcome_email_body = __( 'Username:', 'welcome-email-editor' ) . ' [user_login]' . "\r\n\r\n";
+		$user_welcome_email_body  = __( 'Username:', 'welcome-email-editor' ) . ' [user_login]' . "\r\n\r\n";
 		$user_welcome_email_body .= __( 'To set your password, visit the following address:' ) . "\r\n\r\n";
 		$user_welcome_email_body .= '[reset_pass_url]' . "\r\n\r\n";
 		$user_welcome_email_body .= '[login_url]' . "\r\n";
@@ -148,6 +148,7 @@ class Setup {
 
 		$modules['Weed\\Settings\\Settings_Module'] = __DIR__ . '/modules/settings/class-settings-module.php';
 		$modules['Weed\\Smtp\\Smtp_Module']         = __DIR__ . '/modules/smtp/class-smtp-module.php';
+		$modules['Weed\\Logs\\Logs_Module']         = __DIR__ . '/modules/logs/class-logs-module.php';
 
 		$modules = apply_filters( 'weed_modules', $modules );
 
@@ -194,7 +195,7 @@ class Setup {
 	public function admin_body_class( $classes ) {
 
 		$screens = array(
-			'settings_page_weed_settings',
+			'toplevel_page_weed_settings',
 		);
 
 		$screen = get_current_screen();
@@ -220,8 +221,21 @@ class Setup {
 
 		if ( $remove_on_uninstall ) {
 
+			// Delete all settings.
 			delete_option( 'weed_settings' );
 			delete_option( 'weed_v5_compatibility' );
+
+			// Remove all email logs.
+			$email_logs = get_posts( array(
+				'post_type'   => 'weed_email_logs',
+				'numberposts' => -1, // Retrieve all email logs.
+				'post_status' => 'any', // Includes all statuses.
+			));
+
+			// Loop through each email log and delete it.
+			foreach ( $email_logs as $email_log ) {
+				wp_delete_post( $email_log->ID, true ); // 'true' forces deletion without sending to trash.
+			}
 
 		}
 

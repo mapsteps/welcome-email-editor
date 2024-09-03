@@ -48,7 +48,7 @@ class Settings_Module extends Base_Module {
 
 		add_action( 'init', array( $this, 'set_plugin_priority' ) );
 
-		add_action( 'admin_menu', array( $this, 'submenu_page' ), 20 );
+		add_action( 'admin_menu', array( $this, 'menu_page' ), 20 );
 		add_action( 'current_screen', array( $this, 'reset_settings' ) );
 		add_action( 'admin_init', array( $this, 'add_settings' ) );
 
@@ -108,19 +108,19 @@ class Settings_Module extends Base_Module {
 	}
 
 	/**
-	 * Add submenu page.
+	 * Add menu page.
 	 */
-	public function submenu_page() {
-
-		add_submenu_page(
-			'options-general.php',
-			__( 'Swift SMTP', 'welcome-email-editor' ),
-			__( 'Swift SMTP', 'welcome-email-editor' ),
-			apply_filters( 'weed_settings_capability', 'manage_options' ),
-			'weed_settings',
-			array( $this, 'submenu_page_content' )
+	public function menu_page() {
+		add_menu_page(
+			__( 'Swift SMTP', 'welcome-email-editor' ), // Page title
+			__( 'Swift SMTP', 'welcome-email-editor' ), // Menu title
+			apply_filters( 'weed_settings_capability', 'manage_options' ), // Capability
+			'weed_settings', // Menu slug
+			array( $this, 'submenu_page_content' ), // Function to display the page content
+			'dashicons-email', // Icon (you can change this to any Dashicon)
+			60 // Position in the menu
 		);
-
+	
 	}
 
 	/**
@@ -218,6 +218,7 @@ class Settings_Module extends Base_Module {
 		add_settings_section( 'weed-user-welcome-email-section', __( 'Welcome Email (for Users)', 'welcome-email-editor' ), '', 'weed-user-welcome-email-settings' );
 		add_settings_section( 'weed-admin-new-user-notif-email-section', __( 'New User Notification Email (for Admins)', 'welcome-email-editor' ), '', 'weed-admin-new-user-notif-email-settings' );
 		add_settings_section( 'weed-reset-password-email-section', __( 'Reset Password Email', 'welcome-email-editor' ), '', 'weed-reset-password-email-settings' );
+		add_settings_section( 'weed-enable-logging-section', __( 'Email Logging', 'welcome-email-editor' ), '', 'weed-enable-logging-settings' );
 		add_settings_section( 'weed-misc-section', __( 'Other', 'welcome-email-editor' ), '', 'weed-misc-settings' );
 
 		// General fields.
@@ -500,6 +501,18 @@ class Settings_Module extends Base_Module {
 			'weed-reset-password-email-section'
 		);
 
+		// Email Logging settings.
+		add_settings_field(
+			'enable-email-logging',
+			'Enable Email Logging',
+			array(
+				$this,
+				'enable_email_logging_field',
+			),
+			'weed-enable-logging-settings',
+			'weed-enable-logging-section'
+		);
+
 		// Misc settings.
 		add_settings_field(
 			'remove-on-uninstall',
@@ -562,7 +575,7 @@ class Settings_Module extends Base_Module {
 		$field = require __DIR__ . '/templates/fields/general/content-type.php';
 		$field( $this );
 
-	}
+	} 
 
 	/**
 	 * SMTP host field.
@@ -760,6 +773,16 @@ class Settings_Module extends Base_Module {
 	public function reset_password_email_test_field() {
 
 		$field = require __DIR__ . '/templates/fields/reset-password-email/test-button.php';
+		$field( $this );
+
+	}
+
+	/**
+	 * Content type field.
+	 */
+	public function enable_email_logging_field() {
+
+		$field = require __DIR__ . '/templates/fields/logging/enable-email-logging.php';
 		$field( $this );
 
 	}
