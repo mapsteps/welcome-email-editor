@@ -13,7 +13,7 @@ return function ( $module ) {
 	$is_checked = isset( $settings['enable_email_logging'] ) ? 1 : 0;
 
 	$enable_email_logging_description = __(
-		'If enabled, all emails sent from your site will be recorded and shown under the "Email logs" sub menu.',
+		'If enabled, all outgoing emails will be recorded.',
 		'welcome-email-editor'
 	);
 	?>

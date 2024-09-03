@@ -1,23 +1,27 @@
  
 	.email-log-details-wrapper {
 		padding: 20px;
-		background-color: #f9f9f9;
-		border-radius: 10px;
-		box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+		background-color: #F6F7F7;
+	}
+
+	.email-log-details-wrapper > :last-child {
+		margin-bottom: 0;
+	}
+
+	.email-log-details {
 		margin-bottom: 20px;
 	}
-	.email-log-details {
-		margin-bottom: 15px;
-	}
+
 	.email-log-details label {
 		font-weight: bold;
 		display: block;
 		margin-bottom: 5px;
 		font-size: 15px;
 	}
+
 	.email-log-details div {
 		margin-bottom: 10px;
-		font-size: 14px;
+		font-size: 15px;
 		padding: 10px;
 		background-color: #fff;
 		border-radius: 8px;
@@ -25,14 +29,14 @@
 	}
 
 	.status-button {
-		padding: 10px 20px;
-		border-radius: 8px;
+		padding: 5px 10px;
+		border-radius: 4px;
 		color: white;
 		font-weight: bold;
-		font-size: 14px;
 		display: inline-block;
 		text-align: center;
 	}
+
 	.status-success { background-color: #28a745; } /* Green */
 	.status-failed { background-color: #dc3545; } /* Red */
 	.server-response-success { color: #28a745; } /* Green */

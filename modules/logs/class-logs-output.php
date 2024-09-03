@@ -238,7 +238,7 @@ class Logs_Output extends Base_Output {
 		<div class="email-log-details-wrapper">
 
 			<div class="email-log-details">
-				<label><?php esc_html_e( 'Subject:', 'welcome-email-editor' ); ?></label>
+				<label><?php esc_html_e( 'Email Subject:', 'welcome-email-editor' ); ?></label>
 				<?php echo esc_html( $subject ); ?>
 			</div>
 
