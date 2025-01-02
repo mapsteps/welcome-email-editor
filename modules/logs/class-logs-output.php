@@ -72,7 +72,7 @@ class Logs_Output extends Base_Output {
 		add_filter( 'manage_weed_email_logs_posts_columns', array( $this, 'set_custom_email_logs_columns' ) );
 		add_action( 'manage_weed_email_logs_posts_custom_column', array( $this, 'custom_email_logs_column' ), 10, 2 );
 		add_action( 'restrict_manage_posts', array( $this, 'filter_email_logs_by_status' ) );
-		add_action( 'pre_get_posts', array( $this, 'filter_email_logs_query_by_status' ) );
+		add_action( 'pre_get_posts', array( $this, 'modify_email_logs_query' ) );
 		add_action( 'admin_head', array( $this, 'custom_email_logs_status_styles' ) );
 		add_action( 'admin_menu', array( $this, 'hide_email_logs_menu' ), 999 );
 		add_action( 'add_meta_boxes', array( $this, 'add_email_logs_metabox' ) );
@@ -170,27 +170,6 @@ class Logs_Output extends Base_Output {
 	}
 
 	/**
-	 * Modify the query based on the selected email status
-	 */
-	public function filter_email_logs_query_by_status( $query ) {
-
-		global $pagenow;
-
-		$post_type = isset( $_GET['post_type'] ) ? $_GET['post_type'] : '';
-
-		if ( $post_type == 'weed_email_logs' && is_admin() && $pagenow == 'edit.php' && isset( $_GET['email_status'] ) && $_GET['email_status'] != '' ) {
-			$meta_query = array(
-				array(
-					'key'   => 'status',
-					'value' => sanitize_text_field( $_GET['email_status'] ),
-				),
-			);
-			$query->set( 'meta_query', $meta_query );
-		}
-
-	}
-
-	/**
 	 * Hide the email logs menu page from the admin menu
 	 */
 	public function hide_email_logs_menu() {
@@ -279,6 +258,55 @@ class Logs_Output extends Base_Output {
 		</div>
 		<?php
 
+	}
+
+	/**
+	 * Modify the email logs query for search and status filtering.
+	 *
+	 * @param WP_Query $query The current query.
+	 */
+	public function modify_email_logs_query( $query ) {
+
+		global $pagenow;
+
+		// Ensure it's in the admin, is the main query, and for 'weed_email_logs' post type
+		if ( is_admin() && $query->is_main_query() && $query->get( 'post_type' ) === 'weed_email_logs' ) {
+			$meta_query = array( 'relation' => 'AND' );
+
+			// Handle search functionality
+			if ( $query->is_search() ) {
+				$search_term  = $query->get( 's' );
+				$meta_query[] = array(
+					'relation' => 'OR',
+					array(
+						'key'     => 'recipient',
+						'value'   => $search_term,
+						'compare' => 'LIKE',
+					),
+					array(
+						'key'     => 'subject',
+						'value'   => $search_term,
+						'compare' => 'LIKE',
+					),
+				);
+
+				$query->set( 's', '' );
+			}
+
+			// Handle status filtering
+			if ( $pagenow === 'edit.php' && isset( $_GET['email_status'] ) && $_GET['email_status'] !== '' ) {
+				$meta_query[] = array(
+					'key'     => 'status',
+					'value'   => sanitize_text_field( $_GET['email_status'] ),
+					'compare' => '=',
+				);
+			}
+
+			// Set the combined meta query
+			if ( count( $meta_query ) > 1 ) {
+				$query->set( 'meta_query', $meta_query );
+			}
+		}
 	}
 
 }
