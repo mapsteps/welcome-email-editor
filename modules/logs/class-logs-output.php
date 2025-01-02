@@ -76,6 +76,7 @@ class Logs_Output extends Base_Output {
 		add_action( 'admin_head', array( $this, 'custom_email_logs_status_styles' ) );
 		add_action( 'admin_menu', array( $this, 'hide_email_logs_menu' ), 999 );
 		add_action( 'add_meta_boxes', array( $this, 'add_email_logs_metabox' ) );
+		add_filter( 'get_search_query', array( $this, 'show_search_result_text' ) );
 
 	}
 
@@ -307,6 +308,22 @@ class Logs_Output extends Base_Output {
 				$query->set( 'meta_query', $meta_query );
 			}
 		}
+	}
+
+	/**
+	 * Show the search results text in the email logs list table.
+	 *
+	 * @param string $query The current query.
+	 */
+	public function show_search_result_text( $query ) {
+
+		if ( is_admin() && isset( $_GET['post_type'] ) && $_GET['post_type'] === 'weed_email_logs' ) {
+			if ( isset( $_GET['s'] ) ) {
+				return sanitize_text_field( $_GET['s'] );
+			}
+		}
+		return $query;
+
 	}
 
 }
