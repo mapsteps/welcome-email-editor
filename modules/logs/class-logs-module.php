@@ -170,6 +170,8 @@ class Logs_Module extends Base_Module {
 
 	/**
 	 * Hook into pre_wp_mail to capture email details before sending
+	 * 
+	 * @param array $args The email details.
 	 */
 	public function capture_email_details_for_logging( $args ) {
 
@@ -187,7 +189,8 @@ class Logs_Module extends Base_Module {
 
 	/**
 	 * Action to handle successful emails.
-	 * Type object $phpmailer
+	 *
+	 * @param object $phpmailer The PHPMailer object.
 	 */
 	public function capture_email_sender( $phpmailer ) {
 
@@ -202,6 +205,8 @@ class Logs_Module extends Base_Module {
 
 	/**
 	 * Action to handle successful emails.
+	 * 
+	 * @param array $mail_data Server response.
 	 */
 	public function handle_success_email( $mail_data ) {
 
@@ -237,6 +242,9 @@ class Logs_Module extends Base_Module {
 
 	/**
 	 * Helper function to log email events
+	 * 
+	 * @param string $status Email status.
+	 * @param string $server_response Server response.
 	 */
 	public function log_email_event( $status, $server_response = '' ) {
 
@@ -268,6 +276,11 @@ class Logs_Module extends Base_Module {
 
 	/**
 	 * Insert the email log as a custom post type entry
+	 * 
+	 * @param array $email_log Email log details.
+	 * @param string $sender Sender email.
+	 * @param string $status Email status.
+	 * @param string $server_response Server response.
 	 */
 	protected function insert_email_log_post( $email_log, $sender, $status, $server_response ) {
 
@@ -319,5 +332,5 @@ class Logs_Module extends Base_Module {
 		$role->add_cap( 'read_private_logs' );
 
 	}
-
+	
 }
