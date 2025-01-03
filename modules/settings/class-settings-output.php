@@ -154,7 +154,7 @@ class Settings_Output extends Base_Output {
 	 *
 	 * @param string  $message Email message.
 	 * @param string  $key The activation key.
-	 * @param string  $user_login The activation key.
+	 * @param string  $user_login The user login.
 	 * @param WP_User $user_data WP_User object.
 	 *
 	 * @return string
@@ -173,8 +173,15 @@ class Settings_Output extends Base_Output {
 		// We want to reverse this for the plain text arena of emails.
 		$blogname = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
 
-		// $reset_url = network_site_url("wp-login.php?action=rp&key=$key&login=" . rawurlencode($user_login), 'login');
-		$reset_url = wp_login_url() . '?action=rp&key=' . $key . '&login=' . rawurlencode( $user_login );
+		// Use add_query_arg() to build the reset URL.
+		$reset_url = add_query_arg(
+			array(
+				'action' => 'rp',
+				'key'    => $key,
+				'login'  => rawurlencode( $user_login ),
+			),
+			wp_login_url()
+		);
 
 		$content_helper = new Content_Helper();
 

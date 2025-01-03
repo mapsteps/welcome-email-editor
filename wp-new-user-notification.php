@@ -250,7 +250,15 @@ if ( ! function_exists( 'wp_new_user_notification' ) ) {
 
 		$switched_locale = switch_to_locale( get_user_locale( $user ) );
 
-		$reset_pass_url = network_site_url( "wp-login.php?action=rp&key=$key&login=" . rawurlencode( $user->user_login ), 'login' );
+		// Use add_query_arg() to build the reset URL.
+		$reset_pass_url = add_query_arg(
+			array(
+				'action' => 'rp',
+				'key'    => $key,
+				'login'  => rawurlencode( $user->user_login ),
+			),
+			wp_login_url()
+		);
 
 		$default_user_subject = __( '[%s] Login Details' );
 
