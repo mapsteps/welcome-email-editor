@@ -101,7 +101,7 @@ class Settings_Output extends Base_Output {
 	 */
 	public function retrieve_password_title( $title, $user_login, $user_data ) {
 
-		$saved_title = $this->values['reset_password_email_subject'];
+		$saved_title = ! empty( $this->values['reset_password_email_subject'] ) ? $this->values['reset_password_email_subject'] : '';
 
 		if ( ! $saved_title ) {
 			return $title;
@@ -134,15 +134,15 @@ class Settings_Output extends Base_Output {
 
 		$values = $this->values;
 
-		if ( $values['from_email'] ) {
+		if ( ! empty( $values['from_email'] ) ) {
 			add_filter( 'wp_mail_from', array( $this, 'from_email' ) );
 		}
 
-		if ( $values['from_name'] ) {
+		if ( ! empty( $values['from_name'] ) ) {
 			add_filter( 'wp_mail_from_name', array( $this, 'from_name' ) );
 		}
 
-		if ( 'html' === $values['content_type'] ) {
+		if ( ! empty( $values['content_type'] ) && 'html' === $values['content_type'] ) {
 			add_filter( 'wp_mail_content_type', array( $this, 'html_content_type' ) );
 			add_filter( 'wp_mail_charset', array( $this, 'charset' ) );
 		}
@@ -161,7 +161,7 @@ class Settings_Output extends Base_Output {
 	 */
 	public function retrieve_password_message( $message, $key, $user_login, $user_data ) {
 
-		$saved_message = $this->values['reset_password_email_body'];
+		$saved_message = ! empty( $this->values['reset_password_email_body'] ) ? $this->values['reset_password_email_body'] : '';
 
 		if ( ! $saved_message ) {
 			return $message;
@@ -229,11 +229,11 @@ class Settings_Output extends Base_Output {
 
 		$values = $this->values;
 
-		if ( $values['from_email'] ) {
+		if ( ! empty( $values['from_email'] ) ) {
 			add_filter( 'wp_mail_from', array( $this, 'from_email' ) );
 		}
 
-		if ( $values['from_name'] ) {
+		if ( ! empty( $values['from_name'] ) ) {
 			add_filter( 'wp_mail_from_name', array( $this, 'from_name' ) );
 		}
 
@@ -248,15 +248,15 @@ class Settings_Output extends Base_Output {
 
 		$values = $this->values;
 
-		if ( $values['from_email'] ) {
+		if ( ! empty( $values['from_email'] ) ) {
 			remove_filter( 'wp_mail_from', array( $this, 'from_email' ) );
 		}
 
-		if ( $values['from_name'] ) {
+		if ( ! empty( $values['from_name'] ) ) {
 			remove_filter( 'wp_mail_from_name', array( $this, 'from_name' ) );
 		}
 
-		if ( 'html' === $values['content_type'] ) {
+		if ( ! empty( $values['content_type'] ) && 'html' === $values['content_type'] ) {
 			remove_filter( 'wp_mail_content_type', array( $this, 'html_content_type' ) );
 			remove_filter( 'wp_mail_charset', array( $this, 'charset' ) );
 		}
@@ -272,7 +272,7 @@ class Settings_Output extends Base_Output {
 
 		$values = $this->values;
 
-		if ( ! $values['from_email'] ) {
+		if ( empty( $values['from_email'] ) ) {
 			return $from_email;
 		}
 
@@ -281,7 +281,7 @@ class Settings_Output extends Base_Output {
 			return $from_email;
 		}
 
-		if ( ! $values['force_from_email'] ) {
+		if ( empty( $values['force_from_email'] ) ) {
 			$default_from_email = ( new Email_Helper() )->get_default_wp_from_email();
 
 			// When we don't force the "from email", we only set the value if it's not the default.
@@ -313,7 +313,7 @@ class Settings_Output extends Base_Output {
 
 		$values = $this->values;
 
-		if ( ! $values['from_name'] ) {
+		if ( empty( $values['from_name'] ) ) {
 			return $from_name;
 		}
 
@@ -322,7 +322,7 @@ class Settings_Output extends Base_Output {
 			return $from_name;
 		}
 
-		if ( ! $values['force_from_name'] ) {
+		if ( empty( $values['force_from_name'] ) ) {
 			// When we don't force the "from name", we only set the value if it's not the default.
 			if ( 'WordPress' !== $from_name ) {
 				return $from_name;
