@@ -49,7 +49,11 @@ class Setup {
 	 */
 	public function setup() {
 
-		$this->set_data();
+		// Load textdomain first before any translation functions are called.
+		add_action( 'init', array( $this, 'load_textdomain' ) );
+
+		// Delay set_data() until after textdomain is loaded.
+		add_action( 'init', array( $this, 'set_data' ), 1 );
 
 		add_filter( 'plugin_action_links_' . WEED_PLUGIN_BASENAME, array( $this, 'plugin_action_links' ) );
 		add_filter( 'admin_body_class', array( $this, 'admin_body_class' ) );
@@ -61,6 +65,15 @@ class Setup {
 	}
 
 	/**
+	 * Load plugin textdomain for translations.
+	 */
+	public function load_textdomain() {
+
+		load_plugin_textdomain( 'welcome-email-editor', false, dirname( WEED_PLUGIN_BASENAME ) . '/languages' );
+
+	}
+
+	/**
 	 * Provide data for the plugin.
 	 * This is optimal strategy to only get_option once across modules.
 	 */
@@ -68,7 +81,7 @@ class Setup {
 
 		/* translators: %s: User login. */
 		$user_welcome_email_body  = __( 'Username:', 'welcome-email-editor' ) . ' [user_login]' . "\r\n\r\n";
-		$user_welcome_email_body .= __( 'To set your password, visit the following address:' ) . "\r\n\r\n";
+		$user_welcome_email_body .= __( 'To set your password, visit the following address:', 'welcome-email-editor' ) . "\r\n\r\n";
 		$user_welcome_email_body .= '[reset_pass_url]' . "\r\n\r\n";
 		$user_welcome_email_body .= '[login_url]' . "\r\n";
 
@@ -179,7 +192,7 @@ class Setup {
 	 */
 	public function plugin_action_links( $links ) {
 
-		$settings = array( '<a href="' . admin_url( 'admin.php?page=weed_settings' ) . '">' . __( 'Settings', 'ultimate-quick-view-woocommerce' ) . '</a>' );
+		$settings = array( '<a href="' . admin_url( 'admin.php?page=weed_settings' ) . '">' . __( 'Settings', 'welcome-email-editor' ) . '</a>' );
 
 		return array_merge( $settings, $links );
 
