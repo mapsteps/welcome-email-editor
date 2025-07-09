@@ -27,7 +27,7 @@ class Setup {
 
 		$class = self::get_instance();
 
-		add_action( 'plugins_loaded', array( $class, 'setup' ) );
+		add_action( 'init', array( $class, 'setup' ), 9 );
 
 	}
 
@@ -68,7 +68,7 @@ class Setup {
 
 		/* translators: %s: User login. */
 		$user_welcome_email_body  = __( 'Username:', 'welcome-email-editor' ) . ' [user_login]' . "\r\n\r\n";
-		$user_welcome_email_body .= __( 'To set your password, visit the following address:' ) . "\r\n\r\n";
+		$user_welcome_email_body .= __( 'To set your password, visit the following address:', 'welcome-email-editor' ) . "\r\n\r\n";
 		$user_welcome_email_body .= '[reset_pass_url]' . "\r\n\r\n";
 		$user_welcome_email_body .= '[login_url]' . "\r\n";
 
@@ -179,7 +179,7 @@ class Setup {
 	 */
 	public function plugin_action_links( $links ) {
 
-		$settings = array( '<a href="' . admin_url( 'admin.php?page=weed_settings' ) . '">' . __( 'Settings', 'ultimate-quick-view-woocommerce' ) . '</a>' );
+		$settings = array( '<a href="' . admin_url( 'admin.php?page=weed_settings' ) . '">' . __( 'Settings', 'welcome-email-editor' ) . '</a>' );
 
 		return array_merge( $settings, $links );
 
