@@ -29,6 +29,7 @@ class Setup {
 
 		add_action( 'init', array( $class, 'load_textdomain' ) );
 		add_action( 'plugins_loaded', array( $class, 'setup' ) );
+    
 	}
 
 	/**
