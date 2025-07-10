@@ -10,7 +10,7 @@ namespace Weed;
 defined( 'ABSPATH' ) || die( "Can't access directly" );
 
 /**
- * Class to set up Ultimate Quick View plugin.
+ * Class to set up Welcome Email Editor plugin.
  */
 class Setup {
 	/**
@@ -27,8 +27,9 @@ class Setup {
 
 		$class = self::get_instance();
 
-		add_action( 'init', array( $class, 'setup' ), 9 );
-
+		add_action( 'init', array( $class, 'load_textdomain' ) );
+		add_action( 'plugins_loaded', array( $class, 'setup' ) );
+    
 	}
 
 	/**
@@ -49,7 +50,10 @@ class Setup {
 	 */
 	public function setup() {
 
+		// Always load latest settings from DB at the start of each request.
 		$this->set_data();
+
+		add_action( 'updated_option_weed_settings', [$this, 'update_data'], 10 );
 
 		add_filter( 'plugin_action_links_' . WEED_PLUGIN_BASENAME, array( $this, 'plugin_action_links' ) );
 		add_filter( 'admin_body_class', array( $this, 'admin_body_class' ) );
@@ -61,33 +65,101 @@ class Setup {
 	}
 
 	/**
+	 * Load plugin textdomain for translations.
+	 */
+	public function load_textdomain() {
+
+		// Check if textdomain is already loaded to avoid duplicate loading
+		if ( ! is_textdomain_loaded( 'welcome-email-editor' ) ) {
+
+			load_plugin_textdomain( 'welcome-email-editor', false, dirname( WEED_PLUGIN_BASENAME ) . '/languages' );
+			
+		}
+
+	}
+
+	/**
 	 * Provide data for the plugin.
 	 * This is optimal strategy to only get_option once across modules.
 	 */
 	public function set_data() {
+		$settings = get_option( 'weed_settings', array() );
+		$defaults = array(
+			// General settings.
+			'from_email'                                   => '',
+			'force_from_email'                             => false,
+			'from_name'                                    => '',
+			'force_from_name'                              => false,
+			'content_type'                                 => 'text',
+			// Test SMTP settings.
+			'test_smtp_recipient_email'                    => '',
+			// SMTP settings.
+			'smtp_host'                                    => '',
+			'smtp_port'                                    => 25,
+			'smtp_encryption'                              => '',
+			'smtp_username'                                => '',
+			'smtp_password'                                => '',
+			// Welcome email settings - for user.
+			'user_welcome_email_subject'                   => '',
+			'user_welcome_email_body'                      => '',
+			'user_welcome_email_attachment_url'            => '',
+			'user_welcome_email_reply_to_email'            => '',
+			'user_welcome_email_reply_to_name'             => '',
+			'user_welcome_email_additional_headers'        => '',
+			// Welcome email settings - for admin.
+			'admin_new_user_notif_email_subject'           => '',
+			'admin_new_user_notif_email_body'              => '',
+			'admin_new_user_notif_email_custom_recipients' => '',
+			// Reset password email settings.
+			'reset_password_email_subject'                 => '',
+			'reset_password_email_body'                    => '',
+		);
+		$values = wp_parse_args( $settings, $defaults );
+		Vars::set( 'default_settings', $defaults );
+		Vars::set( 'settings', $values );
+		Vars::set( 'values', $values );
+	}
 
-		/* translators: %s: User login. */
+	/**
+	 * Update Vars settings cache after weed_settings option is updated.
+	 *
+	 * This function is triggered by the 'updated_option_weed_settings' hook.
+	 * It ensures that all plugin modules use the latest settings from the database,
+	 * merged with the current plugin defaults and dynamic email templates.
+	 *
+	 * @return void
+	 */
+	public function update_data() {
+
+		/* translators: [user_login] will be replaced with the user's login name. */
 		$user_welcome_email_body  = __( 'Username:', 'welcome-email-editor' ) . ' [user_login]' . "\r\n\r\n";
 		$user_welcome_email_body .= __( 'To set your password, visit the following address:', 'welcome-email-editor' ) . "\r\n\r\n";
 		$user_welcome_email_body .= '[reset_pass_url]' . "\r\n\r\n";
 		$user_welcome_email_body .= '[login_url]' . "\r\n";
 
-		/* translators: %s: Site title. */
+		/* translators: [blog_name] will be replaced with the site title. */
 		$admin_welcome_email_body = __( 'New user registration on your site', 'welcome-email-editor' ) . " [blog_name]\r\n\r\n";
-		/* translators: %s: User login. */
+		/* translators: [user_login] will be replaced with the user's login name. */
 		$admin_welcome_email_body .= __( 'Username:', 'welcome-email-editor' ) . " [user_login]\r\n\r\n";
-		/* translators: %s: User email address. */
+		/* translators: [user_email] will be replaced with the user's email address. */
 		$admin_welcome_email_body .= __( 'Email:', 'welcome-email-editor' ) . " [user_email]\r\n";
 
 		$reset_password_message = __( 'Someone has requested a password reset for the following account:', 'welcome-email-editor' ) . "\r\n\r\n";
-		/* translators: %s: Site name. */
+		/* translators: [blog_name] will be replaced with the site name. */
 		$reset_password_message .= __( 'Site Name:', 'welcome-email-editor' ) . " [blog_name]\r\n\r\n";
-		/* translators: %s: User login. */
+		/* translators: [user_login] will be replaced with the user's login name. */
 		$reset_password_message .= __( 'Username:', 'welcome-email-editor' ) . " [user_login]\r\n\r\n";
 		$reset_password_message .= __( 'If this was a mistake, ignore this email and nothing will happen.', 'welcome-email-editor' ) . "\r\n\r\n";
 		$reset_password_message .= __( 'To reset your password, visit the following address:', 'welcome-email-editor' ) . "\r\n\r\n";
 		$reset_password_message .= '[reset_pass_url]' . "\r\n\r\n";
-		$reset_password_message .= "[not_logged_in]This password reset request originated from the IP address [user_ip].[/not_logged_in]\r\n";
+		/* translators: [user_ip] will be replaced with the user's IP address. */
+		$reset_password_message .= __( '[not_logged_in]This password reset request originated from the IP address [user_ip].[/not_logged_in]', 'welcome-email-editor' ) . "\r\n";
+
+		$settings = get_option( 'weed_settings', array() );
+
+		if ( ! empty( $settings['smtp_port'] ) && is_string( $settings['smtp_port'] ) ) {
+			$settings['smtp_port'] = absint( $settings['smtp_port'] );
+		}
 
 		$defaults = array(
 			// General settings.
@@ -108,7 +180,8 @@ class Setup {
 			'smtp_password'                                => '',
 
 			// Welcome email settings - for user.
-			'user_welcome_email_subject'                   => '[[blog_name]] ' . __( 'Login Details', 'welcome-email-editor' ),
+			/* translators: %s will be replaced with the site name. */
+			'user_welcome_email_subject'                   => sprintf( __( '%s Login Details', 'welcome-email-editor' ), '[[blog_name]]' ),
 			'user_welcome_email_body'                      => $user_welcome_email_body,
 			'user_welcome_email_attachment_url'            => '',
 			'user_welcome_email_reply_to_email'            => '',
@@ -116,25 +189,21 @@ class Setup {
 			'user_welcome_email_additional_headers'        => '',
 
 			// Welcome email settings - for admin.
-			'admin_new_user_notif_email_subject'           => '[[blog_name]] ' . __( 'New User Registration', 'welcome-email-editor' ),
+			/* translators: %s will be replaced with the site name. */
+			'admin_new_user_notif_email_subject'           => sprintf( __( '%s New User Registration', 'welcome-email-editor' ), '[[blog_name]]' ),
 			'admin_new_user_notif_email_body'              => $admin_welcome_email_body,
 			'admin_new_user_notif_email_custom_recipients' => '',
 
 			// Reset password email settings.
-			'reset_password_email_subject'                 => '[[blog_name]] ' . __( 'Password Reset', 'welcome-email-editor' ),
+			/* translators: %s will be replaced with the site name. */
+			'reset_password_email_subject'                 => sprintf( __( '%s Password Reset', 'welcome-email-editor' ), '[[blog_name]]' ),
 			'reset_password_email_body'                    => $reset_password_message,
 		);
-
-		$settings = get_option( 'weed_settings', array() );
-
-		if ( ! empty( $settings['smtp_port'] ) && is_string( $settings['smtp_port'] ) ) {
-			$settings['smtp_port'] = absint( $settings['smtp_port'] );
-		}
 
 		$values = wp_parse_args( $settings, $defaults );
 
 		Vars::set( 'default_settings', $defaults );
-		Vars::set( 'settings', $settings );
+		Vars::set( 'settings', $values );
 		Vars::set( 'values', $values );
 
 	}
