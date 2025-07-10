@@ -46,10 +46,6 @@ class Base_Output {
 		$this->settings = Vars::get( 'settings' );
 		$this->values   = Vars::get( 'values' );
 
-		if ( ! is_array( $this->values ) ) {
-			$this->values = array();
-		}
-
 	}
 
 	/**
