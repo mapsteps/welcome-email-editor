@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name: Swift SMTP (formerly Welcome Email Editor)
- * Description: Swift SMTP is a free & simple SMTP Plugin for WordPress.
- * Version: 6.2.1
+ * Plugin Name: Swift SMTP (formerly Welcome Email Editor) - Mailjet Edition
+ * Description: Swift SMTP with Mailjet API integration for reliable email delivery.
+ * Version: 6.2.1-mailjet
  * Author: David Vongries
  * Author URI: https://davidvongries.com/
  * Text Domain: welcome-email-editor
@@ -18,10 +18,16 @@ define( 'WEED_PLUGIN_URL', rtrim( plugin_dir_url( __FILE__ ), '/' ) );
 define( 'WEED_PLUGIN_VERSION', '6.2.1' );
 define( 'WEED_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 
+// Load Composer autoloader for Mailjet dependencies.
+if ( file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
+	require_once __DIR__ . '/vendor/autoload.php';
+}
+
 // Helper classes.
 require __DIR__ . '/helpers/class-screen-helper.php';
 require __DIR__ . '/helpers/class-content-helper.php';
 require __DIR__ . '/helpers/class-email-helper.php';
+require __DIR__ . '/helpers/class-mailjet-helper.php';
 
 // Base module.
 require __DIR__ . '/modules/base/class-base-module.php';

@@ -7,9 +7,9 @@
 
 namespace Weed\Smtp;
 
-use PHPMailer\PHPMailer\PHPMailer;
 use Weed\Base\Base_Output;
 use Weed\Vars;
+use Weed\Helpers\Mailjet_Helper;
 use WP_Error;
 
 defined( 'ABSPATH' ) || die( "Can't access directly" );
@@ -68,50 +68,47 @@ class Smtp_Output extends Base_Output {
 	}
 
 	/**
-	 * Setup SMTP output.
+	 * Setup Mailjet output.
 	 */
 	public function setup() {
 
-		add_action( 'phpmailer_init', array( $this, 'phpmailer_init' ), 9999 );
+		// Replace wp_mail function with Mailjet implementation
+		add_filter( 'pre_wp_mail', array( $this, 'mailjet_wp_mail' ), 10, 2 );
 		add_action( 'wp_mail_failed', array( $this, 'wp_mail_failed' ), 10 );
 
 	}
 
 	/**
-	 * Hook into phpmailer_init to set up SMTP.
+	 * Replace wp_mail with Mailjet implementation.
 	 *
-	 * @param PHPMailer $php_mailer The PHPMailer instance.
+	 * @param null|bool $return Short-circuit return value.
+	 * @param array     $atts   Array of the `wp_mail()` arguments.
+	 *
+	 * @return bool|null
 	 */
-	public function phpmailer_init( $php_mailer ) {
+	public function mailjet_wp_mail( $return, $atts ) {
 
 		$values = Vars::get( 'values' );
 
-		if ( empty( $values['smtp_host'] ) || empty( $values['smtp_port'] ) ) {
-			return;
+		// Check if Mailjet is configured
+		if ( empty( $values['mailjet_public_key'] ) || empty( $values['mailjet_secret_key'] ) ) {
+			// Let WordPress handle the email normally if Mailjet is not configured
+			return null;
 		}
 
-		$php_mailer->isSMTP();
+		// Extract wp_mail arguments
+		$to          = $atts['to'];
+		$subject     = $atts['subject'];
+		$message     = $atts['message'];
+		$headers     = isset( $atts['headers'] ) ? $atts['headers'] : '';
+		$attachments = isset( $atts['attachments'] ) ? $atts['attachments'] : array();
 
-		// phpcs:disable
-		$php_mailer->Host     = $values['smtp_host'];
-		$php_mailer->SMTPAuth = true;
+		// Use Mailjet helper to send email
+		$mailjet_helper = new Mailjet_Helper();
+		$result = $mailjet_helper->send( $to, $subject, $message, $headers, $attachments );
 
-		if ( ! empty( $values['smtp_username'] ) ) {
-			$php_mailer->Username = $values['smtp_username'];
-		}
-
-		if ( ! empty( $values['smtp_password'] ) ) {
-			$php_mailer->Password = $values['smtp_password'];
-		}
-
-		$php_mailer->Port = $values['smtp_port'];
-
-		if ( ! empty( $values['smtp_encryption'] ) ) {
-			$php_mailer->SMTPSecure = $values['smtp_encryption'] === 'ssl'
-				? PHPMailer::ENCRYPTION_SMTPS
-				: PHPMailer::ENCRYPTION_STARTTLS;
-		}
-		// phpcs:enable
+		// Return the result to short-circuit wp_mail
+		return $result;
 
 	}
 

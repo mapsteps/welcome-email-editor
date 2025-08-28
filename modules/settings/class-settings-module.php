@@ -213,7 +213,7 @@ class Settings_Module extends Base_Module {
 
 		// Register sections.
 		add_settings_section( 'weed-general-section', __( 'General Settings', 'welcome-email-editor' ), '', 'weed-general-settings' );
-		add_settings_section( 'weed-smtp-section', __( 'SMTP Settings', 'welcome-email-editor' ), '', 'weed-smtp-settings' );
+		add_settings_section( 'weed-smtp-section', __( 'Mailjet API Settings', 'welcome-email-editor' ), '', 'weed-smtp-settings' );
 		add_settings_section( 'weed-test-smtp-section', __( 'Send Test Email', 'welcome-email-editor' ), '', 'weed-test-smtp-settings' );
 		add_settings_section( 'weed-user-welcome-email-section', __( 'Welcome Email (for Users)', 'welcome-email-editor' ), '', 'weed-user-welcome-email-settings' );
 		add_settings_section( 'weed-admin-new-user-notif-email-section', __( 'New User Notification Email (for Admins)', 'welcome-email-editor' ), '', 'weed-admin-new-user-notif-email-settings' );
@@ -277,10 +277,10 @@ class Settings_Module extends Base_Module {
 			'weed-general-section'
 		);
 
-		// SMTP fields.
+		// Mailjet API fields.
 		add_settings_field(
-			'smtp-host',
-			__( 'SMTP Host', 'welcome-email-editor' ),
+			'mailjet-public-key',
+			__( 'Mailjet API Public Key', 'welcome-email-editor' ),
 			array(
 				$this,
 				'smtp_host_field',
@@ -290,19 +290,8 @@ class Settings_Module extends Base_Module {
 		);
 
 		add_settings_field(
-			'smtp-encryption',
-			__( 'SMTP Encryption', 'welcome-email-editor' ),
-			array(
-				$this,
-				'smtp_encryption_field',
-			),
-			'weed-smtp-settings',
-			'weed-smtp-section'
-		);
-
-		add_settings_field(
-			'smtp-port',
-			__( 'SMTP Port', 'welcome-email-editor' ),
+			'mailjet-secret-key',
+			__( 'Mailjet API Secret Key', 'welcome-email-editor' ),
 			array(
 				$this,
 				'smtp_port_field',
@@ -312,8 +301,8 @@ class Settings_Module extends Base_Module {
 		);
 
 		add_settings_field(
-			'smtp-username',
-			__( 'SMTP Username', 'welcome-email-editor' ),
+			'mailjet-sender-name',
+			__( 'Sender Name', 'welcome-email-editor' ),
 			array(
 				$this,
 				'smtp_username_field',
@@ -323,11 +312,22 @@ class Settings_Module extends Base_Module {
 		);
 
 		add_settings_field(
-			'smtp-password',
-			__( 'SMTP Password', 'welcome-email-editor' ),
+			'mailjet-sender-email',
+			__( 'Sender Email', 'welcome-email-editor' ),
 			array(
 				$this,
 				'smtp_password_field',
+			),
+			'weed-smtp-settings',
+			'weed-smtp-section'
+		);
+
+		add_settings_field(
+			'mailjet-template',
+			__( 'Mailjet Template (Optional)', 'welcome-email-editor' ),
+			array(
+				$this,
+				'smtp_encryption_field',
 			),
 			'weed-smtp-settings',
 			'weed-smtp-section'

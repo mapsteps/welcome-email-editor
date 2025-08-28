@@ -1,6 +1,6 @@
 <?php
 /**
- * Test SMTP field.
+ * Test Mailjet field.
  *
  * @package Welcome_Email_Editor
  */
@@ -10,7 +10,7 @@ use Weed\Settings\Settings_Module;
 defined( 'ABSPATH' ) || die( "Can't access directly" );
 
 /**
- * Outputting test SMTP field.
+ * Outputting test Mailjet field.
  *
  * @param Settings_Module $module The Settings_Module instance.
  */
@@ -30,7 +30,7 @@ return function ( $module ) {
 				<?php esc_html_e( 'Before sending a test email, please save your settings.', 'welcome-email-editor' ); ?>
 			</p>
 			<p>
-				<?php esc_html_e( 'If you haven\'t received the test email, please check your spam folder and ensure the SMTP settings are configured correctly.', 'welcome-email-editor' ); ?>
+				<?php esc_html_e( 'If you haven\'t received the test email, please check your spam folder and ensure the Mailjet API settings are configured correctly.', 'welcome-email-editor' ); ?>
 			</p>
 			<input type="text" name="weed_settings[test_smtp_recipient_email]"
 					id="weed_settings--test_smtp_recipient_email" class="all-options"

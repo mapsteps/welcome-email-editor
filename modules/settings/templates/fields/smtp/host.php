@@ -1,6 +1,6 @@
 <?php
 /**
- * SMTP host field.
+ * Mailjet public key field.
  *
  * @package Welcome_Email_Editor
  */
@@ -10,18 +10,21 @@ use Weed\Settings\Settings_Module;
 defined( 'ABSPATH' ) || die( "Can't access directly" );
 
 /**
- * Outputting SMTP host field.
+ * Outputting Mailjet public key field.
  *
  * @param Settings_Module $module The Settings_Module instance.
  */
 return function ( $module ) {
 
 	$values = $module->values;
-	$value  = ! empty( $values['smtp_host'] ) ? $values['smtp_host'] : '';
+	$value  = ! empty( $values['mailjet_public_key'] ) ? $values['mailjet_public_key'] : '';
 	?>
 
-	<input type="text" name="weed_settings[smtp_host]" id="weed_settings--smtp_host" class="regular-text"
-			value="<?php echo esc_attr( $value ); ?>" placeholder="Example: smtp.zoho.com"/>
+	<input type="text" name="weed_settings[mailjet_public_key]" id="weed_settings--mailjet_public_key" class="regular-text"
+			value="<?php echo esc_attr( $value ); ?>" placeholder="Your Mailjet API Public Key"/>
+	<p class="description">
+		<?php esc_html_e( 'Enter your Mailjet API Public Key. You can find this in your Mailjet account under Account Settings > API Keys.', 'welcome-email-editor' ); ?>
+	</p>
 
 	<?php
 

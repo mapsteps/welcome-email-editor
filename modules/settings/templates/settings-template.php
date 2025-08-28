@@ -39,7 +39,7 @@ return function () {
 					<ul class="heatbox-tab-nav">
 						<li class="heatbox-tab-nav-item">
 							<a href="#smtp">
-								<?php esc_html_e( 'SMTP Settings', 'welcome-email-editor' ); ?>
+								<?php esc_html_e( 'Mailjet Settings', 'welcome-email-editor' ); ?>
 							</a>
 						</li>
 						<li class="heatbox-tab-nav-item">

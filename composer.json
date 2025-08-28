@@ -1,0 +1,18 @@
+{
+    "name": "welcome-email-editor/mailjet-integration",
+    "description": "Mailjet integration for Welcome Email Editor plugin",
+    "type": "wordpress-plugin",
+    "require": {
+        "php": ">=7.4",
+        "mailjet/mailjet-apiv3-php": "^1.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Weed\\": "src/"
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    }
+}
