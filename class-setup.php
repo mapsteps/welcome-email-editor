@@ -27,7 +27,6 @@ class Setup {
 
 		$class = self::get_instance();
 
-		add_action( 'init', array( $class, 'load_textdomain' ) );
 		add_action( 'plugins_loaded', array( $class, 'setup' ) );
     
 	}
@@ -61,20 +60,6 @@ class Setup {
 		$this->load_modules();
 
 		register_deactivation_hook( WEED_PLUGIN_BASENAME, array( $this, 'deactivation' ), 20 );
-
-	}
-
-	/**
-	 * Load plugin textdomain for translations.
-	 */
-	public function load_textdomain() {
-
-		// Check if textdomain is already loaded to avoid duplicate loading
-		if ( ! is_textdomain_loaded( 'welcome-email-editor' ) ) {
-
-			load_plugin_textdomain( 'welcome-email-editor', false, dirname( WEED_PLUGIN_BASENAME ) . '/languages' );
-			
-		}
 
 	}
 
