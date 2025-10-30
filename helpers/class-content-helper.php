@@ -33,15 +33,19 @@ class Content_Helper {
 		 * Global wpdb instance.
 		 *
 		 * @global wpdb $wpdb
+		 * @var wpdb $wpdb
 		 */
 		global $wpdb;
 
 		// TODO: Use BuddyPress function if it exists instead of directly touching wpdb.
-		$sql = 'SELECT f.name, d.value
-				FROM
-					' . $wpdb->prefix . 'bp_xprofile_fields f
-					JOIN ' . $wpdb->prefix . 'bp_xprofile_data d ON (d.field_id = f.id)
-				WHERE d.user_id = ' . $user_id;
+		$sql = $wpdb->prepare(
+			'SELECT f.name, d.value
+			FROM
+				' . $wpdb->prefix . 'bp_xprofile_fields f
+				JOIN ' . $wpdb->prefix . 'bp_xprofile_data d ON (d.field_id = f.id)
+			WHERE d.user_id = %d',
+			$user_id
+		);
 
 		$array = $wpdb->get_results( $sql );
 
@@ -68,13 +72,17 @@ class Content_Helper {
 		 * Global wpdb instance.
 		 *
 		 * @global wpdb $wpdb
+		 * @var wpdb $wpdb
 		 */
 		global $wpdb;
 
 		// TODO: Use get_user_meta instead of directly touching wpdb.
-		$sql = 'SELECT meta_key, meta_value
-				FROM ' . $wpdb->usermeta . '
-				WHERE user_ID = ' . $user_id;
+		$sql = $wpdb->prepare(
+			'SELECT meta_key, meta_value
+			FROM ' . $wpdb->usermeta . '
+			WHERE user_ID = %d',
+			$user_id
+		);
 
 		$meta_items = $wpdb->get_results( $sql );
 
