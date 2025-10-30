@@ -161,4 +161,86 @@ class Content_Helper {
 
 	}
 
+	/**
+	 * Parse settings from database with default values.
+	 *
+	 * @param array|null $settings The settings array.
+	 *
+	 * @return array Parsed settings.
+	 */
+	public function parse_settings( $settings = null ) {
+
+		/* translators: [user_login] will be replaced with the user's login name. */
+		$user_welcome_email_body  = __( 'Username:', 'welcome-email-editor' ) . ' [user_login]' . "\r\n\r\n";
+		$user_welcome_email_body .= __( 'To set your password, visit the following address:', 'welcome-email-editor' ) . "\r\n\r\n";
+		$user_welcome_email_body .= '[reset_pass_url]' . "\r\n\r\n";
+		$user_welcome_email_body .= '[login_url]' . "\r\n";
+
+		/* translators: [blog_name] will be replaced with the site title. */
+		$admin_welcome_email_body = __( 'New user registration on your site', 'welcome-email-editor' ) . " [blog_name]\r\n\r\n";
+		/* translators: [user_login] will be replaced with the user's login name. */
+		$admin_welcome_email_body .= __( 'Username:', 'welcome-email-editor' ) . " [user_login]\r\n\r\n";
+		/* translators: [user_email] will be replaced with the user's email address. */
+		$admin_welcome_email_body .= __( 'Email:', 'welcome-email-editor' ) . " [user_email]\r\n";
+
+		$reset_password_message = __( 'Someone has requested a password reset for the following account:', 'welcome-email-editor' ) . "\r\n\r\n";
+		/* translators: [blog_name] will be replaced with the site name. */
+		$reset_password_message .= __( 'Site Name:', 'welcome-email-editor' ) . " [blog_name]\r\n\r\n";
+		/* translators: [user_login] will be replaced with the user's login name. */
+		$reset_password_message .= __( 'Username:', 'welcome-email-editor' ) . " [user_login]\r\n\r\n";
+		$reset_password_message .= __( 'If this was a mistake, ignore this email and nothing will happen.', 'welcome-email-editor' ) . "\r\n\r\n";
+		$reset_password_message .= __( 'To reset your password, visit the following address:', 'welcome-email-editor' ) . "\r\n\r\n";
+		$reset_password_message .= '[reset_pass_url]' . "\r\n\r\n";
+		/* translators: [user_ip] will be replaced with the user's IP address. */
+		$reset_password_message .= __( '[not_logged_in]This password reset request originated from the IP address [user_ip].[/not_logged_in]', 'welcome-email-editor' ) . "\r\n";
+
+		$settings = ! is_array( $settings ) || empty( $settings ) ? get_option( 'weed_settings', array() ) : $settings;
+
+		if ( ! empty( $settings['smtp_port'] ) && is_string( $settings['smtp_port'] ) ) {
+			$settings['smtp_port'] = absint( $settings['smtp_port'] );
+		}
+
+		$defaults = array(
+			// General settings.
+			'from_email'                                   => '',
+			'force_from_email'                             => false,
+			'from_name'                                    => '',
+			'force_from_name'                              => false,
+			'content_type'                                 => 'text',
+
+			// Test SMTP settings.
+			'test_smtp_recipient_email'                    => get_bloginfo( 'admin_email' ),
+
+			// SMTP settings.
+			'smtp_host'                                    => '',
+			'smtp_port'                                    => 25,
+			'smtp_encryption'                              => '',
+			'smtp_username'                                => '',
+			'smtp_password'                                => '',
+
+			// Welcome email settings - for user.
+			/* translators: %s will be replaced with the site name. */
+			'user_welcome_email_subject'                   => sprintf( __( '%s Login Details', 'welcome-email-editor' ), '[[blog_name]]' ),
+			'user_welcome_email_body'                      => $user_welcome_email_body,
+			'user_welcome_email_attachment_url'            => '',
+			'user_welcome_email_reply_to_email'            => '',
+			'user_welcome_email_reply_to_name'             => '',
+			'user_welcome_email_additional_headers'        => '',
+
+			// Welcome email settings - for admin.
+			/* translators: %s will be replaced with the site name. */
+			'admin_new_user_notif_email_subject'           => sprintf( __( '%s New User Registration', 'welcome-email-editor' ), '[[blog_name]]' ),
+			'admin_new_user_notif_email_body'              => $admin_welcome_email_body,
+			'admin_new_user_notif_email_custom_recipients' => '',
+
+			// Reset password email settings.
+			/* translators: %s will be replaced with the site name. */
+			'reset_password_email_subject'                 => sprintf( __( '%s Password Reset', 'welcome-email-editor' ), '[[blog_name]]' ),
+			'reset_password_email_body'                    => $reset_password_message,
+		);
+
+		return wp_parse_args( $settings, $defaults );
+
+	}
+
 }

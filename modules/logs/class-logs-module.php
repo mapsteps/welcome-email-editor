@@ -10,7 +10,7 @@ namespace Weed\Logs;
 defined( 'ABSPATH' ) || die( "Can't access directly" );
 
 use Weed\Base\Base_Module;
-use Weed\Settings\Settings_Module;
+use Weed\Vars;
 
 /**
  * Class to set up Logs module.
@@ -39,23 +39,11 @@ class Logs_Module extends Base_Module {
 	public $url;
 
 	/**
-	 * The parsed settings values.
-	 *
-	 * @var array
-	 */
-	public $values;
-
-	/**
 	 * Module constructor.
 	 */
 	public function __construct() {
 
-		parent::__construct();
-
-		$module = new Settings_Module();
-
-		$this->url    = WEED_PLUGIN_URL . '/modules/logs';
-		$this->values = $module->values;
+		$this->url = WEED_PLUGIN_URL . '/modules/logs';
 
 	}
 
@@ -79,7 +67,8 @@ class Logs_Module extends Base_Module {
 	 */
 	public function setup() {
 
-		$is_checked = isset( $this->values['enable_email_logging'] ) ? 1 : 0;
+		$values     = Vars::get( 'values' );
+		$is_checked = isset( $values['enable_email_logging'] ) ? 1 : 0;
 
 		if ( ! $is_checked ) {
 			return;

@@ -10,6 +10,7 @@ namespace Weed\Settings;
 use Weed\Base\Base_Output;
 use Weed\Helpers\Content_Helper;
 use Weed\Helpers\Email_Helper;
+use Weed\Vars;
 use WP_User;
 
 defined( 'ABSPATH' ) || die( "Can't access directly" );
@@ -37,8 +38,6 @@ class Settings_Output extends Base_Output {
 	 * Module constructor.
 	 */
 	public function __construct() {
-
-		parent::__construct();
 
 		$this->url = WEED_PLUGIN_URL . '/modules/settings';
 
@@ -101,7 +100,9 @@ class Settings_Output extends Base_Output {
 	 */
 	public function retrieve_password_title( $title, $user_login, $user_data ) {
 
-		$saved_title = $this->values['reset_password_email_subject'];
+		$values = Vars::get( 'values' );
+
+		$saved_title = $values['reset_password_email_subject'];
 
 		if ( ! $saved_title ) {
 			return $title;
@@ -132,7 +133,7 @@ class Settings_Output extends Base_Output {
 	 */
 	public function set_email_headers() {
 
-		$values = $this->values;
+		$values = Vars::get( 'values' );
 
 		if ( $values['from_email'] ) {
 			add_filter( 'wp_mail_from', array( $this, 'from_email' ) );
@@ -161,7 +162,9 @@ class Settings_Output extends Base_Output {
 	 */
 	public function retrieve_password_message( $message, $key, $user_login, $user_data ) {
 
-		$saved_message = $this->values['reset_password_email_body'];
+		$values = Vars::get( 'values' );
+
+		$saved_message = $values['reset_password_email_body'];
 
 		if ( ! $saved_message ) {
 			return $message;
@@ -227,7 +230,7 @@ class Settings_Output extends Base_Output {
 	 */
 	public function set_email_from_headers() {
 
-		$values = $this->values;
+		$values = Vars::get( 'values' );
 
 		if ( $values['from_email'] ) {
 			add_filter( 'wp_mail_from', array( $this, 'from_email' ) );
@@ -246,7 +249,7 @@ class Settings_Output extends Base_Output {
 	 */
 	public function reset_email_headers() {
 
-		$values = $this->values;
+		$values = Vars::get( 'values' );
 
 		if ( $values['from_email'] ) {
 			remove_filter( 'wp_mail_from', array( $this, 'from_email' ) );
@@ -270,7 +273,7 @@ class Settings_Output extends Base_Output {
 	 */
 	public function from_email( $from_email ) {
 
-		$values = $this->values;
+		$values = Vars::get( 'values' );
 
 		if ( ! $values['from_email'] ) {
 			return $from_email;
@@ -311,7 +314,7 @@ class Settings_Output extends Base_Output {
 	 */
 	public function from_name( $from_name ) {
 
-		$values = $this->values;
+		$values = Vars::get( 'values' );
 
 		if ( ! $values['from_name'] ) {
 			return $from_name;

@@ -35,8 +35,6 @@ class Smtp_Module extends Base_Module {
 	 */
 	public function __construct() {
 
-		parent::__construct();
-
 		$this->url = WEED_PLUGIN_URL . '/modules/smtp';
 
 	}
