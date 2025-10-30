@@ -38,7 +38,7 @@ class Smtp_Output extends Base_Output {
 	 */
 	public function __construct() {
 
-		$this->url = WEED_PLUGIN_URL . '/modules/settings';
+		$this->url = WEED_PLUGIN_URL . '/modules/smtp';
 
 	}
 
