@@ -162,13 +162,11 @@ class Content_Helper {
 	}
 
 	/**
-	 * Parse settings from database with default values.
+	 * Get default settings.
 	 *
-	 * @param array|null $settings The settings array.
-	 *
-	 * @return array Parsed settings.
+	 * @return array Default settings.
 	 */
-	public function parse_settings( $settings = null ) {
+	public static function default_settings() {
 
 		/* translators: [user_login] will be replaced with the user's login name. */
 		$user_welcome_email_body  = __( 'Username:', 'welcome-email-editor' ) . ' [user_login]' . "\r\n\r\n";
@@ -194,13 +192,7 @@ class Content_Helper {
 		/* translators: [user_ip] will be replaced with the user's IP address. */
 		$reset_password_message .= __( '[not_logged_in]This password reset request originated from the IP address [user_ip].[/not_logged_in]', 'welcome-email-editor' ) . "\r\n";
 
-		$settings = ! is_array( $settings ) || empty( $settings ) ? get_option( 'weed_settings', array() ) : $settings;
-
-		if ( ! empty( $settings['smtp_port'] ) && is_string( $settings['smtp_port'] ) ) {
-			$settings['smtp_port'] = absint( $settings['smtp_port'] );
-		}
-
-		$defaults = array(
+		return array(
 			// General settings.
 			'from_email'                                   => '',
 			'force_from_email'                             => false,
@@ -239,7 +231,25 @@ class Content_Helper {
 			'reset_password_email_body'                    => $reset_password_message,
 		);
 
-		return wp_parse_args( $settings, $defaults );
+	}
+
+	/**
+	 * Parse settings from database with default values.
+	 *
+	 * @param array $settings The settings array.
+	 *
+	 * @return array Parsed settings.
+	 */
+	public function parse_settings( $settings = array() ) {
+
+		$settings = ! is_array( $settings ) || empty( $settings ) ? get_option( 'weed_settings', array() ) : $settings;
+		$settings = ! is_array( $settings ) ? [] : $settings;
+
+		if ( ! empty( $settings['smtp_port'] ) && is_string( $settings['smtp_port'] ) ) {
+			$settings['smtp_port'] = absint( $settings['smtp_port'] );
+		}
+
+		return wp_parse_args( $settings, self::default_settings() );
 
 	}
 

@@ -5,11 +5,13 @@
  * @package Welcome_Email_Editor
  */
 
+use Weed\Vars;
+
 defined( 'ABSPATH' ) || die( "Can't access directly" );
 
 return function ( $module ) {
 
-	$settings   = $module->settings;
+	$settings   = Vars::get( 'values' );
 	$is_checked = isset( $settings['remove_on_uninstall'] ) ? 1 : 0;
 	?>
 

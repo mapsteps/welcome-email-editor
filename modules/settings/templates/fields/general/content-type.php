@@ -6,6 +6,7 @@
  */
 
 use Weed\Settings\Settings_Module;
+use Weed\Vars;
 
 defined( 'ABSPATH' ) || die( "Can't access directly" );
 
@@ -16,7 +17,7 @@ defined( 'ABSPATH' ) || die( "Can't access directly" );
  */
 return function ( $module ) {
 
-	$values = $module->values;
+	$values = Vars::get( 'values' );
 	?>
 
 	<select name="weed_settings[content_type]" id="weed_settings--content_type" class="regular-text">

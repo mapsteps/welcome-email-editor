@@ -6,6 +6,7 @@
  */
 
 use Weed\Settings\Settings_Module;
+use Weed\Vars;
 
 defined( 'ABSPATH' ) || die( "Can't access directly" );
 
@@ -16,7 +17,7 @@ defined( 'ABSPATH' ) || die( "Can't access directly" );
  */
 return function ( $module ) {
 
-	$values = $module->values;
+	$values = Vars::get( 'values' );
 	$value  = ! empty( $values['smtp_encryption'] ) ? $values['smtp_encryption'] : '';
 	?>
 

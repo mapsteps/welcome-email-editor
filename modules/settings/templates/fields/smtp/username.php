@@ -6,6 +6,7 @@
  */
 
 use Weed\Settings\Settings_Module;
+use Weed\Vars;
 
 defined( 'ABSPATH' ) || die( "Can't access directly" );
 
@@ -16,12 +17,12 @@ defined( 'ABSPATH' ) || die( "Can't access directly" );
  */
 return function ( $module ) {
 
-	$values = $module->values;
+	$values = Vars::get( 'values' );
 	$value  = ! empty( $values['smtp_username'] ) ? $values['smtp_username'] : '';
 	?>
 
 	<input type="text" name="weed_settings[smtp_username]" id="weed_settings--smtp_username" class="regular-text"
-		   value="<?php echo esc_attr( $value ); ?>" placeholder="yourname@yourwebsite.com"/>
+			value="<?php echo esc_attr( $value ); ?>" placeholder="yourname@yourwebsite.com"/>
 
 	<?php
 

@@ -5,7 +5,9 @@
  * @package Welcome_Email_Editor
  */
 
+use Weed\Helpers\Content_Helper;
 use Weed\Settings\Settings_Module;
+use Weed\Vars;
 
 defined( 'ABSPATH' ) || die( "Can't access directly" );
 
@@ -16,13 +18,13 @@ defined( 'ABSPATH' ) || die( "Can't access directly" );
  */
 return function ( $module ) {
 
-	$defaults = $module->defaults;
-	$values   = $module->values;
+	$defaults = Content_Helper::default_settings();
+	$values   = Vars::get( 'values' );
 	?>
 
 	<textarea name="weed_settings[user_welcome_email_additional_headers]"
-			  id="weed_settings--user_welcome_email_additional_headers" class="regular-text" rows="5"
-			  placeholder="<?php echo esc_attr( $defaults['user_welcome_email_additional_headers'] ); ?>"><?php echo esc_html( $values['user_welcome_email_additional_headers'] ); ?></textarea>
+				id="weed_settings--user_welcome_email_additional_headers" class="regular-text" rows="5"
+				placeholder="<?php echo esc_attr( $defaults['user_welcome_email_additional_headers'] ); ?>"><?php echo esc_html( $values['user_welcome_email_additional_headers'] ); ?></textarea>
 
 	<p class="description">
 		<?php _e( 'Add custom HTTP headers to your email, such as: <code>Content-Type: text/plain</code>.', 'welcome-email-editor' ); ?><br>

@@ -5,11 +5,13 @@
  * @package Welcome_Email_Editor
  */
 
+use Weed\Vars;
+
 defined( 'ABSPATH' ) || die( "Can't access directly" );
 
 return function ( $module ) {
 
-	$settings   = $module->settings;
+	$settings   = Vars::get( 'values' );
 	$is_checked = isset( $settings['enable_email_logging'] ) ? 1 : 0;
 
 	$enable_email_logging_description = __(

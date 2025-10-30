@@ -51,8 +51,12 @@ class Setup {
 	 */
 	public function setup() {
 
+		// Always load latest settings from DB at the start of each request.
+		$this->set_initial_data();
+
 		add_action( 'updated_option_weed_settings', [ $this, 'handle_updated_option' ], 10, 3 );
 
+		add_action( 'init', array( $this, 'update_initial_data' ), 1 );
 		add_action( 'init', array( $this, 'register_action_links' ) );
 		add_filter( 'admin_body_class', array( $this, 'admin_body_class' ) );
 
@@ -63,11 +67,16 @@ class Setup {
 	}
 
 	/**
-	 * Provide data for the plugin.
+	 * Provide initial data for the plugin.
 	 * This is optimal strategy to only get_option once across modules.
+	 *
+	 * At this point, we don't use the real default values
+	 * because it contains translation functions calling.
 	 */
-	public function set_data() {
+	private function set_initial_data() {
+
 		$settings = get_option( 'weed_settings', array() );
+
 		$defaults = array(
 			// General settings.
 			'from_email'                                   => '',
@@ -75,14 +84,17 @@ class Setup {
 			'from_name'                                    => '',
 			'force_from_name'                              => false,
 			'content_type'                                 => 'text',
+
 			// Test SMTP settings.
 			'test_smtp_recipient_email'                    => '',
+
 			// SMTP settings.
 			'smtp_host'                                    => '',
 			'smtp_port'                                    => 25,
 			'smtp_encryption'                              => '',
 			'smtp_username'                                => '',
 			'smtp_password'                                => '',
+
 			// Welcome email settings - for user.
 			'user_welcome_email_subject'                   => '',
 			'user_welcome_email_body'                      => '',
@@ -90,10 +102,12 @@ class Setup {
 			'user_welcome_email_reply_to_email'            => '',
 			'user_welcome_email_reply_to_name'             => '',
 			'user_welcome_email_additional_headers'        => '',
+
 			// Welcome email settings - for admin.
 			'admin_new_user_notif_email_subject'           => '',
 			'admin_new_user_notif_email_body'              => '',
 			'admin_new_user_notif_email_custom_recipients' => '',
+
 			// Reset password email settings.
 			'reset_password_email_subject'                 => '',
 			'reset_password_email_body'                    => '',
@@ -102,6 +116,17 @@ class Setup {
 		$values = wp_parse_args( $settings, $defaults );
 
 		Vars::set( 'values', $values );
+	}
+
+	/**
+	 * Update initial data of the settings cache.
+	 */
+	public function update_initial_data() {
+
+		$values = ( new Content_Helper() )->parse_settings();
+
+		Vars::set( 'values', $values );
+
 	}
 
 	/**
@@ -118,7 +143,7 @@ class Setup {
 	 */
 	public function handle_updated_option( $old_value, $value, $option ) {
 
-		$values = ( new Content_Helper() )->parse_settings( is_array( $value ) ? $value : null );
+		$values = ( new Content_Helper() )->parse_settings( is_array( $value ) ? $value : array() );
 
 		Vars::set( 'values', $values );
 
