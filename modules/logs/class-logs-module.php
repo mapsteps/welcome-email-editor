@@ -246,10 +246,10 @@ class Logs_Module extends Base_Module {
 
 		$sender = $email_log['sender'];
 
-		// Insert the email log as a custom post type entry
+		// Insert the email log as a custom post type entry.
 		$this->insert_email_log_post( $email_log, $sender, $status, $server_response );
 
-		// Clear the global variable after logging
+		// Clear the global variable after logging.
 		unset( $GLOBALS[ $this->log_global_var ] );
 
 	}
@@ -273,7 +273,7 @@ class Logs_Module extends Base_Module {
 	 */
 	protected function insert_email_log_post( $email_log, $sender, $status, $server_response ) {
 
-		wp_insert_post(array(
+		wp_insert_post( array(
 			'post_title'   => $email_log['subject'],
 			'post_type'    => 'weed_email_logs',
 			'post_status'  => 'publish',
@@ -286,7 +286,7 @@ class Logs_Module extends Base_Module {
 				'status'          => $status,
 				'server_response' => $server_response,
 			),
-		));
+		) );
 
 	}
 
