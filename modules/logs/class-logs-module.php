@@ -39,11 +39,11 @@ class Logs_Module extends Base_Module {
 	public $url;
 
 	/**
-	 * The current module url.
+	 * The parsed settings values.
 	 *
-	 * @var string
+	 * @var array
 	 */
-	public $settings;
+	public $values;
 
 	/**
 	 * Module constructor.
@@ -54,8 +54,8 @@ class Logs_Module extends Base_Module {
 
 		$module = new Settings_Module();
 
-		$this->url      = WEED_PLUGIN_URL . '/modules/logs';
-		$this->settings = $module->settings;
+		$this->url    = WEED_PLUGIN_URL . '/modules/logs';
+		$this->values = $module->values;
 
 	}
 
@@ -79,7 +79,7 @@ class Logs_Module extends Base_Module {
 	 */
 	public function setup() {
 
-		$is_checked = isset( $this->settings['enable_email_logging'] ) ? 1 : 0;
+		$is_checked = isset( $this->values['enable_email_logging'] ) ? 1 : 0;
 
 		if ( ! $is_checked ) {
 			return;
@@ -170,7 +170,7 @@ class Logs_Module extends Base_Module {
 
 	/**
 	 * Hook into pre_wp_mail to capture email details before sending
-	 * 
+	 *
 	 * @param array $args The email details.
 	 */
 	public function capture_email_details_for_logging( $args ) {
@@ -205,7 +205,7 @@ class Logs_Module extends Base_Module {
 
 	/**
 	 * Action to handle successful emails.
-	 * 
+	 *
 	 * @param array $mail_data Server response.
 	 */
 	public function handle_success_email( $mail_data ) {
@@ -242,7 +242,7 @@ class Logs_Module extends Base_Module {
 
 	/**
 	 * Helper function to log email events
-	 * 
+	 *
 	 * @param string $status Email status.
 	 * @param string $server_response Server response.
 	 */
@@ -276,8 +276,8 @@ class Logs_Module extends Base_Module {
 
 	/**
 	 * Insert the email log as a custom post type entry
-	 * 
-	 * @param array $email_log Email log details.
+	 *
+	 * @param array  $email_log Email log details.
 	 * @param string $sender Sender email.
 	 * @param string $status Email status.
 	 * @param string $server_response Server response.
@@ -332,5 +332,5 @@ class Logs_Module extends Base_Module {
 		$role->add_cap( 'read_private_logs' );
 
 	}
-	
+
 }

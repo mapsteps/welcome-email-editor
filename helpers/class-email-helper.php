@@ -28,8 +28,7 @@ class Email_Helper {
 	 */
 	public function get_extra_headers() {
 
-		$values   = Vars::get( 'values' );
-		$settings = Vars::get( 'settings' );
+		$values = Vars::get( 'values' );
 
 		/**
 		 * The blogname option is escaped with esc_html() on the way into the database in sanitize_option().
@@ -48,10 +47,10 @@ class Email_Helper {
 
 			// Only check for reply to name, if reply to email exists.
 			if ( ! empty( $values['user_welcome_email_reply_to_name'] ) ) {
-				$reply_to .= ' ' . $settings['user_welcome_email_reply_to_name'];
+				$reply_to .= ' ' . $values['user_welcome_email_reply_to_name'];
 			}
 
-			$reply_to .= ' <' . $settings['user_welcome_email_reply_to_email'] . '>';
+			$reply_to .= ' <' . $values['user_welcome_email_reply_to_email'] . '>';
 		}
 
 		if ( ! empty( $reply_to ) ) {

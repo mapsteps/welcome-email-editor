@@ -17,20 +17,6 @@ use Weed\Helpers\Screen_Helper;
  */
 class Base_Module {
 	/**
-	 * The default settings.
-	 *
-	 * @var array
-	 */
-	public $defaults;
-
-	/**
-	 * The saved settings.
-	 *
-	 * @var array
-	 */
-	public $settings;
-
-	/**
 	 * The parsed settings values.
 	 *
 	 * @var array
@@ -42,9 +28,7 @@ class Base_Module {
 	 */
 	public function __construct() {
 
-		$this->defaults = Vars::get( 'default_settings' );
-		$this->settings = Vars::get( 'settings' );
-		$this->values   = Vars::get( 'values' );
+		$this->values = Vars::get( 'values' );
 
 	}
 

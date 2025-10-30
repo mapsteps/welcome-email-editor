@@ -28,7 +28,7 @@ class Setup {
 		$class = self::get_instance();
 
 		add_action( 'plugins_loaded', array( $class, 'setup' ) );
-    
+
 	}
 
 	/**
@@ -52,7 +52,7 @@ class Setup {
 		// Always load latest settings from DB at the start of each request.
 		$this->set_data();
 
-		add_action( 'updated_option_weed_settings', [$this, 'update_data'], 10 );
+		add_action( 'updated_option_weed_settings', [ $this, 'update_data' ], 10 );
 
 		add_filter( 'plugin_action_links_' . WEED_PLUGIN_BASENAME, array( $this, 'plugin_action_links' ) );
 		add_filter( 'admin_body_class', array( $this, 'admin_body_class' ) );
@@ -99,8 +99,9 @@ class Setup {
 			'reset_password_email_subject'                 => '',
 			'reset_password_email_body'                    => '',
 		);
+
 		$values = wp_parse_args( $settings, $defaults );
-		Vars::set( 'default_settings', $defaults );
+
 		Vars::set( 'settings', $values );
 		Vars::set( 'values', $values );
 	}
@@ -108,13 +109,16 @@ class Setup {
 	/**
 	 * Update Vars settings cache after weed_settings option is updated.
 	 *
-	 * This function is triggered by the 'updated_option_weed_settings' hook.
-	 * It ensures that all plugin modules use the latest settings from the database,
-	 * merged with the current plugin defaults and dynamic email templates.
+	 * Fires after the value of a 'weed_settings' option has been successfully changed
+	 * via 'updated_option_weed_settings' hook.
 	 *
-	 * @return void
+	 * @see https://developer.wordpress.org/reference/hooks/update_option_option/
+	 *
+	 * @param mixed  $old_value The old option value.
+	 * @param mixed  $value     The new option value.
+	 * @param string $option    Option name.
 	 */
-	public function update_data() {
+	public function update_data( $old_value, $value, $option ) {
 
 		/* translators: [user_login] will be replaced with the user's login name. */
 		$user_welcome_email_body  = __( 'Username:', 'welcome-email-editor' ) . ' [user_login]' . "\r\n\r\n";
@@ -187,7 +191,6 @@ class Setup {
 
 		$values = wp_parse_args( $settings, $defaults );
 
-		Vars::set( 'default_settings', $defaults );
 		Vars::set( 'settings', $values );
 		Vars::set( 'values', $values );
 
