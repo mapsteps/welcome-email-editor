@@ -28,7 +28,10 @@ return function ( $module ) {
 		<?php _e( 'To include additional recipients for the notification email when a new user is registered, add a comma-separated list of user ID\'s (Example: 1, 2, 3, 4).', 'welcome-email-editor' ); ?>
 	</p>
 	<p class="description">
-		<?php echo sprintf( __( 'By default, this email is sent only to the website admin (%1s).', 'welcome-email-editor' ), get_option( 'admin_email' ) ); ?>
+		<?php
+		/* translators: %1s: Admin email address */
+		echo sprintf( __( 'By default, this email is sent only to the website admin (%1s).', 'welcome-email-editor' ), get_option( 'admin_email' ) );
+		?>
 	</p>
 
 	<?php

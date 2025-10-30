@@ -134,11 +134,11 @@ if ( ! function_exists( 'wp_new_user_notification' ) ) {
 			);
 
 			/* translators: %s: Site title. */
-			$default_admin_body = sprintf( __( 'New user registration on your site %s:' ), $blogname ) . "\r\n\r\n";
+			$default_admin_body = sprintf( __( 'New user registration on your site %s:', 'welcome-email-editor' ), $blogname ) . "\r\n\r\n";
 			/* translators: %s: User login. */
-			$default_admin_body .= sprintf( __( 'Username: %s' ), $user->user_login ) . "\r\n\r\n";
+			$default_admin_body .= sprintf( __( 'Username: %s', 'welcome-email-editor' ), $user->user_login ) . "\r\n\r\n";
 			/* translators: %s: User email address. */
-			$default_admin_body .= sprintf( __( 'Email: %s' ), $user->user_email ) . "\r\n";
+			$default_admin_body .= sprintf( __( 'Email: %s', 'welcome-email-editor' ), $user->user_email ) . "\r\n";
 
 			$admin_body = $values['admin_new_user_notif_email_body'];
 			$admin_body = $admin_body ?: $default_admin_body;
@@ -260,7 +260,8 @@ if ( ! function_exists( 'wp_new_user_notification' ) ) {
 			wp_login_url()
 		);
 
-		$default_user_subject = __( '[%s] Login Details' );
+		/* translators: %s: Site title */
+		$default_user_subject = __( '[%s] Login Details', 'welcome-email-editor' );
 
 		$user_subject_placeholders = array(
 			'[blog_name]',
@@ -292,8 +293,8 @@ if ( ! function_exists( 'wp_new_user_notification' ) ) {
 		$user_subject = apply_filters( 'weed_user_welcome_email_subject', $user_subject );
 
 		/* translators: %s: User login. */
-		$default_user_body  = sprintf( __( 'Username: %s' ), $user->user_login ) . "\r\n\r\n";
-		$default_user_body .= __( 'To set your password, visit the following address:' ) . "\r\n\r\n";
+		$default_user_body  = sprintf( __( 'Username: %s', 'welcome-email-editor' ), $user->user_login ) . "\r\n\r\n";
+		$default_user_body .= __( 'To set your password, visit the following address:', 'welcome-email-editor' ) . "\r\n\r\n";
 		$default_user_body .= $reset_pass_url . "\r\n\r\n";
 		$default_user_body .= wp_login_url() . "\r\n";
 

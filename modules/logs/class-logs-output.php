@@ -188,7 +188,7 @@ class Logs_Output extends Base_Output {
 
 		add_meta_box(
 			'email_logs_metabox',
-			__( 'Email Log Details' ),
+			__( 'Email Log Details', 'welcome-email-editor' ),
 			array( $this, 'email_logs_metabox_callback' ),
 			'weed_email_logs',
 			'normal',
