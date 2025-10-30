@@ -118,7 +118,7 @@ class Settings_Module extends Base_Module {
 			'dashicons-email', // Icon (you can change this to any Dashicon)
 			60 // Position in the menu
 		);
-	
+
 	}
 
 	/**
@@ -207,7 +207,13 @@ class Settings_Module extends Base_Module {
 	public function add_settings() {
 
 		// Register settings.
-		register_setting( 'weed-settings-group', 'weed_settings' );
+		register_setting(
+			'weed-settings-group',
+			'weed_settings',
+			array(
+				'sanitize_callback' => array( $this, 'sanitize_settings' ),
+			)
+		);
 
 		// Register sections.
 		add_settings_section( 'weed-general-section', __( 'General Settings', 'welcome-email-editor' ), '', 'weed-general-settings' );
@@ -526,6 +532,129 @@ class Settings_Module extends Base_Module {
 	}
 
 	/**
+	 * Sanitize settings.
+	 *
+	 * @param array $input The input values to sanitize.
+	 * @return array The sanitized values.
+	 */
+	public function sanitize_settings( $input ) {
+
+		if ( ! is_array( $input ) ) {
+			return array();
+		}
+
+		$sanitized = array();
+
+		// General settings - Email fields.
+		if ( isset( $input['from_email'] ) ) {
+			$sanitized['from_email'] = sanitize_text_field( $input['from_email'] );
+		}
+
+		if ( isset( $input['force_from_email'] ) ) {
+			$sanitized['force_from_email'] = 1;
+		}
+
+		if ( isset( $input['from_name'] ) ) {
+			$sanitized['from_name'] = sanitize_text_field( $input['from_name'] );
+		}
+
+		if ( isset( $input['force_from_name'] ) ) {
+			$sanitized['force_from_name'] = 1;
+		}
+
+		if ( isset( $input['content_type'] ) ) {
+			$allowed_content_types     = array( 'html', 'text' );
+			$sanitized['content_type'] = in_array( $input['content_type'], $allowed_content_types, true ) ? $input['content_type'] : 'html';
+		}
+
+		// SMTP settings.
+		if ( isset( $input['smtp_host'] ) ) {
+			$sanitized['smtp_host'] = sanitize_text_field( $input['smtp_host'] );
+		}
+
+		if ( isset( $input['smtp_encryption'] ) ) {
+			$allowed_encryptions          = array( '', 'ssl', 'tls' );
+			$sanitized['smtp_encryption'] = in_array( $input['smtp_encryption'], $allowed_encryptions, true ) ? $input['smtp_encryption'] : '';
+		}
+
+		if ( isset( $input['smtp_port'] ) ) {
+			$sanitized['smtp_port'] = absint( $input['smtp_port'] );
+		}
+
+		if ( isset( $input['smtp_username'] ) ) {
+			$sanitized['smtp_username'] = sanitize_text_field( $input['smtp_username'] );
+		}
+
+		if ( isset( $input['smtp_password'] ) ) {
+			$sanitized['smtp_password'] = sanitize_text_field( $input['smtp_password'] );
+		}
+
+		if ( isset( $input['test_smtp_recipient_email'] ) ) {
+			$sanitized['test_smtp_recipient_email'] = sanitize_text_field( $input['test_smtp_recipient_email'] );
+		}
+
+		// User welcome email settings.
+		if ( isset( $input['user_welcome_email_subject'] ) ) {
+			$sanitized['user_welcome_email_subject'] = sanitize_text_field( $input['user_welcome_email_subject'] );
+		}
+
+		if ( isset( $input['user_welcome_email_body'] ) ) {
+			$sanitized['user_welcome_email_body'] = wp_kses_post( $input['user_welcome_email_body'] );
+		}
+
+		if ( isset( $input['user_welcome_email_attachment_url'] ) ) {
+			$sanitized['user_welcome_email_attachment_url'] = esc_url_raw( $input['user_welcome_email_attachment_url'] );
+		}
+
+		if ( isset( $input['user_welcome_email_reply_to_email'] ) ) {
+			$sanitized['user_welcome_email_reply_to_email'] = sanitize_text_field( $input['user_welcome_email_reply_to_email'] );
+		}
+
+		if ( isset( $input['user_welcome_email_reply_to_name'] ) ) {
+			$sanitized['user_welcome_email_reply_to_name'] = sanitize_text_field( $input['user_welcome_email_reply_to_name'] );
+		}
+
+		if ( isset( $input['user_welcome_email_additional_headers'] ) ) {
+			$sanitized['user_welcome_email_additional_headers'] = sanitize_textarea_field( $input['user_welcome_email_additional_headers'] );
+		}
+
+		// Admin new user notification email settings.
+		if ( isset( $input['admin_new_user_notif_email_subject'] ) ) {
+			$sanitized['admin_new_user_notif_email_subject'] = sanitize_text_field( $input['admin_new_user_notif_email_subject'] );
+		}
+
+		if ( isset( $input['admin_new_user_notif_email_body'] ) ) {
+			$sanitized['admin_new_user_notif_email_body'] = wp_kses_post( $input['admin_new_user_notif_email_body'] );
+		}
+
+		if ( isset( $input['admin_new_user_notif_email_custom_recipients'] ) ) {
+			$sanitized['admin_new_user_notif_email_custom_recipients'] = sanitize_text_field( $input['admin_new_user_notif_email_custom_recipients'] );
+		}
+
+		// Reset password email settings.
+		if ( isset( $input['reset_password_email_subject'] ) ) {
+			$sanitized['reset_password_email_subject'] = sanitize_text_field( $input['reset_password_email_subject'] );
+		}
+
+		if ( isset( $input['reset_password_email_body'] ) ) {
+			$sanitized['reset_password_email_body'] = wp_kses_post( $input['reset_password_email_body'] );
+		}
+
+		// Email logging settings.
+		if ( isset( $input['enable_email_logging'] ) ) {
+			$sanitized['enable_email_logging'] = 1;
+		}
+
+		// Misc settings.
+		if ( isset( $input['remove_on_uninstall'] ) ) {
+			$sanitized['remove_on_uninstall'] = 1;
+		}
+
+		return $sanitized;
+
+	}
+
+	/**
 	 * From email field.
 	 */
 	public function from_email_field() {
@@ -573,7 +702,7 @@ class Settings_Module extends Base_Module {
 		$field = require __DIR__ . '/templates/fields/general/content-type.php';
 		$field( $this );
 
-	} 
+	}
 
 	/**
 	 * SMTP host field.

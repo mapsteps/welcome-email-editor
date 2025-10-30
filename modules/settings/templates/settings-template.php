@@ -75,6 +75,7 @@ return function () {
 					<!-- Faking H1 tag to place admin notices -->
 					<h1 style="display: none;"></h1>
 
+					<?php settings_errors(); ?>
 					<?php settings_fields( 'weed-settings-group' ); ?>
 
 					<div class="heatbox-admin-panel" data-show-when-tab="smtp">
