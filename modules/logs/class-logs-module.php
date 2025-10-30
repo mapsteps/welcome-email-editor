@@ -295,11 +295,11 @@ class Logs_Module extends Base_Module {
 	 */
 	public function email_logs_detail_styles() {
 
-		// Get the current screen object
+		// Get the current screen object.
 		$screen = get_current_screen();
 
-		// Check if the current screen is related to the 'email_logs' post type
-		if ( $screen && $screen->id === 'weed_email_logs' ) {
+		// Check if the current screen is related to the 'email_logs' post type.
+		if ( 'weed_email_logs' === $screen && $screen->id ) {
 			wp_enqueue_style( 'email-logs-details', $this->url . '/assets/css/email-logs-detail.css', array(), WEED_PLUGIN_VERSION );
 		}
 
@@ -311,6 +311,11 @@ class Logs_Module extends Base_Module {
 	public function set_logs_capabilities() {
 
 		$role = get_role( 'administrator' );
+
+		if ( is_null( $role ) ) {
+			return;
+		}
+
 		$role->add_cap( 'edit_log' );
 		$role->add_cap( 'read_log' );
 		$role->add_cap( 'delete_log' );
