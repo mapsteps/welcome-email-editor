@@ -25,7 +25,7 @@ return function ( $module ) {
 	<input type="url" name="weed_settings[user_welcome_email_attachment_url]" id="weed_settings--user_welcome_email_attachment_url" class="regular-text" value="<?php echo esc_attr( $values['user_welcome_email_attachment_url'] ); ?>" placeholder="<?php echo esc_attr( $defaults['user_welcome_email_attachment_url'] ); ?>" />
 
 	<p class="description">
-		<?php _e( 'To add an attachment to your welcome email, please enter the URL here.', 'welcome-email-editor' ); ?>
+		<?php esc_html_e( 'To add an attachment to your welcome email, please enter the URL here.', 'welcome-email-editor' ); ?>
 	</p>
 
 	<?php

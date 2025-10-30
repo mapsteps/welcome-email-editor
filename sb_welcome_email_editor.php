@@ -6,6 +6,8 @@
  * Author: David Vongries
  * Author URI: https://davidvongries.com/
  * Text Domain: welcome-email-editor
+ * License: GPLv2 or later
+ * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  *
  * @package Welcome_Email_Editor
  */

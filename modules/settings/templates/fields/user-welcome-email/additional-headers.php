@@ -27,8 +27,8 @@ return function ( $module ) {
 				placeholder="<?php echo esc_attr( $defaults['user_welcome_email_additional_headers'] ); ?>"><?php echo esc_html( $values['user_welcome_email_additional_headers'] ); ?></textarea>
 
 	<p class="description">
-		<?php _e( 'Add custom HTTP headers to your email, such as: <code>Content-Type: text/plain</code>.', 'welcome-email-editor' ); ?><br>
-		<?php _e( 'Please use one line per HTTP header.', 'welcome-email-editor' ); ?>
+		<?php echo wp_kses_post( __( 'Add custom HTTP headers to your email, such as: <code>Content-Type: text/plain</code>.', 'welcome-email-editor' ) ); ?><br>
+		<?php esc_html_e( 'Please use one line per HTTP header.', 'welcome-email-editor' ); ?>
 	</p>
 
 	<?php

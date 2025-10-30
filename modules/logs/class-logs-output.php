@@ -159,9 +159,9 @@ class Logs_Output extends Base_Output {
 			// Dropdown options for email status
 			?>
 			<select name="email_status" id="email_status">
-				<option value=""><?php _e( 'All Statuses', 'welcome-email-editor' ); ?></option>
-				<option value="Success" <?php selected( $selected, 'Success' ); ?>><?php _e( 'Success', 'welcome-email-editor' ); ?></option>
-				<option value="Failed" <?php selected( $selected, 'Failed' ); ?>><?php _e( 'Failed', 'welcome-email-editor' ); ?></option>
+				<option value=""><?php esc_html_e( 'All Statuses', 'welcome-email-editor' ); ?></option>
+				<option value="Success" <?php selected( $selected, 'Success' ); ?>><?php esc_html_e( 'Success', 'welcome-email-editor' ); ?></option>
+				<option value="Failed" <?php selected( $selected, 'Failed' ); ?>><?php esc_html_e( 'Failed', 'welcome-email-editor' ); ?></option>
 			</select>
 			<?php
 		}

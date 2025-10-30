@@ -35,7 +35,7 @@
 
 		<div class="heatbox-content">
 			<p>
-				<?php _e( 'Use the template tag below in your <strong>Admin Email</strong>.', 'welcome-email-editor' ); ?>
+				<?php echo wp_kses_post( __( 'Use the template tag below in your <strong>Admin Email</strong>.', 'welcome-email-editor' ) ); ?>
 			</p>
 			<p>
 				<?php esc_html_e( 'This will print BuddyPress custom fields.', 'welcome-email-editor' ); ?>
@@ -54,7 +54,7 @@
 
 	<div class="heatbox-content">
 		<p>
-			<?php _e( 'Use the template tag below in your <strong>Admin Email</strong> for debugging.', 'welcome-email-editor' ); ?>
+			<?php echo wp_kses_post( __( 'Use the template tag below in your <strong>Admin Email</strong> for debugging.', 'welcome-email-editor' ) ); ?>
 		</p>
 		<p>
 			<?php esc_html_e( 'This will print $_REQUEST.', 'welcome-email-editor' ); ?>
@@ -72,13 +72,13 @@
 
 	<div class="heatbox-content">
 		<p>
-			<?php _e( 'Sending a test email will send the respective welcome email to the current user (you).', 'welcome-email-editor' ); ?>
+			<?php esc_html_e( 'Sending a test email will send the respective welcome email to the current user (you).', 'welcome-email-editor' ); ?>
 		</p>
 		<p>
-			<?php _e( 'Before sending a test email, please save your settings.', 'welcome-email-editor' ); ?>
+			<?php esc_html_e( 'Before sending a test email, please save your settings.', 'welcome-email-editor' ); ?>
 		</p>
 		<p>
-			<?php _e( 'If you haven\'t received the test email, please check your spam folder and ensure the SMTP settings are configured correctly.', 'welcome-email-editor' ); ?>
+			<?php esc_html_e( 'If you haven\'t received the test email, please check your spam folder and ensure the SMTP settings are configured correctly.', 'welcome-email-editor' ); ?>
 		</p>
 	</div>
 </div>
