@@ -21,7 +21,7 @@ return function ( $module ) {
 	$value  = ! empty( $values['mailjet_api_key'] ) ? $values['mailjet_api_key'] : '';
 	?>
 
-	<div data-show-when-mailer-type="mailjet">
+	<div data-show-when-mailer-type="mailjet_api">
 		<input type="text" name="weed_settings[mailjet_api_key]" id="weed_settings--mailjet_api_key" class="regular-text"
 				value="<?php echo esc_attr( $value ); ?>" placeholder="Enter your Mailjet API Key"/>
 	</div>

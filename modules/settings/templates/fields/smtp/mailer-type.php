@@ -18,7 +18,7 @@ defined( 'ABSPATH' ) || die( "Can't access directly" );
 return function ( $module ) {
 
 	$values = Vars::get( 'values' );
-	$value  = ! empty( $values['mailer_type'] ) ? $values['mailer_type'] : 'default';
+	$value  = ! empty( $values['mailer_type'] ) ? $values['mailer_type'] : 'smtp';
 	?>
 
 	<div class="weed-fields weed-radio-fields">

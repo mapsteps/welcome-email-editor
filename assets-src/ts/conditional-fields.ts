@@ -70,7 +70,7 @@ export function setupConditionalFields() {
 		const selectedMailerType =
 			document.querySelector<HTMLInputElement>(
 				'[name="weed_settings[mailer_type]"]:checked',
-			)?.value || "default";
+			)?.value || "smtp";
 
 		mailerTypeConditionalEls.forEach(function (conditionalEl) {
 			const showWhen = conditionalEl.dataset.showWhenMailerType;

@@ -218,6 +218,7 @@ class Settings_Module extends Base_Module {
 		// Register sections.
 		add_settings_section( 'weed-general-section', __( 'General Settings', 'welcome-email-editor' ), '', 'weed-general-settings' );
 		add_settings_section( 'weed-smtp-section', __( 'SMTP Settings', 'welcome-email-editor' ), '', 'weed-smtp-settings' );
+		add_settings_section( 'weed-mailjet-api-section', __( 'Mailjet API Settings', 'welcome-email-editor' ), '', 'weed-mailjet-api-settings' );
 		add_settings_section( 'weed-test-smtp-section', __( 'Send Test Email', 'welcome-email-editor' ), '', 'weed-test-smtp-settings' );
 		add_settings_section( 'weed-user-welcome-email-section', __( 'Welcome Email (for Users)', 'welcome-email-editor' ), '', 'weed-user-welcome-email-settings' );
 		add_settings_section( 'weed-admin-new-user-notif-email-section', __( 'New User Notification Email (for Admins)', 'welcome-email-editor' ), '', 'weed-admin-new-user-notif-email-settings' );
@@ -281,7 +282,6 @@ class Settings_Module extends Base_Module {
 			'weed-general-section'
 		);
 
-		// SMTP fields.
 		add_settings_field(
 			'mailer-type',
 			__( 'Mailer Type', 'welcome-email-editor' ),
@@ -289,9 +289,11 @@ class Settings_Module extends Base_Module {
 				$this,
 				'mailer_type_field',
 			),
-			'weed-smtp-settings',
-			'weed-smtp-section'
+			'weed-general-settings',
+			'weed-general-section'
 		);
+
+		// SMTP fields.
 
 		add_settings_field(
 			'smtp-host',
@@ -348,6 +350,7 @@ class Settings_Module extends Base_Module {
 			'weed-smtp-section'
 		);
 
+		// Mailjet API fields.
 		add_settings_field(
 			'mailjet-api-key',
 			__( 'Mailjet API Key', 'welcome-email-editor' ),
@@ -355,8 +358,8 @@ class Settings_Module extends Base_Module {
 				$this,
 				'mailjet_api_key_field',
 			),
-			'weed-smtp-settings',
-			'weed-smtp-section'
+			'weed-mailjet-api-settings',
+			'weed-mailjet-api-section'
 		);
 
 		add_settings_field(
@@ -366,8 +369,8 @@ class Settings_Module extends Base_Module {
 				$this,
 				'mailjet_secret_key_field',
 			),
-			'weed-smtp-settings',
-			'weed-smtp-section'
+			'weed-mailjet-api-settings',
+			'weed-mailjet-api-section'
 		);
 
 		add_settings_field(
@@ -377,8 +380,8 @@ class Settings_Module extends Base_Module {
 				$this,
 				'mailjet_sender_name_field',
 			),
-			'weed-smtp-settings',
-			'weed-smtp-section'
+			'weed-mailjet-api-settings',
+			'weed-mailjet-api-section'
 		);
 
 		add_settings_field(
@@ -388,8 +391,8 @@ class Settings_Module extends Base_Module {
 				$this,
 				'mailjet_sender_email_field',
 			),
-			'weed-smtp-settings',
-			'weed-smtp-section'
+			'weed-mailjet-api-settings',
+			'weed-mailjet-api-section'
 		);
 
 		add_settings_field(

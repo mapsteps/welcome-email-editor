@@ -83,8 +83,12 @@ return function () {
 							<?php do_settings_sections( 'weed-general-settings' ); ?>
 						</div>
 
-						<div class="heatbox">
+						<div class="heatbox" data-show-when-mailer-type="smtp">
 							<?php do_settings_sections( 'weed-smtp-settings' ); ?>
+						</div>
+
+						<div class="heatbox" data-show-when-mailer-type="mailjet_api">
+							<?php do_settings_sections( 'weed-mailjet-api-settings' ); ?>
 						</div>
 					</div>
 

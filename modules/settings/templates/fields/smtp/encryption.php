@@ -21,7 +21,7 @@ return function ( $module ) {
 	$value  = ! empty( $values['smtp_encryption'] ) ? $values['smtp_encryption'] : '';
 	?>
 
-	<div data-show-when-mailer-type="default">
+	<div data-show-when-mailer-type="smtp">
 		<div class="weed-fields weed-radio-fields">
 			<label for="weed_settings--smtp_encryption-none" class="label radio-label">
 				<?php esc_html_e( 'None', 'welcome-email-editor' ); ?>
