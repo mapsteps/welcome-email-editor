@@ -34,6 +34,13 @@ class Smtp_Output extends Base_Output {
 	public $url;
 
 	/**
+	 * Flag to track if API sending failed.
+	 *
+	 * @var bool
+	 */
+	public $api_failed = false;
+
+	/**
 	 * Module constructor.
 	 */
 	public function __construct() {
@@ -89,10 +96,9 @@ class Smtp_Output extends Base_Output {
 		$values = Vars::get( 'values' );
 
 		// Check if we should use Mailjet API.
-		$mailer_type     = ! empty( $values['mailer_type'] ) ? $values['mailer_type'] : 'default';
-		$mailjet_backend = ! empty( $values['mailjet_backend'] ) ? $values['mailjet_backend'] : 'smtp';
+		$mailer_type = ! empty( $values['mailer_type'] ) ? $values['mailer_type'] : 'default';
 
-		if ( 'mailjet' !== $mailer_type || 'api' !== $mailjet_backend ) {
+		if ( 'mailjet_api' !== $mailer_type ) {
 			// Not using Mailjet API, let wp_mail continue normally.
 			return $return;
 		}
@@ -110,8 +116,15 @@ class Smtp_Output extends Base_Output {
 
 		$result = $sender->send_email( $to, $subject, $message, $headers, $attachments );
 
-		// Return the result to short-circuit wp_mail.
-		return $result;
+		if ( $result ) {
+			return true;
+		}
+
+		// API failed, fall back to SMTP.
+		$this->api_failed = true;
+
+		// Return null to let wp_mail continue to phpmailer_init.
+		return null;
 
 	}
 
@@ -128,11 +141,8 @@ class Smtp_Output extends Base_Output {
 		$mailer_type = ! empty( $values['mailer_type'] ) ? $values['mailer_type'] : 'default';
 
 		// Configure PHPMailer based on mailer type.
-		if ( 'mailjet' === $mailer_type ) {
-			// Check if using API backend.
-			$mailjet_backend = ! empty( $values['mailjet_backend'] ) ? $values['mailjet_backend'] : 'smtp';
-
-			if ( 'api' === $mailjet_backend ) {
+		if ( 'mailjet_api' === $mailer_type ) {
+			if ( ! $this->api_failed ) {
 				// Use Mailjet API instead of SMTP.
 				// We need to intercept the email before PHPMailer sends it.
 				// This is done via the pre_wp_mail filter in a separate method.
@@ -140,7 +150,7 @@ class Smtp_Output extends Base_Output {
 				return;
 			}
 
-			// Mailjet SMTP configuration.
+			// Mailjet SMTP configuration (fallback).
 			if ( empty( $values['mailjet_api_key'] ) || empty( $values['mailjet_secret_key'] ) ) {
 				return;
 			}

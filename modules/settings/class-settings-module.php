@@ -371,11 +371,22 @@ class Settings_Module extends Base_Module {
 		);
 
 		add_settings_field(
-			'mailjet-backend',
-			__( 'Mailjet Backend', 'welcome-email-editor' ),
+			'mailjet-sender-name',
+			__( 'Sender Name', 'welcome-email-editor' ),
 			array(
 				$this,
-				'mailjet_backend_field',
+				'mailjet_sender_name_field',
+			),
+			'weed-smtp-settings',
+			'weed-smtp-section'
+		);
+
+		add_settings_field(
+			'mailjet-sender-email',
+			__( 'Sender Email', 'welcome-email-editor' ),
+			array(
+				$this,
+				'mailjet_sender_email_field',
 			),
 			'weed-smtp-settings',
 			'weed-smtp-section'
@@ -613,8 +624,8 @@ class Settings_Module extends Base_Module {
 
 		// SMTP settings.
 		if ( isset( $input['mailer_type'] ) ) {
-			$allowed_mailer_types     = array( 'default', 'mailjet' );
-			$sanitized['mailer_type'] = in_array( $input['mailer_type'], $allowed_mailer_types, true ) ? $input['mailer_type'] : 'default';
+			$allowed_mailer_types     = array( 'smtp', 'mailjet_api' );
+			$sanitized['mailer_type'] = in_array( $input['mailer_type'], $allowed_mailer_types, true ) ? $input['mailer_type'] : 'smtp';
 		}
 
 		if ( isset( $input['mailjet_api_key'] ) ) {
@@ -625,9 +636,12 @@ class Settings_Module extends Base_Module {
 			$sanitized['mailjet_secret_key'] = sanitize_text_field( $input['mailjet_secret_key'] );
 		}
 
-		if ( isset( $input['mailjet_backend'] ) ) {
-			$allowed_backends          = array( 'smtp', 'api' );
-			$sanitized['mailjet_backend'] = in_array( $input['mailjet_backend'], $allowed_backends, true ) ? $input['mailjet_backend'] : 'smtp';
+		if ( isset( $input['mailjet_sender_name'] ) ) {
+			$sanitized['mailjet_sender_name'] = sanitize_text_field( $input['mailjet_sender_name'] );
+		}
+
+		if ( isset( $input['mailjet_sender_email'] ) ) {
+			$sanitized['mailjet_sender_email'] = sanitize_email( $input['mailjet_sender_email'] );
 		}
 
 		if ( isset( $input['smtp_host'] ) ) {
@@ -792,6 +806,26 @@ class Settings_Module extends Base_Module {
 	public function smtp_port_field() {
 
 		$field = require __DIR__ . '/templates/fields/smtp/port.php';
+		$field( $this );
+
+	}
+
+	/**
+	 * Mailjet sender name field.
+	 */
+	public function mailjet_sender_name_field() {
+
+		$field = require __DIR__ . '/templates/fields/smtp/mailjet-sender-name.php';
+		$field( $this );
+
+	}
+
+	/**
+	 * Mailjet sender email field.
+	 */
+	public function mailjet_sender_email_field() {
+
+		$field = require __DIR__ . '/templates/fields/smtp/mailjet-sender-email.php';
 		$field( $this );
 
 	}
