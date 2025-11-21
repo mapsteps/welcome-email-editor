@@ -173,15 +173,11 @@ class Mailjet_Api_Sender {
 		);
 
 		// Use from_email and from_name from settings if available.
-		if ( ! empty( $values['mailjet_sender_email'] ) ) {
-			$parsed['from']['Email'] = $values['mailjet_sender_email'];
-		} elseif ( ! empty( $values['from_email'] ) ) {
+		if ( ! empty( $values['from_email'] ) ) {
 			$parsed['from']['Email'] = $values['from_email'];
 		}
 
-		if ( ! empty( $values['mailjet_sender_name'] ) ) {
-			$parsed['from']['Name'] = $values['mailjet_sender_name'];
-		} elseif ( ! empty( $values['from_name'] ) ) {
+		if ( ! empty( $values['from_name'] ) ) {
 			$parsed['from']['Name'] = $values['from_name'];
 		}
 

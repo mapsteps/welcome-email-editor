@@ -374,28 +374,6 @@ class Settings_Module extends Base_Module {
 		);
 
 		add_settings_field(
-			'mailjet-sender-name',
-			__( 'Sender Name', 'welcome-email-editor' ),
-			array(
-				$this,
-				'mailjet_sender_name_field',
-			),
-			'weed-mailjet-api-settings',
-			'weed-mailjet-api-section'
-		);
-
-		add_settings_field(
-			'mailjet-sender-email',
-			__( 'Sender Email', 'welcome-email-editor' ),
-			array(
-				$this,
-				'mailjet_sender_email_field',
-			),
-			'weed-mailjet-api-settings',
-			'weed-mailjet-api-section'
-		);
-
-		add_settings_field(
 			'test-smtp',
 			'',
 			array(
@@ -639,14 +617,6 @@ class Settings_Module extends Base_Module {
 			$sanitized['mailjet_secret_key'] = sanitize_text_field( $input['mailjet_secret_key'] );
 		}
 
-		if ( isset( $input['mailjet_sender_name'] ) ) {
-			$sanitized['mailjet_sender_name'] = sanitize_text_field( $input['mailjet_sender_name'] );
-		}
-
-		if ( isset( $input['mailjet_sender_email'] ) ) {
-			$sanitized['mailjet_sender_email'] = sanitize_email( $input['mailjet_sender_email'] );
-		}
-
 		if ( isset( $input['smtp_host'] ) ) {
 			$sanitized['smtp_host'] = sanitize_text_field( $input['smtp_host'] );
 		}
@@ -813,25 +783,7 @@ class Settings_Module extends Base_Module {
 
 	}
 
-	/**
-	 * Mailjet sender name field.
-	 */
-	public function mailjet_sender_name_field() {
 
-		$field = require __DIR__ . '/templates/fields/smtp/mailjet-sender-name.php';
-		$field( $this );
-
-	}
-
-	/**
-	 * Mailjet sender email field.
-	 */
-	public function mailjet_sender_email_field() {
-
-		$field = require __DIR__ . '/templates/fields/smtp/mailjet-sender-email.php';
-		$field( $this );
-
-	}
 
 	/**
 	 * SMTP username field.
