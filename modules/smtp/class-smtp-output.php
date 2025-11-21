@@ -70,8 +70,48 @@ class Smtp_Output extends Base_Output {
 	 */
 	public function setup() {
 
+		add_filter( 'pre_wp_mail', array( $this, 'maybe_use_mailjet_api' ), 10, 2 );
 		add_action( 'phpmailer_init', array( $this, 'phpmailer_init' ), 9999 );
 		add_action( 'wp_mail_failed', array( $this, 'wp_mail_failed' ), 10 );
+
+	}
+
+	/**
+	 * Intercept wp_mail and use Mailjet API if configured.
+	 *
+	 * @param null|bool $return Short-circuit return value.
+	 * @param array     $atts   Array of the wp_mail() arguments.
+	 *
+	 * @return null|bool
+	 */
+	public function maybe_use_mailjet_api( $return, $atts ) {
+
+		$values = Vars::get( 'values' );
+
+		// Check if we should use Mailjet API.
+		$mailer_type     = ! empty( $values['mailer_type'] ) ? $values['mailer_type'] : 'default';
+		$mailjet_backend = ! empty( $values['mailjet_backend'] ) ? $values['mailjet_backend'] : 'smtp';
+
+		if ( 'mailjet' !== $mailer_type || 'api' !== $mailjet_backend ) {
+			// Not using Mailjet API, let wp_mail continue normally.
+			return $return;
+		}
+
+		// Use Mailjet API to send email.
+		require_once WEED_PLUGIN_DIR . '/modules/mailjet-api/class-mailjet-api-sender.php';
+
+		$sender = \Weed\Mailjet_Api\Mailjet_Api_Sender::get_instance();
+
+		$to          = isset( $atts['to'] ) ? $atts['to'] : '';
+		$subject     = isset( $atts['subject'] ) ? $atts['subject'] : '';
+		$message     = isset( $atts['message'] ) ? $atts['message'] : '';
+		$headers     = isset( $atts['headers'] ) ? $atts['headers'] : '';
+		$attachments = isset( $atts['attachments'] ) ? $atts['attachments'] : array();
+
+		$result = $sender->send_email( $to, $subject, $message, $headers, $attachments );
+
+		// Return the result to short-circuit wp_mail.
+		return $result;
 
 	}
 
@@ -89,7 +129,18 @@ class Smtp_Output extends Base_Output {
 
 		// Configure PHPMailer based on mailer type.
 		if ( 'mailjet' === $mailer_type ) {
-			// Mailjet configuration.
+			// Check if using API backend.
+			$mailjet_backend = ! empty( $values['mailjet_backend'] ) ? $values['mailjet_backend'] : 'smtp';
+
+			if ( 'api' === $mailjet_backend ) {
+				// Use Mailjet API instead of SMTP.
+				// We need to intercept the email before PHPMailer sends it.
+				// This is done via the pre_wp_mail filter in a separate method.
+				// Here we just return early to prevent SMTP configuration.
+				return;
+			}
+
+			// Mailjet SMTP configuration.
 			if ( empty( $values['mailjet_api_key'] ) || empty( $values['mailjet_secret_key'] ) ) {
 				return;
 			}

@@ -371,6 +371,17 @@ class Settings_Module extends Base_Module {
 		);
 
 		add_settings_field(
+			'mailjet-backend',
+			__( 'Mailjet Backend', 'welcome-email-editor' ),
+			array(
+				$this,
+				'mailjet_backend_field',
+			),
+			'weed-smtp-settings',
+			'weed-smtp-section'
+		);
+
+		add_settings_field(
 			'test-smtp',
 			'',
 			array(
@@ -614,6 +625,11 @@ class Settings_Module extends Base_Module {
 			$sanitized['mailjet_secret_key'] = sanitize_text_field( $input['mailjet_secret_key'] );
 		}
 
+		if ( isset( $input['mailjet_backend'] ) ) {
+			$allowed_backends          = array( 'smtp', 'api' );
+			$sanitized['mailjet_backend'] = in_array( $input['mailjet_backend'], $allowed_backends, true ) ? $input['mailjet_backend'] : 'smtp';
+		}
+
 		if ( isset( $input['smtp_host'] ) ) {
 			$sanitized['smtp_host'] = sanitize_text_field( $input['smtp_host'] );
 		}
@@ -830,6 +846,15 @@ class Settings_Module extends Base_Module {
 
 	}
 
+	/**
+	 * Mailjet Backend field.
+	 */
+	public function mailjet_backend_field() {
+
+		$field = require __DIR__ . '/templates/fields/smtp/mailjet-backend.php';
+		$field( $this );
+
+	}
 
 	/**
 	 * Test SMTP field.
