@@ -84,32 +84,55 @@ class Smtp_Output extends Base_Output {
 
 		$values = Vars::get( 'values' );
 
-		if ( empty( $values['smtp_host'] ) || empty( $values['smtp_port'] ) ) {
-			return;
+		// Get the mailer type (default to 'default' if not set).
+		$mailer_type = ! empty( $values['mailer_type'] ) ? $values['mailer_type'] : 'default';
+
+		// Configure PHPMailer based on mailer type.
+		if ( 'mailjet' === $mailer_type ) {
+			// Mailjet configuration.
+			if ( empty( $values['mailjet_api_key'] ) || empty( $values['mailjet_secret_key'] ) ) {
+				return;
+			}
+
+			$php_mailer->isSMTP();
+
+			// phpcs:disable
+			$php_mailer->Host       = 'in-v3.mailjet.com';
+			$php_mailer->Port       = 587;
+			$php_mailer->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+			$php_mailer->SMTPAuth   = true;
+			$php_mailer->Username   = $values['mailjet_api_key'];
+			$php_mailer->Password   = $values['mailjet_secret_key'];
+			// phpcs:enable
+		} else {
+			// Default SMTP configuration.
+			if ( empty( $values['smtp_host'] ) || empty( $values['smtp_port'] ) ) {
+				return;
+			}
+
+			$php_mailer->isSMTP();
+
+			// phpcs:disable
+			$php_mailer->Host     = $values['smtp_host'];
+			$php_mailer->SMTPAuth = true;
+
+			if ( ! empty( $values['smtp_username'] ) ) {
+				$php_mailer->Username = $values['smtp_username'];
+			}
+
+			if ( ! empty( $values['smtp_password'] ) ) {
+				$php_mailer->Password = $values['smtp_password'];
+			}
+
+			$php_mailer->Port = $values['smtp_port'];
+
+			if ( ! empty( $values['smtp_encryption'] ) ) {
+				$php_mailer->SMTPSecure = $values['smtp_encryption'] === 'ssl'
+					? PHPMailer::ENCRYPTION_SMTPS
+					: PHPMailer::ENCRYPTION_STARTTLS;
+			}
+			// phpcs:enable
 		}
-
-		$php_mailer->isSMTP();
-
-		// phpcs:disable
-		$php_mailer->Host     = $values['smtp_host'];
-		$php_mailer->SMTPAuth = true;
-
-		if ( ! empty( $values['smtp_username'] ) ) {
-			$php_mailer->Username = $values['smtp_username'];
-		}
-
-		if ( ! empty( $values['smtp_password'] ) ) {
-			$php_mailer->Password = $values['smtp_password'];
-		}
-
-		$php_mailer->Port = $values['smtp_port'];
-
-		if ( ! empty( $values['smtp_encryption'] ) ) {
-			$php_mailer->SMTPSecure = $values['smtp_encryption'] === 'ssl'
-				? PHPMailer::ENCRYPTION_SMTPS
-				: PHPMailer::ENCRYPTION_STARTTLS;
-		}
-		// phpcs:enable
 
 	}
 

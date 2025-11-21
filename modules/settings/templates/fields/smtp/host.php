@@ -21,8 +21,10 @@ return function ( $module ) {
 	$value  = ! empty( $values['smtp_host'] ) ? $values['smtp_host'] : '';
 	?>
 
-	<input type="text" name="weed_settings[smtp_host]" id="weed_settings--smtp_host" class="regular-text"
-			value="<?php echo esc_attr( $value ); ?>" placeholder="Example: smtp.zoho.com"/>
+	<div data-show-when-mailer-type="default">
+		<input type="text" name="weed_settings[smtp_host]" id="weed_settings--smtp_host" class="regular-text"
+				value="<?php echo esc_attr( $value ); ?>" placeholder="Example: smtp.zoho.com"/>
+	</div>
 
 	<?php
 

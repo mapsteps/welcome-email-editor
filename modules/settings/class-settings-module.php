@@ -283,6 +283,17 @@ class Settings_Module extends Base_Module {
 
 		// SMTP fields.
 		add_settings_field(
+			'mailer-type',
+			__( 'Mailer Type', 'welcome-email-editor' ),
+			array(
+				$this,
+				'mailer_type_field',
+			),
+			'weed-smtp-settings',
+			'weed-smtp-section'
+		);
+
+		add_settings_field(
 			'smtp-host',
 			__( 'SMTP Host', 'welcome-email-editor' ),
 			array(
@@ -332,6 +343,28 @@ class Settings_Module extends Base_Module {
 			array(
 				$this,
 				'smtp_password_field',
+			),
+			'weed-smtp-settings',
+			'weed-smtp-section'
+		);
+
+		add_settings_field(
+			'mailjet-api-key',
+			__( 'Mailjet API Key', 'welcome-email-editor' ),
+			array(
+				$this,
+				'mailjet_api_key_field',
+			),
+			'weed-smtp-settings',
+			'weed-smtp-section'
+		);
+
+		add_settings_field(
+			'mailjet-secret-key',
+			__( 'Mailjet Secret Key', 'welcome-email-editor' ),
+			array(
+				$this,
+				'mailjet_secret_key_field',
 			),
 			'weed-smtp-settings',
 			'weed-smtp-section'
@@ -568,6 +601,19 @@ class Settings_Module extends Base_Module {
 		}
 
 		// SMTP settings.
+		if ( isset( $input['mailer_type'] ) ) {
+			$allowed_mailer_types     = array( 'default', 'mailjet' );
+			$sanitized['mailer_type'] = in_array( $input['mailer_type'], $allowed_mailer_types, true ) ? $input['mailer_type'] : 'default';
+		}
+
+		if ( isset( $input['mailjet_api_key'] ) ) {
+			$sanitized['mailjet_api_key'] = sanitize_text_field( $input['mailjet_api_key'] );
+		}
+
+		if ( isset( $input['mailjet_secret_key'] ) ) {
+			$sanitized['mailjet_secret_key'] = sanitize_text_field( $input['mailjet_secret_key'] );
+		}
+
 		if ( isset( $input['smtp_host'] ) ) {
 			$sanitized['smtp_host'] = sanitize_text_field( $input['smtp_host'] );
 		}
@@ -753,6 +799,37 @@ class Settings_Module extends Base_Module {
 		$field( $this );
 
 	}
+
+	/**
+	 * Mailer type field.
+	 */
+	public function mailer_type_field() {
+
+		$field = require __DIR__ . '/templates/fields/smtp/mailer-type.php';
+		$field( $this );
+
+	}
+
+	/**
+	 * Mailjet API Key field.
+	 */
+	public function mailjet_api_key_field() {
+
+		$field = require __DIR__ . '/templates/fields/smtp/mailjet-api-key.php';
+		$field( $this );
+
+	}
+
+	/**
+	 * Mailjet Secret Key field.
+	 */
+	public function mailjet_secret_key_field() {
+
+		$field = require __DIR__ . '/templates/fields/smtp/mailjet-secret-key.php';
+		$field( $this );
+
+	}
+
 
 	/**
 	 * Test SMTP field.

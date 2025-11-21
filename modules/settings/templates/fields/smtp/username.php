@@ -21,8 +21,10 @@ return function ( $module ) {
 	$value  = ! empty( $values['smtp_username'] ) ? $values['smtp_username'] : '';
 	?>
 
-	<input type="text" name="weed_settings[smtp_username]" id="weed_settings--smtp_username" class="regular-text"
-			value="<?php echo esc_attr( $value ); ?>" placeholder="yourname@yourwebsite.com"/>
+	<div data-show-when-mailer-type="default">
+		<input type="text" name="weed_settings[smtp_username]" id="weed_settings--smtp_username" class="regular-text"
+				value="<?php echo esc_attr( $value ); ?>" placeholder="yourname@yourwebsite.com"/>
+	</div>
 
 	<?php
 

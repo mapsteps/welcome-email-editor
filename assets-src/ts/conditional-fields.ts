@@ -57,15 +57,57 @@ export function setupConditionalFields() {
 		});
 	});
 
-	const smtpEncryptionFields = document.querySelectorAll('[name="weed_settings[smtp_encryption]"]');
+	// Handle mailer type radio button conditional fields
+	const mailerTypeConditionalEls = document.querySelectorAll(
+		"[data-show-when-mailer-type]",
+	) as NodeListOf<HTMLElement>;
+
+	const mailerTypeRadios = document.querySelectorAll(
+		'[name="weed_settings[mailer_type]"]',
+	) as NodeListOf<HTMLInputElement>;
+
+	function updateMailerTypeFields() {
+		const selectedMailerType =
+			document.querySelector<HTMLInputElement>(
+				'[name="weed_settings[mailer_type]"]:checked',
+			)?.value || "default";
+
+		mailerTypeConditionalEls.forEach(function (conditionalEl) {
+			const showWhen = conditionalEl.dataset.showWhenMailerType;
+			if (!showWhen) return;
+
+			if (showWhen === selectedMailerType) {
+				conditionalEl.style.display = "block";
+			} else {
+				conditionalEl.style.display = "none";
+			}
+		});
+	}
+
+	// Initialize field visibility on page load
+	updateMailerTypeFields();
+
+	// Update field visibility when mailer type changes
+	mailerTypeRadios.forEach(function (radio) {
+		radio.addEventListener("change", updateMailerTypeFields);
+	});
+
+	const smtpEncryptionFields = document.querySelectorAll(
+		'[name="weed_settings[smtp_encryption]"]',
+	);
 
 	smtpEncryptionFields.forEach(function (smtpEncryptionField) {
-		smtpEncryptionField.addEventListener("change", handleSmtpEncryptionFieldChange);
+		smtpEncryptionField.addEventListener(
+			"change",
+			handleSmtpEncryptionFieldChange,
+		);
 	});
 
 	function handleSmtpEncryptionFieldChange(e: Event) {
 		const value = (e.target as HTMLInputElement).value;
-		const smtpPortField = document.querySelector('[name="weed_settings[smtp_port]"]') as HTMLInputElement;
+		const smtpPortField = document.querySelector(
+			'[name="weed_settings[smtp_port]"]',
+		) as HTMLInputElement;
 		if (!smtpPortField) return;
 
 		if (value === "ssl") {
