@@ -103,8 +103,18 @@ class Mailjet_Api_Sender {
 			$payload['Messages'][0]['ReplyTo'] = $parsed_headers['reply_to'];
 		}
 
-		// Note: Attachments are not implemented in this version.
-		// They would require base64 encoding and proper MIME type detection.
+		// Process attachments if provided.
+		if ( ! empty( $attachments ) ) {
+			$processed_attachments = $this->prepare_attachments( $attachments, $message, $content_type );
+
+			if ( ! empty( $processed_attachments['regular'] ) ) {
+				$payload['Messages'][0]['Attachments'] = $processed_attachments['regular'];
+			}
+
+			if ( ! empty( $processed_attachments['inline'] ) ) {
+				$payload['Messages'][0]['InlinedAttachments'] = $processed_attachments['inline'];
+			}
+		}
 
 		// Make API request.
 		$response = $this->make_api_request( $payload, $values['mailjet_api_key'], $values['mailjet_secret_key'] );
@@ -230,6 +240,198 @@ class Mailjet_Api_Sender {
 		}
 
 		return $parsed;
+
+	}
+
+	/**
+	 * Prepare attachments for Mailjet API.
+	 *
+	 * @param string|array $attachments File paths to attach.
+	 * @param string       $message     Email message content.
+	 * @param string       $content_type Content type (html or text).
+	 *
+	 * @return array Array with 'regular' and 'inline' attachment arrays.
+	 */
+	private function prepare_attachments( $attachments, $message, $content_type ) {
+
+		$prepared = array(
+			'regular' => array(),
+			'inline'  => array(),
+		);
+
+		// Ensure attachments is an array.
+		if ( ! is_array( $attachments ) ) {
+			$attachments = explode( "\n", str_replace( "\r\n", "\n", $attachments ) );
+		}
+
+		if ( empty( $attachments ) ) {
+			return $prepared;
+		}
+
+		// Extract inline attachments if HTML email.
+		if ( 'html' === $content_type ) {
+			$extracted          = $this->extract_inline_attachments( $message, $attachments );
+			$prepared['inline'] = $extracted['inline'];
+			$attachments        = $extracted['regular'];
+		}
+
+		// Process regular attachments.
+		$total_size     = 0;
+		$max_total_size = 14 * 1024 * 1024; // 14 MB (leave buffer for 15MB Mailjet limit).
+
+		foreach ( $attachments as $attachment ) {
+			$attachment = trim( $attachment );
+
+			if ( empty( $attachment ) ) {
+				continue;
+			}
+
+			// Check if file exists.
+			if ( ! file_exists( $attachment ) ) {
+				error_log( 'Mailjet API: Attachment file not found: ' . $attachment );
+				continue;
+			}
+
+			// Check if file is readable.
+			if ( ! is_readable( $attachment ) ) {
+				error_log( 'Mailjet API: Attachment file not readable: ' . $attachment );
+				continue;
+			}
+
+			// Get file size.
+			$file_size = filesize( $attachment );
+
+			// Check total size limit.
+			if ( ( $total_size + $file_size ) > $max_total_size ) {
+				error_log( 'Mailjet API: Attachment size limit exceeded (14MB), skipping: ' . $attachment );
+				continue;
+			}
+
+			// Read file content.
+			$file_content = file_get_contents( $attachment );
+			if ( false === $file_content ) {
+				error_log( 'Mailjet API: Failed to read attachment: ' . $attachment );
+				continue;
+			}
+
+			// Get MIME type and filename.
+			$mime_type = $this->get_mime_type( $attachment );
+			$filename  = basename( $attachment );
+
+			// Add to regular attachments array.
+			$prepared['regular'][] = array(
+				'ContentType'   => $mime_type,
+				'Filename'      => $filename,
+				'Base64Content' => base64_encode( $file_content ),
+			);
+
+			$total_size += $file_size;
+		}
+
+		return $prepared;
+
+	}
+
+	/**
+	 * Extract inline attachments from HTML message.
+	 *
+	 * @param string $html_message HTML message content.
+	 * @param array  $attachments  Array of attachment file paths.
+	 *
+	 * @return array Array with 'inline' and 'regular' keys.
+	 */
+	private function extract_inline_attachments( $html_message, $attachments ) {
+
+		$result = array(
+			'inline'  => array(),
+			'regular' => array(),
+		);
+
+		// Find all cid: references in HTML.
+		preg_match_all( '/src=["\']cid:([^"\']+)["\']/', $html_message, $matches );
+
+		if ( empty( $matches[1] ) ) {
+			// No inline attachments found, all are regular.
+			$result['regular'] = $attachments;
+			return $result;
+		}
+
+		$cid_references = $matches[1];
+
+		// Process each attachment.
+		foreach ( $attachments as $attachment ) {
+			$attachment = trim( $attachment );
+
+			if ( empty( $attachment ) || ! file_exists( $attachment ) ) {
+				continue;
+			}
+
+			$filename = basename( $attachment );
+			$file_ext = pathinfo( $filename, PATHINFO_EXTENSION );
+			$cid      = pathinfo( $filename, PATHINFO_FILENAME );
+
+			// Check if this attachment is referenced as inline.
+			$is_inline = false;
+			foreach ( $cid_references as $cid_ref ) {
+				// Match by filename without extension or full filename.
+				if ( $cid_ref === $cid || $cid_ref === $filename ) {
+					$is_inline = true;
+					break;
+				}
+			}
+
+			if ( $is_inline ) {
+				// Read file content.
+				$file_content = file_get_contents( $attachment );
+				if ( false === $file_content ) {
+					error_log( 'Mailjet API: Failed to read inline attachment: ' . $attachment );
+					continue;
+				}
+
+				// Add to inline attachments.
+				$result['inline'][] = array(
+					'ContentType'   => $this->get_mime_type( $attachment ),
+					'Filename'      => $filename,
+					'ContentID'     => $cid,
+					'Base64Content' => base64_encode( $file_content ),
+				);
+			} else {
+				// Regular attachment.
+				$result['regular'][] = $attachment;
+			}
+		}
+
+		return $result;
+
+	}
+
+	/**
+	 * Get MIME type for a file.
+	 *
+	 * @param string $file_path Path to file.
+	 *
+	 * @return string MIME type.
+	 */
+	private function get_mime_type( $file_path ) {
+
+		// Use WordPress function if available.
+		if ( function_exists( 'wp_check_filetype' ) ) {
+			$file_info = wp_check_filetype( $file_path );
+			if ( ! empty( $file_info['type'] ) ) {
+				return $file_info['type'];
+			}
+		}
+
+		// Fallback to PHP's mime_content_type.
+		if ( function_exists( 'mime_content_type' ) ) {
+			$mime = mime_content_type( $file_path );
+			if ( $mime ) {
+				return $mime;
+			}
+		}
+
+		// Default fallback.
+		return 'application/octet-stream';
 
 	}
 
