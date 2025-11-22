@@ -156,9 +156,10 @@ class Setup {
 
 		$modules = array();
 
-		$modules['Weed\\Settings\\Settings_Module'] = __DIR__ . '/modules/settings/class-settings-module.php';
-		$modules['Weed\\Smtp\\Smtp_Module']         = __DIR__ . '/modules/smtp/class-smtp-module.php';
-		$modules['Weed\\Logs\\Logs_Module']         = __DIR__ . '/modules/logs/class-logs-module.php';
+		$modules['Weed\\Settings\\Settings_Module']       = __DIR__ . '/modules/settings/class-settings-module.php';
+		$modules['Weed\\Smtp\\Smtp_Module']               = __DIR__ . '/modules/smtp/class-smtp-module.php';
+		$modules['Weed\\Mailjet_Api\\Mailjet_Api_Module'] = __DIR__ . '/modules/mailjet-api/class-mailjet-api-module.php';
+		$modules['Weed\\Logs\\Logs_Module']               = __DIR__ . '/modules/logs/class-logs-module.php';
 
 		$modules = apply_filters( 'weed_modules', $modules );
 
