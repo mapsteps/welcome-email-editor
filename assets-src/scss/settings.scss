@@ -169,7 +169,9 @@ $light-grey: #f5492a;
 			color: $white-color;
 			background-color: $light-grey;
 			border-color: $light-grey;
-			box-shadow: 0 0 0 1px #fff, 0 0 0 3px #f5492a;
+			box-shadow:
+				0 0 0 1px #fff,
+				0 0 0 3px #f5492a;
 		}
 	}
 
@@ -202,6 +204,17 @@ $light-grey: #f5492a;
 	}
 }
 
+// Test Mailjet API metabox.
+.weed-test-mailjet-api-metabox {
+	th {
+		display: none;
+	}
+
+	.form-table td p {
+		margin-bottom: 20px;
+	}
+}
+
 .weed-submission-notice {
 	padding: 5px 10px;
 	font-weight: 700;
@@ -210,13 +223,13 @@ $light-grey: #f5492a;
 	border-style: solid;
 
 	&.is-error {
-		background-color: rgba(255, 99, 71, .1);
+		background-color: rgba(255, 99, 71, 0.1);
 		border-color: tomato;
 		color: tomato;
 	}
 
 	&.is-success {
-		background-color: rgba(79, 225, 144, .1);
+		background-color: rgba(79, 225, 144, 0.1);
 		border-color: #4fe190;
 		color: #4fe190;
 	}
