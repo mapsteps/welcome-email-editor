@@ -170,10 +170,12 @@ class Settings_Module extends Base_Module {
 			'weedSettings',
 			array(
 				'nonces'          => array(
-					'adminWelcomeEmail'  => wp_create_nonce( WEED_PLUGIN_DIR . '_Admin_Welcome_Email' ),
-					'userWelcomeEmail'   => wp_create_nonce( WEED_PLUGIN_DIR . '_User_Welcome_Email' ),
-					'resetPasswordEmail' => wp_create_nonce( WEED_PLUGIN_DIR . '_Reset_Password_Email' ),
-					'testSmtpEmail'      => wp_create_nonce( WEED_PLUGIN_DIR . '_Test_SMTP_Email' ),
+					'adminWelcomeEmail'                 => wp_create_nonce( WEED_PLUGIN_DIR . '_Admin_Welcome_Email' ),
+					'userWelcomeEmail'                  => wp_create_nonce( WEED_PLUGIN_DIR . '_User_Welcome_Email' ),
+					'resetPasswordEmail'                => wp_create_nonce( WEED_PLUGIN_DIR . '_Reset_Password_Email' ),
+					'testSmtpEmail'                     => wp_create_nonce( WEED_PLUGIN_DIR . '_Test_SMTP_Email' ),
+					'testMailjetApiEmail'               => wp_create_nonce( WEED_PLUGIN_DIR . '_Test_Mailjet_API_Email' ),
+					'testMailjetApiEmailWithAttachment' => wp_create_nonce( WEED_PLUGIN_DIR . '_Test_Mailjet_API_Email_With_Attachment' ),
 				),
 				'warningMessages' => array(
 					'resetSettings' => __( 'Caution! Are you sure you want to reset all settings?', 'welcome-email-editor' ),
@@ -220,6 +222,7 @@ class Settings_Module extends Base_Module {
 		add_settings_section( 'weed-smtp-section', __( 'SMTP Settings', 'welcome-email-editor' ), '', 'weed-smtp-settings' );
 		add_settings_section( 'weed-mailjet-api-section', __( 'Mailjet API Settings', 'welcome-email-editor' ), '', 'weed-mailjet-api-settings' );
 		add_settings_section( 'weed-test-smtp-section', __( 'Send Test Email', 'welcome-email-editor' ), '', 'weed-test-smtp-settings' );
+		add_settings_section( 'weed-mailjet-api-test-section', __( 'Send Test Email (Mailjet API)', 'welcome-email-editor' ), '', 'weed-mailjet-api-test-settings' );
 		add_settings_section( 'weed-user-welcome-email-section', __( 'Welcome Email (for Users)', 'welcome-email-editor' ), '', 'weed-user-welcome-email-settings' );
 		add_settings_section( 'weed-admin-new-user-notif-email-section', __( 'New User Notification Email (for Admins)', 'welcome-email-editor' ), '', 'weed-admin-new-user-notif-email-settings' );
 		add_settings_section( 'weed-reset-password-email-section', __( 'Reset Password Email', 'welcome-email-editor' ), '', 'weed-reset-password-email-settings' );
@@ -382,6 +385,18 @@ class Settings_Module extends Base_Module {
 			),
 			'weed-test-smtp-settings',
 			'weed-test-smtp-section'
+		);
+
+		// Mailjet API test field.
+		add_settings_field(
+			'test-mailjet-api',
+			'',
+			array(
+				$this,
+				'mailjet_api_test_field',
+			),
+			'weed-mailjet-api-test-settings',
+			'weed-mailjet-api-test-section'
 		);
 
 		// User welcome email fields.
@@ -642,6 +657,10 @@ class Settings_Module extends Base_Module {
 			$sanitized['test_smtp_recipient_email'] = sanitize_text_field( $input['test_smtp_recipient_email'] );
 		}
 
+		if ( isset( $input['test_mailjet_api_recipient_email'] ) ) {
+			$sanitized['test_mailjet_api_recipient_email'] = sanitize_text_field( $input['test_mailjet_api_recipient_email'] );
+		}
+
 		// User welcome email settings.
 		if ( isset( $input['user_welcome_email_subject'] ) ) {
 			$sanitized['user_welcome_email_subject'] = sanitize_text_field( $input['user_welcome_email_subject'] );
@@ -851,6 +870,16 @@ class Settings_Module extends Base_Module {
 	public function test_smtp_field() {
 
 		$field = require __DIR__ . '/templates/fields/test-smtp/test-smtp.php';
+		$field( $this );
+
+	}
+
+	/**
+	 * Mailjet API test field.
+	 */
+	public function mailjet_api_test_field() {
+
+		$field = require __DIR__ . '/templates/fields/mailjet-api/test-email.php';
 		$field( $this );
 
 	}

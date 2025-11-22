@@ -148,6 +148,7 @@ return function () {
 					<div class="heatbox-admin-panel" data-show-when-tab="smtp">
 						<?php
 						require __DIR__ . '/metaboxes/test-smtp-metabox.php';
+						require __DIR__ . '/metaboxes/test-mailjet-api-metabox.php';
 						require __DIR__ . '/metaboxes/review-metabox.php';
 						?>
 					</div>

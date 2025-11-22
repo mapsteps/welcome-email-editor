@@ -1,4 +1,4 @@
-import {hideNotice, showNotice, startLoading, stopLoading} from "./utils";
+import { hideNotice, showNotice, startLoading, stopLoading } from "./utils";
 
 declare var ajaxurl: string;
 
@@ -8,6 +8,8 @@ declare var weedSettings: {
 		userWelcomeEmail: string;
 		resetPasswordEmail: string;
 		testSmtpEmail: string;
+		testMailjetApiEmail: string;
+		testMailjetApiEmailWithAttachment: string;
 	};
 	warningMessages: {
 		resetSettings: string;
@@ -34,14 +36,20 @@ export function setupTestEmails() {
 		const button = this as HTMLButtonElement | null;
 		if (!button) return;
 
-		const allNoticeEls = document.querySelectorAll('.weed-submission-notice') as NodeListOf<HTMLElement>;
+		const allNoticeEls = document.querySelectorAll(
+			".weed-submission-notice",
+		) as NodeListOf<HTMLElement>;
 
 		allNoticeEls.forEach(function (el) {
 			hideNotice(el);
 		});
 
 		const parentEl = button.parentElement as HTMLElement | null;
-		const noticeEl = parentEl ? parentEl.querySelector('.weed-submission-notice') as HTMLElement | null : null;
+		const noticeEl = parentEl
+			? (parentEl.querySelector(
+					".weed-submission-notice",
+			  ) as HTMLElement | null)
+			: null;
 
 		if (isRequesting) return;
 		isRequesting = true;
@@ -67,8 +75,28 @@ export function setupTestEmails() {
 
 			case "test_smtp_email":
 				data.nonce = weedSettings.nonces.testSmtpEmail;
-				const toEmailField = document.querySelector('#weed_settings--test_smtp_recipient_email') as HTMLInputElement;
-				data.to_email = toEmailField ? toEmailField.value : '';
+				const toEmailField = document.querySelector(
+					"#weed_settings--test_smtp_recipient_email",
+				) as HTMLInputElement;
+				data.to_email = toEmailField ? toEmailField.value : "";
+				break;
+
+			case "test_mailjet_api_email":
+				data.nonce = weedSettings.nonces.testMailjetApiEmail;
+				const mailjetToEmailField = document.querySelector(
+					"#weed_settings--test_mailjet_api_recipient_email",
+				) as HTMLInputElement;
+				data.to_email = mailjetToEmailField ? mailjetToEmailField.value : "";
+				break;
+
+			case "test_mailjet_api_with_attachment":
+				data.nonce = weedSettings.nonces.testMailjetApiEmailWithAttachment;
+				const mailjetAttachmentToEmailField = document.querySelector(
+					"#weed_settings--test_mailjet_api_recipient_email",
+				) as HTMLInputElement;
+				data.to_email = mailjetAttachmentToEmailField
+					? mailjetAttachmentToEmailField.value
+					: "";
 				break;
 		}
 
@@ -88,7 +116,7 @@ export function setupTestEmails() {
 				if (noticeEl) {
 					showNotice({
 						el: noticeEl,
-						type: r.success ? 'success' : 'error',
+						type: r.success ? "success" : "error",
 						msg: r.data,
 					});
 				}
