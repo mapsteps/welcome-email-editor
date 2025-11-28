@@ -61,6 +61,8 @@ Since version 4.3, the password is no longer sent to the user via email, and ins
 1. Swift SMTP Settings
 
 == Changelog ==
+= 6.3.0 | November 28, 2025 =
+* New: Added Mailjet support (via SMTP and API)
 = 6.2.2 | October 30, 2025 =
 * Fixed: Translation notice issue
 * Fixed: Added missing data sanitization
