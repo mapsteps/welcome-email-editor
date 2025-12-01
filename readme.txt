@@ -2,7 +2,7 @@
 Contributors: davidvongries
 Tags: WP Mail SMTP, Welcome Email Editor, Custom SMTP, SMTP, WordPress Email
 Requires at least: 4.6
-Tested up to: 6.8
+Tested up to: 6.9
 Stable tag: 6.2.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
