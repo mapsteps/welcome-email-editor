@@ -170,12 +170,11 @@ class Settings_Module extends Base_Module {
 			'weedSettings',
 			array(
 				'nonces'          => array(
-					'adminWelcomeEmail'                 => wp_create_nonce( WEED_PLUGIN_DIR . '_Admin_Welcome_Email' ),
-					'userWelcomeEmail'                  => wp_create_nonce( WEED_PLUGIN_DIR . '_User_Welcome_Email' ),
-					'resetPasswordEmail'                => wp_create_nonce( WEED_PLUGIN_DIR . '_Reset_Password_Email' ),
-					'testSmtpEmail'                     => wp_create_nonce( WEED_PLUGIN_DIR . '_Test_SMTP_Email' ),
-					'testMailjetApiEmail'               => wp_create_nonce( WEED_PLUGIN_DIR . '_Test_Mailjet_API_Email' ),
-					'testMailjetApiEmailWithAttachment' => wp_create_nonce( WEED_PLUGIN_DIR . '_Test_Mailjet_API_Email_With_Attachment' ),
+					'adminWelcomeEmail'   => wp_create_nonce( WEED_PLUGIN_DIR . '_Admin_Welcome_Email' ),
+					'userWelcomeEmail'    => wp_create_nonce( WEED_PLUGIN_DIR . '_User_Welcome_Email' ),
+					'resetPasswordEmail'  => wp_create_nonce( WEED_PLUGIN_DIR . '_Reset_Password_Email' ),
+					'testSmtpEmail'       => wp_create_nonce( WEED_PLUGIN_DIR . '_Test_SMTP_Email' ),
+					'testMailjetApiEmail' => wp_create_nonce( WEED_PLUGIN_DIR . '_Test_Mailjet_API_Email' ),
 				),
 				'warningMessages' => array(
 					'resetSettings' => __( 'Caution! Are you sure you want to reset all settings?', 'welcome-email-editor' ),

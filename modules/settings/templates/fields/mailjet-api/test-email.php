@@ -44,11 +44,6 @@ return function ( $module ) {
 				data-email-type="test_mailjet_api_email">
 			<?php esc_html_e( 'Test Regular Email (Save First!)', 'welcome-email-editor' ); ?>
 		</button>
-
-		<button type="button" class="button button-full button-larger weed-test-email-button"
-				data-email-type="test_mailjet_api_with_attachment" style="margin-top: 10px;">
-			<?php esc_html_e( 'Test Email with Attachment (Save First!)', 'welcome-email-editor' ); ?>
-		</button>
 	</div>
 
 	<?php
