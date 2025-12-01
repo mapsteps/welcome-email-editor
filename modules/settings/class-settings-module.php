@@ -286,7 +286,7 @@ class Settings_Module extends Base_Module {
 
 		add_settings_field(
 			'mailer-type',
-			__( 'Mailer Type', 'welcome-email-editor' ),
+			__( 'Integration', 'welcome-email-editor' ),
 			array(
 				$this,
 				'mailer_type_field',

@@ -6,6 +6,7 @@ $light-grey: #f5492a;
 	from {
 		transform: rotate(0);
 	}
+
 	to {
 		transform: rotate(359deg);
 	}
@@ -15,6 +16,7 @@ $light-grey: #f5492a;
 	from {
 		transform: rotate(0);
 	}
+
 	to {
 		transform: rotate(359deg);
 	}
@@ -22,7 +24,7 @@ $light-grey: #f5492a;
 
 // Heatbox override
 .heatbox-header {
-	.logo-container > div:first-child {
+	.logo-container>div:first-child {
 		width: 70%;
 	}
 
@@ -30,7 +32,7 @@ $light-grey: #f5492a;
 		line-height: 1.4;
 	}
 
-	.logo-container > div:last-child {
+	.logo-container>div:last-child {
 		width: 30%;
 	}
 }
@@ -237,7 +239,7 @@ $light-grey: #f5492a;
 
 // Featured products
 .weed-featured-products {
-	> h2 {
+	>h2 {
 		text-align: center;
 		margin-bottom: 50px;
 		font-size: 24px;
@@ -293,5 +295,65 @@ $light-grey: #f5492a;
 
 	a {
 		text-decoration: none;
+	}
+}
+
+// Image Toggle Fields
+.weed-image-toggle-fields {
+	display: flex;
+	gap: 20px;
+	margin: 0px 0;
+
+	.image-toggle-label {
+		position: relative;
+		cursor: pointer;
+		flex: 1;
+		max-width: 180px;
+
+		input[type="radio"] {
+			position: absolute;
+			opacity: 0;
+			pointer-events: none;
+		}
+
+		.image-toggle-container {
+			border: 2px solid #ddd;
+			border-radius: 8px;
+			padding: 5px;
+			text-align: center;
+			transition: all 0.3s ease;
+			background: #fff;
+
+			&:hover {
+				border-color: #0073aa;
+				box-shadow: 0 2px 8px rgba(0, 115, 170, 0.1);
+			}
+
+			.toggle-image {
+				width: fit-content;
+				height: 80px;
+				object-fit: cover;
+				display: block;
+				margin: 0 auto 5px;
+			}
+
+			.toggle-label {
+				display: block;
+				font-size: 14px;
+				font-weight: 500;
+				color: #555;
+			}
+		}
+
+		input[type="radio"]:checked+.image-toggle-container {
+			border-color: #0073aa;
+			background: #f0f8ff;
+			box-shadow: 0 2px 12px rgba(0, 115, 170, 0.2);
+
+			.toggle-label {
+				color: #0073aa;
+				font-weight: 600;
+			}
+		}
 	}
 }
