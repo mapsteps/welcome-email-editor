@@ -72,11 +72,13 @@ class Mailjet_Api_Sender {
 			return false;
 		}
 
-		// Prepare headers and extract from/reply-to.
+		// Prepare headers and extract from/reply-to/content-type/cc/bcc.
 		$parsed_headers = $this->prepare_headers( $headers );
 
-		// Determine content type.
-		$content_type = ! empty( $values['content_type'] ) ? $values['content_type'] : 'html';
+		// Determine content type: use header value if provided, otherwise fall back to global setting.
+		$content_type = ! empty( $parsed_headers['content_type'] )
+			? $parsed_headers['content_type']
+			: ( ! empty( $values['content_type'] ) ? $values['content_type'] : 'html' );
 
 		// Build API payload.
 		$payload = array(
@@ -101,6 +103,16 @@ class Mailjet_Api_Sender {
 		// Add Reply-To if present.
 		if ( ! empty( $parsed_headers['reply_to'] ) ) {
 			$payload['Messages'][0]['ReplyTo'] = $parsed_headers['reply_to'];
+		}
+
+		// Add Cc if present.
+		if ( ! empty( $parsed_headers['cc'] ) ) {
+			$payload['Messages'][0]['Cc'] = $parsed_headers['cc'];
+		}
+
+		// Add Bcc if present.
+		if ( ! empty( $parsed_headers['bcc'] ) ) {
+			$payload['Messages'][0]['Bcc'] = $parsed_headers['bcc'];
 		}
 
 		// Process attachments if provided.
@@ -164,22 +176,25 @@ class Mailjet_Api_Sender {
 	}
 
 	/**
-	 * Prepare headers and extract From and Reply-To information.
+	 * Prepare headers and extract From, Reply-To, Content-Type, Cc, and Bcc information.
 	 *
 	 * @param string|array $headers Email headers.
 	 *
-	 * @return array Parsed headers with 'from' and 'reply_to' keys.
+	 * @return array Parsed headers with 'from', 'reply_to', 'content_type', 'cc', and 'bcc' keys.
 	 */
 	private function prepare_headers( $headers ) {
 
 		$values = Vars::get( 'values' );
 
 		$parsed = array(
-			'from'     => array(
+			'from'         => array(
 				'Email' => get_option( 'admin_email' ),
 				'Name'  => get_option( 'blogname' ),
 			),
-			'reply_to' => null,
+			'reply_to'     => null,
+			'content_type' => null,
+			'cc'           => array(),
+			'bcc'          => array(),
 		);
 
 		// Use from_email and from_name from settings if available.
@@ -237,9 +252,108 @@ class Mailjet_Api_Sender {
 					);
 				}
 			}
+
+			// Parse Content-Type header.
+			if ( stripos( $header, 'Content-Type:' ) === 0 ) {
+				$content_value = trim( substr( $header, 13 ) );
+
+				if ( stripos( $content_value, 'text/html' ) !== false ) {
+					$parsed['content_type'] = 'html';
+				} elseif ( stripos( $content_value, 'text/plain' ) !== false ) {
+					$parsed['content_type'] = 'plain';
+				}
+			}
+
+			// Parse Cc header.
+			if ( stripos( $header, 'Cc:' ) === 0 ) {
+				$cc_value      = trim( substr( $header, 3 ) );
+				$cc_recipients = $this->parse_email_list( $cc_value );
+
+				if ( ! empty( $cc_recipients ) ) {
+					$parsed['cc'] = array_merge( $parsed['cc'], $cc_recipients );
+				}
+			}
+
+			// Parse Bcc header.
+			if ( stripos( $header, 'Bcc:' ) === 0 ) {
+				$bcc_value      = trim( substr( $header, 4 ) );
+				$bcc_recipients = $this->parse_email_list( $bcc_value );
+
+				if ( ! empty( $bcc_recipients ) ) {
+					$parsed['bcc'] = array_merge( $parsed['bcc'], $bcc_recipients );
+				}
+			}
 		}
 
 		return $parsed;
+
+	}
+
+	/**
+	 * Parse a list of email addresses.
+	 *
+	 * Handles formats like:
+	 * - "email@example.com"
+	 * - "Name <email@example.com>"
+	 * - "email1@example.com, email2@example.com"
+	 * - array( "email1@example.com", "email2@example.com" )
+	 *
+	 * @param string|array $email_list Comma-separated string or array of email addresses.
+	 *
+	 * @return array Array of recipient objects with 'Email' and optionally 'Name' keys.
+	 */
+	private function parse_email_list( $email_list = '' ) {
+
+		$recipients = array();
+
+		if ( empty( $email_list ) ) {
+			return $recipients;
+		}
+
+		// Normalize to array.
+		if ( is_array( $email_list ) ) {
+			$emails = $email_list;
+		} elseif ( is_string( $email_list ) ) {
+			$emails = explode( ',', $email_list );
+		} else {
+			// Invalid type, return empty array.
+			return $recipients;
+		}
+
+		foreach ( $emails as $email ) {
+			// Skip non-string values.
+			if ( ! is_string( $email ) ) {
+				continue;
+			}
+
+			$email = trim( $email );
+
+			if ( empty( $email ) ) {
+				continue;
+			}
+
+			// Check if email has name format: "Name <email@example.com>".
+			if ( preg_match( '/(.*)<(.+)>/', $email, $matches ) ) {
+				$parsed_email = trim( $matches[2] );
+				$parsed_name  = trim( $matches[1] );
+
+				// Validate email.
+				if ( is_email( $parsed_email ) ) {
+					$recipient = array( 'Email' => $parsed_email );
+
+					if ( ! empty( $parsed_name ) ) {
+						$recipient['Name'] = $parsed_name;
+					}
+
+					$recipients[] = $recipient;
+				}
+			} elseif ( is_email( $email ) ) {
+				// Validate and add plain email.
+				$recipients[] = array( 'Email' => $email );
+			}
+		}
+
+		return $recipients;
 
 	}
 
