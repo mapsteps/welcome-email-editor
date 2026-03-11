@@ -9,6 +9,7 @@ namespace Weed\Smtp;
 
 use PHPMailer\PHPMailer\PHPMailer;
 use Weed\Base\Base_Output;
+use Weed\Logs\Logs_Module;
 use Weed\Vars;
 use WP_Error;
 
@@ -114,11 +115,19 @@ class Smtp_Output extends Base_Output {
 		$headers     = isset( $atts['headers'] ) ? $atts['headers'] : '';
 		$attachments = isset( $atts['attachments'] ) ? $atts['attachments'] : array();
 
+		// Set sender in global for logging (since phpmailer_init won't fire for API).
+		$this->set_sender_for_logging( $headers );
+
 		$result = $sender->send_email( $to, $subject, $message, $headers, $attachments );
 
 		if ( $result ) {
+			// Trigger success hook for logging.
+			$this->trigger_mail_success_hook( $to, $subject, $message, $headers, $attachments );
 			return true;
 		}
+
+		// Trigger failure hook for logging.
+		$this->trigger_mail_failed_hook();
 
 		// API failed, fall back to SMTP.
 		$this->api_failed = true;
@@ -207,6 +216,101 @@ class Smtp_Output extends Base_Output {
 		$error = $wp_error->get_error_message();
 
 		Vars::set( 'wp_mail_failed', $error );
+	}
+
+	/**
+	 * Set sender email in global variable for logging.
+	 *
+	 * Since phpmailer_init doesn't fire when using Mailjet API,
+	 * we need to manually set the sender for the Logs module.
+	 *
+	 * @param string|array $headers Email headers.
+	 */
+	private function set_sender_for_logging( $headers ) {
+
+		$values = Vars::get( 'values' );
+
+		// Determine sender email (same logic as Mailjet_Api_Sender::prepare_headers).
+		$from_email = ! empty( $values['from_email'] ) ? $values['from_email'] : get_option( 'admin_email' );
+
+		// Check if From header is provided.
+		if ( ! empty( $headers ) ) {
+			$headers_array = is_array( $headers ) ? $headers : explode( "\r\n", $headers );
+
+			foreach ( $headers_array as $header ) {
+				$header = trim( $header );
+
+				if ( stripos( $header, 'From:' ) === 0 ) {
+					$from_value = trim( substr( $header, 5 ) );
+
+					if ( preg_match( '/(.*)<(.+)>/', $from_value, $matches ) ) {
+						$from_email = trim( $matches[2] );
+					} else {
+						$from_email = $from_value;
+					}
+					break;
+				}
+			}
+		}
+
+		// Ensure Logs_Module class is loaded.
+		require_once WEED_PLUGIN_DIR . '/modules/logs/class-logs-module.php';
+
+		// Set sender in global variable used by Logs_Module.
+		$log_global_var = ( new Logs_Module() )->log_global_var;
+
+		if ( isset( $GLOBALS[ $log_global_var ] ) ) {
+			$GLOBALS[ $log_global_var ]['sender'] = $from_email;
+		}
+
+	}
+
+	/**
+	 * Trigger wp_mail_succeeded hook for logging.
+	 *
+	 * @param string|string[] $to          Email recipients.
+	 * @param string          $subject     Email subject.
+	 * @param string          $message     Email message.
+	 * @param string|string[] $headers     Email headers.
+	 * @param string|string[] $attachments Email attachments.
+	 */
+	private function trigger_mail_success_hook( $to, $subject, $message, $headers, $attachments ) {
+
+		// Build mail_data array matching WordPress wp_mail_succeeded structure.
+		$mail_data = array(
+			'to'          => is_array( $to ) ? $to : array( $to ),
+			'subject'     => $subject,
+			'message'     => $message,
+			'headers'     => is_array( $headers ) ? $headers : ( ! empty( $headers ) ? explode( "\r\n", $headers ) : array() ),
+			'attachments' => is_array( $attachments ) ? $attachments : array(),
+		);
+
+		/**
+		 * Fires after Mailjet API has successfully sent an email.
+		 *
+		 * @param array $mail_data An array containing the email recipient(s), subject, message, headers, and attachments.
+		 */
+		do_action( 'wp_mail_succeeded', $mail_data );
+
+	}
+
+	/**
+	 * Trigger wp_mail_failed hook for logging.
+	 */
+	private function trigger_mail_failed_hook() {
+
+		$error = new WP_Error(
+			'mailjet_api_failed',
+			__( 'Mailjet API failed to send email. Falling back to SMTP.', 'welcome-email-editor' )
+		);
+
+		/**
+		 * Fires after Mailjet API has failed to send an email.
+		 *
+		 * @param WP_Error $error A WP_Error object with the error message.
+		 */
+		do_action( 'wp_mail_failed', $error );
+
 	}
 
 }
